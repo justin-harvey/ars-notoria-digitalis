@@ -45,6 +45,7 @@ Access via the "⊕ GROUNDPLAT" button (`groundplat.html`, data in `groundplat-d
 - **The tree** - All 55 branches, from the two principal sciences through vulgar arithmetic and geometry to the nineteen named arts, ending in Archemastrie. Each branch shows Dee's definition, a plain-language summary, and his full discussion from the Preface, with his marginal notes.
 - **Practice** - A monochord that plays Dee's consonances (Musike), height by shadow (Hypsometrie), distance by thumb (Apomecometrie), and true local noon with the equation of time (Horometrie), plus hands-on exercises for most of the arts
 - **Study path** - The arts in Dee's order, with progress saved locally
+- **The Oracle of the Groundplat** - A tribute to Terry A. Davis's TempleOS oracle (`groundplat-oracle.js`). Press F7 for a word or Shift-F7 for a passage, drawn only from Dee's 1570 text (about 4,600 words and 870 sentences). Or walk the Groundplat: at each fork, the moment you press picks the branch, and you end on an art with Dee's definition, a sentence from his discussion, and an exercise. Randomness comes from keypress and tap timing, as in TempleOS, mixed with the browser's secure random generator. On phones there are large buttons, a bottom dock while the Oracle is on screen, and haptic taps. Sessions can be saved locally.
 - **Legacy** - Archemastrie, Dee's hinted "OPTICAL Science", Yates's Rosicrucian thesis and its critics, and Dee's defence against being called a "Coniurer"
 
 All text is Dee's 1570 spelling from the Project Gutenberg transcription (#22062, public domain), checked against it: 425 passages.
@@ -123,6 +124,7 @@ Ars Notoria Digitalis/
 ├── dee-prayers.html                    # John Dee's own prayers as a daily office
 ├── groundplat.html                     # Interactive Groundplat of the Mathematical Preface
 ├── groundplat-data.js                  # Groundplat tree and Preface text (generated)
+├── groundplat-oracle.js                # The Oracle of the Groundplat (TempleOS tribute)
 ├── lunar.js                            # True new-moon / day-of-the-Moon calculation
 ├── reference-tools.js                  # Interactive tools for the reference library
 ├── README.md                           # This file

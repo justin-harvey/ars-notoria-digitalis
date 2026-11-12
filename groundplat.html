@@ -54,6 +54,7 @@
         /* ---------- The Groundplat ---------- */
         .gp-wrap { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 18px; align-items: start; }
         .gp-sheet {
+            position: relative;
             background: var(--parchment); color: var(--ink-dk); padding: 18px 14px; border: 3px double var(--ink);
             box-shadow: 0 0 0 4px #000, 0 0 0 6px var(--brown); max-height: 80vh; overflow: auto;
         }
@@ -117,6 +118,53 @@
         .bar div { height: 100%; background: var(--ltgreen); width: 0; transition: width 0.3s; }
         .sources li { font-size: 12px; margin-bottom: 6px; }
         footer { text-align: center; font-size: 11px; color: var(--dkgray); border-top: 1px solid var(--dkgray); padding: 20px; margin-top: 40px; }
+
+        /* ---------- Oracle ---------- */
+        .oracle-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; align-items: start; }
+        .o-panel { border: 2px solid var(--ltgreen); background: #000; padding: 15px; }
+        .o-panel h3 { margin-top: 0; }
+        .o-input { width: 100%; background: #000; color: var(--white); border: 1px solid var(--ltblue); font-family: inherit; font-size: 14px; padding: 8px; margin: 4px 0 6px; }
+        .btn.big { padding: 9px 16px; font-size: 13px; }
+        .btn.press { width: 100%; padding: 18px; font-size: 18px; letter-spacing: 2px; background: var(--yellow); color: #000; border: 2px solid var(--white); margin: 6px 0; touch-action: manipulation; }
+        .btn.press:disabled { background: #333; color: #777; border-color: #555; }
+        .btn.press:not(:disabled):active { background: var(--white); }
+        .walk-path { font-size: 12px; color: var(--white); line-height: 2; margin: 8px 0; }
+        .w-step { display: inline-block; background: var(--blue); border: 1px solid var(--ltblue); padding: 0 6px; margin: 1px 0; }
+        .w-arrow { color: var(--yellow); margin: 0 4px; }
+        .walk-prompt { font-size: 12px; color: var(--ltcyan); margin: 6px 0; }
+        .walk-result { border-top: 1px dashed var(--dkgray); margin-top: 10px; padding-top: 6px; }
+        .walk-result h3 { color: var(--yellow); font-family: Georgia, serif; font-size: 18px; margin: 2px 0 6px; }
+        .walk-result .gloss { font-size: 13px; color: var(--white); margin: 8px 0; }
+        .o-time { color: var(--dkgray); font-size: 10px; }
+        .o-window { border: 2px solid var(--ltblue); }
+        .o-title { background: var(--blue); color: var(--white); font-size: 12px; font-weight: bold; padding: 3px 8px; display: flex; justify-content: space-between; gap: 8px; }
+        .o-keys { color: var(--ltcyan); font-weight: normal; }
+        .o-body { background: #000; height: 300px; overflow-y: auto; padding: 8px 10px; font-size: 13px; }
+        .o-line { padding: 3px 0; border-bottom: 1px solid #111; }
+        .o-word { color: var(--yellow); font-size: 16px; font-weight: bold; }
+        .o-pass { color: var(--ltcyan); font-family: Georgia, serif; font-size: 14px; }
+        .o-note { font-size: 11px; color: var(--ltgray); margin-top: 8px; }
+        .log-entry { border: 1px solid var(--dkgray); padding: 8px 10px; margin-top: 6px; font-size: 12px; overflow-wrap: anywhere; }
+        .log-entry .when { color: var(--yellow); }
+        .gp-node.walk { outline: 2px solid var(--brown); outline-offset: 1px; }
+        .gp-node.walk-end { outline: 3px solid var(--ink); background: var(--yellow); }
+        .o-dock { display: none; }
+        @media (hover: none) { .o-keys { display: none; } }
+        @media (max-width: 900px) {
+            .oracle-grid { grid-template-columns: 1fr; }
+            .o-body { height: 220px; font-size: 14px; }
+            .o-word { font-size: 18px; }
+            .o-buttons .btn.big { flex: 1 1 40%; padding: 14px 10px; font-size: 14px; }
+            .o-panel .row .btn { min-height: 44px; }
+            /* Bottom dock: big thumb buttons while the Oracle section is on screen */
+            .o-dock {
+                position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; gap: 6px; padding: 8px 8px calc(8px + env(safe-area-inset-bottom));
+                background: rgba(0, 0, 40, 0.96); border-top: 2px solid var(--ltblue);
+            }
+            .o-dock.show { display: flex; }
+            .o-dock .btn { flex: 1; min-height: 52px; font-size: 14px; touch-action: manipulation; }
+            body.dock-on { padding-bottom: 76px; }
+        }
         @media (max-width: 900px) {
             .gp-wrap { grid-template-columns: 1fr; }
             .reader { position: static; max-height: none; }
@@ -135,6 +183,7 @@
     <nav class="menubar">
         <a class="menu-item" href="#origins">ORIGINS</a>
         <a class="menu-item" href="#groundplat">THE GROUNDPLAT</a>
+        <a class="menu-item" href="#oracle">ORACLE</a>
         <a class="menu-item" href="#practice">PRACTICE</a>
         <a class="menu-item" href="#path">STUDY PATH</a>
         <a class="menu-item" href="#legacy">LEGACY</a>
@@ -170,6 +219,44 @@
                     <ul class="gp" id="gpTree"></ul>
                 </div>
                 <div class="reader" id="reader"></div>
+            </div>
+        </section>
+
+        <section id="oracle">
+            <h2>The Oracle of the Groundplat</h2>
+            <p>A tribute to <strong>Terry A. Davis</strong>, who built an oracle into TempleOS: he read a microsecond stopwatch at each key press, then pressed <em>F7</em> for a word or <em>Shift-F7</em> for a passage, and read what came up. This oracle works the same way with Dee's material. Its words and passages come only from Dee's own 1570 Preface, and you can also let your key presses walk you down the Groundplat to an art to study.</p>
+            <p>Opening a book at random for guidance is old, too: Renaissance readers practised the <em>sortes</em> with Virgil and the Bible. The oracle doesn't claim to speak for anyone. What a draw means is for you to work out, as with any reflective practice.</p>
+
+            <div class="oracle-grid">
+                <div class="o-panel">
+                    <h3>⊕ Walk the Groundplat</h3>
+                    <label for="oracleQ">Your question or intention (optional)</label>
+                    <input type="text" id="oracleQ" class="o-input" maxlength="140" placeholder="What should I study next?">
+                    <div class="row"><button class="btn alt big" id="walkStart">BEGIN A WALK</button></div>
+                    <div class="walk-path" id="walkPath"></div>
+                    <p class="walk-prompt" id="walkPrompt">Begin at the root of the tree. At each fork, the moment you press chooses the branch.</p>
+                    <button class="btn press" id="walkPress" disabled>◉ PRESS</button>
+                    <div class="walk-result" id="walkResult" hidden></div>
+                </div>
+                <div class="o-panel">
+                    <div class="o-window">
+                        <div class="o-title"><span>ORACLE</span><span class="o-keys">F7 word · Shift-F7 passage</span></div>
+                        <div class="o-body" id="oracleOut" aria-live="polite"></div>
+                    </div>
+                    <div class="row o-buttons">
+                        <button class="btn alt big" id="oracleWord">◇ WORD</button>
+                        <button class="btn alt big" id="oraclePassage">¶ PASSAGE</button>
+                        <button class="btn" id="oracleClear">CLEAR</button>
+                    </div>
+                    <p class="o-note"><span id="oracleStats"></span>. Each draw shows the stopwatch reading behind it. On phones and tablets, tap the buttons: every tap feeds the stopwatch. Browsers blur their timers slightly for privacy, so the timing is also mixed with your device's secure random generator.</p>
+                    <div class="row"><button class="btn" id="oracleSave" disabled>SAVE THIS SESSION</button><button class="btn" id="oracleClearLog">CLEAR LOG</button></div>
+                    <div id="oracleLog"></div>
+                </div>
+            </div>
+            <div class="o-dock" id="oDock" aria-hidden="true">
+                <button class="btn alt" data-dock="oracleWord">◇ WORD</button>
+                <button class="btn alt" data-dock="oraclePassage">¶ PASSAGE</button>
+                <button class="btn" data-dock="walkPress">⊕ NEW WALK</button>
             </div>
         </section>
 
@@ -357,7 +444,9 @@
 
         function saveDone() {
             store('groundplatDone', Array.from(done));
+            const marks = Array.from(document.querySelectorAll('.gp-node.walk, .gp-node.walk-end')).map(b => [b.dataset.id, b.classList.contains('walk-end')]);
             renderTree();
+            marks.forEach(([id, end]) => { const b = document.querySelector('.gp-node[data-id="' + id + '"]'); if (b) b.classList.add(end ? 'walk-end' : 'walk'); });
             if (current) document.querySelectorAll('.gp-node').forEach(b => b.classList.toggle('sel', b.dataset.id === current));
             renderPath();
         }
@@ -387,6 +476,17 @@
             $('groundplat').scrollIntoView();
             const more = $('moreBtn'); if (more) more.click();
         });
+
+        // Expose what the oracle needs
+        function reveal(id) {
+            let p = parentOf[id];
+            while (p) { const li = document.querySelector('[data-li="' + p + '"]'); if (li && li.classList.contains('closed')) { li.classList.remove('closed'); li.querySelector(':scope > .twisty').textContent = '▾'; } p = parentOf[p]; }
+            const b = document.querySelector('.gp-node[data-id="' + id + '"]');
+            // scroll only the tree panel, never the page
+            const sheet = b && b.closest('.gp-sheet');
+            if (sheet) sheet.scrollTop = Math.max(0, b.offsetTop - sheet.clientHeight / 2);
+        }
+        window.GP = { byId: byId, parentOf: parentOf, TRY: TRY, select: select, reveal: reveal };
 
         // initial selection (deep link #gp-<id>)
         const m = (location.hash || '').match(/^#gp-(\w+)/);
@@ -486,6 +586,35 @@
             navigator.geolocation.getCurrentPosition(p => { $('hoLat').value = p.coords.latitude.toFixed(4); $('hoLon').value = p.coords.longitude.toFixed(4); horo(); });
         });
         horo();
+    })();
+    </script>
+    <script src="groundplat-oracle.js"></script>
+    <script>
+    (function () {
+        // Mobile: show the bottom dock only while the Oracle section is on screen
+        const dock = document.getElementById('oDock'), sec = document.getElementById('oracle');
+        dock.addEventListener('click', e => {
+            const b = e.target.closest('[data-dock]'); if (!b) return;
+            let target = document.getElementById(b.dataset.dock);
+            if (b.dataset.dock === 'walkPress' && target.disabled) target = document.getElementById('walkStart');
+            if (target && !target.disabled) target.click();
+            if (navigator.vibrate) { try { navigator.vibrate(15); } catch (err) {} }
+        });
+        const pressBtn = document.getElementById('walkPress'), dockPress = dock.querySelector('[data-dock="walkPress"]');
+        // When no walk is in progress, the dock's PRESS button starts a new one
+        const syncDock = () => { dockPress.textContent = pressBtn.disabled ? '⊕ NEW WALK' : '◉ PRESS'; dockPress.classList.toggle('alt', pressBtn.disabled); };
+        new MutationObserver(syncDock).observe(pressBtn, { attributes: true, attributeFilter: ['disabled'] });
+        syncDock();
+        ['oracleWord', 'oraclePassage', 'walkPress'].forEach(id => document.getElementById(id).addEventListener('click', () => {
+            if (navigator.vibrate) { try { navigator.vibrate(15); } catch (err) {} }
+        }));
+        if ('IntersectionObserver' in window) {
+            new IntersectionObserver(entries => entries.forEach(en => {
+                dock.classList.toggle('show', en.isIntersecting);
+                document.body.classList.toggle('dock-on', en.isIntersecting);
+                dock.setAttribute('aria-hidden', en.isIntersecting ? 'false' : 'true');
+            }), { threshold: 0.05 }).observe(sec);
+        }
     })();
     </script>
 </body>
