@@ -2,7 +2,7 @@
 
 A digital manifestation of the ancient grimoire "Ars Notoria - The Notory Art of Solomon" in the aesthetic style of TempleOS. This interactive website presents the sacred geometric figures and **historically accurate orations** from the 1657 Robert Turner translation, used for obtaining perfect memory, eloquence, and understanding of the Seven Liberal Arts.
 
-**✨ Historically Accurate Version** - All orations are extracted directly from the original 1657 manuscript translation by Robert Turner, with art-specific sacred names, lunation timings, and instructions faithful to the source text.
+** Historically Accurate Version** - All orations are extracted directly from the original 1657 manuscript translation by Robert Turner, with art-specific sacred names, lunation timings, and instructions faithful to the source text.
 
 ## About the Ars Notoria
 
@@ -24,7 +24,7 @@ The Ars Notoria (Notory Art) is a medieval grimoire attributed to Solomon that c
 - **Manuscript Gallery**: View the original manuscript geometric figures
 - **Authentic Orations**: Sacred invocations and Latin names from the historical texts
 - **Responsive Design**: Works on desktop and mobile devices
-- **📖 Digital Grimoire**: Complete magical journaling system with unlockable premium features
+- ** Digital Grimoire**: Complete magical journaling system with unlockable premium features
 
 ### Monas Hieroglyphica Exercise
 
@@ -40,7 +40,7 @@ Note: Dee left no ritual instructions for the Monas. The exercise is a modern re
 
 ### Digital Grimoire System
 
-Access via the "📖 GRIMOIRE" button in the main interface. The grimoire includes:
+Access via the " GRIMOIRE" button in the main interface. The grimoire includes:
 
 **Free Features:**
 - Daily Divination tracker (list & calendar views)
@@ -129,38 +129,7 @@ Current test codes in `grimoire.js`:
 - Reference Bundle: `REFDB-2026`
 - Spell Database: `SPELLDB-2026`
 
-**⚠️ IMPORTANT:** Change these codes before deploying to production!
 
-## Deployment to Netlify
-
-### Manual Deployment (Recommended)
-
-1. **Prepare Your Files**:
-   - Ensure all files are in the `Ars Notoria Digitalis` folder
-   - The PDF file is optional for deployment (it's large and not used by the website)
-
-2. **Sign in to Netlify**:
-   - Go to [netlify.com](https://www.netlify.com/)
-   - Sign in or create an account
-
-3. **Deploy via Drag & Drop**:
-   - On the Netlify dashboard, scroll down to "Want to deploy a new site without connecting to Git?"
-   - Drag the entire `Ars Notoria Digitalis` folder into the deployment area
-   - OR click "Browse to upload" and select the folder
-
-4. **Wait for Deployment**:
-   - Netlify will upload and deploy your files
-   - You'll receive a URL like `https://random-name-12345.netlify.app`
-
-5. **Optional - Custom Domain**:
-   - In Site settings, you can set a custom domain name
-   - Example: `ars-notoria-digitalis.netlify.app`
-
-### Alternative: Deploy via Netlify CLI
-
-```bash
-# Install Netlify CLI (if not already installed)
-npm install -g netlify-cli
 
 # Navigate to the project folder
 cd "C:\Users\justin.harvey\Ars Notoria Digitalis"
