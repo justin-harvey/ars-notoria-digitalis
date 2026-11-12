@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monas Hieroglyphica - A Practitioner's Exercise</title>
+    <style>
+        :root {
+            --black: #000000;
+            --blue: #0000AA;
+            --green: #00AA00;
+            --cyan: #00AAAA;
+            --red: #AA0000;
+            --purple: #AA00AA;
+            --brown: #AA5500;
+            --ltgray: #AAAAAA;
+            --dkgray: #555555;
+            --ltblue: #5555FF;
+            --ltgreen: #55FF55;
+            --ltcyan: #55FFFF;
+            --ltred: #FF5555;
+            --pink: #FF55FF;
+            --yellow: #FFFF55;
+            --white: #FFFFFF;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: var(--black);
+            color: var(--ltgray);
+            font-family: 'Courier New', monospace;
+            line-height: 1.6;
+        }
+
+        .titlebar {
+            background: var(--blue);
+            color: var(--white);
+            padding: 6px 12px;
+            font-size: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--ltblue);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .titlebar-title { font-weight: bold; letter-spacing: 1px; }
+
+        .titlebar-btn {
+            background: var(--ltgray);
+            color: var(--black);
+            border: 1px solid var(--white);
+            padding: 2px 10px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 11px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .titlebar-btn:hover { background: var(--white); }
+
+        .menubar {
+            background: var(--dkgray);
+            display: flex;
+            flex-wrap: wrap;
+            border-bottom: 1px solid var(--ltgray);
+        }
+
+        .menu-item {
+            color: var(--white);
+            padding: 4px 14px;
+            font-size: 12px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .menu-item:hover { background: var(--ltblue); }
+
+        main {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 2px solid var(--ltcyan);
+            background: rgba(85, 255, 255, 0.05);
+        }
+
+        h1 {
+            color: var(--ltcyan);
+            font-size: 24px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .subtitle { color: var(--yellow); font-size: 12px; font-style: italic; }
+
+        h2 {
+            color: var(--ltblue);
+            font-size: 18px;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid var(--dkgray);
+            text-transform: uppercase;
+        }
+
+        h3 { color: var(--ltgreen); font-size: 14px; margin: 20px 0 10px; }
+
+        p { margin-bottom: 15px; }
+
+        strong { color: var(--white); }
+
+        em { color: var(--ltcyan); font-style: normal; }
+
+        ul, ol { margin: 0 0 15px 22px; }
+        li { margin-bottom: 8px; }
+
+        a { color: var(--ltblue); text-decoration: none; }
+        a:hover { color: var(--ltcyan); text-decoration: underline; }
+
+        section { margin-bottom: 40px; scroll-margin-top: 70px; }
+
+        .box {
+            border: 1px solid var(--dkgray);
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .box-header { font-weight: bold; margin-bottom: 8px; }
+
+        .note { background: rgba(255, 255, 85, 0.07); border-color: var(--brown); }
+        .note .box-header { color: var(--yellow); }
+
+        .practice { background: rgba(0, 170, 0, 0.08); border-color: var(--green); }
+        .practice .box-header { color: var(--ltgreen); }
+
+        .contemplate { background: rgba(170, 0, 170, 0.1); border-color: var(--purple); }
+        .contemplate .box-header { color: var(--pink); }
+
+        .readings {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 15px;
+        }
+
+        .reading {
+            border: 1px solid var(--ltblue);
+            padding: 15px;
+            background: rgba(85, 85, 255, 0.06);
+        }
+
+        .reading h3 { margin-top: 0; color: var(--ltcyan); }
+
+        /* ---- Exercise layout ---- */
+        .work {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 20px;
+            align-items: start;
+        }
+
+        .figure-panel {
+            border: 2px solid var(--ltblue);
+            background: #000;
+            padding: 10px;
+            position: sticky;
+            top: 70px;
+        }
+
+        .figure-panel svg { width: 100%; height: auto; display: block; }
+
+        .figure-caption {
+            text-align: center;
+            font-size: 11px;
+            color: var(--yellow);
+            margin-top: 6px;
+            min-height: 18px;
+        }
+
+        .stage-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            margin-bottom: 12px;
+        }
+
+        .stage-tab {
+            background: var(--dkgray);
+            color: var(--white);
+            border: 1px solid var(--ltgray);
+            padding: 3px 9px;
+            font-family: inherit;
+            font-size: 11px;
+            cursor: pointer;
+        }
+
+        .stage-tab.active { background: var(--blue); border-color: var(--ltcyan); color: var(--yellow); }
+        .stage-tab.done { color: var(--ltgreen); }
+
+        .stage { display: none; }
+        .stage.active { display: block; }
+
+        .stage h3 { font-size: 16px; color: var(--yellow); margin-top: 0; }
+
+        .glyph-inline { color: var(--ltcyan); font-size: 18px; }
+
+        .stage-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .btn {
+            background: var(--ltgray);
+            color: var(--black);
+            border: 1px solid var(--white);
+            padding: 5px 14px;
+            font-family: inherit;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .btn:hover { background: var(--white); }
+        .btn:disabled { opacity: 0.3; cursor: default; }
+        .btn.alt { background: var(--blue); color: var(--white); border-color: var(--ltblue); }
+        .btn.alt:hover { background: var(--ltblue); }
+
+        .planet-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin: 10px 0;
+        }
+
+        .planet-btn {
+            background: #111;
+            color: var(--ltcyan);
+            border: 1px solid var(--cyan);
+            padding: 4px 10px;
+            font-family: inherit;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .planet-btn.active { background: var(--cyan); color: var(--black); }
+
+        .planet-info {
+            min-height: 60px;
+            border-left: 3px solid var(--cyan);
+            padding: 6px 10px;
+            font-size: 13px;
+        }
+
+        /* ---- Tracing canvas ---- */
+        .trace-wrap {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            align-items: flex-start;
+        }
+
+        .trace-board {
+            position: relative;
+            width: 300px;
+            height: 440px;
+            border: 2px solid var(--ltgreen);
+            background: #000;
+            touch-action: none;
+            flex-shrink: 0;
+        }
+
+        .trace-board svg, .trace-board canvas {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .trace-board svg { opacity: 0.22; transition: opacity 0.3s; }
+        .trace-board.no-guide svg { opacity: 0; }
+
+        .trace-controls { display: flex; flex-direction: column; gap: 8px; max-width: 420px; }
+
+        textarea {
+            width: 100%;
+            min-height: 90px;
+            background: #000;
+            color: var(--white);
+            border: 1px solid var(--ltblue);
+            font-family: inherit;
+            font-size: 12px;
+            padding: 8px;
+            margin-bottom: 10px;
+        }
+
+        label { color: var(--ltcyan); font-size: 12px; display: block; margin-bottom: 4px; }
+
+        .status { font-size: 11px; color: var(--ltgreen); min-height: 16px; }
+
+        .sources li { font-size: 12px; }
+
+        footer {
+            text-align: center;
+            font-size: 11px;
+            color: var(--dkgray);
+            border-top: 1px solid var(--dkgray);
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        /* ---- SVG parts ---- */
+        .part {
+            fill: none;
+            stroke: var(--ltcyan);
+            stroke-width: 6;
+            stroke-linecap: round;
+            transition: stroke 0.3s, opacity 0.3s;
+        }
+
+        .part.dot { fill: var(--ltcyan); stroke: none; }
+        .part.hidden { opacity: 0; }
+        .part.fresh { stroke: var(--yellow); }
+        .part.dot.fresh { fill: var(--yellow); }
+        .part.lit { stroke: var(--yellow); filter: url(#glow); }
+        .part.dot.lit { fill: var(--yellow); }
+        .part.dim { opacity: 0.15; }
+
+        .guide-line { stroke: var(--blue); stroke-width: 1; stroke-dasharray: 3 4; fill: none; }
+
+        @media (max-width: 780px) {
+            .work { grid-template-columns: 1fr; }
+            .figure-panel { position: static; max-width: 320px; margin: 0 auto; }
+            main { padding: 10px; }
+            h1 { font-size: 18px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="titlebar">
+        <span class="titlebar-title">ARS NOTORIA DIGITALIS :: Monas Hieroglyphica</span>
+        <a class="titlebar-btn" href="index.html">← RETURN TO NOTES</a>
+    </div>
+
+    <nav class="menubar">
+        <a class="menu-item" href="#origins">ORIGINS</a>
+        <a class="menu-item" href="#readings">THREE READINGS</a>
+        <a class="menu-item" href="#work">THE WORK</a>
+        <a class="menu-item" href="#trace">TRACE</a>
+        <a class="menu-item" href="#record">RECORD</a>
+        <a class="menu-item" href="#sources">SOURCES</a>
+    </nav>
+
+    <main>
+        <header>
+            <h1>☿ The Hieroglyphic Monad ☿</h1>
+            <div class="subtitle">A practitioner's exercise after Dr. John Dee's <em>Monas Hieroglyphica</em> (Antwerp, 1564)</div>
+        </header>
+
+        <!-- ============ ORIGINS ============ -->
+        <section id="origins">
+            <h2>What the Monas Is</h2>
+            <p>In 1564 John Dee, mathematician and later advisor to Elizabeth I, published a short Latin treatise built around one symbol of his own invention. He dedicated it to the Emperor Maximilian II and said he had written it in about twelve days, as if the pen were being guided for him.</p>
+            <p>The symbol joins four familiar marks into one figure: the <strong>Moon</strong> ☽, the <strong>Sun</strong> ☉, the <strong>Cross</strong> of the elements, and the horns of <strong>Aries</strong> ♈, the sign of fire. Dee called it a <em>monad</em>: a single unit that contains the many. In twenty-four short theorems, laid out like Euclid's geometry, he builds the figure piece by piece and draws astronomy, alchemy, number and Kabbalah out of it.</p>
+            <p>The full title says how it is meant to be read: <em>Monas Hieroglyphica, Mathematice, Anagogiceque explicata</em>, "explained mathematically and anagogically" (anagogically means spiritually, leading upward). Dee used the glyph as his personal emblem for the rest of his life. Later alchemists and the Rosicrucians took it up, and it is still one of the best-known symbols in Western esotericism.</p>
+
+            <div class="box note">
+                <div class="box-header">⚠ A note on method</div>
+                <p style="margin-bottom:0">Dee left no ritual and no step-by-step practice. His text is famously hard; the historian Frances Yates found it left the reader bewildered. The exercise below is a <strong>modern reconstruction</strong>. It follows the order in which Dee's theorems build the figure, and it turns each stage into drawing and contemplation. Wherever we report what Dee argued, we put it in our own words; the prompts for contemplation are ours.</p>
+            </div>
+            <div class="box note">
+                <div class="box-header">⚠ Not Enochian</div>
+                <p style="margin-bottom:0">The Monas is not part of the Enochian "angelic" system Dee received through the scryer Edward Kelley in the 1580s. It came about twenty years earlier, and Dee wrote and published it himself.</p>
+            </div>
+        </section>
+
+        <!-- ============ THREE READINGS ============ -->
+        <section id="readings">
+            <h2>Three Ways to Read the Figure</h2>
+            <p>Scholars generally find three layers in the Monas. They overlap, and the exercise touches each one.</p>
+            <div class="readings">
+                <div class="reading">
+                    <h3>I. Contemplation</h3>
+                    <p>This is the core. You study the figure and the theorems until you can see how point, line and circle give rise to the Sun, Moon, elements and planets. Dee pictured knowledge as a climb from visible things to invisible ones. To him the symbols were not just pictures of truth but truth itself, so studying them was meant to change the person who studies.</p>
+                </div>
+                <div class="reading">
+                    <h3>II. The "Real" Kabbalah</h3>
+                    <p>Ordinary Kabbalah works on the letters of written Hebrew. Dee called that the <em>vulgar</em> Kabbalah and set against it a <em>real</em> one, which reads the structure of creation itself. In his eyes the Monas was a key to that deeper reading, an ancient art he was restoring rather than inventing.</p>
+                </div>
+                <div class="reading">
+                    <h3>III. Alchemy</h3>
+                    <p>The fire sign at the base and the figure as a whole point to alchemical operations. Take away the horns of Aries and what is left is the sign of <strong>Mercury</strong> ☿, the central substance of the alchemists. Several theorems read like veiled descriptions of laboratory work, and scholars still debate whether they mean real chemistry, an inner process, or both.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ THE WORK ============ -->
+        <section id="work">
+            <h2>The Work: Building the Monad</h2>
+            <p>Seven stages, in the order Dee builds the figure. For each one: read the teaching, <strong>draw that part by hand</strong> on your own page, then sit with the prompt. The figure on the left grows with you. Plan on 30 to 45 minutes. Dee meant the Monas to be studied again and again, so repeating the whole sequence over several sittings is part of the practice.</p>
+
+            <div class="box practice">
+                <div class="box-header">✎ Before you begin</div>
+                <ul style="margin-bottom:0">
+                    <li>Unlined paper, a pencil and a pen. A compass and a straightedge if you have them: Dee was a geometer, and the figure is built from true circles and right angles.</li>
+                    <li>A quiet half hour. Leave room under your drawing for notes.</li>
+                    <li>Place your page in portrait orientation. The figure is tall: crescent at the top, horns at the base.</li>
+                </ul>
+            </div>
+
+            <div class="work">
+                <div class="figure-panel">
+                    <svg id="monad" viewBox="0 0 300 440" role="img" aria-label="The Hieroglyphic Monad, built in stages">
+                        <defs>
+                            <filter id="glow" filterUnits="userSpaceOnUse" x="0" y="0" width="300" height="440">
+                                <feGaussianBlur stdDeviation="3" result="b"/>
+                                <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+                            </filter>
+                        </defs>
+                        <!-- construction guides -->
+                        <g id="guides">
+                            <line class="guide-line" x1="150" y1="10" x2="150" y2="430"/>
+                            <line class="guide-line" x1="20" y1="170" x2="280" y2="170"/>
+                        </g>
+                        <path id="p-moon" class="part" d="M 95 60 A 55 55 0 0 0 205 60"/>
+                        <circle id="p-sun" class="part" cx="150" cy="170" r="55"/>
+                        <circle id="p-point" class="part dot" cx="150" cy="170" r="7"/>
+                        <line id="p-crossv" class="part" x1="150" y1="225" x2="150" y2="350"/>
+                        <line id="p-crossh" class="part" x1="95" y1="282" x2="205" y2="282"/>
+                        <path id="p-ariesl" class="part" d="M 150 350 A 27 27 0 0 0 96 350"/>
+                        <path id="p-ariesr" class="part" d="M 150 350 A 27 27 0 0 1 204 350"/>
+                    </svg>
+                    <div class="figure-caption" id="figCaption"></div>
+                </div>
+
+                <div>
+                    <div class="stage-tabs" id="stageTabs"></div>
+
+                    <!-- Stage 1 -->
+                    <div class="stage" data-show="point" data-fresh="point" data-caption="The Point: the center, the Earth">
+                        <h3>1 · The Point <span class="glyph-inline">·</span></h3>
+                        <p><strong>The teaching.</strong> Dee starts before there is any figure at all. A circle can't be drawn without a line, he argues, and a line can't be drawn without a point, so everything begins from the point. In the Monad the point is the <strong>Earth</strong>, the fixed center around which, in the cosmos of his day, the Sun, Moon and planets turned.</p>
+                        <div class="box practice">
+                            <div class="box-header">✎ Draw</div>
+                            Mark a single firm dot a little above the middle of your page. Everything else will be measured from it.
+                        </div>
+                        <div class="box contemplate">
+                            <div class="box-header">◉ Contemplate</div>
+                            Look at the dot for a full minute. It has position but no size. Notice that every line you draw tonight is already implied by where you put it. What is the fixed center your own life turns around?
+                        </div>
+                    </div>
+
+                    <!-- Stage 2 -->
+                    <div class="stage" data-show="point sun" data-fresh="sun" data-caption="The Circle around the point: the Sun ☉">
+                        <h3>2 · The Circle: the Sun <span class="glyph-inline">☉</span></h3>
+                        <p><strong>The teaching.</strong> Dee's first theorem says the straight line and the circle are the first and simplest way to represent anything at all. Put a circle around the point and you have the ancient sign of the <strong>Sun</strong>. Dee gives the Sun the highest dignity: it is the ruler and king of the figure.</p>
+                        <div class="box practice">
+                            <div class="box-header">✎ Draw</div>
+                            Set the compass point on your dot and draw one full circle. Leave room above it for the crescent and plenty of room below for the cross.
+                        </div>
+                        <div class="box contemplate">
+                            <div class="box-header">◉ Contemplate</div>
+                            The point has turned into a boundary without moving. Center and circumference are now one sign. Think about the relation between a source and everything that radiates from it.
+                        </div>
+                    </div>
+
+                    <!-- Stage 3 -->
+                    <div class="stage" data-show="point sun moon" data-fresh="moon" data-caption="The Crescent above: the Moon ☽">
+                        <h3>3 · The Crescent: the Moon <span class="glyph-inline">☽</span></h3>
+                        <p><strong>The teaching.</strong> The Moon's crescent sits on top of the Sun. Dee admits this makes the Moon look superior, but says the reverse is true: the Moon only reflects the Sun's light, and she seems to long so much for that light that she vanishes from the sky for days before she returns. Joining Sun and Moon also recalls Genesis, where evening and morning together make the first day. For Dee this pair is where the "light of the philosophers" begins.</p>
+                        <div class="box practice">
+                            <div class="box-header">✎ Draw</div>
+                            Draw a crescent like a cup, horns pointing up, with its lowest point just resting on the top of the circle.
+                        </div>
+                        <div class="box contemplate">
+                            <div class="box-header">◉ Contemplate</div>
+                            What sits higher in you than it deserves to, shining with a light it doesn't make? And what quiet source actually feeds it?
+                        </div>
+                    </div>
+
+                    <!-- Stage 4 -->
+                    <div class="stage" data-show="point sun moon crossv crossh" data-fresh="crossv crossh" data-caption="The Cross beneath: the elements, 3 and 4">
+                        <h3>4 · The Cross: the Elements <span class="glyph-inline">✝</span></h3>
+                        <p><strong>The teaching.</strong> Sun and Moon now rest on a right-angled cross, and Dee reads it two ways at once:</p>
+                        <ul>
+                            <li><strong>As three</strong>, the ternary: two lines joined at one shared center. Dee links it to the old threefold division of body, soul and spirit.</li>
+                            <li><strong>As four</strong>, the quaternary: four arms enclosing four right angles. These are the four elements, Earth, Water, Air and Fire.</li>
+                        </ul>
+                        <p>He also brings in the Pythagorean saying that 1 + 2 + 3 + 4 make 10: the point, the line, the triangle and the square together make a complete number.</p>
+                        <div class="box practice">
+                            <div class="box-header">✎ Draw</div>
+                            Drop a vertical line straight down from the bottom of the circle. Then draw a shorter horizontal bar across it, a little below the circle.
+                        </div>
+                        <div class="box contemplate">
+                            <div class="box-header">◉ Contemplate</div>
+                            Count the cross as three (two lines plus their meeting point), then as four (four arms). Go back and forth until both feel true at once. Where in your life is something both a single meeting and a fourfold spread?
+                        </div>
+                    </div>
+
+                    <!-- Stage 5 -->
+                    <div class="stage" data-show="point sun moon crossv crossh ariesl ariesr" data-fresh="ariesl ariesr" data-caption="The Horns at the base: Aries ♈, fire">
+                        <h3>5 · The Horns: Aries, Fire <span class="glyph-inline">♈</span></h3>
+                        <p><strong>The teaching.</strong> The base of the figure is the sign of <strong>Aries</strong>, a fire sign and the first sign of the zodiac, where the year begins at the spring equinox. In alchemy fire is the agent of change. Putting Aries at the foot of the figure tells you that what sits above it is meant to be worked on and transformed, not just looked at.</p>
+                        <div class="box practice">
+                            <div class="box-header">✎ Draw</div>
+                            At the foot of the vertical line, draw two small arches, one curving off to each side, joined where the line ends.
+                        </div>
+                        <div class="box contemplate">
+                            <div class="box-header">◉ Contemplate</div>
+                            Fire starts things and fire refines them. What in you is ready to be heated, and what are you willing to have burned away?
+                        </div>
+                    </div>
+
+                    <!-- Stage 6 -->
+                    <div class="stage" data-show="point sun moon crossv crossh ariesl ariesr" data-fresh="" data-caption="The whole Monad: find the seven planets">
+                        <h3>6 · The Whole: Seven in One</h3>
+                        <p><strong>The teaching.</strong> With the figure complete, Dee shows that the signs of all seven classical planets can be found inside it, so the one figure holds the whole heavens. Press each planet below to see the parts that make up its sign. Our breakdowns follow the standard astronomical glyphs. Dee's own derivations go into more detail.</p>
+                        <div class="planet-grid" id="planetGrid"></div>
+                        <div class="planet-info" id="planetInfo">Select a planet.</div>
+                        <div class="box practice">
+                            <div class="box-header">✎ Draw</div>
+                            On a fresh sheet, draw the whole Monad <strong>from memory</strong> in one sitting. Then go over each planet's parts in a different color, or point them out with your pencil.
+                        </div>
+                        <div class="box contemplate">
+                            <div class="box-header">◉ Contemplate</div>
+                            Notice that Moon, circle and cross together make <strong>Mercury ☿</strong>, the alchemists' key substance, and that the fire of Aries sits right underneath it. Read this way, the Monad is a picture of Mercury being worked by fire.
+                        </div>
+                    </div>
+
+                    <!-- Stage 7 -->
+                    <div class="stage" data-show="point sun moon crossv crossh ariesl ariesr" data-fresh="" data-caption="Seal the work">
+                        <h3>7 · Seal and Record</h3>
+                        <p>Dee meant the Monas to be studied over and over, one theorem at a time, with understanding coming slowly. Close each session by writing down what came up. Over several sittings, the record of what changes is the real result of the practice.</p>
+                        <div class="box practice">
+                            <div class="box-header">✎ Do</div>
+                            <ol style="margin-bottom:0">
+                                <li>Trace the figure one last time below, in the order you learned it: point, circle, crescent, cross, horns.</li>
+                                <li>Answer the prompts in the <a href="#record">record</a>.</li>
+                                <li>Next session, take just one stage and stay with it longer.</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="stage-nav">
+                        <button class="btn" id="prevBtn">◄ PREV</button>
+                        <button class="btn alt" id="replayBtn">↻ REDRAW</button>
+                        <button class="btn" id="nextBtn">NEXT ►</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ TRACE ============ -->
+        <section id="trace">
+            <h2>Trace the Monad</h2>
+            <p>Draw over the faint guide with your mouse, finger or stylus. Trace the parts in order. Once you're confident, turn the guide off and draw it unaided.</p>
+            <div class="trace-wrap">
+                <div class="trace-board" id="traceBoard">
+                    <svg viewBox="0 0 300 440" aria-hidden="true">
+                        <g fill="none" stroke="#55FFFF" stroke-width="6" stroke-linecap="round">
+                            <path d="M 95 60 A 55 55 0 0 0 205 60"/>
+                            <circle cx="150" cy="170" r="55"/>
+                            <line x1="150" y1="225" x2="150" y2="350"/>
+                            <line x1="95" y1="282" x2="205" y2="282"/>
+                            <path d="M 150 350 A 27 27 0 0 0 96 350"/>
+                            <path d="M 150 350 A 27 27 0 0 1 204 350"/>
+                        </g>
+                        <circle cx="150" cy="170" r="7" fill="#55FFFF"/>
+                    </svg>
+                    <canvas id="traceCanvas" width="600" height="880"></canvas>
+                </div>
+                <div class="trace-controls">
+                    <button class="btn" id="toggleGuide">HIDE GUIDE</button>
+                    <button class="btn" id="clearTrace">CLEAR</button>
+                    <p style="font-size:12px; margin-top:10px">Order: <strong>·</strong> point → <strong>☉</strong> circle → <strong>☽</strong> crescent → <strong>✝</strong> cross → <strong>♈</strong> horns.<br><br>A drawing on this screen doesn't replace one made by hand. Dee wanted the figure built with real compass and straightedge.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ RECORD ============ -->
+        <section id="record">
+            <h2>Record of the Work</h2>
+            <p>Your notes are saved in this browser only. Copy them into your <a href="grimoire.html">Book of Mirrors</a> to keep a permanent record.</p>
+            <label for="r1">What did the point bring to mind? What is your center?</label>
+            <textarea id="r1" data-key="point"></textarea>
+            <label for="r2">Sun and Moon: what in you shines by its own light, and what only reflects?</label>
+            <textarea id="r2" data-key="lights"></textarea>
+            <label for="r3">The cross as three and as four: what did you notice?</label>
+            <textarea id="r3" data-key="cross"></textarea>
+            <label for="r4">Fire: what is ready to be transformed?</label>
+            <textarea id="r4" data-key="fire"></textarea>
+            <label for="r5">The whole: which planet stood out, and why?</label>
+            <textarea id="r5" data-key="whole"></textarea>
+            <div style="display:flex; gap:8px; flex-wrap:wrap">
+                <button class="btn" id="saveRecord">SAVE</button>
+                <button class="btn alt" id="copyRecord">COPY ALL</button>
+                <button class="btn" id="clearRecord">CLEAR</button>
+            </div>
+            <div class="status" id="recordStatus"></div>
+        </section>
+
+        <!-- ============ SOURCES ============ -->
+        <section id="sources">
+            <h2>Sources and Further Reading</h2>
+            <ul class="sources">
+                <li>John Dee, <em>Monas Hieroglyphica</em> (Antwerp: Gulielmus Silvius, 1564). The original Latin edition, with the diagrams Dee told the printer to copy exactly.</li>
+                <li>C. H. Josten, "A Translation of John Dee's <em>Monas Hieroglyphica</em> (Antwerp, 1564), with an Introduction and Annotations," <em>Ambix</em> 12 (1964), 84–221. The standard scholarly translation.</li>
+                <li>John Dee, <em>Monas Hieroglyphica</em>, trans. Teresa Burns and Nancy Turner (Ouroboros Press). The most complete modern translation, including Dee's letters to Maximilian and the printer.</li>
+                <li>Frances Yates, <em>The Occult Philosophy in the Elizabethan Age</em> (1979). On the Monas as Christian Cabala.</li>
+                <li>Peter J. French, <em>John Dee: The World of an Elizabethan Magus</em> (1972).</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        ARS NOTORIA DIGITALIS • Monas Hieroglyphica Exercise • Figure redrawn after the 1564 Antwerp edition (public domain)
+    </footer>
+
+    <script>
+    (function () {
+        'use strict';
+
+        // ---------- Figure parts ----------
+        const PARTS = ['point', 'sun', 'moon', 'crossv', 'crossh', 'ariesl', 'ariesr'];
+        const el = id => document.getElementById('p-' + id);
+
+        function prepDash(node) {
+            if (node.classList.contains('dot')) return;
+            const len = Math.ceil(node.getTotalLength());
+            node.style.strokeDasharray = len;
+            node.dataset.len = len;
+        }
+        PARTS.forEach(p => prepDash(el(p)));
+
+        function animateIn(node, delay) {
+            if (node.classList.contains('dot')) {
+                node.style.transition = 'none';
+                node.style.opacity = 0;
+                requestAnimationFrame(() => {
+                    node.style.transition = 'opacity 0.6s ' + delay + 'ms';
+                    node.style.opacity = 1;
+                });
+                return;
+            }
+            const len = node.dataset.len;
+            node.style.transition = 'none';
+            node.style.strokeDashoffset = len;
+            node.getBoundingClientRect(); // force reflow
+            node.style.transition = 'stroke-dashoffset 1.2s ease ' + delay + 'ms, stroke 0.3s, opacity 0.3s';
+            node.style.strokeDashoffset = 0;
+        }
+
+        function render(show, fresh, animate) {
+            PARTS.forEach(p => {
+                const n = el(p);
+                n.classList.remove('lit', 'dim', 'fresh');
+                n.style.opacity = '';
+                if (show.includes(p)) {
+                    n.classList.remove('hidden');
+                    if (fresh.includes(p)) {
+                        n.classList.add('fresh');
+                        if (animate) animateIn(n, fresh.indexOf(p) * 400);
+                    } else if (!n.classList.contains('dot')) {
+                        n.style.transition = 'stroke 0.3s, opacity 0.3s';
+                        n.style.strokeDashoffset = 0;
+                    }
+                } else {
+                    n.classList.add('hidden');
+                }
+            });
+        }
+
+        // ---------- Stages ----------
+        const stages = Array.from(document.querySelectorAll('.stage'));
+        const tabs = document.getElementById('stageTabs');
+        const caption = document.getElementById('figCaption');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        let current = 0;
+        const visited = new Set();
+
+        const tabNames = ['POINT', 'SUN', 'MOON', 'CROSS', 'FIRE', 'WHOLE', 'SEAL'];
+        tabNames.forEach((name, i) => {
+            const b = document.createElement('button');
+            b.className = 'stage-tab';
+            b.textContent = (i + 1) + '·' + name;
+            b.addEventListener('click', () => go(i));
+            tabs.appendChild(b);
+        });
+
+        function go(i) {
+            current = Math.max(0, Math.min(stages.length - 1, i));
+            visited.add(current);
+            stages.forEach((s, j) => s.classList.toggle('active', j === current));
+            Array.from(tabs.children).forEach((t, j) => {
+                t.classList.toggle('active', j === current);
+                t.classList.toggle('done', visited.has(j) && j !== current);
+            });
+            const s = stages[current];
+            const show = s.dataset.show.split(' ').filter(Boolean);
+            const fresh = s.dataset.fresh.split(' ').filter(Boolean);
+            render(show, fresh, true);
+            caption.textContent = s.dataset.caption;
+            prevBtn.disabled = current === 0;
+            nextBtn.disabled = current === stages.length - 1;
+            clearPlanet();
+        }
+
+        prevBtn.addEventListener('click', () => go(current - 1));
+        nextBtn.addEventListener('click', () => go(current + 1));
+        document.getElementById('replayBtn').addEventListener('click', () => {
+            if (current >= 5) {
+                // Redraw the whole figure in construction order
+                render(PARTS, [], false);
+                PARTS.forEach((p, k) => animateIn(el(p), k * 350));
+            } else {
+                go(current);
+            }
+        });
+
+        // ---------- Planets ----------
+        const PLANETS = [
+            { sym: '☽', name: 'Moon', parts: ['moon'],
+              text: 'The crescent by itself. The Moon reflects; it does not shine on its own.' },
+            { sym: '☉', name: 'Sun', parts: ['sun', 'point'],
+              text: 'The circle with its center point: the oldest sign of the Sun, ruler of the figure.' },
+            { sym: '♀', name: 'Venus', parts: ['sun', 'crossv', 'crossh'],
+              text: 'The circle standing on the cross. Venus is the solar circle set over the elements.' },
+            { sym: '☿', name: 'Mercury', parts: ['moon', 'sun', 'crossv', 'crossh'],
+              text: 'Crescent, circle and cross: the whole Monad except the horns. This is the alchemists\' Mercury, and the heart of the figure.' },
+            { sym: '♂', name: 'Mars', parts: ['sun', 'ariesl', 'ariesr'],
+              text: 'The circle with the fiery horns of Aries, the sign Mars rules. Fire joined to the solar body.' },
+            { sym: '♃', name: 'Jupiter', parts: ['moon', 'crossv', 'crossh'],
+              text: 'The lunar arc together with the cross. In the glyph ♃ the curve is joined to the cross.' },
+            { sym: '♄', name: 'Saturn', parts: ['crossv', 'crossh', 'moon'],
+              text: 'The cross with the lunar curve hanging from it: the sickle of ♄. Saturn takes the same parts as Jupiter, arranged the other way round.' }
+        ];
+
+        const planetGrid = document.getElementById('planetGrid');
+        const planetInfo = document.getElementById('planetInfo');
+
+        PLANETS.forEach((pl, i) => {
+            const b = document.createElement('button');
+            b.className = 'planet-btn';
+            b.textContent = pl.sym + ' ' + pl.name;
+            b.addEventListener('click', () => showPlanet(i, b));
+            planetGrid.appendChild(b);
+        });
+
+        function showPlanet(i, btn) {
+            const pl = PLANETS[i];
+            Array.from(planetGrid.children).forEach(c => c.classList.toggle('active', c === btn));
+            PARTS.forEach(p => {
+                const n = el(p);
+                n.classList.remove('fresh');
+                n.classList.toggle('lit', pl.parts.includes(p));
+                n.classList.toggle('dim', !pl.parts.includes(p));
+            });
+            planetInfo.innerHTML = '<strong>' + pl.sym + ' ' + pl.name + '</strong><br>' + pl.text;
+            caption.textContent = pl.sym + ' ' + pl.name + ' within the Monad';
+        }
+
+        function clearPlanet() {
+            Array.from(planetGrid.children).forEach(c => c.classList.remove('active'));
+            PARTS.forEach(p => el(p).classList.remove('lit', 'dim'));
+            planetInfo.textContent = 'Select a planet.';
+        }
+
+        // ---------- Tracing canvas ----------
+        const board = document.getElementById('traceBoard');
+        const canvas = document.getElementById('traceCanvas');
+        const ctx = canvas.getContext('2d');
+        let drawing = false;
+
+        function pos(e) {
+            const r = canvas.getBoundingClientRect();
+            return {
+                x: (e.clientX - r.left) * (canvas.width / r.width),
+                y: (e.clientY - r.top) * (canvas.height / r.height)
+            };
+        }
+
+        canvas.addEventListener('pointerdown', e => {
+            drawing = true;
+            canvas.setPointerCapture(e.pointerId);
+            const p = pos(e);
+            ctx.strokeStyle = '#FFFF55';
+            ctx.lineWidth = 8;
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(p.x + 0.1, p.y + 0.1);
+            ctx.stroke();
+        });
+        canvas.addEventListener('pointermove', e => {
+            if (!drawing) return;
+            const p = pos(e);
+            ctx.lineTo(p.x, p.y);
+            ctx.stroke();
+        });
+        ['pointerup', 'pointercancel', 'pointerleave'].forEach(t =>
+            canvas.addEventListener(t, () => { drawing = false; }));
+
+        document.getElementById('clearTrace').addEventListener('click', () => {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        });
+        const toggleGuide = document.getElementById('toggleGuide');
+        toggleGuide.addEventListener('click', () => {
+            const off = board.classList.toggle('no-guide');
+            toggleGuide.textContent = off ? 'SHOW GUIDE' : 'HIDE GUIDE';
+        });
+
+        // ---------- Record (localStorage, guarded) ----------
+        const STORE_KEY = 'monasHieroglyphicaRecord';
+        const fields = Array.from(document.querySelectorAll('#record textarea'));
+        const status = document.getElementById('recordStatus');
+
+        function flash(msg) {
+            status.textContent = msg;
+            setTimeout(() => { if (status.textContent === msg) status.textContent = ''; }, 2500);
+        }
+
+        try {
+            const saved = JSON.parse(localStorage.getItem(STORE_KEY) || '{}');
+            fields.forEach(f => { if (saved[f.dataset.key]) f.value = saved[f.dataset.key]; });
+        } catch (e) { /* storage unavailable */ }
+
+        document.getElementById('saveRecord').addEventListener('click', () => {
+            const data = { savedAt: new Date().toISOString() };
+            fields.forEach(f => { data[f.dataset.key] = f.value; });
+            try {
+                localStorage.setItem(STORE_KEY, JSON.stringify(data));
+                flash('✓ Saved in this browser.');
+            } catch (e) {
+                flash('Could not save here. Use COPY ALL instead.');
+            }
+        });
+
+        document.getElementById('copyRecord').addEventListener('click', () => {
+            const lines = ['MONAS HIEROGLYPHICA: Record of the Work', new Date().toLocaleString(), ''];
+            fields.forEach(f => {
+                const label = document.querySelector('label[for="' + f.id + '"]').textContent;
+                lines.push(label, f.value || '(blank)', '');
+            });
+            const text = lines.join('\n');
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text).then(
+                    () => flash('✓ Copied to clipboard.'),
+                    () => flash('Copy failed. Select the text manually.'));
+            } else {
+                flash('Clipboard unavailable. Select the text manually.');
+            }
+        });
+
+        document.getElementById('clearRecord').addEventListener('click', () => {
+            fields.forEach(f => { f.value = ''; });
+            try { localStorage.removeItem(STORE_KEY); } catch (e) { /* ignore */ }
+            flash('Cleared.');
+        });
+
+        go(0);
+    })();
+    </script>
+</body>
+</html>

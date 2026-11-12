@@ -26,6 +26,18 @@ The Ars Notoria (Notory Art) is a medieval grimoire attributed to Solomon that c
 - **Responsive Design**: Works on desktop and mobile devices
 - **📖 Digital Grimoire**: Complete magical journaling system with unlockable premium features
 
+### Monas Hieroglyphica Exercise
+
+Access via the "☿ MONAS" button in the main interface (`monas-hieroglyphica.html`). A guided, self-paced practice built on John Dee's *Monas Hieroglyphica* (1564):
+
+- **Origins & Three Readings** - What the Monad is, and how it can be read as contemplation, "real" Kabbalah, and alchemy
+- **The Work** - Seven stages (Point, Sun, Moon, Cross, Fire, Whole, Seal) that build the glyph step by step with an animated figure, a teaching, a drawing instruction, and a contemplation prompt
+- **Seven Planets** - Highlights how each classical planetary sign sits within the Monad
+- **Trace Canvas** - Draw over a faint guide with mouse, finger, or stylus, then without it
+- **Record of the Work** - Reflection prompts saved locally in the browser, with copy-to-clipboard for the Book of Mirrors
+
+Note: Dee left no ritual instructions for the Monas. The exercise is a modern reconstruction that follows the order of his theorems, and the page says so.
+
 ### Digital Grimoire System
 
 Access via the "📖 GRIMOIRE" button in the main interface. The grimoire includes:
@@ -57,6 +69,7 @@ Ars Notoria Digitalis/
 ├── sigils.js                           # JavaScript for sigils and interactions
 ├── grimoire.html                       # Digital grimoire interface
 ├── grimoire.js                         # Grimoire functionality and unlock system
+├── monas-hieroglyphica.html            # Guided Monas Hieroglyphica exercise
 ├── README.md                           # This file
 ├── Ars Notoria - PDF.pdf              # Source grimoire (not deployed)
 ├── Screenshot 2026-01-13 165343.jpg   # Manuscript page 1
