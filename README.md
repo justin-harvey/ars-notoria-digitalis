@@ -1,8 +1,8 @@
 # Ars Notoria Digitalis
 
-A digital manifestation of the ancient grimoire "Ars Notoria - The Notory Art of Solomon" in the aesthetic style of TempleOS. This interactive website presents the sacred geometric figures and **historically accurate orations** from the 1657 Robert Turner translation, used for obtaining perfect memory, eloquence, and understanding of the Seven Liberal Arts.
+A digital manifestation of the ancient grimoire "Ars Notoria - The Notory Art of Solomon" in the aesthetic style of TempleOS. This interactive website presents stylized geometric figures and the **orations of the 1657 Robert Turner translation, quoted verbatim with page references**, used for obtaining perfect memory, eloquence, and understanding of the Seven Liberal Arts.
 
-** Historically Accurate Version** - All orations are extracted directly from the original 1657 manuscript translation by Robert Turner, with art-specific sacred names, lunation timings, and instructions faithful to the source text.
+**Source-Checked** - Every oration, sacred name and quoted precept in `sigils.js` is taken word for word from Robert Turner's 1657 translation (Benjamin Rowe's transcription, the PDF in this repository), with page references. Run `python3 tools/verify-orations.py` to check them all against the PDF (needs `pdftotext`). Where Turner gives no oration for a figure (for example Music's Note), the site shows the orations Turner directs you to use instead, and says so. The geometric figures are modern designs: Turner printed no figures.
 
 ## About the Ars Notoria
 
@@ -22,13 +22,17 @@ The Ars Notoria (Notory Art) is a medieval grimoire attributed to Solomon that c
 - **Seven Liberal Arts**: Navigate between the Notes of each art via the menu bar
 - **TempleOS Aesthetic**: Inspired by Terry A. Davis's TempleOS, featuring a 16-color palette and retro interface
 - **Manuscript Gallery**: View the original manuscript geometric figures
-- **Authentic Orations**: Sacred invocations and Latin names from the historical texts
+- **Authentic Orations**: Turner's orations and sacred names, quoted verbatim with page references
 - **Responsive Design**: Works on desktop and mobile devices
-- ** Digital Grimoire**: Complete magical journaling system with unlockable premium features
+- **Digital Grimoire**: Complete magical journaling system with unlockable premium features
+
+### The WORKS Menu
+
+Every page has a **☰ WORKS** button in its titlebar (`works-menu.js`). It links to all the practice pages, grouped as The Notory Art of Solomon, John Dee, and Tools, and marks the page you're on. It works with the keyboard (arrow keys, Esc) and on phones (full-width sheet, wrapping titlebar). To add a page, add one entry to the `WORKS` list at the top of `works-menu.js`.
 
 ### Monas Hieroglyphica Exercise
 
-Access via the "☿ MONAS" button in the main interface (`monas-hieroglyphica.html`). A guided, self-paced practice built on John Dee's *Monas Hieroglyphica* (1564):
+Access via the "☰ WORKS" menu (`monas-hieroglyphica.html`). A guided, self-paced practice built on John Dee's *Monas Hieroglyphica* (1564):
 
 - **Origins & Three Readings** - What the Monad is, and how it can be read as contemplation, "real" Kabbalah, and alchemy
 - **The Work** - Seven stages (Point, Sun, Moon, Cross, Fire, Whole, Seal) that build the glyph step by step with an animated figure, a teaching, a drawing instruction, and a contemplation prompt
@@ -38,9 +42,58 @@ Access via the "☿ MONAS" button in the main interface (`monas-hieroglyphica.ht
 
 Note: Dee left no ritual instructions for the Monas. The exercise is a modern reconstruction that follows the order of his theorems, and the page says so.
 
+### The Groundplat
+
+Access via the "☰ WORKS" menu (`groundplat.html`, data in `groundplat-data.js`). An interactive version of the fold-out "Groundplat" from Dee's *Mathematicall Præface* to the first English Euclid (1570):
+
+- **The tree** - All 55 branches, from the two principal sciences through vulgar arithmetic and geometry to the nineteen named arts, ending in Archemastrie. Each branch shows Dee's definition, a plain-language summary, and his full discussion from the Preface, with his marginal notes.
+- **Practice** - A monochord that plays Dee's consonances (Musike), height by shadow (Hypsometrie), distance by thumb (Apomecometrie), and true local noon with the equation of time (Horometrie), plus hands-on exercises for most of the arts
+- **Study path** - The arts in Dee's order, with progress saved locally
+- **The Oracle of the Groundplat** - A tribute to Terry A. Davis's TempleOS oracle (`groundplat-oracle.js`). Press F7 for a word or Shift-F7 for a passage, drawn only from Dee's 1570 text (about 4,600 words and 870 sentences). Or walk the Groundplat: at each fork, the moment you press picks the branch, and you end on an art with Dee's definition, a sentence from his discussion, and an exercise. Randomness comes from keypress and tap timing, as in TempleOS, mixed with the browser's secure random generator. On phones there are large buttons, a bottom dock while the Oracle is on screen, and haptic taps. Sessions can be saved locally.
+- **Legacy** - Archemastrie, Dee's hinted "OPTICAL Science", Yates's Rosicrucian thesis and its critics, and Dee's defence against being called a "Coniurer"
+
+All text is Dee's 1570 spelling from the Project Gutenberg transcription (#22062, public domain), checked against it: 425 passages.
+
+### The Prayers of John Dee
+
+Access via the "☰ WORKS" menu (`dee-prayers.html`). A daily office built only from Dee's own words in Sloane MS 3188, with nothing spoken by angels or scryers:
+
+- **The Morning and Evening Prayer for Wisdom** - Dee's most-used prayer (Latin), stepped through in nine parts with an original English translation. Latin, English or both, with your own name in the final petition.
+- **The Three Short Prayers** - The ones Dee says he cried out "full oft", plus a study bell that offers one at each interval
+- **The Psalms Dee Prayed** - With Vulgate and English numbering and the occasion for each
+- **Dee's Closings** - The praises he wrote at the end of his sessions
+- **The Faithful Protestation (1582)** - Dee's own account of why he prayed as he did, in his spelling, with glosses
+- **A Day in Dee's Manner** and **Record** - A daily rhythm and a local journal
+
+Dee's text is from the transcription in Joseph H. Peterson's *John Dee's Five Books of Mystery* (2003). Translations from the Latin are original to this site, and Peterson's notes and translations are not used.
+
+### Practice of the Notory Art
+
+Access via the "☰ WORKS" menu (`ars-notoria-practice.html`). A guided practice built directly on Turner's 1657 text:
+
+- **Shape of the Art** - Interactive map of the generals and specials, with each art's number of Notes, the angel's reasons for that number, the inspection rules, and the favourable months by sign
+- **Moon Calendar** - The true day of the Moon (Meeus new-moon algorithm), with every lunar-day rule in the text marked: Speculum of Wisdom, Grammar's days 1-17, Philosophy's days 7 and 17, Rhetoric's forbidden days 11, 17 and 19, and more
+- **The Work** - A seven-stage session (Prepare, Opening Prayer, Hely Scemath, Speculum of Wisdom, Orations before the Note, Inspect, Close), with prayers quoted from Turner
+- **Inspection** - Manuscript figures with tally counters set to the text's own counts (for example, 12 inspections and 24 repetitions for Grammar's first Note)
+- **Record of the Work** - A session log saved locally, with copy-to-clipboard
+
+`lunar.js` is shared by this page and the main status bar, which now shows the astronomical day of the Moon instead of an estimate from the calendar date.
+
+### Reference Library Tools
+
+The reference databases (`reference.html`) now include interactive tools (`reference-tools.js`) and a **History & Sources** note in every section:
+
+- **Astrology** - Live planetary hours, using true sunrise and sunset for your location (from your device or entered by hand, stored only in the browser), with a "sky now" summary and a short working by the hours
+- **Meditation** - Animated breath pacer (Calm, Box, Even, 4-7-8) and a guided body scan with a highlighted figure
+- **Energy Work** - Animated nine-step ground-and-shield visualization, and a clickable chakra figure with a timed walk through the centers
+- **Divination** - Daily draw from the Major Arcana or Elder Futhark, with a log. The rune list is now complete (all 24).
+- **Plants** - Safety box (toxic herbs, pregnancy, pets, smoke)
+- **Shadow Work** - Journaling prompts presented one at a time, and a corrected Jung quotation
+- Sections can be linked directly (for example `reference.html#meditation`)
+
 ### Digital Grimoire System
 
-Access via the " GRIMOIRE" button in the main interface. The grimoire includes:
+Access via the "GRIMOIRE" button in the main interface. The grimoire includes:
 
 **Free Features:**
 - Daily Divination tracker (list & calendar views)
@@ -66,10 +119,19 @@ All entries are saved in browser localStorage. Export/import functionality inclu
 ```
 Ars Notoria Digitalis/
 ├── index.html                          # Main HTML file
-├── sigils.js                           # JavaScript for sigils and interactions
+├── sigils.js                           # Figures, interactions, and Turner's orations (source-checked)
+├── tools/verify-orations.py            # Checks every oration in sigils.js against the Turner PDF
 ├── grimoire.html                       # Digital grimoire interface
 ├── grimoire.js                         # Grimoire functionality and unlock system
 ├── monas-hieroglyphica.html            # Guided Monas Hieroglyphica exercise
+├── ars-notoria-practice.html           # Guided practice of the Notory Art
+├── dee-prayers.html                    # John Dee's own prayers as a daily office
+├── groundplat.html                     # Interactive Groundplat of the Mathematical Preface
+├── groundplat-data.js                  # Groundplat tree and Preface text (generated)
+├── groundplat-oracle.js                # The Oracle of the Groundplat (TempleOS tribute)
+├── lunar.js                            # True new-moon / day-of-the-Moon calculation
+├── works-menu.js                       # Shared WORKS menu for every page
+├── reference-tools.js                  # Interactive tools for the reference library
 ├── README.md                           # This file
 ├── Ars Notoria - PDF.pdf              # Source grimoire (not deployed)
 ├── Screenshot 2026-01-13 165343.jpg   # Manuscript page 1
