@@ -38,6 +38,18 @@ Access via the "☿ MONAS" button in the main interface (`monas-hieroglyphica.ht
 
 Note: Dee left no ritual instructions for the Monas. The exercise is a modern reconstruction that follows the order of his theorems, and the page says so.
 
+### Practice of the Notory Art
+
+Access via the "✦ PRACTICE" button in the main interface (`ars-notoria-practice.html`). A guided practice built directly on Turner's 1657 text:
+
+- **Shape of the Art** - Interactive map of the generals and specials, with each art's number of Notes, the angel's reasons for that number, the inspection rules, and the favourable months by sign
+- **Moon Calendar** - The true day of the Moon (Meeus new-moon algorithm), with every lunar-day rule in the text marked: Speculum of Wisdom, Grammar's days 1-17, Philosophy's days 7 and 17, Rhetoric's forbidden days 11, 17 and 19, and more
+- **The Work** - A seven-stage session (Prepare, Opening Prayer, Hely Scemath, Speculum of Wisdom, Orations before the Note, Inspect, Close), with prayers quoted from Turner
+- **Inspection** - Manuscript figures with tally counters set to the text's own counts (for example, 12 inspections and 24 repetitions for Grammar's first Note)
+- **Record of the Work** - A session log saved locally, with copy-to-clipboard
+
+`lunar.js` is shared by this page and the main status bar, which now shows the astronomical day of the Moon instead of an estimate from the calendar date.
+
 ### Digital Grimoire System
 
 Access via the "📖 GRIMOIRE" button in the main interface. The grimoire includes:
@@ -70,6 +82,8 @@ Ars Notoria Digitalis/
 ├── grimoire.html                       # Digital grimoire interface
 ├── grimoire.js                         # Grimoire functionality and unlock system
 ├── monas-hieroglyphica.html            # Guided Monas Hieroglyphica exercise
+├── ars-notoria-practice.html           # Guided practice of the Notory Art
+├── lunar.js                            # True new-moon / day-of-the-Moon calculation
 ├── README.md                           # This file
 ├── Ars Notoria - PDF.pdf              # Source grimoire (not deployed)
 ├── Screenshot 2026-01-13 165343.jpg   # Manuscript page 1

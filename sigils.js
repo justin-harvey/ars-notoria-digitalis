@@ -1096,10 +1096,13 @@ function updateClock() {
     const now = new Date();
     const hour = now.getHours();
 
-    // Simple lunar day calculation (not astronomically accurate, but thematic)
-    const dayOfMonth = now.getDate();
-    const lunaDay = ((dayOfMonth - 1) % 28) + 1;
-    document.getElementById('lunaDay').textContent = romanNumeral(Math.min(lunaDay, 14));
+    // Day of the Moon, counted from the true astronomical new moon (see lunar.js)
+    const lunaEl = document.getElementById('lunaDay');
+    if (window.Lunar) {
+        const lun = Lunar.lunation(now);
+        lunaEl.textContent = Lunar.toRoman(lun.day);
+        lunaEl.title = 'Day ' + lun.day + ' of the Moon (' + Lunar.phaseName(lun.age) + ')';
+    }
 
     // Planetary hour (simplified)
     const planetaryHour = (hour % 12) + 1;
