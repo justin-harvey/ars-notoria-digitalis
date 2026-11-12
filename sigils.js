@@ -1,505 +1,611 @@
 // Ars Notoria Digitalis - Interactive Sigil System
-// Sacred orations from the 1657 Robert Turner translation
-// Authentic text from "The Notory Art of Solomon"
+// Orations, sacred names and precepts quoted from Robert Turner's English translation,
+// "Ars Notoria: The Notory Art of Solomon" (London, 1657), as transcribed by Benjamin Rowe
+// (the PDF in this repository). Page numbers refer to that transcription.
+// Generated and checked word-for-word against the source; see tools/verify-orations.py.
 
-// Art-specific orations extracted from the historical manuscript
 const artOrations = {
-    grammar: {
-        center: {
-            title: "NOTA PRIMA GRAMMATICAE - The Central Figure",
-            sacred: "Hely · Scemath · Amazaz · Hemel · Sathusteon",
-            content: "The Light, Truth, Life, Way, Judge, Mercy, Fortitude and Patience, preserve, help me, and have Mercy upon me, Amen. Oh Lord, Holy Father, Almighty, eternal God, which art the Fountain of goodness and truth, be merciful unto me thy servant, and illuminate my understanding with the Splendor of thy Light.",
-            instruction: "Inspect this Note 12 times daily during lunation Days I to XIV, and again from XIV to XVII. Repeat the oration 24 times. This is the first of three Notes for Grammar.",
-            latin: "Hely, Scemath Amazaz, Hemel, Sathusteon, Lamtara, Gezaraman"
+    "grammar": {
+        "center": {
+            "title": "NOTA PRIMA GRAMMATICAE: The First Note of Grammar",
+            "heading": "THE ORATION",
+            "sacred": "",
+            "content": "The Light, Truth, Life, Way, Judge, Mercy, Fortitude and Patience, preserve, help me, and have Mercy upon me, Amen.\n\nOh Lord, Holy Father, Almighty, eternal God, in whose sight are all the foundations of all creatures, and invisible beings whose Eyes behold my imperfections, of the sweetness of whose love the Earth and Heavens are filled; who sawest all things before they were made, in whose book every day is formed, and all mankind are written therein: behold me, thy Servant this day prostrate me before thee, with thy whole Heart and Soul: by thy Holy Spirit confirm me, blesse me, protect all my Actions in this inspection or repetition, and illuminate me of thy visitation.",
+            "instruction": "Turner gives the short oration first, then: \"This Oration, with the preceding ought to be said in the beginning of the first Note of Grammar.\" Rule: “In the dayes when the Moon is in her prime, the first Note is to be looked into 12 times, and the Oration thereof repeated 24 times with Holy reverence; making a little space between, let the Oration be twice repeated at the inspection of every Note, and chiefly abstain from sins: do this from the first day of the Moon to the 14, and from the 14 to the 17. The first and second Notes are to be looked into 20 times, and the Oration to be repeated 30 times, on the 15 and 17 dayes, using some interval between them, All the three Notes are then everyday to be looked into 12 times, and the Orations are to be repeated 20 times: and thus of the Notes of the Art of Grammar.”",
+            "source": "Turner, Ars Notoria (1657), Rowe transcription, pp. 23, 26"
         },
-        north: {
-            title: "FOR PERFECT MEMORY IN GRAMMAR",
-            sacred: "Lamtara · Gezaraman · Sanehet",
-            content: "Oh God, who hast created all things by thy Power, and hast ordained the Generation of all for thy Glory: Look mercifully upon me, and grant that by contemplating this sacred Figure, I may obtain perfect Memory of all Grammatical learning.",
-            instruction: "This oration grants retention of all grammatical rules, declensions, and conjugations. Speak it facing East at dawn during the appropriate lunation.",
-            latin: "Sanehet, Zamathay, Heled, Gemehe, Selatha"
+        "north": {
+            "title": "THE SECOND NOTE OF GRAMMAR",
+            "heading": "THE ORATION",
+            "sacred": "",
+            "content": "Behold, O Lord, merciful Father all things, eternal dispensor of all virtues, and consider my operations this day; Thou art the Beholder and Discerner of all the Actions of Men and Angels: Let the wonderful grace of thy promises condescend to fufil this sudden virtue in me, and infuse such efficacy into me, operating in thy Holy and great Name, thou who infusest thy praise into the mouths of them that love thee, Amen.",
+            "instruction": "Turner: \"This Oration ought to be said before the second Note of Grammar.\"",
+            "source": "Turner, Ars Notoria (1657), Rowe transcription, p. 26"
         },
-        south: {
-            title: "FOR ELOQUENT SPEECH IN GRAMMAR",
-            sacred: "Zemez · Gehedabezay · Samar",
-            content: "Stretch forth thy Hand, and touch my Mouth, and make my Tongue as a sharp sword to speak with perfect understanding of Language. Grant unto me knowledge of all parts of speech and their proper usage.",
-            instruction: "The Southern point opens the mouth for perfect grammatical expression. Speak this before teaching or writing in any language.",
-            latin: "Zemez, Gehedabezay, Samar, Heleb, Gezemon"
+        "south": {
+            "title": "THE THIRD NOTE OF GRAMMAR",
+            "heading": "THE ORATION",
+            "sacred": "",
+            "content": "O ADONAY, Creator of all visible Creatures! OH most Holy Father, who dwellest incompassed about with eternal light, disposing and by thy power governing all things before all beginnings; I most humbly beseech thy eternity and thy incomprehensible goodness may come to perfection in me, by the operation of thy most Holy Angels; and be confirmed in my Memory, and establish these, thy Holy works in me, Amen.",
+            "instruction": "Turner: \"Let this Oration be rehearsed before the third Grammatical Note.\"",
+            "source": "Turner, Ars Notoria (1657), Rowe transcription, p. 26"
         },
-        east: {
-            title: "FOR UNDERSTANDING GRAMMATICAL CONSTRUCTION",
-            sacred: "Halataiam · Sezamon · Gedelamay",
-            content: "Illuminate my understanding that I may comprehend the Construction and Analysis of all Languages. Let the sacred structure of Speech be revealed unto me through thy Divine Wisdom.",
-            instruction: "The Eastern mysteries reveal how words are built and combined. Use this when studying the structure of language.",
-            latin: "Halataiam, Sezamon, Gedelamay, Helors, Gemelion"
+        "east": {
+            "title": "THE FIRST PRECEPT: Hely Scemath",
+            "heading": "THE ORATION",
+            "sacred": "Hely, Scemath Amazaz, Hemel, Sathusteon, hheli Tamazam, &cet.",
+            "content": "Hely, Scemath Amazaz, Hemel, Sathusteon, hheli Tamazam, &cet.",
+            "instruction": "Solomon called it \"His First Revelation; and that to be without any Interpretation.\" The text gives only its opening words. “If any one will search the Scriptures, or would understand, or eloquently pronounce any part of Scripture, let him pronounce the words of the following Figure, to wit, Hely Scemath, in the morning betimes of that day, wherein thou wilt begin any work.”",
+            "source": "Turner, Ars Notoria (1657), Rowe transcription, p. 7"
         },
-        west: {
-            title: "FOR COMPLETION OF GRAMMATICAL KNOWLEDGE",
-            sacred: "Themozathiam · Hezel · Saday",
-            content: "Complete and perfect my knowledge of Grammar. Let no rule be hidden from me, no exception unknown. The West brings all learning to fulfillment.",
-            instruction: "After mastering the other three points, contemplate this Figure to seal all Grammatical knowledge permanently in Memory.",
-            latin: "Themozathiam, Hezel, Saday, Saneha, Gemarathan"
+        "west": {
+            "title": "THE SPECULUM OF WISDOM: Oration of the Four Tongues",
+            "heading": "THE ORATION",
+            "sacred": "",
+            "content": "Assaylemath, Assay, Lemath, Azzabue.\n\nAzzaylemath, Lemath, Azacgessenio.\n\nLemath, Sabanche, Ellithy, Aygezo.",
+            "instruction": "“But it is to be rehearsed four times a day, beginning in the morning once, about the third hour once, once in the ninth hour, and once in the evening. The precedent Oration ought to be spoken secretly; and let him that speaks it be alone, and pronounce it with a low voyce, so that he scarcely hear himself.” The second part \"is to be said only once.\" Its days are the 4th, 8th and 12th of the Moon.",
+            "source": "Turner, Ars Notoria (1657), Rowe transcription, p. 9"
         },
-        node1: {
-            title: "FIRST NODE - Ordination of Words and Times",
-            sacred: "Gehetaman · Sezaly",
-            content: "The first necessity of Grammar is the Ordination of words and their proper arrangement in time. Through this Node, understand when and how each word must be placed for perfect sense.",
-            instruction: "The first of Grammar's three essential nodes. Study this for mastery of word order and tenses.",
-            latin: "Gehetaman, Sezaly, Helam, Gemarion"
+        "node1": {
+            "title": "WHY GRAMMAR HAS THREE NOTES: I",
+            "heading": "THE TEACHING",
+            "sacred": "",
+            "content": "The Grammatical Art is called a liberal Art, and hath three things necessary thereunto; Ordination of words and times; and in them, of Adjuncts or Figures; Simple, compound and various; and a various declination of the parts to the parts, or a relation from the parts, and a Congruent and ordinate division.",
+            "instruction": "The angel's explanation to Solomon. Turner then assigns one purpose to each Note: “that as there should be a full knowledge of declining by one; by another, that there should be had a convenient Ordination of all the parts; by the third, there should be had a continual and convenient Division of all the parts, simple and compound.”",
+            "source": "Turner, Ars Notoria (1657), Rowe transcription, p. 22"
         },
-        node2: {
-            title: "SECOND NODE - Figures of Speech",
-            sacred: "Hamezamar · Getalion",
-            content: "The second necessity is knowledge of Simple and Compound figures of speech. By this Node, learn Metaphor, Synecdoche, Metonymy, and all rhetorical devices.",
-            instruction: "The second node opens the mysteries of figurative language. Essential for Poetry and elevated discourse.",
-            latin: "Hamezamar, Getalion, Semath, Helez"
+        "node2": {
+            "title": "WHY GRAMMAR HAS THREE NOTES: II",
+            "heading": "THE TEACHING",
+            "sacred": "",
+            "content": "that as there should be a full knowledge of declining by one; by another, that there should be had a convenient Ordination of all the parts; by the third, there should be had a continual and convenient Division of all the parts, simple and compound.",
+            "instruction": "The first Note gives knowledge of declining, the second the ordering of the parts, the third their division.",
+            "source": "Turner, Ars Notoria (1657), Rowe transcription, p. 22"
         },
-        node3: {
-            title: "THIRD NODE - Division of Parts of Speech",
-            sacred: "Semarathan · Heledon",
-            content: "The third necessity is Division and understanding of the parts of speech: Noun, Verb, Participle, Article, Pronoun, Preposition, Adverb, and Conjunction. Master these through this sacred Node.",
-            instruction: "The third node completes Grammar. All language is built from these eight parts. Know them perfectly.",
-            latin: "Semarathan, Heledon, Gezamoray, Themas"
+        "node3": {
+            "title": "THE NUMBER OF THE NOTES",
+            "heading": "THE TEACHING",
+            "sacred": "",
+            "content": "For Grammar hath three Notes only, Dialects two, and Rhetorick four, and every one with open and distinct Orations.",
+            "instruction": "Turner also gives Geometry one Note, Arithmetic a Note and a half, Music and Physic one each, Philosophy seven species, and Theology and Astronomy seven Notes.",
+            "source": "Turner, Ars Notoria (1657), Rowe transcription, p. 21"
         },
-        ring1: {
-            title: "THE OUTER GRAMMATICAL CIRCLE",
-            sacred: "Assaylemath · Lemozele · Thesalamaton",
-            content: "This outer circle encompasses all Grammatical knowledge. These are the Augmentations that magnify the efficacy of the Grammatical Notes sevenfold.",
-            instruction: "Before approaching any Grammatical Note, speak this oration to prepare the mind and soul for receiving divine knowledge of Language.",
-            latin: "Assaylemath, Lemozele, Thesalamaton, Haziel, Gemathon"
+        "ring1": {
+            "title": "THE PRAYER IN THE BEGINNING: Alpha and Omega",
+            "heading": "THE ORATION",
+            "sacred": "",
+            "content": "Alpha and Omega! Oh Almighty God, the Beginning of all things, without Beginning, and without End: Graciously this day hear my Prayers; neither do thou render unto me according to my sins, nor after mine iniquities, O Lord my God, but according to thy mercy, which is greater then all things visible and invisible. Have mercy upon me, O Christ, the Wisdom of the Father, The Light of the Angels, The Glory of the Saints, The Hope, Refuge, and Support of Sinners, The Creator of all things, and Redeemer of all humane Frailties, who holdest the Heaven, Earth, and Sea, and all the whole World, in the palm of thy Hand: I humbly implore and beseech, that thou wilt mercifully with the Father, illustrate my Minde with the beams of thy holy Spirit, that I may be able to come and attain to the perfection of this most holy Art; and that I may be able to gain the knowledge of every Science, Art, and Wisdom; and of every Faculty of Memory, Intelligences, Understanding, and Intellect, by the Vertue and Power of thy most holy Spirit, and in thy Name. And thou, O God my God, who in the Beginning hast created the Heaven and the Earth, and all things out of nothing; who reformest, and makest all things by thy own Spirit; compleat, fulfil, restore, and implant a sound understanding in me, that I may glorify thee and all thy Works, in all my Thoughts, Words, and Deeds. O God the Father, confirm and grant this my Prayer, and increase my Understanding and Memory, and strengthen the same, to know and receive the Science, Memory, Eloquence, and Perseverance in all manner of Learning, who livest and reignest, World without end. Amen.",
+            "instruction": "“Before any one is to reade or pronounce any Orations of this Art, to bring them to Effect, let them always first reverently and devoutly rehearse the Prayer in the beginning.” This prayer opens the book.",
+            "source": "Turner, Ars Notoria (1657), Rowe transcription, pp. 5, 7"
         },
-        ring2: {
-            title: "THE INNER GRAMMATICAL CIRCLE",
-            sacred: "Hamabiel · Thesolamay · Hazamemay",
-            content: "The inner circle protects and sanctifies the work. No error may enter within this sacred boundary. All Grammatical learning proceeding from this center is without corruption.",
-            instruction: "The inner circle creates sacred space for study. Speak this to establish perfect conditions for learning Grammar.",
-            latin: "Hamabiel, Thesolamay, Hazamemay, Sela, Gezamar"
+        "ring2": {
+            "title": "A PRAYER TO OBTAIN A GOOD MEMORY",
+            "heading": "THE ORATION",
+            "sacred": "O Most Mighty God, Invisible God, Theos Patir Heminas; By thy Archangels, Eliphamasay, Gelonucoa, Gebeche Banai, Gerabcai, Elomnit; and by thy glorious Angels, whose names are so Consecrated, that they cannot be uttered by us; which are these, Do., Hel., X., P., A., Li., O., F, &c. which cannot be comprehended by Humane Sense.",
+            "content": "O Most Mighty God, Invisible God, Theos Patir Heminas; By thy Archangels, Eliphamasay, Gelonucoa, Gebeche Banai, Gerabcai, Elomnit; and by thy glorious Angels, whose names are so Consecrated, that they cannot be uttered by us; which are these, Do., Hel., X., P., A., Li., O., F, &c. which cannot be comprehended by Humane Sense.\n\nI Beseech thee, O my Lord, to Illuminate the Light of my Conscience with the Splendor of thy Light: Illustrate and confirm my Understanding, with the sweet odour of thy Spirit. Adorn my Soul, that hearing I may hear; and what I hear, I may retain in my Memory. O Lord, reform my heart, restore my senses, and strengthen them; qualifie my Memory with thy Gifts: Mercifully open the dulness of my Soul. O most merciful God, temper the frame of my Tongue, by thy most glorious and unspeakable Name: Thou who art the Fountain of all Goodness; the Original and Spring of Piety, have patience with me, give a good Memory unto me, and bestow upon me what I pray of thee in this holy Oration. O thou who dost not forthwith Judge a sinner, but mercifully waitest, expecting his Repentance; I, (though unworthy) beseech thee to take away the guilt of my sins, and wash away my wickedness and offences, and grant me these my Petitions, by the vertue of thy holy Angels, thou who art one God in Trinity. Amen.",
+            "instruction": "Turner gives the prayer, then its \"Prologue,\" which \"ought to be said next to the precedent Oration; to wit, Lameth.\" The angels' names after \"Do., Hel., X.\" are left as initials in the text.",
+            "source": "Turner, Ars Notoria (1657), Rowe transcription, pp. 11, 12"
         },
-        cross: {
-            title: "THE GRAMMATICAL CROSS - Binding of Knowledge",
-            sacred: "Azelethemamon · Hazasemor",
-            content: "By this Cross, all Grammatical knowledge is bound to the Memory. The vertical connects Divine Language to Human Speech; the horizontal spans all Tongues from East to West.",
-            instruction: "Trace this Cross over thy heart after completing the orations. This seals Grammar in thy Memory forever.",
-            latin: "Azelethemamon, Hazasemor, Gemath, Helion, Samathay"
+        "cross": {
+            "title": "LAMETH: Invocation of the Angels for Eloquence",
+            "heading": "THE ORATION",
+            "sacred": "",
+            "content": "Lameth, Leynach, Semach, Belmay, (these Orations have not proper Lunations, as the Commentator saith upon the Gloss.) Azzailement, Gesegon, Lothamasim, Ozetogomaglial, Zeziphier, Josanum, Solatac, Bozefama, Defarciamar, Zemait, Lemaio, Pheralon, Anuc, Philosophi, Gregoon, Letos, Anum, Anum, Anum.",
+            "instruction": "“The Oration which follows, is a certain Invocation of the Angels of God, and it provoketh Eloquence, and ought to be said in the beginning of the Scripture, and in the beginning of the Moneth.” It is introduced right after the oration Turner calls \"The Queen of Tongues.\" Say it fasting, \"before you have taken either Meat or Drink.\"",
+            "source": "Turner, Ars Notoria (1657), Rowe transcription, p. 11"
         },
-        node4: {
-            title: "THE QUATERNARY COMPLETION",
-            sacred: "Salam · Gezamahel · Themath",
-            content: "The fourth completes the sacred quaternary. Four is the number of completion in Grammar: the four modes, the four seasons of study, the four quarters of the figure.",
-            instruction: "After mastering the three essential nodes, contemplate this fourth to bring all elements into perfect unity.",
-            latin: "Salam, Gezamahel, Themath, Helion, Gemara"
+        "node4": {
+            "title": "PRECEPTS FOR INSPECTING THE NOTES",
+            "heading": "THE PRECEPT",
+            "sacred": "",
+            "content": "In the beginning of the inspection of all Notes, fast the first day till the evening, if you can; if thou canst not, then take another hour. This is the Grammatical precept.\n\nsee that it be secret to thy self, and that thou have no looker on but God.",
+            "instruction": "These general precepts apply to every Note, not to Grammar alone.",
+            "source": "Turner, Ars Notoria (1657), Rowe transcription, p. 24"
         }
     },
-    logic: {
-        center: {
-            title: "NOTA DIALECTICAE - The Art of Logic",
-            sacred: "Heliothamar · Semath · Halemon",
-            content: "O Holy God, great good and the eternal Maker of all things, illuminate my understanding with the Light of Logic and Dialectic. Grant me the power to distinguish Truth from Falsehood, to construct perfect Arguments, and to detect all Sophistry.",
-            instruction: "Logic has two and a half Notes: one for Eloquence of Arguing, one for Prudence to Answer, and a half for swift Comprehension. Begin with this central oration.",
-            latin: "Heliothamar, Semath, Halemon, Gezamara, Themios"
+    "logic": {
+        "center": {
+            "title": "THE FIRST NOTE OF LOGIC",
+            "heading": "THE ORATION",
+            "sacred": "",
+            "content": "O Holy God, great good and the eternal Maker of all things, thy Attributes not to be expressed, who hast Created the Heaven and the Earth, the Sea and all things in them, and the bottomless pit according to thy pleasure; in whose sight are the Words and Actions of all men: Grant unto me, by these Sacramental Mysteries of thy Holy Angels, the precious knowledge of this art, which I desire by the Ministery of thy Holy Angels, it being without any Malignant or Malicious intent, Amen.",
+            "instruction": "Turner: \"Pronounce this Oration in the beginning of the first Figure of the Logick Art; and after this Oration rehearse incontinently with some interval, the Orations written between the first Figure.\"",
+            "source": "Turner, Ars Notoria (1657), Rowe transcription, p. 26"
         },
-        north: {
-            title: "FOR ELOQUENCE IN ARGUING",
-            sacred: "Samarezathim · Gedemehon",
-            content: "Grant unto me perfect Eloquence in Argument and Disputation. Let my Syllogisms be sound, my Premises true, and my Conclusions inevitable. Make my Logic as iron that cannot be broken.",
-            instruction: "The first full Note. Use this before engaging in Disputation, Debate, or any contest of Reasoning. Grants power in offensive argument.",
-            latin: "Samarezathim, Gedemehon, Helez, Salarim, Gemathion"
+        "north": {
+            "title": "HELAY: The Oration Before the First Note of the Dialect",
+            "heading": "THE ORATION",
+            "sacred": "",
+            "content": "Most Merciful Creator, Inspirer, Reformer, and Approver of all Divine Wills, Ordainer of all things, Mercifully give ear to my Prayer, gloriously intend unto the desires of my heart, that what I humbly desire, according to thy promises, thou wilt Mercifully grant, Amen.",
+            "instruction": "Turner: \"The sixth Oration ought to be said before the first Note of the Dialect; Helay.\"",
+            "source": "Turner, Ars Notoria (1657), Rowe transcription, p. 27"
         },
-        south: {
-            title: "FOR PRUDENCE IN ANSWERING",
-            sacred: "Themosarathay · Heledamas",
-            content: "Grant unto me Prudence and Wisdom to Answer all Arguments brought against me. Let me see instantly the flaws in false reasoning, and respond with unassailable Logic.",
-            instruction: "The second full Note. Use this when you must defend a position or respond to criticism. Grants power in defensive argument.",
-            latin: "Themosarathay, Heledamas, Sezamah, Gehoron, Halathiam"
+        "south": {
+            "title": "HOW THE LOGICAL NOTES ARE INSPECTED",
+            "heading": "THE PRECEPT",
+            "sacred": "",
+            "content": "Know, that the Dialectical Notes are four times to be looked into, and the Orations thereof in that day are 20 times to be repeated, making some respite, and having the books of that Art before your Eyes;\n\nThe Dialectical Notes may be used every day, except only in those dayes before told of:",
+            "instruction": "Turner gives no separate oration for the second Note of Logic.",
+            "source": "Turner, Ars Notoria (1657), Rowe transcription, p. 24"
         },
-        node1: {
-            title: "THE HALF NOTE - Swift Comprehension",
-            sacred: "Genemathon · Sezelay",
-            content: "This half Note grants swift comprehension of complex Arguments. In an instant, understand the structure of any Syllogism and perceive its validity or falsehood.",
-            instruction: "The half Note is spoken once in the morning during the waxing moon. It sharpens the mind for rapid logical analysis.",
-            latin: "Genemathon, Sezelay, Hemathay, Salaman"
+        "node1": {
+            "title": "WHY LOGIC HAS TWO NOTES",
+            "heading": "THE TEACHING",
+            "sacred": "",
+            "content": "Dialect, which is called the form of Arts, and a Doctrinal speech, hath two things necessary thereunto, to wit, Eloquence of Arguing, and Prudence to answer; Therefore the greatness of the Divine Providence and Piety, hath appointed two Notes to it; that by the first, we may have Eloquence to Argue and Dispute; and by the second, industry to answer without ambiguity:",
+            "instruction": "By the first Note, eloquence to argue and dispute; by the second, the skill to answer without ambiguity.",
+            "source": "Turner, Ars Notoria (1657), Rowe transcription, p. 23"
         },
-        node2: {
-            title: "FOR DETECTING SOPHISTRY",
-            sacred: "Hazelamenon · Themarat",
-            content: "Reveal unto me all Sophisms and false Arguments. Let no Fallacy escape my notice: neither Equivocation, nor Ambiguity, nor False Cause, nor any of the deceptions of imperfect Logic.",
-            instruction: "Use this node when examining arguments for hidden flaws. Essential for philosophers and judges.",
-            latin: "Hazelamenon, Themarat, Gezahemon, Salarim"
+        "node2": {
+            "title": "LAMED: For Understanding a Science Suddenly Proposed",
+            "heading": "THE ORATION",
+            "sacred": "Lamed, Rogum, Ragia, Ragium, Ragiomal, Agaled, Eradioch, Anchovionos, Lochen, Saza, Ya, Manichel, Mamacuo, Lephoa, Bozaco, Cogemal, Saluyel, Tesunanu, Azaroch, Beyestar, Amak.",
+            "content": "Lamed, Rogum, Ragia, Ragium, Ragiomal, Agaled, Eradioch, Anchovionos, Lochen, Saza, Ya, Manichel, Mamacuo, Lephoa, Bozaco, Cogemal, Saluyel, Tesunanu, Azaroch, Beyestar, Amak.\n\nOh Eternal and Unreprehensible Memory! Oh Uncontradictible Wisdom! Oh Unchangeable Power! Let thy right-hand encompass my heart, and the holy Angels of thy Eternal Counsel; complete and fill up my Conscience with thy Memory, and the odor of thy Ointments; and let the sweetness of thy Grace strengthen and fortifie my Understanding, through the pure splendor and brightness of thy holy Spirit; by vertue whereof, the holy Angels alwayes behold and admire the brightness of thy face, and all thy holy and heavenly Vertues; Wisdom, wherewith thou hast made all things; Understanding, by which thou hast reformed all things; Perseverance unto blessedness, whereby thou hast restored and confirmed the Angels; Love, whereby thou hast restored lost Mankind, and raised him after his Fall to Heaven; Learning, whereby thou wer't pleased to teach Adam the knowledge of every Science: Inform, repleat, instruct, restore, correct, and refine me, that I may be made new in the understanding thy Precepts, and in receiving the Sciences which are profitable for my Soul and Body, and for all faithful believers in thy Name which is blessed forever, world without end.",
+            "instruction": "“The same Oration is also to be said, when you would clearly and plainly understand and expound any Science or great Mystery, that is on a sudden proposed to you, which you never heard of before:” The Latin \"beginning of the Oration\" follows the names.",
+            "source": "Turner, Ars Notoria (1657), Rowe transcription, pp. 14, 15"
         },
-        ring1: {
-            title: "THE DIALECTICAL CIRCLE",
-            sacred: "Semalathion · Hegemehon",
-            content: "The circle of Logic encompasses all rational thought. Within this boundary, only Truth and valid Inference may dwell. All Sophistry is cast out.",
-            instruction: "Speak this before beginning any logical work to purify the mind of prejudice and prepare it for pure Reason.",
-            latin: "Semalathion, Hegemehon, Tharamos, Gezel, Hemathion"
+        "ring1": {
+            "title": "THE PRAYER IN THE BEGINNING: Alpha and Omega",
+            "heading": "THE ORATION",
+            "sacred": "",
+            "content": "Alpha and Omega! Oh Almighty God, the Beginning of all things, without Beginning, and without End: Graciously this day hear my Prayers; neither do thou render unto me according to my sins, nor after mine iniquities, O Lord my God, but according to thy mercy, which is greater then all things visible and invisible. Have mercy upon me, O Christ, the Wisdom of the Father, The Light of the Angels, The Glory of the Saints, The Hope, Refuge, and Support of Sinners, The Creator of all things, and Redeemer of all humane Frailties, who holdest the Heaven, Earth, and Sea, and all the whole World, in the palm of thy Hand: I humbly implore and beseech, that thou wilt mercifully with the Father, illustrate my Minde with the beams of thy holy Spirit, that I may be able to come and attain to the perfection of this most holy Art; and that I may be able to gain the knowledge of every Science, Art, and Wisdom; and of every Faculty of Memory, Intelligences, Understanding, and Intellect, by the Vertue and Power of thy most holy Spirit, and in thy Name. And thou, O God my God, who in the Beginning hast created the Heaven and the Earth, and all things out of nothing; who reformest, and makest all things by thy own Spirit; compleat, fulfil, restore, and implant a sound understanding in me, that I may glorify thee and all thy Works, in all my Thoughts, Words, and Deeds. O God the Father, confirm and grant this my Prayer, and increase my Understanding and Memory, and strengthen the same, to know and receive the Science, Memory, Eloquence, and Perseverance in all manner of Learning, who livest and reignest, World without end. Amen.",
+            "instruction": "“Before any one is to reade or pronounce any Orations of this Art, to bring them to Effect, let them always first reverently and devoutly rehearse the Prayer in the beginning.”",
+            "source": "Turner, Ars Notoria (1657), Rowe transcription, pp. 5, 7"
         }
     },
-    rhetoric: {
-        center: {
-            title: "NOTA RHETORICAE - The Art of Eloquence",
-            sacred: "Hanazay · Sazhaon · Gemehiel",
-            content: "Omnipotent and merciful Father, Ordainer and Creator of all Creatures, visible and invisible: Grant unto thy servant the gift of perfect Rhetoric and Eloquence. Make my Speech beautiful and persuasive, that all who hear may be moved.",
-            instruction: "Rhetoric has four Notes: for Eloquence, for Judgment in speech, for powerful Testimony, and for deep Understanding. Begin here at the center.",
-            latin: "Hanazay, Sazhaon, Hubi, Sene, Hay, Ginbar, Ronail, Samech"
+    "rhetoric": {
+        "center": {
+            "title": "THE FIRST NOTE OF RHETORIC",
+            "heading": "THE ORATION",
+            "sacred": "",
+            "content": "Omnipotent and merciful Father, Ordainer and Creator of all Creatures: O most Holy Judge, eternal King of Kings, and Lord of Lords; who wonderfully condescendest to give wisdom and understanding to the Saints, who judgest and discernest all things: I beseech thee to illuminate my heart this day with the Splendor of thy Beauty, that I may understand and know what I desire, and what things are considerable to be known in this Art, Amen.",
+            "instruction": "Said \"with the following Hanazay, &c.\" Turner: \"ought to be pronounced before the first Figure of Rhetorick\" … \"that there might be some mean interval used in the pronouncing of them.\"",
+            "source": "Turner, Ars Notoria (1657), Rowe transcription, p. 27"
         },
-        north: {
-            title: "FIRST NOTE - For Perfect Eloquence",
-            sacred: "Helemazathon · Gezaharay",
-            content: "This is the Queen of all Speech. It taketh away all Impediments of the Tongue and granteth perfect fluency. Let my words flow as honey, my arguments as iron, and my rhetoric move all hearts.",
-            instruction: "The first of four Notes. Use before any important speech, sermon, or address. Grants supernatural eloquence and persuasive power.",
-            latin: "Helemazathon, Gezaharay, Samalion, Thehez, Gemorathon"
+        "north": {
+            "title": "HANAZAY: Spoken With the First Oration of Rhetoric",
+            "heading": "THE ORATION",
+            "sacred": "Hanazay, Sazhaon, Hubi, Sene, Hay, Ginbar, Ronail, Selmore, Hyramay, Lobal, Yzazamael, Amathomatois, Yaboageyors, Sozomcrat, Ampho, Delmedos, Geroch, Agalos, Meihatagiel, Secamai, Sabeleton, Mechogrisces, Lerirenorbon.",
+            "content": "Hanazay, Sazhaon, Hubi, Sene, Hay, Ginbar, Ronail, Selmore, Hyramay, Lobal, Yzazamael, Amathomatois, Yaboageyors, Sozomcrat, Ampho, Delmedos, Geroch, Agalos, Meihatagiel, Secamai, Sabeleton, Mechogrisces, Lerirenorbon.",
+            "instruction": "Said after the first oration of Rhetoric, with a short pause between them.",
+            "source": "Turner, Ars Notoria (1657), Rowe transcription, p. 27"
         },
-        east: {
-            title: "SECOND NOTE - For Judgment in Speech",
-            sacred: "Themasorahon · Helamazim",
-            content: "Grant me perfect Judgment in Speech, that I may know what to say, when to say it, and to whom. Let me neither speak too much nor too little, but always with perfect appropriateness.",
-            instruction: "The second Note teaches prudence and timing in Rhetoric. Essential for Counselors, Ambassadors, and all who must speak with care.",
-            latin: "Themasorahon, Helamazim, Gezethamas, Salahin, Gemion"
+        "east": {
+            "title": "THE SECOND NOTE OF RHETORIC",
+            "heading": "THE ORATION",
+            "sacred": "",
+            "content": "Oh great eternal and wonderful Lord God, who of thy eternal counsel hast disposed of all virtues, and art Ordainer of all goodness; Adorn and beautify my understanding, and give unto me Reason to know and learn the Mysteries of thy Holy Angels: And grant unto me all knowledge and learning thou hast promised to thy Servants by the virtue of thy Holy Angels, Amen.",
+            "instruction": "Turner: \"This Oration, with the other two following… ought to be pronounced… in the beginning of the second Figure of Rhetorick… and there ought to be some interval between them.\"",
+            "source": "Turner, Ars Notoria (1657), Rowe transcription, p. 27"
         },
-        south: {
-            title: "THIRD NOTE - For Powerful Testimony",
-            sacred: "Samarathion · Helezemath",
-            content: "When I bear witness, let my Testimony be received as Truth. Give weight to my words, credibility to my account, and power to my declarations.",
-            instruction: "The third Note grants authority to testimony. Use when bearing witness in court, giving testimony, or vouching for truth.",
-            latin: "Samarathion, Helezemath, Themozalon, Gezamaran, Hiel"
+        "south": {
+            "title": "VISION: Before the Second Note of Rhetoric",
+            "heading": "THE ORATION",
+            "sacred": "",
+            "content": "Vision; beholding with thy eternal conspiration all Powers, Kingdoms and Judges, Administering all manner of Languages to all, and of whose power there is no end; restore I beseech thee, and increase my Memory, my heart and understanding, to know, understand, and judge all things which thy Divine Authority commendeth necessary in this art, perfectly fulfill them in me, Amen.",
+            "instruction": "The second of the three orations for the second Note.",
+            "source": "Turner, Ars Notoria (1657), Rowe transcription, p. 27"
         },
-        west: {
-            title: "FOURTH NOTE - For Deep Understanding",
-            sacred: "Gemalasemay · Tharamathon",
-            content: "Grant me understanding of all Rhetorical devices: Metaphor, Simile, Allegory, Hyperbole, and all the ornaments of Speech. Let me use them with mastery.",
-            instruction: "The fourth Note completes Rhetoric. It teaches the deeper mysteries of figurative language and elevated discourse.",
-            latin: "Gemalasemay, Tharamathon, Helezamon, Sathames, Gemor"
+        "west": {
+            "title": "AZELECHIAS: Before the Second Note of Rhetoric",
+            "heading": "THE ORATION",
+            "sacred": "Azelechias, Velozeos, Inoanzama, Samelo, Hotens, Sagnath, Adonay, Soma, Jezoehos, Hicon, Jezomethon, Sadaot. And thou Oh God propitiously confirm thy promises in me, as thou hast confirmed them by the same words to King Solomon; send unto me, Oh Lord, thy virtue from Heaven, that may illuminate my mind and understanding: strengthen, Oh God, my understanding, renew my Soul within me, and wash me with the Waters which are above the Heavens; pour out thy Spirit upon my flesh, and fill my bowels with thy Judgements, with humility and charity: thou who hast created Heaven and the Earth, and made Man according to thy own Image; pour out the light of thy love into my understanding, that being radicated and established in thy love and thy mercy, I may love thy Name, and know and worship thee, and understand all thy Scriptures, And all the Mysteries which thou hast declared by thy Holy Angels, I may receive and understand in my Heart, and use this Art to thy Honor and Glory, through thy mighty Counsel, Amen.",
+            "content": "Azelechias, Velozeos, Inoanzama, Samelo, Hotens, Sagnath, Adonay, Soma, Jezoehos, Hicon, Jezomethon, Sadaot. And thou Oh God propitiously confirm thy promises in me, as thou hast confirmed them by the same words to King Solomon; send unto me, Oh Lord, thy virtue from Heaven, that may illuminate my mind and understanding: strengthen, Oh God, my understanding, renew my Soul within me, and wash me with the Waters which are above the Heavens; pour out thy Spirit upon my flesh, and fill my bowels with thy Judgements, with humility and charity: thou who hast created Heaven and the Earth, and made Man according to thy own Image; pour out the light of thy love into my understanding, that being radicated and established in thy love and thy mercy, I may love thy Name, and know and worship thee, and understand all thy Scriptures, And all the Mysteries which thou hast declared by thy Holy Angels, I may receive and understand in my Heart, and use this Art to thy Honor and Glory, through thy mighty Counsel, Amen.",
+            "instruction": "The third oration for the second Note, said \"with the precedent.\"",
+            "source": "Turner, Ars Notoria (1657), Rowe transcription, p. 28"
         },
-        node1: {
-            title: "NODE OF INVENTION",
-            sacred: "Hazelemon · Themos",
-            content: "Invention is the first of Rhetoric's five canons. By this Node, discover the Arguments and proofs that will persuade thy audience.",
-            instruction: "Use this node when preparing any speech or written work. It reveals what arguments will be most effective.",
-            latin: "Hazelemon, Themos, Gezamathan, Helior, Sama"
+        "node1": {
+            "title": "THE THIRD NOTE OF RHETORIC",
+            "heading": "THE ORATION",
+            "sacred": "",
+            "content": "I know, that I love thy Glory, and my delight is in thy wonderful works, and that thou wilt give unto me wisdome, according to thy goodness and thy power, which is incomprehensible: Theon, Haltanagon, Haramalon, Zamoyma, Chamasal, Jeconamril, Harionatar, Jechomagol, Gela Magos, Kemolihot, Kamanatar, Hariomolatar, Hanaces, Velonionathar, Azoroy, Jezabali; by these most Holy and Glorious profound Mysteries, precious Offices, virtue and knowledge of God, complete and perfect my beginnings and reform my beginnings, Zembar, Henoranat, Grenatayl, Samzatam, Jecornazay: Oh thou great Fountain of all goodness, knowledge and virtue, given unto thy Servant power to eschew all evil, and cleave unto goodness and knowledge, and to follow the same with an Holy intention, that with my whole heart I may understand & learn thy Laws and Decrees; especially these Holy Mysteries; wherein that I may profit, I beseech thee, Amen.",
+            "instruction": "Turner: \"The 11 Oration ought to be said before the pronounciation of the third Note of Rhetorick.\"",
+            "source": "Turner, Ars Notoria (1657), Rowe transcription, p. 28"
         },
-        node2: {
-            title: "NODE OF ARRANGEMENT",
-            sacred: "Semalathon · Gezorah",
-            content: "Arrangement is the second canon. Learn here the proper ordering of thy speech: Exordium, Narration, Division, Proof, Refutation, and Peroration.",
-            instruction: "The second node teaches structure. A speech well-arranged is half-persuaded already.",
-            latin: "Semalathon, Gezorah, Hemath, Thelamon, Gema"
+        "node2": {
+            "title": "THE FOURTH NOTE OF RHETORIC",
+            "heading": "THE ORATION",
+            "sacred": "",
+            "content": "O most reverend Almighty Lord, ruling all Creatures both Angels and Archangels, and all Celestial, Terrestrial, and Infernal Creatures; of whose greatness comes all plenty, who hast made man after thy own Image; Grant unto me the knowledge of this Art, and strengthen all Sciences in me, Amen.",
+            "instruction": "Turner's heading reads \"12. This Oration ought to be said before the ninth Rhetorical Note:\" Rhetoric has only four Notes, so \"ninth\" is probably a misprint for the fourth.",
+            "source": "Turner, Ars Notoria (1657), Rowe transcription, p. 28"
         },
-        node3: {
-            title: "NODE OF STYLE",
-            sacred: "Hamazemon · Themozar",
-            content: "Style is the third canon. By this Node, learn the three styles: the Grand, the Middle, and the Plain. Know when each is appropriate and how to employ all three with mastery.",
-            instruction: "The third node teaches the clothing of thought in beautiful language. This is the ornament of Rhetoric.",
-            latin: "Hamazemon, Themozar, Gezalemon, Hesam, Gematha"
+        "node3": {
+            "title": "ELMOT: The Special Oration for Eloquence",
+            "heading": "THE ORATION",
+            "sacred": "Elmot, Sehel, Hemech, Zaba, &c.",
+            "content": "Elmot, Sehel, Hemech, Zaba, &c.\n\nOh omnipotent and eternal God, and merciful Father, blessed before all Worlds; who art a God eternal, incomprehensible, and unchangeable, and hast granted this blessed gift of Salvation unto us; according to the omnipotency of thy Majesty, hast granted unto us; the faculty of speaking and learning, which thou hast denied to all other animals; and hast disposed of all things by thy infallible providence: thou art God, whose Nature is eternal and consubstantial, exalted above the Heavens; in whom the whole Deity corporally dwells: I implore thy Majesty, and Glorify thy omnipotency, with an intentive imploration, adoring the mighty Virtue, Power, and Magnificence of thy eternity. I beseech thee, Oh my God, to grant me the inestimable Wisdom of the Life of thy holy Angels. Oh God the Holy Spirit, incomprehensible, in whose presence stand the Holy quires of Angels; I pray and beseech thee, by thy Holy and Glorious Name, and by the sight of thy Angels, and the Heavenly Principalities, to give thy grace unto me, to be present with me, and to give unto me power to persevere in the Memory of thy Wisdom, who livest and reignest eternally one eternal God, through all worlds of worlds; in whose sight are all Celestial Virtues, now and alwayes, and everywhere, Amen.",
+            "instruction": "“if thou dost desire to be made Eloquent, repeat it three times. And if any evil thing trouble thee, or thou art emerged and involved into any great business, repeat this Oration once, and Eloquence shall be added to thee, as much as is needed; and if thou repeat it over twice, great Eloquence shall be given to thee: so great a Sacrament is this Oration.” Say it early in the morning, after confession \"of the Heart and Mouth,\" with the Latin prologue after it, then keep a short silence.",
+            "source": "Turner, Ars Notoria (1657), Rowe transcription, pp. 19, 20"
         },
-        node4: {
-            title: "NODE OF MEMORY AND DELIVERY",
-            sacred: "Gehoramathon · Selamay",
-            content: "Memory and Delivery are the fourth and fifth canons united. Remember thy speech perfectly, and deliver it with powerful voice and appropriate gesture.",
-            instruction: "The fourth node completes the Rhetorical arts. It teaches both memorization and performance of oratory.",
-            latin: "Gehoramathon, Selamay, Themozah, Helazar, Gemora"
+        "node4": {
+            "title": "LAMETH: Invocation of the Angels for Eloquence",
+            "heading": "THE ORATION",
+            "sacred": "",
+            "content": "Lameth, Leynach, Semach, Belmay, (these Orations have not proper Lunations, as the Commentator saith upon the Gloss.) Azzailement, Gesegon, Lothamasim, Ozetogomaglial, Zeziphier, Josanum, Solatac, Bozefama, Defarciamar, Zemait, Lemaio, Pheralon, Anuc, Philosophi, Gregoon, Letos, Anum, Anum, Anum.",
+            "instruction": "“The Oration which follows, is a certain Invocation of the Angels of God, and it provoketh Eloquence, and ought to be said in the beginning of the Scripture, and in the beginning of the Moneth.”",
+            "source": "Turner, Ars Notoria (1657), Rowe transcription, p. 11"
         },
-        ring1: {
-            title: "THE RHETORICAL CROWN",
-            sacred: "Halamenothay · Gezemor",
-            content: "This outer ring is the Crown of Eloquence. It encompasses all four Notes and magnifies their power. Speak this first to prepare for any Rhetorical work.",
-            instruction: "The crown opens the heavens to receive thy speech. All words spoken within this circle are heard with favor.",
-            latin: "Halamenothay, Gezemor, Themazan, Helios, Samath, Gemehel"
+        "ring1": {
+            "title": "WHY RHETORIC HAS FOUR NOTES",
+            "heading": "THE TEACHING",
+            "sacred": "",
+            "content": "For there are four things necessary therein; as the Angel of the Lord said unto Solomon; to wit, a continual and flourishing adornment of locution, An ordinate, competent and discreet judgement, a Testimony of Causes or Offices, of Chances & Losses, a composed disposition of buying and selling; An Eloquence of the matters of that Art, with a demonstrative understanding. Therefore the greatness of God hath appointed to the Art of Rhetorick four Notes, with their Holy and Glorious Orations; as they were reverently sent by the Hand of God; that every Note in that Art aforesaid, might have a several faculty, That the first Note in that Art, might give a continual locution, a competent and florishing adornment thereof: The second, to discern Judgements, just and unjust, ordinate and inordinate, true and false: The third, competently to discover offices and causes: and the fourth giveth understanding and Eloquence in all the operations in this Art, without prolixity.\n\nThe Rhetorical every day, except only three dayes of the Moneth, to wit, ☾. 11. 17. and 19.",
+            "instruction": "The first Note gives flourishing speech, the second judgement, the third the discovery of offices and causes, the fourth understanding and eloquence.",
+            "source": "Turner, Ars Notoria (1657), Rowe transcription, pp. 23, 24"
         }
     },
-    arithmetic: {
-        center: {
-            title: "NOTA ARITHMETICAE - The Art of Numbers",
-            sacred: "Semalion · Gezetham · Helemos",
-            content: "Oh God of Order and Measure, who hast established all things by Number, Weight, and Measure: Grant unto thy servant perfect knowledge of Arithmetic. Let me comprehend all calculations and perceive the Divine Mathematics underlying Creation.",
-            instruction: "Arithmetic has one and a half Notes. The full Note grants computational mastery; the half Note reveals the mystical properties of numbers.",
-            latin: "Semalion, Gezetham, Helemos, Thamara, Gezemon, Salahin"
+    "arithmetic": {
+        "center": {
+            "title": "THE FIRST FIGURE OF ARITHMETIC",
+            "heading": "THE ORATION",
+            "sacred": "",
+            "content": "Oh God who numbrest, weighest, and measurest all things, given the day his order, and called the Sun by his name; Grant the knowledge of this Art unto my understanding, that I may love thee, and acknowledge the gift of thy goodness, Amen.",
+            "instruction": "Turner: \"Pronounce this before the first Figure of Arithmetick.\"",
+            "source": "Turner, Ars Notoria (1657), Rowe transcription, p. 28"
         },
-        north: {
-            title: "THE FULL NOTE - Computational Mastery",
-            sacred: "Halamathem · Sezoralon",
-            content: "By this Note, understand all operations of Arithmetic: Addition, Subtraction, Multiplication, and Division. Let no calculation be too complex, no sum beyond thy power to determine.",
-            instruction: "Contemplate this Note during calculated lunar aspects. Grants instant facility with all numerical operations and perfect accuracy.",
-            latin: "Halamathem, Sezoralon, Gemath, Themios, Helez, Samarion"
+        "north": {
+            "title": "THE SEMI-NOTE OF ARITHMETIC",
+            "heading": "THE ORATION",
+            "sacred": "",
+            "content": "Oh God, the Operator of all things, from whom proceeds every good and perfect gift; sow the Seeds of thy Word in my Heart, that I may understand the excellent Mysteries of this Art, Amen.",
+            "instruction": "Turner: \"Say this before the semi-note of Arithmetick.\" Arithmetic has \"a Note and a half.\"",
+            "source": "Turner, Ars Notoria (1657), Rowe transcription, p. 28"
         },
-        node1: {
-            title: "THE HALF NOTE - Mystical Numbers",
-            sacred: "Themagoron · Helamaz",
-            content: "The half Note reveals the secret properties of Numbers. Seven is perfection, Three is divine, Four is elemental, Twelve is completion. Understand the mystical meaning of all Numbers.",
-            instruction: "Use this half Note when studying sacred numerology or the deeper meanings of quantities in Scripture and Nature.",
-            latin: "Themagoron, Helamaz, Gezorah, Semathion, Hela"
+        "node1": {
+            "title": "THE SECOND FIGURE OF ARITHMETIC",
+            "heading": "THE ORATION",
+            "sacred": "",
+            "content": "Oh God the perfect Judge of all good works, who maketh known they saving goodness among all Nations; open my Eyes and my heart, with the beams of thy mercy, that I may understand and persever, in these thy Heavenly Mysteries, Amen.",
+            "instruction": "Turner: \"Say this before the second Figure of Arithmetick.\"",
+            "source": "Turner, Ars Notoria (1657), Rowe transcription, p. 28"
         },
-        node2: {
-            title: "FOR UNDERSTANDING PROPORTIONS",
-            sacred: "Gehelamathon · Sezarim",
-            content: "Grant understanding of all Proportions and Ratios. The Golden Proportion, Musical intervals, geometric progressions - let all be revealed.",
-            instruction: "This node connects Arithmetic to Music and Geometry. Essential for understanding harmony in number.",
-            latin: "Gehelamathon, Sezarim, Themala, Hezer, Gemathon"
+        "node2": {
+            "title": "PRECEPT FOR THE FOUR OTHER ARTS",
+            "heading": "THE PRECEPT",
+            "sacred": "",
+            "content": "In the four other Arts, only the first dayes are to be observed: The Philosophical Notes, with all Sciences contained therein, the 7 and 17 dayes of the Moon are to be inspected, 7 times a day, with their several Orations. The Note is to be looked into, with fear, silence and trembling.\n\nif you would have the perfect knowledge of them, make the first Oration of Theology before you say the Orations of the other Notes.",
+            "instruction": "This applies to Arithmetic, Geometry, Music and Philosophy. Turner does not say what \"the first dayes\" means.",
+            "source": "Turner, Ars Notoria (1657), Rowe transcription, pp. 29, 30"
         },
-        node3: {
-            title: "FOR SWIFT CALCULATION",
-            sacred: "Halazemon · Themath",
-            content: "Grant swiftness in Calculation. Let me compute in an instant what others labor hours to determine. Make my mind a perfect abacus.",
-            instruction: "For merchants, accountants, and all who must calculate rapidly. This node grants supernatural speed in arithmetic.",
-            latin: "Halazemon, Themath, Gezomar, Selahim, Gemara"
+        "node3": {
+            "title": "THE FIRST PRECEPT: Hely Scemath",
+            "heading": "THE ORATION",
+            "sacred": "Hely, Scemath Amazaz, Hemel, Sathusteon, hheli Tamazam, &cet.",
+            "content": "Hely, Scemath Amazaz, Hemel, Sathusteon, hheli Tamazam, &cet.",
+            "instruction": "“If any one will search the Scriptures, or would understand, or eloquently pronounce any part of Scripture, let him pronounce the words of the following Figure, to wit, Hely Scemath, in the morning betimes of that day, wherein thou wilt begin any work.”",
+            "source": "Turner, Ars Notoria (1657), Rowe transcription, p. 7"
         },
-        ring1: {
-            title: "THE CIRCLE OF NUMBERS",
-            sacred: "Semazathon · Helomara",
-            content: "The circle of Arithmetic encompasses all quantity and measure. Within this boundary, all calculations are perfect and all numbers reveal their truth.",
-            instruction: "Speak this before any arithmetical work to ensure accuracy and prevent all errors in calculation.",
-            latin: "Semazathon, Helomara, Themagon, Gezelion, Sama, Helemath"
+        "ring1": {
+            "title": "DEFINITIONS OF THE ARTS",
+            "heading": "THE TEACHING",
+            "sacred": "",
+            "content": "Geometry hath one Note, Arithmetick a Note and a half; Philosophy, with the Arts and Sciences contained therein, hath 7 Species; Theology and Astronomy, with the Sciences in them contained, hath 7 Notes, but they are great and dangerous; not great in the pronunciation, but have great efficacy:",
+            "instruction": "Turner: \"they are all to be published and rehearsed in their appointed dayes.\"",
+            "source": "Turner, Ars Notoria (1657), Rowe transcription, p. 25"
         }
     },
-    geometry: {
-        center: {
-            title: "NOTA GEOMETRIAE - The Measurement of Earth and Heaven",
-            sacred: "Helothamos · Gezemarion · Salathem",
-            content: "Oh Eternal Geometer, who hast measured the Heavens and established the foundations of the Earth: Grant unto thy servant perfect knowledge of Geometry. Let me understand all figures, all measures, and all spatial relationships.",
-            instruction: "Geometry has but one Note, yet it is powerful. Contemplate it at the Full Moon when Luna's circle is perfect in the sky.",
-            latin: "Helothamos, Gezemarion, Salathem, Themara, Hezemon, Gela"
+    "geometry": {
+        "center": {
+            "title": "THE ORATION OF GEOMETRY",
+            "heading": "THE ORATION",
+            "sacred": "",
+            "content": "Oh God, the giver of all wisdome and knowledge to them that are without sin, Instructor and Master of all Spiritual learning, by thy Angels and Arch-Angels, by Thrones, Potestates, Principates and Powers, by Cherubim and Seraphim, and by the 24 Elders, by the 4 Animals, and all the host of Heaven, I adore, invocate, worship and glorify thy Name, and exalt thee: most terrible and most merciful, I do humbly beseech thee this day to illuminate and fill my Heart with the grace of thy Holy Spirit, thou who art three in one, Amen.",
+            "instruction": "Turner gives Geometry \"one Note,\" yet heads this \"This Oration before the second Note of Geometry.\" The text is inconsistent here.",
+            "source": "Turner, Ars Notoria (1657), Rowe transcription, p. 28"
         },
-        north: {
-            title: "FOR UNDERSTANDING THE TRIANGLE",
-            sacred: "Themasorion · Helazam",
-            content: "The Triangle is the first figure of Geometry, symbol of the Trinity and foundation of all angles. Grant me understanding of all triangular forms and their properties.",
-            instruction: "The triangle points upward to heaven. All stable structures rest upon triangular principles.",
-            latin: "Themasorion, Helazam, Gezathamon, Semala, Hezor"
+        "north": {
+            "title": "PRECEPT FOR THE FOUR OTHER ARTS",
+            "heading": "THE PRECEPT",
+            "sacred": "",
+            "content": "In the four other Arts, only the first dayes are to be observed: The Philosophical Notes, with all Sciences contained therein, the 7 and 17 dayes of the Moon are to be inspected, 7 times a day, with their several Orations. The Note is to be looked into, with fear, silence and trembling.\n\nif you would have the perfect knowledge of them, make the first Oration of Theology before you say the Orations of the other Notes.",
+            "instruction": "This applies to Geometry along with Arithmetic, Music and Philosophy.",
+            "source": "Turner, Ars Notoria (1657), Rowe transcription, pp. 29, 30"
         },
-        south: {
-            title: "FOR UNDERSTANDING THE CIRCLE",
-            sacred: "Halazemath · Gehoron",
-            content: "The Circle is perfection, eternity, the shape of the Heavens. It has no beginning and no end. Grant me understanding of all circular forms and the mystery of Pi.",
-            instruction: "The circle represents divine perfection. Through it, understand the eternal nature of God's creation.",
-            latin: "Halazemath, Gehoron, Themazar, Selamon, Gemath"
+        "south": {
+            "title": "THE SPECULUM OF WISDOM",
+            "heading": "THE ORATION",
+            "sacred": "",
+            "content": "Assaylemath, Assay, Lemath, Azzabue.\n\nAzzaylemath, Lemath, Azacgessenio.\n\nLemath, Sabanche, Ellithy, Aygezo.",
+            "instruction": "“But it is to be rehearsed four times a day, beginning in the morning once, about the third hour once, once in the ninth hour, and once in the evening. The precedent Oration ought to be spoken secretly; and let him that speaks it be alone, and pronounce it with a low voyce, so that he scarcely hear himself.”",
+            "source": "Turner, Ars Notoria (1657), Rowe transcription, p. 9"
         },
-        east: {
-            title: "FOR UNDERSTANDING THE SQUARE",
-            sacred: "Gezomalethon · Hesamar",
-            content: "The Square is stability, the four elements, the four directions, the foundation of the Earth. Grant me understanding of all quadrilateral forms.",
-            instruction: "The square represents earthly stability. Upon square foundations are built all lasting structures.",
-            latin: "Gezomalethon, Hesamar, Thamathon, Helazar, Gema"
+        "east": {
+            "title": "THE FIRST PRECEPT: Hely Scemath",
+            "heading": "THE ORATION",
+            "sacred": "Hely, Scemath Amazaz, Hemel, Sathusteon, hheli Tamazam, &cet.",
+            "content": "Hely, Scemath Amazaz, Hemel, Sathusteon, hheli Tamazam, &cet.",
+            "instruction": "“If any one will search the Scriptures, or would understand, or eloquently pronounce any part of Scripture, let him pronounce the words of the following Figure, to wit, Hely Scemath, in the morning betimes of that day, wherein thou wilt begin any work.”",
+            "source": "Turner, Ars Notoria (1657), Rowe transcription, p. 7"
         },
-        west: {
-            title: "FOR ALL GEOMETRIC PROOFS",
-            sacred: "Semalethon · Hazaram",
-            content: "Grant me the power to discover and demonstrate all Geometric truths. Let me prove all theorems with perfect logic and construct all figures with accuracy.",
-            instruction: "This completes the single Note of Geometry. With it, all spatial relationships become clear.",
-            latin: "Semalethon, Hazaram, Gemath, Themosion, Helaz, Sama"
+        "west": {
+            "title": "LAMED: For Understanding a Science Suddenly Proposed",
+            "heading": "THE ORATION",
+            "sacred": "Lamed, Rogum, Ragia, Ragium, Ragiomal, Agaled, Eradioch, Anchovionos, Lochen, Saza, Ya, Manichel, Mamacuo, Lephoa, Bozaco, Cogemal, Saluyel, Tesunanu, Azaroch, Beyestar, Amak.",
+            "content": "Lamed, Rogum, Ragia, Ragium, Ragiomal, Agaled, Eradioch, Anchovionos, Lochen, Saza, Ya, Manichel, Mamacuo, Lephoa, Bozaco, Cogemal, Saluyel, Tesunanu, Azaroch, Beyestar, Amak.\n\nOh Eternal and Unreprehensible Memory! Oh Uncontradictible Wisdom! Oh Unchangeable Power! Let thy right-hand encompass my heart, and the holy Angels of thy Eternal Counsel; complete and fill up my Conscience with thy Memory, and the odor of thy Ointments; and let the sweetness of thy Grace strengthen and fortifie my Understanding, through the pure splendor and brightness of thy holy Spirit; by vertue whereof, the holy Angels alwayes behold and admire the brightness of thy face, and all thy holy and heavenly Vertues; Wisdom, wherewith thou hast made all things; Understanding, by which thou hast reformed all things; Perseverance unto blessedness, whereby thou hast restored and confirmed the Angels; Love, whereby thou hast restored lost Mankind, and raised him after his Fall to Heaven; Learning, whereby thou wer't pleased to teach Adam the knowledge of every Science: Inform, repleat, instruct, restore, correct, and refine me, that I may be made new in the understanding thy Precepts, and in receiving the Sciences which are profitable for my Soul and Body, and for all faithful believers in thy Name which is blessed forever, world without end.",
+            "instruction": "“The same Oration is also to be said, when you would clearly and plainly understand and expound any Science or great Mystery, that is on a sudden proposed to you, which you never heard of before:”",
+            "source": "Turner, Ars Notoria (1657), Rowe transcription, pp. 14, 15"
         },
-        ring1: {
-            title: "THE GEOMETRIC COMPASS",
-            sacred: "Halazemathon · Gezorah",
-            content: "As the Compass describes a perfect circle, so let this oration encompass all Geometric knowledge. All measures are true within this sacred boundary.",
-            instruction: "Speak this before any geometric work, whether calculation or construction, to ensure all measures are perfect.",
-            latin: "Halazemathon, Gezorah, Thematon, Selamon, Hezar, Gemarion"
+        "ring1": {
+            "title": "DEFINITIONS OF THE ARTS",
+            "heading": "THE TEACHING",
+            "sacred": "",
+            "content": "Geometry hath one Note, Arithmetick a Note and a half; Philosophy, with the Arts and Sciences contained therein, hath 7 Species; Theology and Astronomy, with the Sciences in them contained, hath 7 Notes, but they are great and dangerous; not great in the pronunciation, but have great efficacy:",
+            "instruction": "Geometry's Note is \"to be published and rehearsed in\" its \"appointed dayes.\"",
+            "source": "Turner, Ars Notoria (1657), Rowe transcription, p. 25"
         }
     },
-    music: {
-        center: {
-            title: "NOTA MUSICAE - The Celestial Harmony",
-            sacred: "Hamaloson · Gezethemia · Salamos",
-            content: "Oh Lord of Harmony, who hast ordained the Music of the Spheres and given unto Man the gift of Song: Grant me understanding of all Music. Let me perceive the celestial harmonies and reproduce them in earthly sound.",
-            instruction: "Music has but one Note, yet it contains all harmony. Contemplate it when Luna aspects Venus, planet of music and beauty.",
-            latin: "Hamaloson, Gezethemia, Salamos, Themara, Helozion, Gema"
+    "music": {
+        "center": {
+            "title": "EZAMAMOS: The First of the Four Orations",
+            "heading": "THE ORATION",
+            "sacred": "Ezamamos, Hazalat, Ezityne, Hezemechel, Czemomechel, Zamay, Zaton, Ziamy Nayzaton, Hyzemogoy, Jeccomantha, Jaraphy, Phalezeton, Sacramphal, Sagamazaim, Secranale, Sacramathan, Jezennalaton Hacheriatos, Jetelemathon, Zaymazay, Zamaihay Gigutheio Geurlagon, Garyos. Mega'on Hera Cruhic, Crarihuc, Amen.",
+            "content": "Ezamamos, Hazalat, Ezityne, Hezemechel, Czemomechel, Zamay, Zaton, Ziamy Nayzaton, Hyzemogoy, Jeccomantha, Jaraphy, Phalezeton, Sacramphal, Sagamazaim, Secranale, Sacramathan, Jezennalaton Hacheriatos, Jetelemathon, Zaymazay, Zamaihay Gigutheio Geurlagon, Garyos. Mega'on Hera Cruhic, Crarihuc, Amen.\n\nOh Lord God, Holy Father, Almighty and incomprehensible; hear my Prayers, thou that art invisible, immortal and intelligible, whose face the Angels and Arch-Angels, and all the powers of Heaven, do so much desire to see; whose Majesty I desire eternally to adore, and honor the only one God for ever and ever. Amen.",
+            "instruction": "Turner gives no oration of its own for Music's single Note. Instead he directs: “if you would learn or teach anything of dictating, versifying, singing or Musick, or any of these Sciences, first teach him these Orations, that thou wouldst teach, how he should read them: but if he be a Child of mean understanding, read them before him, and let him say after thee word for word; but if he be of a good understanding, let him read them 7 times a day for 7 days: or if it be a general Note, pronounce these Orations, and the Virtue thereof shall profit you much, and you shall therein find great virtue.” These four orations \"are necessary for liberal Arts\" and are also the orations of the first Notes of Philosophy.",
+            "source": "Turner, Ars Notoria (1657), Rowe transcription, pp. 30, 31"
         },
-        north: {
-            title: "FOR PERFECT PITCH",
-            sacred: "Themahorion · Selamaz",
-            content: "Grant unto me perfect Pitch, that I may hear and reproduce any tone with exactness. Let my ear become perfectly attuned to all frequencies and intervals.",
-            instruction: "This grants the ability to identify and produce any musical note with perfect accuracy. Essential for singers and instrumentalists.",
-            latin: "Themahorion, Selamaz, Gezathon, Helios, Samara"
+        "north": {
+            "title": "THE SECOND OF THE FOUR ORATIONS",
+            "heading": "THE ORATION",
+            "sacred": "",
+            "content": "Oh Lord God, Holy and Almighty Father, hear my Prayers this day, and incline thy ears to my Orations; Gezomelion Samach, Semath, Cemon, Gezagam, Gezatrhin, Zheamoth, Zeze Hator Sezeator Samay Sannanda, Gezyel, Iezel, Gaziety, Hel, Gazayethyhel, Amen.\n\nOh God eternal, the way, the truth, and the life; give thy light and the flower of thy Holy Spirit into my mind and understanding, and grant that the gift of thy grace may shine forth in my heart, and into my Soul, now and forever, Amen.",
+            "instruction": "Turner: \"Say this before the second Note of Philosophy,\" then \"Say this following with the former.\"",
+            "source": "Turner, Ars Notoria (1657), Rowe transcription, p. 30"
         },
-        south: {
-            title: "FOR UNDERSTANDING HARMONY",
-            sacred: "Halezemion · Thamathon",
-            content: "Reveal unto me the mysteries of Harmony: the Consonances and Dissonances, the perfect intervals and the imperfect. Let me understand how tones combine to create beauty.",
-            instruction: "This unveils the mathematical relationships between musical notes. The foundation of all composition.",
-            latin: "Halezemion, Thamathon, Sezamar, Gelion, Hematha"
+        "south": {
+            "title": "LEMOGETHOM: The Third of the Four Orations",
+            "heading": "THE ORATION",
+            "sacred": "Lemogethom, Hegemochom, Hazachay Hazatha, Azamachar, Azacham, Cohathay, Geomothay Logomothay, Zathana, Lachanma, Legomezon, Legornozon, Lembdemachon, Zegomaday, Haihanayos, Hatamam, Helesymom, Vagedaren, Vadeyabar, Lamnanath, Lamadai, Gomongchor, Gemecher, Ellemay, Gecromal, Gecrohahi, Colomanos, Colomaythos, Amen.",
+            "content": "Lemogethom, Hegemochom, Hazachay Hazatha, Azamachar, Azacham, Cohathay, Geomothay Logomothay, Zathana, Lachanma, Legomezon, Legornozon, Lembdemachon, Zegomaday, Haihanayos, Hatamam, Helesymom, Vagedaren, Vadeyabar, Lamnanath, Lamadai, Gomongchor, Gemecher, Ellemay, Gecromal, Gecrohahi, Colomanos, Colomaythos, Amen.\n\nOh God the life of all visible Creatures, eternal brightness, and virtue of all things; who art the original of all piety, who knewest all thing before they were; who judgest all things, and discerneth all things by the unspeakable knowledge: glorify thy Holy and unspeakable Name this day in my heart, and strengthen my intellectual understanding; increase my Memory, and confirm my eloquence; make my tongue ready, quick, and perfect in thy Sciences and Scriptures, that by thy power given unto me, and thy wisdome taught in my heart, I may praise thee, and know and understand thy Holy Name for ever World without end, Amen.",
+            "instruction": "Turner: \"Pronounce the Oration following before the third Note of Philosophy,\" with the next \"with the precedent Oration.\"",
+            "source": "Turner, Ars Notoria (1657), Rowe transcription, p. 30"
         },
-        east: {
-            title: "FOR MASTERY OF RHYTHM",
-            sacred: "Gemalathon · Hezomar",
-            content: "Grant me perfect understanding of Rhythm and Time. Let me master all Meters, keep perfect Tempo, and understand the relationship between Music and Time.",
-            instruction: "Rhythm is the temporal element of Music. Master it to give life and motion to melody and harmony.",
-            latin: "Gemalathon, Hezomar, Themazar, Selathon, Gema"
+        "east": {
+            "title": "THE FOURTH OF THE FOUR ORATIONS",
+            "heading": "THE ORATION",
+            "sacred": "",
+            "content": "Oh King of Kings, the Giver and Dispenser of infinite Majesty, and of infinite mercy, the founder of all foundations; lay the foundation of all thy virtues in me, remove all foolishness from my heart, that my senses may be established in the love of thy charity, and my Spirit informed by thee, according to the recreation and invocation of thy will, who livest and reignest God throughout all Worlds of Worlds, Amen.",
+            "instruction": "Turner: \"Say this Oration following before the fourth Note of Philosophy.\"",
+            "source": "Turner, Ars Notoria (1657), Rowe transcription, p. 31"
         },
-        west: {
-            title: "FOR HEARING THE MUSIC OF THE SPHERES",
-            sacred: "Salamazethon · Helomara",
-            content: "Open my ears to hear the Celestial Music, the harmony of the Planets in their orbits. Let me perceive the cosmic symphony that underlies all earthly music.",
-            instruction: "The deepest mystery of Music. Requires purity and long preparation. This connects Music to Astronomy.",
-            latin: "Salamazethon, Helomara, Gezemathon, Thomion, Helaz"
+        "west": {
+            "title": "HOW THE FOUR ORATIONS ARE TAUGHT",
+            "heading": "THE PRECEPT",
+            "sacred": "",
+            "content": "if you would learn or teach anything of dictating, versifying, singing or Musick, or any of these Sciences, first teach him these Orations, that thou wouldst teach, how he should read them: but if he be a Child of mean understanding, read them before him, and let him say after thee word for word; but if he be of a good understanding, let him read them 7 times a day for 7 days: or if it be a general Note, pronounce these Orations, and the Virtue thereof shall profit you much, and you shall therein find great virtue.",
+            "instruction": "For a child \"of mean understanding,\" read the orations aloud and have the child repeat them \"word for word.\"",
+            "source": "Turner, Ars Notoria (1657), Rowe transcription, p. 31"
         },
-        ring1: {
-            title: "THE HARMONIC CIRCLE",
-            sacred: "Hamazonethon · Gelemara",
-            content: "As all tones return to their origin in the octave, so this circle encompasses all Musical knowledge and returns it to its divine source.",
-            instruction: "Speak this before practicing Music, composing, or performing. It attunes the soul to celestial harmony.",
-            latin: "Hamazonethon, Gelemara, Themosion, Selamar, Hezion, Gema"
+        "ring1": {
+            "title": "THE NOTE OF MUSIC",
+            "heading": "THE TEACHING",
+            "sacred": "",
+            "content": "Musick hath one Note, and Physick one Note;",
+            "instruction": "Music and Physic \"are all to be published and rehearsed in their appointed dayes.\" Best months: when the lunation is in ♉ or ♎.",
+            "source": "Turner, Ars Notoria (1657), Rowe transcription, p. 25"
         }
     },
-    astronomy: {
-        center: {
-            title: "NOTA ASTRONOMIAE - THE GREAT AND DANGEROUS ART",
-            sacred: "Halamanethon · Gezoramatheion · Selamathoros",
-            content: "Oh Lord God of Hosts, Creator of the Heavenly Bodies, Ordainer of the Stars in their courses: I approach thy most terrible and exalted Art with fear and trembling. Grant me knowledge of Celestial movements, but preserve me from the dangers attendant upon this study.",
-            instruction: "EXTREME DANGER. Astronomy has Seven Notes corresponding to the Seven Planets. Twenty-four Angels attend. Fast for three days before approaching. Study only during specific planetary hours. One error may bring madness or death.",
-            latin: "Halamanethon, Gezoramatheion, Selamathoros, Themagarion, Helez, Samar, Gemaltheon"
+    "astronomy": {
+        "center": {
+            "title": "THE INEFFABLE NOTE: The Last of Theology, Having 24 Angels",
+            "heading": "THE ORATION",
+            "sacred": "",
+            "content": "Oh God of all piety, Author and Foundation of all things, the eternal Health and Redemption of thy People; Inspirer and great Giver of all graces, Sciences and Arts, from whose gift it cometh: Inspire into me thy servant, an increase of those Sciences: who hast granted life to me miserable sinner, defend my Soul, and deliver my Heart from the wicked cogitations of this World; extinguish and quench in me the flames of all lust and fornication, that I may the more attentively delight in thy Sciences and Arts; and give unto me the desire of my Heart, that I being confirmed and exalted in thy Glory, may love thee: and increase in me the power of thy Holy Spirit, by thy Salvation and reward of the faithful, to the Salvation of my Soul and Body, Amen.",
+            "instruction": "Turner: \"The 7 Oration, which is the end of the Orations, belonging to the ineffable Note, the last of Theology, having 24 Angels.\" Turner groups Astronomy with Theology: together they have seven Notes.",
+            "source": "Turner, Ars Notoria (1657), Rowe transcription, p. 32"
         },
-        node1: {
-            title: "FIRST NOTE - The Sun (Sol)",
-            sacred: "Helios · Samaseol · Themahoron",
-            content: "The Sun, center of all, source of Light and Life, ruler of the Day. By this Note, understand the Solar cycles, the year's progression, and the Sun's influence upon all earthly things.",
-            instruction: "Study during the hour of the Sun. The First Note is least dangerous but still requires preparation and purity.",
-            latin: "Helios, Samaseol, Themahoron, Gezamatheon, Hel, Samaros"
+        "node1": {
+            "title": "THE SECOND NOTE OF THEOLOGY",
+            "heading": "THE ORATION",
+            "sacred": "",
+            "content": "I adore thee, O King of Kings, my light, my substance, my life, my King, and my God, my Memory, and my strength; who in a Moment gavest sundry Tongues, and threwest down a Mighty Tower, and gavest by thy Holy Spirit the knowledge of Tongues to thy Apostles, infusing thy knowledge into them in a Moment, giving them the understanding of all Languages: inspire my Heart, and pour the dew of thy grace and Holy Spirit into me, that I may understand the Exposition of Tongues and Languages, Amen.",
+            "instruction": "Turner: \"Say this Oration before the second Note on Theology.\"",
+            "source": "Turner, Ars Notoria (1657), Rowe transcription, p. 29"
         },
-        node2: {
-            title: "SECOND NOTE - The Moon (Luna)",
-            sacred: "Selene · Lemath · Halazemara",
-            content: "The Moon, measurer of Time, mistress of Tides and Cycles, ruler of the Night. By this Note, understand Lunations, eclipses, and Luna's power over waters and the human mind.",
-            instruction: "Study during the hour of the Moon. The Second Note affects dreams and visions. Use with caution.",
-            latin: "Selene, Lemath, Halazemara, Themagarion, Sela, Gezem"
+        "node2": {
+            "title": "THE INEFFABLE NAMES",
+            "heading": "THE ORATION",
+            "sacred": "Hosel, Jesel, Anchiator, Aratol, Hasiatol, Gemor, Gesameor.",
+            "content": "Hosel, Jesel, Anchiator, Aratol, Hasiatol, Gemor, Gesameor.",
+            "instruction": "Turner: \"these words are ineffable Names, and are spiritually to be pronounced before the ineffable Note… Those are the Orations which ought to be pronounced after the inspection of all the Arts, and after the Note of Theology.\"",
+            "source": "Turner, Ars Notoria (1657), Rowe transcription, p. 32"
         },
-        node3: {
-            title: "THIRD NOTE - Mercury (Mercurius)",
-            sacred: "Hermes · Thelegamathon · Sezorim",
-            content: "Mercury, swift messenger, planet of Intellect and Communication. By this Note, understand the movements of the swiftest planet and its influence upon the mind.",
-            instruction: "Study during the hour of Mercury. The Third Note heightens mental activity but may cause restlessness.",
-            latin: "Hermes, Thelegamathon, Sezorim, Gemath, Helomara, Sema"
+        "node3": {
+            "title": "AN ORATION FOR TEACHING THE SCIENCES",
+            "heading": "THE ORATION",
+            "sacred": "",
+            "content": "Oh Father, incomprehensible, from whom proceedeth everything that is good; whose greatness is incomprehensible: hear this day my Prayers, which I make in thy sight, and grant to me the Joy of thy saving health, that I may teach unto the wicked the wayes and Paths of thy Sciences, and convert the Rebellious & incredulous unto thee, that whatsoever I commemorate and repeat in my heart and mouth, may take root and foundation in me; that I may be made powerful and efficacious in thy works, Amen.",
+            "instruction": "Turner: \"Solomon saith of these Orations, Let no man presume to make use of them unless for the proper Office they are instituted for.\"",
+            "source": "Turner, Ars Notoria (1657), Rowe transcription, p. 31"
         },
-        node4: {
-            title: "FOURTH NOTE - Venus (Venus)",
-            sacred: "Aphrodite · Halamathozeon · Gelemara",
-            content: "Venus, morning and evening star, planet of Love and Beauty. By this Note, understand the cycles of Venus and its influence upon harmony and affection.",
-            instruction: "Study during the hour of Venus. The Fourth Note is relatively safe but affects the passions.",
-            latin: "Aphrodite, Halamathozeon, Gelemara, Themason, Hel, Samara"
+        "node4": {
+            "title": "O ETERNAL KING",
+            "heading": "THE ORATION",
+            "sacred": "",
+            "content": "Oh eternal King! O God, the Judge and discerner of all things, knower of all good Sciences; instruct me this day for thy Holy Names sake, and by these Holy Sacraments; and purify my understanding, that thy knowledge may enter into my inward parts, as water flowing from Heaven, and as Oil into my bones, by thee, Oh God Saviour of all things, who art the fountain of goodness, and original of piety; instruct me this day in those Holy Sciences which I desire, thou who art one God for ever, Amen.",
+            "instruction": "Said after the names of the sixth Note of Philosophy. Theology's orations are \"an augmentation of the rest.\"",
+            "source": "Turner, Ars Notoria (1657), Rowe transcription, p. 31"
         },
-        north: {
-            title: "FIFTH NOTE - Mars (Mars)",
-            sacred: "Ares · Themagazeron · Helamoz",
-            content: "Mars, the red planet, bringer of Strife and Courage. By this Note, understand the martial cycles and their influence upon War and Conflict. DANGEROUS.",
-            instruction: "Study during the hour of Mars. The Fifth Note is DANGEROUS. It may provoke anger and violence. Approach only if pure of heart.",
-            latin: "Ares, Themagazeron, Helamoz, Gezamath, Selamon, Thema"
+        "north": {
+            "title": "NO LAUGHTER ON THESE DAYS",
+            "heading": "THE PRECEPT",
+            "sacred": "",
+            "content": "that in every day wherein you beholdest the Notes of Theology, Philosophy, or of any Arts contained in them, that thou neither laugh nor play, nor sport;",
+            "instruction": "Turner explains why: when King Solomon saw these Notes \"having overdrunk himself,\" God was angry, took away part of his kingdom, and forbade him the Temple for 80 days.",
+            "source": "Turner, Ars Notoria (1657), Rowe transcription, p. 25"
         },
-        south: {
-            title: "SIXTH NOTE - Jupiter (Jove)",
-            sacred: "Zeus · Salamathegon · Helomara",
-            content: "Jupiter, king of the planets, bringer of Fortune and Expansion. By this Note, understand the twelve-year cycle of Jupiter and its beneficent influences.",
-            instruction: "Study during the hour of Jupiter. The Sixth Note is relatively safe and brings good fortune if approached correctly.",
-            latin: "Zeus, Salamathegon, Helomara, Gezemathon, Hela, Samara"
+        "south": {
+            "title": "HOW SOLOMON RECEIVED THE INEFFABLE NOTE",
+            "heading": "THE TEACHING",
+            "sacred": "",
+            "content": "the expression whereof is given in the Angels by the Figures of Swords, birds, trees, Flowers, Candles and Serpents; for Solomon received this from the Lord in the night of Pacification, ingraven in a book of Gold;\n\nWhen thou look'st into this Note and read'st the Orations thereof, observe the precepts before, and diligently look into them; And beware that thou prudently conceal and keep whatsoever thou read'st in this Note of God, and whatsoever shall be revealed to thee in the vision.",
+            "instruction": "Turner adds: \"But if thou dost anything uncertain, there is danger.\"",
+            "source": "Turner, Ars Notoria (1657), Rowe transcription, p. 32"
         },
-        east: {
-            title: "SEVENTH NOTE - Saturn (Saturnus)",
-            sacred: "Chronos · Thalamageron · Sezemara",
-            content: "Saturn, the old and cold planet, bringer of Time, Limitation, and Death. By this Note, understand the great cycles of Saturn. EXTREMELY DANGEROUS.",
-            instruction: "EXTREME DANGER. Study during the hour of Saturn only. The Seventh Note brings knowledge of Time, aging, and mortality. Many who study it fall into melancholy or madness. Attempt only if absolutely necessary and completely prepared.",
-            latin: "Chronos, Thalamageron, Sezemara, Halamatheon, Gez, Themos, Hela"
+        "east": {
+            "title": "ACHACHAM: The Oration Delivered in Thunder",
+            "heading": "THE ORATION",
+            "sacred": "Achacham, Yhel, Chelychem, Agzyraztor, Yegor, &c.",
+            "content": "Achacham, Yhel, Chelychem, Agzyraztor, Yegor, &c.\n\nOh God the Father, God the Son, God the Holy Spirit, Confirm this Oration, and my Understanding and Memory, to receive, understand, and retain the knowledge of all good Scriptures; and give me perseverance of minde therein.",
+            "instruction": "Solomon says an angel \"delivered the following Oration in Thunder.\" “neither ought this Oration to be said above once, because it moveth the heavenly Spirits to perform any great work.” The text gives only its opening words, then the Latin that confirms it.",
+            "source": "Turner, Ars Notoria (1657), Rowe transcription, p. 16"
         },
-        ring1: {
-            title: "THE SPHERE OF THE FIXED STARS",
-            sacred: "Themalasoragatheon · Hezelamara",
-            content: "Beyond the seven wandering stars lies the Sphere of the Fixed Stars, the outer boundary of Creation. This ring encompasses all planetary knowledge and protects from celestial influences.",
-            instruction: "ALWAYS speak this first before approaching any Astronomical Note. It provides essential protection from harmful celestial influences.",
-            latin: "Themalasoragatheon, Hezelamara, Samalagorion, Helzem, Thema, Gezemarion, Sala"
+        "ring1": {
+            "title": "A WARNING: The Servant of Solomon",
+            "heading": "THE TEACHING",
+            "sacred": "",
+            "content": "a Servant of his house having found this book by chance, and being too much overcome with Wine in the company of a Woman, he presumtuously read it; but before he had finished a part thereof, he was stricked dumb, blind and lame, and his Memory taken from him;",
+            "instruction": "For reading an oration \"presumtuously,\" the servant stayed so \"to the day of his death.\" Four offended angels had afflicted his memory, speech, sight and hearing.",
+            "source": "Turner, Ars Notoria (1657), Rowe transcription, p. 18"
         },
-        ring2: {
-            title: "THE TWENTY-FOUR ANGELS OF ASTRONOMY",
-            sacred: "Semalathagorem · Hezelamatheon",
-            content: "Twenty-four Angels attend the Art of Astronomy, three for each of the seven planets and three for the sphere of the stars. They protect, guide, and reveal celestial mysteries. Invoke them before any astronomical work.",
-            instruction: "The Angels guard against the dangers inherent in Astronomy. NEVER attempt astronomical operations without invoking their protection first.",
-            latin: "Semalathagorem, Hezelamatheon, Thalama, Gezemon, Helatha, Samarion, Themegos"
+        "ring2": {
+            "title": "THEOS MEGALE",
+            "heading": "THE ORATION",
+            "sacred": "Theos Megale patyr, ymas, heth, heldya, hebeath, heleotezygel, Sabatyel, Salus, Telli, Samel, Zadaziel, Zadan, Sadiz Leogio, Yemegas, Mengas, Omchon Myenoym, Ezel, Ezely, Yegrogamal, Sameldach, Somelta, Sanay, Geltonama, Hanns, Simon Salte, Patyr, Osyon, Hate, Haylos, Amen.",
+            "content": "Theos Megale patyr, ymas, heth, heldya, hebeath, heleotezygel, Sabatyel, Salus, Telli, Samel, Zadaziel, Zadan, Sadiz Leogio, Yemegas, Mengas, Omchon Myenoym, Ezel, Ezely, Yegrogamal, Sameldach, Somelta, Sanay, Geltonama, Hanns, Simon Salte, Patyr, Osyon, Hate, Haylos, Amen.",
+            "instruction": "From the third part of the book, said after \"Alpha and Omaega\" and \"Helischemat azatan\" on the fourth day of the month.",
+            "source": "Turner, Ars Notoria (1657), Rowe transcription, p. 38"
         }
     }
 };
 
-// General orations from Artem Novam - applicable to all arts
 const generalOrations = {
-    oration1: {
-        title: "THE FIRST ORATION - For All Arts",
-        sacred: "Heliamathe · Sezoralon · Themagazeron",
-        content: "Omnipotent, Incomprehensible, invisible and indissolvable Lord God, whose Name is ineffable: Illuminate my Understanding and sanctify my Memory. Grant me perseverance in study and excellence in practice of the Sacred Arts.",
-        instruction: "This first general oration may be used to begin the study of any of the Seven Arts. Speak it facing East at dawn.",
-        latin: "Heliamathe, Sezoralon, Themagazeron, Heloms, Samaletheon, Gema"
+    "oration1": {
+        "title": "THE PRAYER IN THE BEGINNING: Alpha and Omega",
+        "heading": "THE ORATION",
+        "sacred": "",
+        "content": "Alpha and Omega! Oh Almighty God, the Beginning of all things, without Beginning, and without End: Graciously this day hear my Prayers; neither do thou render unto me according to my sins, nor after mine iniquities, O Lord my God, but according to thy mercy, which is greater then all things visible and invisible. Have mercy upon me, O Christ, the Wisdom of the Father, The Light of the Angels, The Glory of the Saints, The Hope, Refuge, and Support of Sinners, The Creator of all things, and Redeemer of all humane Frailties, who holdest the Heaven, Earth, and Sea, and all the whole World, in the palm of thy Hand: I humbly implore and beseech, that thou wilt mercifully with the Father, illustrate my Minde with the beams of thy holy Spirit, that I may be able to come and attain to the perfection of this most holy Art; and that I may be able to gain the knowledge of every Science, Art, and Wisdom; and of every Faculty of Memory, Intelligences, Understanding, and Intellect, by the Vertue and Power of thy most holy Spirit, and in thy Name. And thou, O God my God, who in the Beginning hast created the Heaven and the Earth, and all things out of nothing; who reformest, and makest all things by thy own Spirit; compleat, fulfil, restore, and implant a sound understanding in me, that I may glorify thee and all thy Works, in all my Thoughts, Words, and Deeds. O God the Father, confirm and grant this my Prayer, and increase my Understanding and Memory, and strengthen the same, to know and receive the Science, Memory, Eloquence, and Perseverance in all manner of Learning, who livest and reignest, World without end. Amen.",
+        "instruction": "“Before any one is to reade or pronounce any Orations of this Art, to bring them to Effect, let them always first reverently and devoutly rehearse the Prayer in the beginning.”",
+        "source": "Turner, Ars Notoria (1657), Rowe transcription, pp. 5, 7"
     },
-    oration2: {
-        title: "THE SECOND ORATION - Confession and Preparation",
-        sacred: "Themalazemaron · Helesemonon",
-        content: "I confess my self guilty this day before thee Oh God, of many sins and offences. Purify me of all corruption that I may approach these Sacred Arts with a clean heart and pure mind.",
-        instruction: "Speak this before beginning serious study. It purifies and prepares the mind for receiving divine knowledge.",
-        latin: "Themalazemaron, Helesemonon, Gezamathos, Selamara, Hel"
+    "oration2": {
+        "title": "THE FIRST PRECEPT: Hely Scemath",
+        "heading": "THE ORATION",
+        "sacred": "Hely, Scemath Amazaz, Hemel, Sathusteon, hheli Tamazam, &cet.",
+        "content": "Hely, Scemath Amazaz, Hemel, Sathusteon, hheli Tamazam, &cet.",
+        "instruction": "“If any one will search the Scriptures, or would understand, or eloquently pronounce any part of Scripture, let him pronounce the words of the following Figure, to wit, Hely Scemath, in the morning betimes of that day, wherein thou wilt begin any work.”",
+        "source": "Turner, Ars Notoria (1657), Rowe transcription, p. 7"
     },
-    oration3: {
-        title: "THE THIRD ORATION - For Understanding",
-        sacred: "Halethemagoron · Semalazemon",
-        content: "Oh Holy God, merciful and omnipotent Father, illuminate my Understanding that I may comprehend these mysteries. Let no part be hidden from me, but all made clear by thy divine Light.",
-        instruction: "Use when a concept or text is difficult to understand. This oration opens the mind to comprehension.",
-        latin: "Halethemagoron, Semalazemon, Thamatheon, Gezela, Hemaros"
+    "oration3": {
+        "title": "THE SPECULUM OF WISDOM",
+        "heading": "THE ORATION",
+        "sacred": "",
+        "content": "Assaylemath, Assay, Lemath, Azzabue.\n\nAzzaylemath, Lemath, Azacgessenio.\n\nLemath, Sabanche, Ellithy, Aygezo.",
+        "instruction": "“But it is to be rehearsed four times a day, beginning in the morning once, about the third hour once, once in the ninth hour, and once in the evening. The precedent Oration ought to be spoken secretly; and let him that speaks it be alone, and pronounce it with a low voyce, so that he scarcely hear himself.”",
+        "source": "Turner, Ars Notoria (1657), Rowe transcription, p. 9"
     },
-    oration4: {
-        title: "THE FOURTH ORATION - For Memory",
-        sacred: "Semalathagemon · Helomarathon",
-        content: "Lift up the senses of my Heart and Soul unto thee, and grant me Memory that fadeth not. Let all that I learn be retained perfectly, without loss or corruption.",
-        instruction: "Speak after learning something important to seal it in Memory. Especially powerful when spoken at night before sleep.",
-        latin: "Semalathagemon, Helomarathon, Themazeron, Gezala, Hems"
+    "oration4": {
+        "title": "LAMETH",
+        "heading": "THE ORATION",
+        "sacred": "",
+        "content": "Lameth, Leynach, Semach, Belmay, (these Orations have not proper Lunations, as the Commentator saith upon the Gloss.) Azzailement, Gesegon, Lothamasim, Ozetogomaglial, Zeziphier, Josanum, Solatac, Bozefama, Defarciamar, Zemait, Lemaio, Pheralon, Anuc, Philosophi, Gregoon, Letos, Anum, Anum, Anum.",
+        "instruction": "“The Oration which follows, is a certain Invocation of the Angels of God, and it provoketh Eloquence, and ought to be said in the beginning of the Scripture, and in the beginning of the Moneth.”",
+        "source": "Turner, Ars Notoria (1657), Rowe transcription, p. 11"
     },
-    oration5: {
-        title: "THE FIFTH ORATION - For Grace of the Holy Spirit",
-        sacred: "Halemathazeron · Themosagemon",
-        content: "Oh God of the living, Lord of all Creatures: Send forth thy Holy Spirit to guide my studies. Let divine inspiration flow through me as I contemplate these Sacred Arts.",
-        instruction: "For receiving direct inspiration and divine guidance in study. The highest of the general orations.",
-        latin: "Halemathazeron, Themosagemon, Selamarathon, Hel, Gezem"
+    "oration5": {
+        "title": "A PRAYER TO OBTAIN A GOOD MEMORY",
+        "heading": "THE ORATION",
+        "sacred": "O Most Mighty God, Invisible God, Theos Patir Heminas; By thy Archangels, Eliphamasay, Gelonucoa, Gebeche Banai, Gerabcai, Elomnit; and by thy glorious Angels, whose names are so Consecrated, that they cannot be uttered by us; which are these, Do., Hel., X., P., A., Li., O., F, &c. which cannot be comprehended by Humane Sense.",
+        "content": "O Most Mighty God, Invisible God, Theos Patir Heminas; By thy Archangels, Eliphamasay, Gelonucoa, Gebeche Banai, Gerabcai, Elomnit; and by thy glorious Angels, whose names are so Consecrated, that they cannot be uttered by us; which are these, Do., Hel., X., P., A., Li., O., F, &c. which cannot be comprehended by Humane Sense.\n\nI Beseech thee, O my Lord, to Illuminate the Light of my Conscience with the Splendor of thy Light: Illustrate and confirm my Understanding, with the sweet odour of thy Spirit. Adorn my Soul, that hearing I may hear; and what I hear, I may retain in my Memory. O Lord, reform my heart, restore my senses, and strengthen them; qualifie my Memory with thy Gifts: Mercifully open the dulness of my Soul. O most merciful God, temper the frame of my Tongue, by thy most glorious and unspeakable Name: Thou who art the Fountain of all Goodness; the Original and Spring of Piety, have patience with me, give a good Memory unto me, and bestow upon me what I pray of thee in this holy Oration. O thou who dost not forthwith Judge a sinner, but mercifully waitest, expecting his Repentance; I, (though unworthy) beseech thee to take away the guilt of my sins, and wash away my wickedness and offences, and grant me these my Petitions, by the vertue of thy holy Angels, thou who art one God in Trinity. Amen.",
+        "instruction": "Say it in the morning for memory, or in the evening for any other effect.",
+        "source": "Turner, Ars Notoria (1657), Rowe transcription, pp. 11, 12"
     }
 };
 
 const artDescriptions = {
-    grammar: {
-        title: "NOTA PRIMA GRAMMATICAE",
-        subtitle: "The First Note of the Art of Grammar - Three Notes Total",
-        description: "Grammar is the foundation of all learning. Through these three Notes, perfect understanding of language is granted. Master the Ordination of Words, Figures of Speech, and Division of Parts.",
-        lunation: "From Luna Day I to XIV, and from XIV to XVII. Inspect 12 times daily, repeat orations 24 times.",
-        danger: "Low - Safe for beginners with proper devotion"
+    "grammar": {
+        "title": "NOTA PRIMA GRAMMATICAE",
+        "subtitle": "The Art of Grammar · Three Notes",
+        "description": "Turner gives Grammar three Notes, one for each of its three necessities: declining, the ordering of the parts, and their division. The figures here are modern stylized designs, not reproductions of the manuscript Notes. The orations are quoted from Turner.",
+        "lunation": "Moon days 1–17 (\"when the Moon is in her prime\"). First Note 12× a day, its oration 24×. Days 15 and 17: first and second Notes 20×, orations 30×. Then all three Notes 12× a day, orations 20×. Best months: lunation in ♊ or ♍.",
+        "caution": "Fast the first day till evening \"if you can.\" Keep the work secret, \"no looker on but God,\" and abstain from sins.",
+        "level": "normal"
     },
-    logic: {
-        title: "NOTA DIALECTICAE",
-        subtitle: "The Notes of Logic - Two and a Half Notes",
-        description: "Logic teaches perfect reasoning and argument. Two full Notes grant Eloquence in Arguing and Prudence in Answering. The half Note grants swift comprehension of all syllogisms.",
-        lunation: "During the Waxing Moon. Best when Luna increases in light.",
-        danger: "Moderate - Requires mental preparation and clarity"
+    "logic": {
+        "title": "NOTA DIALECTICAE",
+        "subtitle": "The Art of Logic (Dialect) · Two Notes",
+        "description": "Turner gives Logic two Notes: the first for \"Eloquence to Argue and Dispute,\" the second for \"industry to answer without ambiguity.\"",
+        "lunation": "May be used every day except the forbidden days. Inspect 4× a day and repeat the orations 20×, with the books of the art before your eyes. Best months: lunation in ♊ or ♍.",
+        "caution": "As for all Notes: fast the first day, keep it secret, abstain from sins.",
+        "level": "normal"
     },
-    rhetoric: {
-        title: "NOTA RHETORICAE",
-        subtitle: "The Art of Eloquence - Four Notes",
-        description: "Rhetoric grants supernatural eloquence and persuasive power. Four Notes reveal: Perfect Eloquence, Judgment in Speech, Powerful Testimony, and Deep Understanding of rhetorical devices.",
-        lunation: "When Luna is in Mercury's house. Favorable for all speech and communication.",
-        danger: "Moderate - Requires purity of intention and heart"
+    "rhetoric": {
+        "title": "NOTA RHETORICAE",
+        "subtitle": "The Art of Rhetoric · Four Notes",
+        "description": "Turner gives Rhetoric four Notes: flourishing speech, judgement of what is just and true, discovery of offices and causes, and understanding and eloquence \"without prolixity.\"",
+        "lunation": "Every day except the 11th, 17th and 19th days of the Moon. Keep the books of the art before you. Best months: lunation in ♊ or ♋.",
+        "caution": "Leave a short interval between the orations that are said together.",
+        "level": "normal"
     },
-    arithmetic: {
-        title: "NOTA ARITHMETICAE",
-        subtitle: "The Art of Numbers - One and a Half Notes",
-        description: "Arithmetic reveals divine mathematics. The full Note grants perfect computational mastery. The half Note reveals the mystical properties and sacred meanings of all numbers.",
-        lunation: "During calculated lunar aspects. Best at Quarter Moons when Luna forms perfect angles.",
-        danger: "Moderate - Requires precision and focus"
+    "arithmetic": {
+        "title": "NOTA ARITHMETICAE",
+        "subtitle": "The Art of Arithmetic · A Note and a Half",
+        "description": "Turner gives Arithmetic \"a Note and a half,\" with orations for the first Figure, the semi-note, and a second Figure.",
+        "lunation": "For the \"four other Arts,\" Turner says only that \"the first dayes are to be observed.\" Best months: lunation in ♊ or ♋.",
+        "caution": "Say \"the first Oration of Theology\" before the orations of these Notes.",
+        "level": "normal"
     },
-    geometry: {
-        title: "NOTA GEOMETRIAE",
-        subtitle: "The Single Note of Geometry",
-        description: "Geometry is the measurement of Earth and Heaven. One powerful Note grants understanding of all figures, all measures, all spatial relationships. Triangle, Square, and Circle are revealed.",
-        lunation: "At the Full Moon when Luna's circle is perfect in the Heavens.",
-        danger: "Moderate - Requires contemplative focus"
+    "geometry": {
+        "title": "NOTA GEOMETRIAE",
+        "subtitle": "The Art of Geometry · One Note",
+        "description": "Turner gives Geometry one Note, though he also heads an oration \"before the second Note of Geometry.\"",
+        "lunation": "Turner: \"only the first dayes are to be observed.\" Best months: lunation in ♊ or ♋.",
+        "caution": "Say \"the first Oration of Theology\" before the orations of these Notes.",
+        "level": "normal"
     },
-    music: {
-        title: "NOTA MUSICAE",
-        subtitle: "The Celestial Harmony - One Note",
-        description: "Music connects Earth to the Celestial Spheres. One Note contains all harmony, revealing perfect pitch, understanding of harmony, mastery of rhythm, and the Music of the Spheres.",
-        lunation: "When Luna aspects Venus. Most powerful on Fridays in Venus's hour.",
-        danger: "Low - Harmonious and relatively safe practice"
+    "music": {
+        "title": "NOTA MUSICAE",
+        "subtitle": "The Art of Music · One Note",
+        "description": "Turner gives Music one Note but no oration of its own. For \"singing or Musick\" he directs the student to the four orations shown here.",
+        "lunation": "Read the four orations \"7 times a day for 7 days.\" Best months: lunation in ♉ or ♎.",
+        "caution": "Turner: \"Let no man presume to make use of them unless for the proper Office they are instituted for.\"",
+        "level": "normal"
     },
-    astronomy: {
-        title: "NOTA ASTRONOMIAE",
-        subtitle: "The Great and Dangerous Art - Seven Notes",
-        description: "Astronomy is the most exalted and most dangerous Art. Seven Notes corresponding to the Seven Planets: Sun, Moon, Mercury, Venus, Mars, Jupiter, Saturn. Grants knowledge of celestial movements and influences.",
-        lunation: "Each Note must be studied during its specific planetary hour. Fast for three days before approaching.",
-        danger: "EXTREME - Only for the completely prepared. 24 Angels attend. One error may bring madness or death."
+    "astronomy": {
+        "title": "NOTA THEOLOGIAE ET ASTRONOMIAE",
+        "subtitle": "Theology & Astronomy · Seven Notes, \"great and dangerous\"",
+        "description": "Turner groups Astronomy with Theology: \"Theology and Astronomy, with the Sciences in them contained, hath 7 Notes, but they are great and dangerous; not great in the pronunciation, but have great efficacy:\" The last, the \"ineffable Note,\" has 24 Angels.",
+        "lunation": "Work \"in a fiery sign\" (♈ ♌ ♐). \"Observe the 4 ☾ in every operation of Theology.\" Say the four orations 7 times to every Note.",
+        "caution": "On the days you behold these Notes, \"neither laugh nor play, nor sport.\" Conceal whatever is revealed in the vision. Turner: \"if thou dost anything uncertain, there is danger.\"",
+        "level": "high"
+    }
+};
+
+const noteInfo = {
+    "grammar": {
+        "1": "First Note: gives \"a full knowledge of declining.\" Its orations are in the central figure.",
+        "2": "Second Note: gives \"a convenient Ordination of all the parts.\"",
+        "3": "Third Note: gives \"a continual and convenient Division of all the parts, simple and compound.\""
+    },
+    "logic": {
+        "1": "First Note: \"Eloquence to Argue and Dispute.\"",
+        "2": "Second Note: \"industry to answer without ambiguity.\"",
+        "3": "Turner gives Logic only two Notes."
+    },
+    "rhetoric": {
+        "1": "First Note: \"a continual locution, a competent and florishing adornment thereof.\"",
+        "2": "Second Note: \"to discern Judgements, just and unjust, ordinate and inordinate, true and false.\"",
+        "3": "Third Note: \"competently to discover offices and causes.\" The fourth \"giveth understanding and Eloquence in all the operations in this Art, without prolixity.\""
+    },
+    "arithmetic": {
+        "1": "First Figure: \"Oh God who numbrest, weighest, and measurest all things…\"",
+        "2": "The semi-note: \"Oh God, the Operator of all things…\"",
+        "3": "Second Figure: \"Oh God the perfect Judge of all good works…\""
+    },
+    "geometry": {
+        "1": "Turner: \"Geometry hath one Note.\"",
+        "2": "Turner nonetheless gives an oration \"before the second Note of Geometry.\"",
+        "3": "Turner gives no third Note of Geometry."
+    },
+    "music": {
+        "1": "Turner: \"Musick hath one Note, and Physick one Note.\"",
+        "2": "Music has a single Note. Use the four orations shown in the figure.",
+        "3": "Music has a single Note."
+    },
+    "astronomy": {
+        "1": "Theology and Astronomy \"hath 7 Notes.\" Before them, say the four orations (Ezamamos…), \"7 times to every Note.\"",
+        "2": "Second Note of Theology: \"I adore thee, O King of Kings…\"",
+        "3": "The last, \"ineffable Note,\" \"having 24 Angels,\" expressed \"by the Figures of Swords, birds, trees, Flowers, Candles and Serpents.\""
     }
 };
 
@@ -561,28 +667,26 @@ function loadArt(art) {
 }
 
 function updatePanelWithArtInfo(artData) {
-    const dangerColor = artData.danger.includes('EXTREME') ? 'color: var(--ltred);' :
-                        artData.danger.includes('Moderate') ? 'color: var(--yellow);' :
-                        'color: var(--ltgreen);';
+    const dangerColor = artData.level === 'high' ? 'color: var(--ltred);' : 'color: var(--yellow);';
 
     document.getElementById('panelContent').innerHTML = `
         <div class="panel-section">
             <div class="panel-section-title">DESCRIPTION</div>
-            <p class="oration-text">${artData.description}</p>
+            <p class="oration-text">${escapeHtml(artData.description)}</p>
         </div>
         <div class="panel-section">
             <div class="panel-section-title">LUNATION TIMES</div>
-            <p class="oration-text">${artData.lunation}</p>
+            <p class="oration-text">${escapeHtml(artData.lunation)}</p>
         </div>
         <div class="panel-section">
-            <div class="panel-section-title">DANGER LEVEL</div>
-            <p class="oration-text" style="${dangerColor}">${artData.danger}</p>
+            <div class="panel-section-title">CAUTIONS FROM THE TEXT</div>
+            <p class="oration-text" style="${dangerColor}">${escapeHtml(artData.caution)}</p>
         </div>
         <div class="panel-section">
             <div class="panel-section-title">INSTRUCTIONS</div>
             <p class="instruction-text">
-                Click upon any circle, cross, or figure within the sigil to reveal its sacred oration and purpose.
-                Approach with reverence. Speak the sacred names with precision.
+                Click upon any circle, cross, or figure within the figure to reveal its oration from Turner's text.
+                The figures are modern designs; the orations, names and precepts are quoted with page references.
             </p>
         </div>
     `;
@@ -948,7 +1052,15 @@ function generateAstronomySigil() {
     </svg>`;
 }
 
-function showOration(key) {
+function escapeHtml(str) {
+    return String(str).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+}
+
+function paragraphs(str) {
+    return String(str).split('\n\n').map(p => `<p class="oration-text">${escapeHtml(p)}</p>`).join('');
+}
+
+function showOration(key, ev) {
     // Get art-specific oration or fall back to general oration
     let data = artOrations[currentArt]?.[key];
 
@@ -959,22 +1071,25 @@ function showOration(key) {
 
     if (!data) return;
 
+    // Paragraphs already shown in the large sacred-names block are not repeated below it
+    const rest = String(data.content).split('\n\n').filter(p => p !== data.sacred).join('\n\n');
+
     document.getElementById('panelContent').innerHTML = `
         <div class="panel-section">
-            <div class="panel-section-title">${data.title}</div>
-            <p class="sacred-text">${data.sacred}</p>
+            <div class="panel-section-title">${escapeHtml(data.title)}</div>
+            ${data.sacred ? `<p class="sacred-text">${escapeHtml(data.sacred)}</p>` : ''}
         </div>
-        <div class="panel-section">
-            <div class="panel-section-title">THE ORATION</div>
-            <p class="oration-text">${data.content}</p>
-        </div>
+        ${rest ? `<div class="panel-section">
+            <div class="panel-section-title">${escapeHtml(data.heading || 'THE ORATION')}</div>
+            ${paragraphs(rest)}
+        </div>` : ''}
         <div class="panel-section">
             <div class="panel-section-title">INSTRUCTION</div>
-            <p class="instruction-text">${data.instruction}</p>
+            <p class="instruction-text">${escapeHtml(data.instruction)}</p>
         </div>
         <div class="panel-section">
-            <div class="panel-section-title">SACRED NAMES</div>
-            <p class="latin-text">${data.latin}</p>
+            <div class="panel-section-title">SOURCE</div>
+            <p class="latin-text">${escapeHtml(data.source)}</p>
         </div>
     `;
 
@@ -982,7 +1097,8 @@ function showOration(key) {
 
     // Visual feedback
     document.querySelectorAll('.sigil-node').forEach(n => n.classList.remove('active'));
-    event.target.closest('.sigil-node')?.classList.add('active');
+    const e = ev || window.event;
+    e?.target?.closest?.('.sigil-node')?.classList.add('active');
 }
 
 function selectNote(num) {
@@ -996,68 +1112,30 @@ function selectNote(num) {
 
     // Update the panel to show information about the selected note
     const artData = artDescriptions[currentArt];
-    const noteInfo = {
-        grammar: {
-            1: "The First Note of Grammar focuses on the Ordination of Words and Times. Inspect 12 times daily during Luna Days I-XIV.",
-            2: "The Second Note of Grammar reveals Simple and Compound Figures of Speech. Master metaphor, synecdoche, and all rhetorical devices.",
-            3: "The Third Note of Grammar teaches Division of Parts of Speech: Noun, Verb, Participle, Article, Pronoun, Preposition, Adverb, and Conjunction."
-        },
-        logic: {
-            1: "The First Full Note grants Eloquence in Arguing. Construct perfect syllogisms with sound premises and inevitable conclusions.",
-            2: "The Second Full Note grants Prudence in Answering. Detect flaws in false reasoning and respond with unassailable logic.",
-            3: "The Half Note grants Swift Comprehension of complex arguments. Understand any syllogism instantly."
-        },
-        rhetoric: {
-            1: "The First Note grants Perfect Eloquence. The Queen of all Speech removes impediments and grants supernatural fluency.",
-            2: "The Second Note grants Judgment in Speech. Know what to say, when to say it, and to whom with perfect appropriateness.",
-            3: "The Third Note grants Powerful Testimony. Your words carry weight, credibility, and authority.",
-            4: "The Fourth Note grants Deep Understanding of all rhetorical devices: Metaphor, Simile, Allegory, Hyperbole."
-        },
-        arithmetic: {
-            1: "The Full Note grants Computational Mastery. Understand all operations: Addition, Subtraction, Multiplication, Division.",
-            2: "The Half Note reveals Mystical Numbers. Seven is perfection, Three is divine, Four is elemental, Twelve is completion."
-        },
-        geometry: {
-            1: "The Single Note of Geometry grants understanding of Triangle, Circle, and Square - the foundational forms of all creation."
-        },
-        music: {
-            1: "The Single Note of Music contains all harmony: Perfect Pitch, Understanding of Harmony, Mastery of Rhythm, and the Music of the Spheres."
-        },
-        astronomy: {
-            1: "First Note: The Sun - Solar cycles and the year's progression. Study during the hour of the Sun.",
-            2: "Second Note: The Moon - Lunations, eclipses, tides. Study during the hour of the Moon. CAUTION.",
-            3: "Third Note: Mercury - Swift planet of intellect. Study during the hour of Mercury.",
-            4: "Fourth Note: Venus - Morning star of love and beauty. Study during the hour of Venus.",
-            5: "Fifth Note: Mars - The red planet. DANGEROUS. Study during the hour of Mars only.",
-            6: "Sixth Note: Jupiter - King of planets, bringer of fortune. Study during the hour of Jupiter.",
-            7: "Seventh Note: Saturn - EXTREMELY DANGEROUS. Study during the hour of Saturn only. Brings knowledge of Time, aging, and mortality."
-        }
-    };
-
-    const noteText = noteInfo[currentArt]?.[num] || `Note ${num} of ${currentArt.toUpperCase()}`;
+    const noteText = noteInfo[currentArt]?.[String(num)] || `Note ${num} of ${currentArt.toUpperCase()}`;
 
     document.getElementById('panelContent').innerHTML = `
         <div class="panel-section">
             <div class="panel-section-title">NOTE ${num} SELECTED</div>
-            <p class="oration-text">${noteText}</p>
+            <p class="oration-text">${escapeHtml(noteText)}</p>
         </div>
         <div class="panel-section">
             <div class="panel-section-title">DESCRIPTION</div>
-            <p class="oration-text">${artData.description}</p>
+            <p class="oration-text">${escapeHtml(artData.description)}</p>
         </div>
         <div class="panel-section">
             <div class="panel-section-title">LUNATION TIMES</div>
-            <p class="oration-text">${artData.lunation}</p>
+            <p class="oration-text">${escapeHtml(artData.lunation)}</p>
         </div>
         <div class="panel-section">
-            <div class="panel-section-title">DANGER LEVEL</div>
-            <p class="oration-text" style="color: ${artData.danger.includes('EXTREME') ? 'var(--ltred)' : artData.danger.includes('Moderate') ? 'var(--yellow)' : 'var(--ltgreen)'};">${artData.danger}</p>
+            <div class="panel-section-title">CAUTIONS FROM THE TEXT</div>
+            <p class="oration-text" style="color: ${artData.level === 'high' ? 'var(--ltred)' : 'var(--yellow)'};">${escapeHtml(artData.caution)}</p>
         </div>
         <div class="panel-section">
             <div class="panel-section-title">INSTRUCTIONS</div>
             <p class="instruction-text">
-                Click upon any circle, cross, or figure within the sigil to reveal its sacred oration and purpose.
-                Approach with reverence. Speak the sacred names with precision.
+                Click upon any circle, cross, or figure within the figure to reveal its oration from Turner's text.
+                The figures are modern designs; the orations, names and precepts are quoted with page references.
             </p>
         </div>
     `;

@@ -261,6 +261,71 @@
                 padding: 6px;
             }
         }
+
+        /* ===== Interactive tools & history notes ===== */
+        .jump-link { text-align: center; font-size: 11px; margin-top: -10px; }
+        .jump-link a, .history-box a { color: var(--ltcyan); }
+        .tool-panel { background: #000; border: 2px solid var(--ltgreen); padding: 18px; margin: 25px 0; }
+        .tool-header { color: var(--ltgreen); font-weight: bold; font-size: 15px; margin-bottom: 12px; text-transform: uppercase; }
+        .tool-panel em, .history-box em { color: var(--ltcyan); font-style: normal; }
+        .tool-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 10px 0; }
+        .tool-row label, .tool-label { color: var(--ltcyan); font-size: 11px; }
+        .tool-input { background: #000; color: var(--white); border: 1px solid var(--ltblue); font-family: inherit; font-size: 12px; padding: 4px 6px; margin-left: 4px; }
+        input.tool-input[type=number] { width: 110px; }
+        .tool-input.wide { width: 100%; margin: 4px 0 8px; }
+        .tool-btn { background: var(--ltgray); color: var(--black); border: 1px solid var(--white); padding: 5px 12px; font-family: inherit; font-size: 11px; font-weight: bold; cursor: pointer; }
+        .tool-btn:hover { background: var(--white); }
+        .tool-btn:disabled { opacity: 0.3; cursor: default; }
+        .tool-btn.alt { background: var(--blue); color: var(--white); border-color: var(--ltblue); }
+        .tool-btn.alt:hover { background: var(--ltblue); }
+        .tool-note { font-size: 11px; color: var(--ltgray); }
+        .sky-now { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 6px; border: 1px solid var(--cyan); padding: 10px; margin-bottom: 12px; font-size: 12px; color: var(--white); }
+        .sky-k { color: var(--yellow); margin-right: 6px; }
+        .ph-summary { font-size: 12px; color: var(--white); margin: 8px 0; }
+        .ph-now { color: var(--ltgreen); }
+        .ph-table th { background: var(--blue); }
+        .ph-table tr.ph-night td { background: rgba(0, 0, 170, 0.12); }
+        .ph-table tr.ph-current td { background: var(--yellow); color: var(--black); font-weight: bold; }
+        .history-box { background: rgba(170, 85, 0, 0.12); border: 1px solid var(--brown); padding: 15px; margin: 25px 0 5px; }
+        .history-header { color: var(--yellow); font-weight: bold; margin-bottom: 10px; }
+        .history-src { font-size: 11px; margin: 8px 0 0; }
+        .gs-wrap { display: grid; grid-template-columns: 240px 1fr; gap: 20px; align-items: center; margin: 10px 0 20px; }
+        .gs-wrap svg { width: 100%; height: auto; background: #050510; border: 1px solid var(--dkgray); }
+        #gsFigure [data-g] { opacity: 0; transition: opacity 0.8s; }
+        #gsFigure [data-g].on { opacity: 1; }
+        #gsFigure path { fill: none; stroke-linecap: round; }
+        #gsFigure [data-g="roots"] path { stroke: #AA5500; stroke-width: 3; }
+        #gsFigure [data-g="down"] path { stroke: #FF5555; stroke-width: 3; }
+        #gsFigure [data-g="up"] path { stroke: #55FF55; stroke-width: 3; }
+        #gsFigure [data-g="branches"] path { stroke: #55FFFF; stroke-width: 2; }
+        .gs-figure circle, .gs-figure path { fill: none; stroke: var(--ltgray); stroke-width: 4; }
+        .gs-core { fill: var(--white); filter: drop-shadow(0 0 6px #fff); }
+        .gs-sphere { fill: rgba(85, 255, 255, 0.08); stroke: var(--ltcyan); stroke-width: 2; }
+        .chakra-body circle, .chakra-body path { fill: none; stroke: var(--dkgray); stroke-width: 3; }
+        .chakra-node { cursor: pointer; }
+        .chakra-node.active circle:first-child { opacity: 0.9; }
+        #scanFigure [data-part] { fill: #111; stroke: var(--dkgray); stroke-width: 1.5; transition: fill 0.6s; }
+        #scanFigure [data-part].lit { fill: rgba(85, 255, 255, 0.55); stroke: var(--ltcyan); }
+        .breath-stage { position: relative; height: 240px; display: flex; align-items: center; justify-content: center; background: #050510; border: 1px solid var(--dkgray); }
+        .breath-orb { width: 200px; height: 200px; border-radius: 50%; background: radial-gradient(circle, rgba(85,255,255,0.6), rgba(0,0,170,0.4)); border: 2px solid var(--ltcyan); }
+        .breath-cue { position: absolute; color: var(--white); font-weight: bold; font-size: 14px; pointer-events: none; }
+        .draw-wrap { display: grid; grid-template-columns: 170px 1fr; gap: 20px; align-items: start; margin-top: 10px; }
+        .draw-card { height: 250px; border: 3px double var(--yellow); background: #0a0a2a; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 10px; }
+        .draw-card.flip { animation: drawflip 0.6s ease; }
+        @keyframes drawflip { from { transform: rotateY(90deg); opacity: 0.2; } to { transform: rotateY(0); opacity: 1; } }
+        .draw-glyph { font-size: 64px; color: var(--yellow); line-height: 1.1; }
+        .draw-name { color: var(--white); font-weight: bold; margin-top: 10px; font-size: 13px; }
+        .draw-sub { color: var(--ltgray); font-size: 10px; margin-top: 6px; }
+        .draw-log { margin-top: 10px; font-size: 11px; }
+        .draw-log-entry { border-bottom: 1px solid #222; padding: 3px 0; color: var(--ltgray); }
+        .draw-log-entry span { color: var(--yellow); }
+        .sh-card { border: 1px solid var(--purple); padding: 15px; background: rgba(170, 0, 170, 0.08); }
+        .sh-prompt { color: var(--white); font-size: 15px; margin: 8px 0 10px; }
+        .sh-answer { min-height: 120px; }
+        @media (max-width: 768px) {
+            .gs-wrap, .draw-wrap { grid-template-columns: 1fr; }
+            .gs-wrap svg { max-width: 260px; margin: 0 auto; }
+        }
     </style>
 </head>
 <body>
@@ -284,6 +349,7 @@
         <!-- ASTROLOGY SECTION -->
         <div id="astrology" class="section active">
             <h1>Astrology Reference</h1>
+            <p class="jump-link"><a href="#astrology-tools" onclick="document.getElementById('astrology-tools').scrollIntoView();return false;">▼ Jump to the guided practice</a></p>
 
             <h2>The Seven Classical Planets</h2>
 
@@ -468,6 +534,37 @@
                     <li>Follow Chaldean order: Saturn→Jupiter→Mars→Sun→Venus→Mercury→Moon (repeat)</li>
                 </ol>
             </div>
+
+            <div class="tool-panel" id="astrology-tools">
+                <div class="tool-header">▶ Live Planetary Hours</div>
+
+                <div class="sky-now" id="skyNow"></div>
+                <p>Planetary hours are <em>unequal</em>: daylight from sunrise to sunset is split into 12 hours, and night from sunset to the next sunrise into another 12. In summer the day hours are long and the night hours short. The planetary day begins at sunrise, not midnight.</p>
+                <div class="tool-row">
+                    <label>Latitude <input type="number" step="0.0001" id="phLat" class="tool-input"></label>
+                    <label>Longitude <input type="number" step="0.0001" id="phLon" class="tool-input"></label>
+                    <button class="tool-btn" id="phLocate">📍 USE MY LOCATION</button>
+                    <button class="tool-btn" id="phSave">SAVE</button>
+                </div>
+                <p class="tool-note" id="phLocLabel"></p>
+                <div class="ph-summary" id="phSummary"></div>
+                <table class="ph-table" id="phTable"></table>
+                <div class="info-box">
+                    <div class="info-header">A short working by the hours:</div>
+                    <ol>
+                        <li>Choose the planet that matches your aim (see the planet boxes above).</li>
+                        <li>Find that planet's next hour in the table, ideally on its own day (for example, a Mercury hour on Wednesday for study or writing).</li>
+                        <li>Prepare beforehand so you can begin as soon as the hour starts. Hours can be shorter than 60 minutes.</li>
+                        <li>Open with grounding (see Energy Work), state your aim, do the work, then close and record the date, hour and result.</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="history-box">
+                <div class="history-header">⌛ History &amp; Sources: Astrology</div>
+                <ul><li>The order Saturn → Jupiter → Mars → Sun → Venus → Mercury → Moon is the <strong>Chaldean order</strong> of Hellenistic astrology, which ranks the planets from slowest to fastest as seen from Earth.</li><li>Run the planetary hours in that order and the ruler of each day’s first hour gives the sequence of weekday names: Saturday, Sunday, Monday and so on. The Roman historian Cassius Dio (3rd century) explains the planetary week this way.</li><li>Unequal "seasonal" hours were the ordinary way of telling time in antiquity and the Middle Ages. Renaissance magic books such as Agrippa’s and the Key of Solomon time their operations by them.</li><li>The modern co-rulers (Pluto for Scorpio, Uranus for Aquarius, Neptune for Pisces) came only after those planets were discovered in 1930, 1781 and 1846. Traditional astrology uses Mars, Saturn and Jupiter.</li></ul>
+                <p class="history-src"><strong>Further reading:</strong> Ptolemy, <em>Tetrabiblos</em> (2nd c.); Cornelius Agrippa, <em>Three Books of Occult Philosophy</em> (1533); William Lilly, <em>Christian Astrology</em> (1647); Chris Brennan, <em>Hellenistic Astrology</em> (2017).</p>
+            </div>
         </div>
 
         <!-- COLOR MAGIC SECTION -->
@@ -588,6 +685,12 @@
                 <div class="info-header">Tip:</div>
                 <p>White can substitute for ANY color if you don't have the specific one. It contains all colors and works for all intentions.</p>
             </div>
+
+            <div class="history-box">
+                <div class="history-header">⌛ History &amp; Sources: Color Magic</div>
+                <ul><li>Correspondences between colors and intentions differ from one tradition to the next. Most of the lists in use today, including candle color magic, come from 20th-century sources such as American hoodoo candle shops and modern Wicca.</li><li>Older systems linked colors to the planets rather than to purposes. Agrippa’s <em>Occult Philosophy</em> (1533), for example, gives each planet its own colors. That is why the planet boxes in the Astrology section list colors.</li><li>The chakra column in the table uses the modern rainbow scheme, a 20th-century Western addition (see Energy Work).</li><li>Choose the meaning you can hold most clearly. A consistent personal system is more useful than borrowed lists that contradict each other.</li></ul>
+                <p class="history-src"><strong>Further reading:</strong> Agrippa, <em>Three Books of Occult Philosophy</em>, Book I; Catherine Yronwode, <em>Hoodoo Herb and Root Magic</em> (2002); John Gage, <em>Color and Culture</em> (1993).</p>
+            </div>
         </div>
 
         <!-- DEITIES SECTION -->
@@ -691,11 +794,18 @@
                     <li>Some deities demand more than others - be prepared</li>
                 </ul>
             </div>
+
+            <div class="history-box">
+                <div class="history-header">⌛ History &amp; Sources: Deities</div>
+                <ul><li>The domains and offerings above are modern devotional summaries. In the ancient world, worship of each god varied by city, century and cult, and each entry simplifies a long history.</li><li>Some offerings do have ancient roots. Thoth was the patron of scribes and linked with the Moon. Hecate received "Hecate’s suppers," food left at crossroads at the new moon.</li><li>Several of these traditions are living religions today, including Kemetic and Hellenic polytheism and Heathenry, and many people approach the gods through them. Their own sources are worth reading.</li><li>Uriel, among the archangels, is not named in the canonical Bible. He appears in <em>1 Enoch</em> and <em>2 Esdras</em>, and he was one of the first angels Dee and Kelley recorded.</li></ul>
+                <p class="history-src"><strong>Further reading:</strong> Geraldine Pinch, <em>Egyptian Mythology</em> (2002); Walter Burkert, <em>Greek Religion</em> (1985); John Lindow, <em>Norse Mythology</em> (2001); <em>1 Enoch</em> (trans. Nickelsburg &amp; VanderKam, 2004).</p>
+            </div>
         </div>
 
         <!-- DIVINATION SECTION -->
         <div id="divination" class="section">
             <h1>Divination Reference</h1>
+            <p class="jump-link"><a href="#divination-tools" onclick="document.getElementById('divination-tools').scrollIntoView();return false;">▼ Jump to the guided practice</a></p>
 
             <h2>Tarot</h2>
             <p>78 cards: 22 Major Arcana (spiritual lessons) + 56 Minor Arcana (daily life)</p>
@@ -794,6 +904,22 @@
                 <li><strong>ᚲ Kenaz:</strong> Knowledge, creativity, illumination</li>
                 <li><strong>ᚷ Gebo:</strong> Gift, partnership, exchange</li>
                 <li><strong>ᚹ Wunjo:</strong> Joy, harmony, success</li>
+                <li><strong>ᚺ Hagalaz:</strong> Disruption, uncontrolled forces, testing</li>
+                <li><strong>ᚾ Nauthiz:</strong> Constraint, necessity, endurance</li>
+                <li><strong>ᛁ Isa:</strong> Stillness, pause, standstill</li>
+                <li><strong>ᛃ Jera:</strong> Harvest, reward for effort, cycles</li>
+                <li><strong>ᛇ Eihwaz:</strong> Endurance, defence, steadfastness</li>
+                <li><strong>ᛈ Perthro:</strong> Chance, mystery, the unknown</li>
+                <li><strong>ᛉ Algiz:</strong> Protection, warding, higher self</li>
+                <li><strong>ᛊ Sowilo:</strong> Success, wholeness, guidance</li>
+                <li><strong>ᛏ Tiwaz:</strong> Justice, honour, sacrifice</li>
+                <li><strong>ᛒ Berkano:</strong> Growth, birth, renewal</li>
+                <li><strong>ᛖ Ehwaz:</strong> Partnership, trust, movement</li>
+                <li><strong>ᛗ Mannaz:</strong> Self, community, humanity</li>
+                <li><strong>ᛚ Laguz:</strong> Flow, intuition, the unconscious</li>
+                <li><strong>ᛜ Ingwaz:</strong> Potential, gestation, completion</li>
+                <li><strong>ᛞ Dagaz:</strong> Breakthrough, awakening, dawn</li>
+                <li><strong>ᛟ Othala:</strong> Heritage, home, ancestry</li>
             </ul>
 
             <h2>Other Methods</h2>
@@ -805,11 +931,42 @@
                 <li><strong>Dream Interpretation:</strong> Symbolic meaning in dreams</li>
                 <li><strong>Bone Casting:</strong> Throwing bones/charms and reading pattern</li>
             </ul>
+
+            <div class="tool-panel" id="divination-tools">
+                <div class="tool-header">▶ Daily Draw</div>
+
+                <p>Draw one card or rune for the day. Read its keywords, write one line about what it brings up, and look at it again in the evening. Over weeks, the log shows patterns.</p>
+                <div class="tool-row">
+                    <label>Deck <select id="drawDeck" class="tool-input"><option value="majors">Major Arcana (22)</option><option value="runes">Elder Futhark (24)</option></select></label>
+                    <button class="tool-btn" id="drawBtn">✦ DRAW</button>
+                </div>
+                <div class="draw-wrap">
+                    <div class="draw-card" id="drawCard">
+                        <div class="draw-glyph" id="drawGlyph">?</div>
+                        <div class="draw-name" id="drawName">Draw to begin</div>
+                        <div class="draw-sub" id="drawSub"></div>
+                    </div>
+                    <div class="draw-side">
+                        <p><strong>Keywords:</strong> <span id="drawKw">-</span></p>
+                        <label class="tool-label" for="drawNote">What does this bring up today?</label>
+                        <input class="tool-input wide" id="drawNote" maxlength="200">
+                        <button class="tool-btn" id="drawSave" disabled>SAVE TO LOG</button>
+                        <div class="draw-log" id="drawLog"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="history-box">
+                <div class="history-header">⌛ History &amp; Sources: Divination</div>
+                <ul><li><strong>Tarot</strong> began in 15th-century Italy as a card game (<em>tarocchi</em>). It was first used for divination in the 1780s, by Etteilla in Paris. Antoine Court de Gébelin claimed an ancient Egyptian origin in 1781, but there is no evidence for it.</li><li>Most modern meanings descend from the Rider–Waite–Smith deck (1909), designed by A. E. Waite and drawn by Pamela Colman Smith. Waite swapped Strength and Justice to VIII and XI, the numbering used above.</li><li><strong>Runes</strong> were an alphabet, used from about the 2nd century CE. The rune names are reconstructed from medieval rune poems in Old English, Norwegian and Icelandic. Rune divination is mostly modern, popularized by Ralph Blum’s <em>Book of Runes</em> (1982). Tacitus describes Germanic lot-casting with marked strips of wood, but he does not say the marks were runes.</li><li><strong>Scrying</strong> has a well-documented history. John Dee’s obsidian mirror and crystal are in the British Museum.</li></ul>
+                <p class="history-src"><strong>Further reading:</strong> Michael Dummett, <em>The Game of Tarot</em> (1980); Decker, Depaulis &amp; Dummett, <em>A Wicked Pack of Cards</em> (1996); R. I. Page, <em>Runes</em> (1987); Tacitus, <em>Germania</em> §10.</p>
+            </div>
         </div>
 
         <!-- ENERGY WORK SECTION -->
         <div id="energy" class="section">
             <h1>Energy Work Reference</h1>
+            <p class="jump-link"><a href="#energy-tools" onclick="document.getElementById('energy-tools').scrollIntoView();return false;">▼ Jump to the guided practice</a></p>
 
             <h2>The Seven Main Chakras</h2>
 
@@ -967,11 +1124,54 @@
                     <li>If dizzy/nauseous, ground immediately and eat something</li>
                 </ul>
             </div>
+
+            <div class="tool-panel" id="energy-tools">
+                <div class="tool-header">▶ Guided Practice: Ground &amp; Shield, and the Centers</div>
+
+                <div class="gs-wrap">
+                    <svg id="gsFigure" viewBox="0 0 260 330" role="img" aria-label="Grounding and shielding visualization">
+                        <g data-g="sphere"><circle id="gsSphere" cx="130" cy="150" r="120" class="gs-sphere"/></g>
+                        <g data-g="branches"><path d="M130 54 C130 34 112 24 96 8"/><path d="M130 54 C130 30 148 22 166 6"/><path d="M130 54 C128 36 122 20 128 2"/><path d="M118 42 C104 38 92 30 80 26"/><path d="M142 42 C156 38 168 30 182 26"/></g>
+                        <g data-g="roots"><path d="M120 252 C116 278 98 292 80 322"/><path d="M120 252 C122 282 112 300 116 328"/><path d="M140 252 C144 278 162 292 180 322"/><path d="M140 252 C138 282 148 300 144 328"/></g>
+                        <g data-g="down"><path d="M120 252 C116 278 98 292 80 322"/><path d="M140 252 C144 278 162 292 180 322"/></g>
+                        <g data-g="up"><path d="M116 328 C112 300 122 282 120 252"/><path d="M144 328 C148 300 138 282 140 252"/></g>
+                        <g data-g="figure" class="gs-figure"><circle cx="130" cy="70" r="16"/><path d="M130 86 L130 190 M130 108 L100 160 M130 108 L160 160 M130 190 L120 252 M130 190 L140 252"/></g>
+                        <g data-g="core"><circle cx="130" cy="130" r="9" class="gs-core"/></g>
+                    </svg>
+                    <div class="gs-side">
+                        <h3 id="gsTitle"></h3>
+                        <p id="gsText"></p>
+                        <div class="tool-row"><button class="tool-btn" id="gsPrev">◄ BACK</button><button class="tool-btn alt" id="gsNext">NEXT ►</button></div>
+                        <p class="tool-note">Go slowly: stay with each step for three to five breaths before moving on.</p>
+                    </div>
+                </div>
+                <h3>The Seven Centers</h3>
+                <div class="gs-wrap">
+                    <svg id="chakraFigure" viewBox="0 0 220 340" role="img" aria-label="The seven chakras">
+                        <g class="chakra-body"><circle cx="110" cy="90" r="26"/><path d="M98 116 L98 132 L62 146 L52 250 M122 116 L122 132 L158 146 L168 250 M70 150 L74 320 L146 320 L150 150"/></g>
+                    </svg>
+                    <div class="gs-side">
+                        <div id="chakraInfo"></div>
+                        <div class="tool-row">
+                            <label>Seconds each <select id="chakraSecs" class="tool-input"><option>20</option><option selected>40</option><option>60</option></select></label>
+                            <button class="tool-btn alt" id="chakraWalk">▶ WALK THE CENTERS</button>
+                        </div>
+                        <p class="tool-note">A soft tone marks each move, rising from root to crown.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="history-box">
+                <div class="history-header">⌛ History &amp; Sources: Energy Work</div>
+                <ul><li>Chakras come from Indian tantric traditions, and the number and description of the centers vary from text to text. The seven-chakra model familiar in the West comes mainly from Sir John Woodroffe ("Arthur Avalon"), whose <em>The Serpent Power</em> (1919) translated the 16th-century <em>Ṣaṭ-cakra-nirūpaṇa</em>.</li><li>The rainbow colors (red root to violet crown) and the psychological keywords are 20th-century Western additions. The traditional texts give each center other colors, petals, letters and deities.</li><li>Grounding and shielding as practiced here are modern Western techniques, shaped by works such as Dion Fortune’s <em>Psychic Self-Defence</em> (1930). The LBRP comes from the Hermetic Order of the Golden Dawn (1888).</li><li>Rapid breathing to "raise energy" can cause dizziness or fainting. Do it sitting down, stop if you feel unwell, and avoid it if you have heart, lung or seizure conditions.</li></ul>
+                <p class="history-src"><strong>Further reading:</strong> Arthur Avalon, <em>The Serpent Power</em> (1919); Dion Fortune, <em>Psychic Self-Defence</em> (1930); Israel Regardie, <em>The Golden Dawn</em> (1937–40); Anodea Judith, <em>Wheels of Life</em> (1987).</p>
+            </div>
         </div>
 
         <!-- MEDITATION SECTION -->
         <div id="meditation" class="section">
             <h1>Meditation Reference</h1>
+            <p class="jump-link"><a href="#meditation-tools" onclick="document.getElementById('meditation-tools').scrollIntoView();return false;">▼ Jump to the guided practice</a></p>
 
             <h2>Basic Meditation Techniques</h2>
 
@@ -1102,6 +1302,58 @@
                     <li>No "wrong" meditation - if you tried, you succeeded</li>
                     <li>Keep journal of experiences and insights</li>
                 </ul>
+            </div>
+
+            <div class="tool-panel" id="meditation-tools">
+                <div class="tool-header">▶ Guided Practice: Breath and Body</div>
+
+                <div class="gs-wrap">
+                    <div class="breath-stage"><div class="breath-orb" id="breathOrb"></div><div class="breath-cue" id="breathCue">Ready</div></div>
+                    <div class="gs-side">
+                        <h3 style="margin-top:0">Breath Pacer</h3>
+                        <p>Follow the circle: breathe in as it grows and out as it shrinks. Hold while it rests.</p>
+                        <div class="tool-row">
+                            <label>Pattern <select id="breathPattern" class="tool-input"></select></label>
+                            <label>Minutes <select id="breathMinutes" class="tool-input"><option>3</option><option selected>5</option><option>10</option><option>20</option></select></label>
+                        </div>
+                        <div class="tool-row"><button class="tool-btn alt" id="breathStart">▶ BEGIN</button><span class="tool-note" id="breathLeft"></span><span class="tool-note" id="breathCount"></span></div>
+                        <p class="tool-note">If you feel lightheaded, drop the holds and breathe normally. Skip breath-holding patterns if you are pregnant or have heart or lung conditions.</p>
+                    </div>
+                </div>
+                <h3>Guided Body Scan</h3>
+                <div class="gs-wrap">
+                    <svg id="scanFigure" viewBox="0 0 160 330" role="img" aria-label="Body scan figure">
+                        <circle data-part="head" cx="80" cy="30" r="22"/>
+                        <ellipse data-part="face" cx="80" cy="36" rx="13" ry="11"/>
+                        <rect data-part="neck" x="44" y="54" width="72" height="18" rx="8"/>
+                        <rect data-part="arms" x="22" y="72" width="16" height="90" rx="8"/><rect data-part="arms" x="122" y="72" width="16" height="90" rx="8"/>
+                        <circle data-part="hands" cx="30" cy="174" r="10"/><circle data-part="hands" cx="130" cy="174" r="10"/>
+                        <rect data-part="chest" x="44" y="74" width="72" height="50" rx="6"/>
+                        <rect data-part="belly" x="48" y="126" width="64" height="36" rx="6"/>
+                        <rect data-part="hips" x="46" y="164" width="68" height="26" rx="8"/>
+                        <rect data-part="legs" x="50" y="192" width="26" height="110" rx="10"/><rect data-part="legs" x="84" y="192" width="26" height="110" rx="10"/>
+                        <ellipse data-part="feet" cx="60" cy="314" rx="16" ry="8"/><ellipse data-part="feet" cx="100" cy="314" rx="16" ry="8"/>
+                    </svg>
+                    <div class="gs-side">
+                        <h3 id="scanTitle" style="margin-top:0">Lie down or sit comfortably</h3>
+                        <p id="scanText">Press BEGIN. The highlighted area shows where to rest your attention. Notice what is there without trying to change it.</p>
+                        <div class="tool-row">
+                            <button class="tool-btn alt" id="scanStart">▶ BEGIN</button>
+                            <button class="tool-btn" id="scanPrev" disabled>◄</button>
+                            <button class="tool-btn" id="scanNext" disabled>►</button>
+                        </div>
+                        <div class="tool-row">
+                            <label><input type="checkbox" id="scanAuto" checked> Auto-advance every</label>
+                            <select id="scanSecs" class="tool-input"><option>20</option><option selected>40</option><option>60</option><option>90</option></select><span class="tool-note">seconds</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="history-box">
+                <div class="history-header">⌛ History &amp; Sources: Meditation</div>
+                <ul><li>Breath awareness is close to <em>ānāpānasati</em>, "mindfulness of breathing," which is taught in early Buddhist texts such as the <em>Ānāpānasati Sutta</em>.</li><li>The body scan as taught in the West comes from Vipassana practice, by way of Jon Kabat-Zinn’s Mindfulness-Based Stress Reduction program (1979).</li><li>The Middle Pillar exercise was devised by Israel Regardie and published in <em>The Middle Pillar</em> (1938), drawing on Golden Dawn teaching.</li><li>The 4-7-8 pattern was popularized by the physician Andrew Weil. "Box breathing" is widely taught for stress control.</li></ul>
+                <p class="history-src"><strong>Further reading:</strong> Jon Kabat-Zinn, <em>Full Catastrophe Living</em> (1990); Israel Regardie, <em>The Middle Pillar</em> (1938); Bhikkhu Anālayo, <em>Mindfulness of Breathing</em> (2019).</p>
             </div>
         </div>
 
@@ -1262,11 +1514,29 @@
                     <li>Give offerings when harvesting from nature</li>
                 </ul>
             </div>
+
+            <div class="warning-box">
+                <div class="warning-header">⚠ Plant Safety: read before using any herb</div>
+                <ul>
+                    <li><strong>Not every herb here is safe to drink.</strong> Wormwood contains thujone, which is toxic in quantity. Do not make it into tea or tinctures without expert guidance.</li>
+                    <li><strong>Pregnancy:</strong> mugwort, wormwood, sage (in large amounts) and several others can stimulate the uterus. Avoid them in teas and baths while pregnant or trying to conceive.</li>
+                    <li><strong>Pets:</strong> many essential oils, including peppermint and other mints, are toxic to cats and dogs. Keep oils, sachets and smoke away from animals.</li>
+                    <li><strong>Smoke:</strong> burn incense and herbs with the window open. Smoke can trigger asthma.</li>
+                    <li>Check with a doctor or pharmacist before ingesting herbs if you take medication. Herbs interact with drugs.</li>
+                </ul>
+            </div>
+
+            <div class="history-box">
+                <div class="history-header">⌛ History &amp; Sources: Plants</div>
+                <ul><li>Assigning herbs to planets goes back to medieval and Renaissance herbal medicine. Nicholas Culpeper’s <em>English Physitian</em> (1652, later the <em>Complete Herbal</em>) gives a planetary ruler for almost every plant.</li><li>Most modern magical herb lists, including their elements and "magical uses," follow Scott Cunningham’s <em>Encyclopedia of Magical Herbs</em> (1985). Sources often disagree, so expect different rulers in different books.</li><li>Bay laurel’s link with prophecy is ancient: Apollo’s priestess at Delphi was associated with the laurel.</li></ul>
+                <p class="history-src"><strong>Further reading:</strong> Nicholas Culpeper, <em>The English Physitian</em> (1652); Scott Cunningham, <em>Cunningham’s Encyclopedia of Magical Herbs</em> (1985); Richard Mabey, <em>Weeds</em> (2010).</p>
+            </div>
         </div>
 
         <!-- SHADOW WORK SECTION -->
         <div id="shadow" class="section">
             <h1>Shadow Work Reference</h1>
+            <p class="jump-link"><a href="#shadow-tools" onclick="document.getElementById('shadow-tools').scrollIntoView();return false;">▼ Jump to the guided practice</a></p>
 
             <h2>What is Shadow Work?</h2>
             <p>Shadow work is the practice of exploring and integrating the parts of yourself you've repressed, denied, or hidden. The "shadow" (Carl Jung) contains rejected aspects of your personality - both "negative" traits you're ashamed of AND "positive" qualities you've suppressed.</p>
@@ -1437,6 +1707,29 @@
                 <p>Shadow work isn't about becoming "perfect" or eliminating the shadow. It's about making the unconscious conscious, so you have CHOICE. An integrated shadow becomes a source of power, creativity, and authenticity.</p>
                 <p style="color: var(--ltcyan); margin-top: 10px; font-style: italic;">"Until you make the unconscious conscious, it will direct your life and you will call it fate." - Carl Jung</p>
             </div>
+
+            <div class="tool-panel" id="shadow-tools">
+                <div class="tool-header">▶ Guided Practice: One Prompt at a Time</div>
+
+                <p>Work through the journaling prompts one at a time. Write for at least three minutes on each without editing yourself. Answers are saved only in this browser.</p>
+                <div class="sh-card">
+                    <div class="tool-note" id="shCount"></div>
+                    <div class="sh-prompt" id="shPrompt"></div>
+                    <textarea id="shAnswer" class="tool-input wide sh-answer"></textarea>
+                    <div class="tool-row">
+                        <button class="tool-btn" id="shPrev">◄ BACK</button>
+                        <button class="tool-btn alt" id="shNext">NEXT ►</button>
+                        <button class="tool-btn" id="shClear">CLEAR ALL</button>
+                    </div>
+                    <p class="tool-note" id="shStatus"></p>
+                </div>
+            </div>
+
+            <div class="history-box">
+                <div class="history-header">⌛ History &amp; Sources: Shadow Work</div>
+                <ul><li>The "shadow" is Carl Jung’s term for the parts of the personality that the conscious self does not acknowledge. He developed the idea most fully in <em>Aion</em> (1951).</li><li>The quotation above ("Until you make the unconscious conscious…") is a popular paraphrase. Jung’s own wording in <em>Aion</em> is close to: "When an inner situation is not made conscious, it happens outside, as fate."</li><li>The face "shifting" during mirror gazing has a known perceptual cause, the <em>strange-face-in-the-mirror illusion</em>. Giovanni Caputo (2010) found that most people see distortions after about a minute of gazing in dim light. Avoid the exercise if you have a history of dissociation or psychosis.</li></ul>
+                <p class="history-src"><strong>Further reading:</strong> C. G. Jung, <em>Aion</em> (1951), Collected Works vol. 9ii; Giovanni B. Caputo, "Strange-face-in-the-mirror illusion," <em>Perception</em> 39 (2010); Connie Zweig &amp; Jeremiah Abrams, eds., <em>Meeting the Shadow</em> (1991).</p>
+            </div>
         </div>
     </div>
 
@@ -1447,25 +1740,7 @@
         </p>
     </div>
 
-    <script>
-        function showSection(sectionId) {
-            // Hide all sections
-            const sections = document.querySelectorAll('.section');
-            sections.forEach(section => section.classList.remove('active'));
-
-            // Remove active from all pills
-            const pills = document.querySelectorAll('.nav-pill');
-            pills.forEach(pill => pill.classList.remove('active'));
-
-            // Show selected section
-            document.getElementById(sectionId).classList.add('active');
-
-            // Activate clicked pill
-            event.target.classList.add('active');
-
-            // Scroll to top
-            window.scrollTo(0, 0);
-        }
-    </script>
+    <script src="lunar.js"></script>
+    <script src="reference-tools.js"></script>
 </body>
 </html>

@@ -1,8 +1,8 @@
 # Ars Notoria Digitalis
 
-A digital manifestation of the ancient grimoire "Ars Notoria - The Notory Art of Solomon" in the aesthetic style of TempleOS. This interactive website presents the sacred geometric figures and **historically accurate orations** from the 1657 Robert Turner translation, used for obtaining perfect memory, eloquence, and understanding of the Seven Liberal Arts.
+A digital manifestation of the ancient grimoire "Ars Notoria - The Notory Art of Solomon" in the aesthetic style of TempleOS. This interactive website presents stylized geometric figures and the **orations of the 1657 Robert Turner translation, quoted verbatim with page references**, used for obtaining perfect memory, eloquence, and understanding of the Seven Liberal Arts.
 
-**✨ Historically Accurate Version** - All orations are extracted directly from the original 1657 manuscript translation by Robert Turner, with art-specific sacred names, lunation timings, and instructions faithful to the source text.
+**✨ Source-Checked** - Every oration, sacred name and quoted precept in `sigils.js` is taken word for word from Robert Turner's 1657 translation (Benjamin Rowe's transcription, the PDF in this repository), with page references. Run `python3 tools/verify-orations.py` to check them all against the PDF (needs `pdftotext`). Where Turner gives no oration for a figure (for example Music's Note), the site shows the orations Turner directs you to use instead, and says so. The geometric figures are modern designs: Turner printed no figures.
 
 ## About the Ars Notoria
 
@@ -22,7 +22,7 @@ The Ars Notoria (Notory Art) is a medieval grimoire attributed to Solomon that c
 - **Seven Liberal Arts**: Navigate between the Notes of each art via the menu bar
 - **TempleOS Aesthetic**: Inspired by Terry A. Davis's TempleOS, featuring a 16-color palette and retro interface
 - **Manuscript Gallery**: View the original manuscript geometric figures
-- **Authentic Orations**: Sacred invocations and Latin names from the historical texts
+- **Authentic Orations**: Turner's orations and sacred names, quoted verbatim with page references
 - **Responsive Design**: Works on desktop and mobile devices
 - **📖 Digital Grimoire**: Complete magical journaling system with unlockable premium features
 
@@ -49,6 +49,18 @@ Access via the "✦ PRACTICE" button in the main interface (`ars-notoria-practic
 - **Record of the Work** - A session log saved locally, with copy-to-clipboard
 
 `lunar.js` is shared by this page and the main status bar, which now shows the astronomical day of the Moon instead of an estimate from the calendar date.
+
+### Reference Library Tools
+
+The reference databases (`reference.html`) now include interactive tools (`reference-tools.js`) and a **History & Sources** note in every section:
+
+- **Astrology** - Live planetary hours, using true sunrise and sunset for your location (from your device or entered by hand, stored only in the browser), with a "sky now" summary and a short working by the hours
+- **Meditation** - Animated breath pacer (Calm, Box, Even, 4-7-8) and a guided body scan with a highlighted figure
+- **Energy Work** - Animated nine-step ground-and-shield visualization, and a clickable chakra figure with a timed walk through the centers
+- **Divination** - Daily draw from the Major Arcana or Elder Futhark, with a log. The rune list is now complete (all 24).
+- **Plants** - Safety box (toxic herbs, pregnancy, pets, smoke)
+- **Shadow Work** - Journaling prompts presented one at a time, and a corrected Jung quotation
+- Sections can be linked directly (for example `reference.html#meditation`)
 
 ### Digital Grimoire System
 
@@ -78,12 +90,14 @@ All entries are saved in browser localStorage. Export/import functionality inclu
 ```
 Ars Notoria Digitalis/
 ├── index.html                          # Main HTML file
-├── sigils.js                           # JavaScript for sigils and interactions
+├── sigils.js                           # Figures, interactions, and Turner's orations (source-checked)
+├── tools/verify-orations.py            # Checks every oration in sigils.js against the Turner PDF
 ├── grimoire.html                       # Digital grimoire interface
 ├── grimoire.js                         # Grimoire functionality and unlock system
 ├── monas-hieroglyphica.html            # Guided Monas Hieroglyphica exercise
 ├── ars-notoria-practice.html           # Guided practice of the Notory Art
 ├── lunar.js                            # True new-moon / day-of-the-Moon calculation
+├── reference-tools.js                  # Interactive tools for the reference library
 ├── README.md                           # This file
 ├── Ars Notoria - PDF.pdf              # Source grimoire (not deployed)
 ├── Screenshot 2026-01-13 165343.jpg   # Manuscript page 1
