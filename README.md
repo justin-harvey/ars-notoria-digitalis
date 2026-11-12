@@ -38,6 +38,19 @@ Access via the "☿ MONAS" button in the main interface (`monas-hieroglyphica.ht
 
 Note: Dee left no ritual instructions for the Monas. The exercise is a modern reconstruction that follows the order of his theorems, and the page says so.
 
+### The Prayers of John Dee
+
+Access via the "✠ DEE'S PRAYERS" button (`dee-prayers.html`). A daily office built only from Dee's own words in Sloane MS 3188, with nothing spoken by angels or scryers:
+
+- **The Morning and Evening Prayer for Wisdom** - Dee's most-used prayer (Latin), stepped through in nine parts with an original English translation. Latin, English or both, with your own name in the final petition.
+- **The Three Short Prayers** - The ones Dee says he cried out "full oft", plus a study bell that offers one at each interval
+- **The Psalms Dee Prayed** - With Vulgate and English numbering and the occasion for each
+- **Dee's Closings** - The praises he wrote at the end of his sessions
+- **The Faithful Protestation (1582)** - Dee's own account of why he prayed as he did, in his spelling, with glosses
+- **A Day in Dee's Manner** and **Record** - A daily rhythm and a local journal
+
+Dee's text is from the transcription in Joseph H. Peterson's *John Dee's Five Books of Mystery* (2003). Translations from the Latin are original to this site, and Peterson's notes and translations are not used.
+
 ### Practice of the Notory Art
 
 Access via the "✦ PRACTICE" button in the main interface (`ars-notoria-practice.html`). A guided practice built directly on Turner's 1657 text:
@@ -96,6 +109,7 @@ Ars Notoria Digitalis/
 ├── grimoire.js                         # Grimoire functionality and unlock system
 ├── monas-hieroglyphica.html            # Guided Monas Hieroglyphica exercise
 ├── ars-notoria-practice.html           # Guided practice of the Notory Art
+├── dee-prayers.html                    # John Dee's own prayers as a daily office
 ├── lunar.js                            # True new-moon / day-of-the-Moon calculation
 ├── reference-tools.js                  # Interactive tools for the reference library
 ├── README.md                           # This file
