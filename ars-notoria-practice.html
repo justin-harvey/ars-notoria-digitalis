@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Notory Art - A Practitioner's Exercise</title>
+    <style>
+        :root {
+            --black: #000000; --blue: #0000AA; --green: #00AA00; --cyan: #00AAAA;
+            --red: #AA0000; --purple: #AA00AA; --brown: #AA5500; --ltgray: #AAAAAA;
+            --dkgray: #555555; --ltblue: #5555FF; --ltgreen: #55FF55; --ltcyan: #55FFFF;
+            --ltred: #FF5555; --pink: #FF55FF; --yellow: #FFFF55; --white: #FFFFFF;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: var(--black); color: var(--ltgray); font-family: 'Courier New', monospace; line-height: 1.6; }
+
+        .titlebar {
+            background: var(--blue); color: var(--white); padding: 6px 12px; font-size: 14px;
+            display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 2px solid var(--ltblue); position: sticky; top: 0; z-index: 10;
+        }
+        .titlebar-title { font-weight: bold; letter-spacing: 1px; }
+        .titlebar-btn {
+            background: var(--ltgray); color: var(--black); border: 1px solid var(--white);
+            padding: 2px 10px; cursor: pointer; font-family: inherit; font-size: 11px;
+            font-weight: bold; text-decoration: none;
+        }
+        .titlebar-btn:hover { background: var(--white); }
+        .menubar { background: var(--dkgray); display: flex; flex-wrap: wrap; border-bottom: 1px solid var(--ltgray); }
+        .menu-item { color: var(--white); padding: 4px 14px; font-size: 12px; text-decoration: none; }
+        .menu-item:hover { background: var(--ltblue); }
+
+        main { max-width: 1000px; margin: 0 auto; padding: 20px; }
+        header {
+            text-align: center; margin-bottom: 30px; padding: 20px;
+            border: 2px solid var(--ltcyan); background: rgba(85, 255, 255, 0.05);
+        }
+        h1 { color: var(--ltcyan); font-size: 24px; margin-bottom: 10px; text-transform: uppercase; }
+        .subtitle { color: var(--yellow); font-size: 12px; font-style: italic; }
+        h2 {
+            color: var(--ltblue); font-size: 18px; margin: 30px 0 15px; padding-bottom: 5px;
+            border-bottom: 1px solid var(--dkgray); text-transform: uppercase;
+        }
+        h3 { color: var(--ltgreen); font-size: 14px; margin: 20px 0 10px; }
+        p { margin-bottom: 15px; }
+        strong { color: var(--white); }
+        em { color: var(--ltcyan); font-style: normal; }
+        ul, ol { margin: 0 0 15px 22px; }
+        li { margin-bottom: 8px; }
+        a { color: var(--ltblue); text-decoration: none; }
+        a:hover { color: var(--ltcyan); text-decoration: underline; }
+        section { margin-bottom: 40px; scroll-margin-top: 70px; }
+
+        .box { border: 1px solid var(--dkgray); padding: 15px; margin: 15px 0; }
+        .box-header { font-weight: bold; margin-bottom: 8px; }
+        .note { background: rgba(255, 255, 85, 0.07); border-color: var(--brown); }
+        .note .box-header { color: var(--yellow); }
+        .practice { background: rgba(0, 170, 0, 0.08); border-color: var(--green); }
+        .practice .box-header { color: var(--ltgreen); }
+        .contemplate { background: rgba(170, 0, 170, 0.1); border-color: var(--purple); }
+        .contemplate .box-header { color: var(--pink); }
+
+        .oration {
+            border-left: 3px solid var(--ltcyan); background: rgba(0, 170, 170, 0.07);
+            padding: 12px 16px; margin: 12px 0; color: var(--white); font-size: 13px;
+        }
+        .oration .rubric { display: block; color: var(--yellow); font-size: 11px; margin-bottom: 6px; }
+        .names { color: var(--ltcyan); letter-spacing: 0.5px; }
+        .cite { color: var(--dkgray); font-size: 11px; }
+
+        .btn {
+            background: var(--ltgray); color: var(--black); border: 1px solid var(--white);
+            padding: 5px 14px; font-family: inherit; font-size: 12px; font-weight: bold; cursor: pointer;
+        }
+        .btn:hover { background: var(--white); }
+        .btn:disabled { opacity: 0.3; cursor: default; }
+        .btn.alt { background: var(--blue); color: var(--white); border-color: var(--ltblue); }
+        .btn.alt:hover { background: var(--ltblue); }
+
+        /* Shape of the art */
+        .shape { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: start; }
+        .shape svg { width: 100%; height: auto; display: block; border: 2px solid var(--ltblue); background: #000; }
+        .node { cursor: pointer; }
+        .node rect { fill: #000; stroke: var(--ltblue); stroke-width: 1.5; transition: fill 0.2s; }
+        .node text { fill: var(--white); font-family: 'Courier New', monospace; font-size: 11px; text-anchor: middle; pointer-events: none; }
+        .node .count { fill: var(--yellow); font-size: 10px; }
+        .node:hover rect, .node.active rect { fill: var(--blue); stroke: var(--ltcyan); }
+        .link { stroke: var(--dkgray); stroke-width: 1.5; fill: none; }
+        .info-panel { border: 1px solid var(--ltblue); padding: 15px; min-height: 200px; background: rgba(85, 85, 255, 0.05); font-size: 13px; }
+        .info-panel h3 { margin-top: 0; color: var(--yellow); }
+        .kv { font-size: 13px; margin-bottom: 8px; }
+        .kv b { color: var(--ltcyan); font-weight: normal; }
+
+        /* Moon calendar */
+        .moon-wrap { display: grid; grid-template-columns: 340px 1fr; gap: 20px; align-items: start; }
+        .moon-wrap svg { width: 100%; height: auto; display: block; }
+        .seg { cursor: pointer; }
+        .seg path { fill: #050510; stroke: var(--dkgray); stroke-width: 1; transition: fill 0.2s; }
+        .seg:hover path { fill: #10104a; }
+        .seg.today path { fill: var(--blue); stroke: var(--ltcyan); }
+        .seg.selected path { stroke: var(--yellow); stroke-width: 2.5; }
+        .seg.beyond path { fill: #000; stroke: #222; }
+        .seg text { fill: var(--white); font-size: 11px; font-family: 'Courier New', monospace; text-anchor: middle; dominant-baseline: middle; pointer-events: none; }
+        .seg.beyond text { fill: var(--dkgray); }
+        .legend { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 11px; margin: 10px 0; }
+        .legend span::before { content: '●'; margin-right: 5px; color: var(--c); }
+        .today-line { font-size: 13px; border: 1px solid var(--ltcyan); padding: 10px; margin-bottom: 12px; background: rgba(85, 255, 255, 0.05); }
+        .day-rules { font-size: 13px; }
+        .day-rules li { border-left: 3px solid var(--c); padding-left: 8px; list-style: none; margin-left: 0; }
+        input[type=date] {
+            background: #000; color: var(--white); border: 1px solid var(--ltblue);
+            font-family: inherit; padding: 3px 6px; color-scheme: dark;
+        }
+
+        /* Stages */
+        .stage-tabs { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 12px; }
+        .stage-tab {
+            background: var(--dkgray); color: var(--white); border: 1px solid var(--ltgray);
+            padding: 3px 9px; font-family: inherit; font-size: 11px; cursor: pointer;
+        }
+        .stage-tab.active { background: var(--blue); border-color: var(--ltcyan); color: var(--yellow); }
+        .stage-tab.done { color: var(--ltgreen); }
+        .stage { display: none; border: 1px solid var(--dkgray); padding: 18px; }
+        .stage.active { display: block; }
+        .stage h3 { font-size: 16px; color: var(--yellow); margin-top: 0; }
+        .stage-nav { display: flex; justify-content: space-between; margin-top: 16px; }
+
+        /* Inspection */
+        .inspect { display: grid; grid-template-columns: 1fr 300px; gap: 20px; align-items: start; }
+        .plate { border: 2px solid var(--brown); background: #111; }
+        .plate img { width: 100%; display: block; }
+        .plate-caption { font-size: 11px; color: var(--yellow); padding: 6px 8px; }
+        .thumbs { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
+        .thumbs button {
+            background: #111; border: 1px solid var(--dkgray); color: var(--ltgray);
+            font-family: inherit; font-size: 11px; padding: 2px 8px; cursor: pointer;
+        }
+        .thumbs button.active { border-color: var(--yellow); color: var(--yellow); }
+        .tally { border: 1px solid var(--ltgreen); padding: 12px; background: rgba(0, 170, 0, 0.06); }
+        .tally select {
+            width: 100%; background: #000; color: var(--white); border: 1px solid var(--ltblue);
+            font-family: inherit; font-size: 12px; padding: 4px; margin-bottom: 10px;
+        }
+        .counter { margin-bottom: 14px; }
+        .counter .label { font-size: 12px; color: var(--ltcyan); }
+        .counter .num { font-size: 28px; color: var(--yellow); font-weight: bold; }
+        .counter .of { font-size: 14px; color: var(--ltgray); }
+        .bar { height: 8px; background: #222; border: 1px solid var(--dkgray); margin: 4px 0 8px; }
+        .bar div { height: 100%; background: var(--ltgreen); width: 0; transition: width 0.3s; }
+        .counter .btn { width: 100%; padding: 10px; font-size: 13px; }
+        .rule-text { font-size: 11px; color: var(--ltgray); margin-bottom: 10px; }
+
+        textarea, .rec-input {
+            width: 100%; background: #000; color: var(--white); border: 1px solid var(--ltblue);
+            font-family: inherit; font-size: 12px; padding: 8px; margin-bottom: 10px;
+        }
+        textarea { min-height: 80px; }
+        label { color: var(--ltcyan); font-size: 12px; display: block; margin-bottom: 4px; }
+        .status { font-size: 11px; color: var(--ltgreen); min-height: 16px; }
+        .log { margin-top: 15px; font-size: 12px; }
+        .log-entry { border: 1px solid var(--dkgray); padding: 8px 10px; margin-bottom: 6px; }
+        .log-entry .when { color: var(--yellow); }
+        .sources li { font-size: 12px; }
+        footer { text-align: center; font-size: 11px; color: var(--dkgray); border-top: 1px solid var(--dkgray); padding: 20px; margin-top: 40px; }
+
+        @media (max-width: 800px) {
+            .shape, .moon-wrap, .inspect { grid-template-columns: 1fr; }
+            main { padding: 10px; }
+            h1 { font-size: 18px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="titlebar">
+        <span class="titlebar-title">ARS NOTORIA DIGITALIS :: Practice of the Notory Art</span>
+        <a class="titlebar-btn" href="index.html">← RETURN TO NOTES</a>
+    </div>
+    <nav class="menubar">
+        <a class="menu-item" href="#origins">ORIGINS</a>
+        <a class="menu-item" href="#shape">SHAPE OF THE ART</a>
+        <a class="menu-item" href="#moon">MOON CALENDAR</a>
+        <a class="menu-item" href="#work">THE WORK</a>
+        <a class="menu-item" href="#inspect">INSPECT</a>
+        <a class="menu-item" href="#record">RECORD</a>
+        <a class="menu-item" href="#sources">SOURCES</a>
+    </nav>
+
+    <main>
+        <header>
+            <h1>✦ The Notory Art of Solomon ✦</h1>
+            <div class="subtitle">A practitioner's exercise after Robert Turner's English translation of 1657</div>
+        </header>
+
+        <!-- ORIGINS -->
+        <section id="origins">
+            <h2>What the Notory Art Is</h2>
+            <p>The <em>Ars Notoria</em> is a medieval Latin ritual text. Surviving manuscripts go back to the 13th century. It claims to be the art an angel taught King Solomon, handed down through a "Master Apollonius." Its promise is ambitious: by praying certain prayers and contemplating certain figures, called <em>notae</em> or "Notes", at set times of the Moon, you gain memory, eloquence, understanding and perseverance, and then mastery of the liberal arts, in a fraction of the usual time.</p>
+            <p>It was popular among students and clerics, and it was controversial. Thomas Aquinas rejected it as an illegitimate way to seek knowledge (<em>Summa Theologiae</em> II-II, q. 96, a. 1). The monk John of Morigny practiced it for years, came to fear it, and wrote his own Marian replacement for it, the <em>Liber florum</em>.</p>
+            <p>The only English version is <strong>Robert Turner's translation of 1657</strong>. He worked from a Latin text printed in the editions of Agrippa's works, and this site's copy is a transcription by Benjamin Rowe. Turner left out the figures. The manuscripts that do have them show at least three different sets, and no one set counts as definitive.</p>
+
+            <div class="box note">
+                <div class="box-header">⚠ A note on method</div>
+                <p>The text is confusing: it mixes three sections and repeats or contradicts itself. This exercise draws its rules, its numbers and its prayers from Turner's text. The prayers are quoted in Turner's 1657 English. Where the text is unclear, we say so instead of guessing.</p>
+                <p style="margin-bottom:0">One open question: we don't know exactly what "inspecting" a Note meant. It may have meant memorizing the figure and seeing it in the mind's eye while reciting. The text itself says that someone without access to the figures can say each prayer twice instead.</p>
+            </div>
+            <div class="box note">
+                <div class="box-header">⚠ Health</div>
+                <p style="margin-bottom:0">The text asks for fasting. It lets you off if you can't ("if thou canst not, then take another hour"). Skip the fast if it isn't safe for you.</p>
+            </div>
+        </section>
+
+        <!-- SHAPE -->
+        <section id="shape">
+            <h2>The Shape of the Art</h2>
+            <p>The book works from general to particular. The <strong>generals</strong> come first: faculties that every kind of learning needs. Then come the <strong>specials</strong>: Notes for each art, each with its own count, days and rules. Click any box.</p>
+            <div class="shape">
+                <svg id="shapeSvg" viewBox="0 0 420 462" role="img" aria-label="Structure of the Ars Notoria"></svg>
+                <div class="info-panel" id="shapeInfo">
+                    <h3>Select a part of the art</h3>
+                    <p>Turner's text gives each art a set number of Notes, and the angel explains to Solomon why each number is what it is.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- MOON -->
+        <section id="moon">
+            <h2>Moon Calendar</h2>
+            <p>Almost every instruction in the Ars Notoria is tied to the <strong>day of the Moon</strong>, that is, how many days have passed since the new moon. Below is the current lunation, worked out astronomically. Click a day to see what the text assigns to it, or pick a date.</p>
+            <div class="moon-wrap">
+                <div>
+                    <svg id="moonSvg" viewBox="0 0 340 340" role="img" aria-label="Days of the Moon"></svg>
+                    <div style="margin-top:8px; font-size:12px">
+                        <label for="moonDate" style="display:inline">Date:</label>
+                        <input type="date" id="moonDate">
+                        <button class="btn" id="moonToday" style="padding:2px 8px">TODAY</button>
+                    </div>
+                </div>
+                <div>
+                    <div class="today-line" id="todayLine"></div>
+                    <div class="legend" id="legend"></div>
+                    <h3 id="dayTitle" style="margin-top:6px">Day</h3>
+                    <ul class="day-rules" id="dayRules"></ul>
+                    <p class="cite">Days count from the moment of the true new moon. Medieval practitioners often counted from the first sight of the crescent, which can be a day or two later. A lunation lasts 29 or 30 days, so day 30 doesn't always come. The text says some months are "more profitable" for certain arts by sign. We read that as the sign the new moon falls in, but the text doesn't say so explicitly.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- THE WORK -->
+        <section id="work">
+            <h2>The Work: A Session</h2>
+            <p>One session in the order the text gives, using the <strong>first Note of Grammar</strong> as the example, since Grammar is where the specials begin. Plan on about an hour the first time.</p>
+            <div class="stage-tabs" id="stageTabs"></div>
+
+            <div class="stage" data-name="PREPARE">
+                <h3>1 · Prepare</h3>
+                <p>Turner's text sets several conditions before anything is said or looked at:</p>
+                <ul>
+                    <li><strong>Choose the day.</strong> Grammar's first Note belongs to the days "when the Moon is in her prime," days 1 to 17. Check the <a href="#moon">calendar</a>.</li>
+                    <li><strong>Fast on the first day.</strong> "In the beginning of the inspection of all Notes, fast the first day till the evening, if you can; if thou canst not, then take another hour."</li>
+                    <li><strong>Keep it secret.</strong> "See that it be secret to thy self, and that thou have no looker on but God."</li>
+                    <li><strong>Live cleanly.</strong> The text repeatedly asks you to "abstain from sins" and to live "chaste and soberly" while using the Notes.</li>
+                    <li><strong>Keep the books of the art in front of you.</strong> For Logic and Rhetoric the text says to have the books of that art before your eyes. Doing the same for Grammar is a sensible choice.</li>
+                </ul>
+                <div class="box contemplate">
+                    <div class="box-header">◉ Before you begin</div>
+                    Name, to yourself, what you want to learn and why. The Ars Notoria promises learning, not power. Its whole frame is a prayer for understanding.
+                </div>
+            </div>
+
+            <div class="stage" data-name="OPEN">
+                <h3>2 · The Opening Prayer</h3>
+                <p>"Before any one is to reade or pronounce any Orations of this Art … let them always first reverently and devoutly rehearse the Prayer in the beginning." This is the prayer the book opens with:</p>
+                <div class="oration">
+                    <span class="rubric">The Prayer in the beginning · Turner 1657</span>
+                    Alpha and Omega! Oh Almighty God, the Beginning of all things, without Beginning, and without End: Graciously this day hear my Prayers; neither do thou render unto me according to my sins, nor after mine iniquities, O Lord my God, but according to thy mercy, which is greater then all things visible and invisible. Have mercy upon me, O Christ, the Wisdom of the Father, The Light of the Angels, The Glory of the Saints, The Hope, Refuge, and Support of Sinners, The Creator of all things, and Redeemer of all humane Frailties, who holdest the Heaven, Earth, and Sea, and all the whole World, in the palm of thy Hand: I humbly implore and beseech, that thou wilt mercifully with the Father, illustrate my Minde with the beams of thy holy Spirit, that I may be able to come and attain to the perfection of this most holy Art; and that I may be able to gain the knowledge of every Science, Art, and Wisdom; and of every Faculty of Memory, Intelligences, Understanding, and Intellect, by the Vertue and Power of thy most holy Spirit, and in thy Name. And thou, O God my God, who in the Beginning hast created the Heaven and the Earth, and all things out of nothing; who reformest, and makest all things by thy own Spirit; compleat, fulfil, restore, and implant a sound understanding in me, that I may glorify thee and all thy Works, in all my Thoughts, Words, and Deeds. O God the Father, confirm and grant this my Prayer, and increase my Understanding and Memory, and strengthen the same, to know and receive the Science, Memory, Eloquence, and Perseverance in all manner of Learning, who livest and reignest, World without end. Amen.
+                </div>
+            </div>
+
+            <div class="stage" data-name="PRECEPT">
+                <h3>3 · The First Precept: Hely Scemath</h3>
+                <p>Next comes what Solomon "entitled, His First Revelation; and that to be without any Interpretation." The text gives only its opening words and breaks off with "&c." Turner's text says it should be said "in the morning betimes of that day, wherein thou wilt begin any work."</p>
+                <div class="oration">
+                    <span class="rubric">The first Precept · Turner 1657</span>
+                    <span class="names">Hely, Scemath Amazaz, Hemel, Sathusteon, hheli Tamazam, &amp;c.</span>
+                </div>
+                <div class="box contemplate">
+                    <div class="box-header">◉ Contemplate</div>
+                    The text insists these words "cannot be expounded nor understood, by humane sense." Saying words you can't understand is an act of trust, not of study. Notice how it feels to say them without trying to work out what they mean.
+                </div>
+            </div>
+
+            <div class="stage" data-name="SPECULUM">
+                <h3>4 · The Speculum of Wisdom</h3>
+                <p>Turner calls this "the Oration of the four Tongues," also named <em>the Splendor or Speculum of Wisdom</em>, and "the Foundation of the whole Science." It belongs to particular Moon days (4, 8 and 12 especially). On those days it is said four times: <strong>in the morning, about the third hour, about the ninth hour, and in the evening</strong>. The third and ninth hours are counted from sunrise, so they fall around mid-morning and mid-afternoon.</p>
+                <p>How to say it: "spoken secretly; and let him that speaks it be alone, and pronounce it with a low voyce, so that he scarcely hear himself."</p>
+                <div class="oration">
+                    <span class="rubric">The Oration</span>
+                    <span class="names">Assaylemath, Assay, Lemath, Azzabue.</span>
+                </div>
+                <div class="oration">
+                    <span class="rubric">The second part, which is to be said only once</span>
+                    <span class="names">Azzaylemath, Lemath, Azacgessenio.</span>
+                </div>
+                <div class="oration">
+                    <span class="rubric">The third part, spoken together with the other</span>
+                    <span class="names">Lemath, Sabanche, Ellithy, Aygezo.</span>
+                </div>
+                <p class="cite">If today isn't one of its days, skip this stage. The <a href="#moon">calendar</a> marks its days.</p>
+            </div>
+
+            <div class="stage" data-name="BEFORE">
+                <h3>5 · The Orations Before the Note</h3>
+                <p>"At the beginning of a Note, having seen the generals; let the specials be looked into." For the first Note of Grammar the text gives a short oration followed by a longer one:</p>
+                <div class="oration">
+                    <span class="rubric">The first Oration at the beginning of the Note</span>
+                    The Light, Truth, Life, Way, Judge, Mercy, Fortitude and Patience, preserve, help me, and have Mercy upon me, Amen.
+                </div>
+                <div class="oration">
+                    <span class="rubric">Said in the beginning of the first Note of Grammar</span>
+                    Oh Lord, Holy Father, Almighty, eternal God, in whose sight are all the foundations of all creatures, and invisible beings whose Eyes behold my imperfections, of the sweetness of whose love the Earth and Heavens are filled; who sawest all things before they were made, in whose book every day is formed, and all mankind are written therein: behold me, thy Servant this day prostrate me before thee, with thy whole Heart and Soul: by thy Holy Spirit confirm me, blesse me, protect all my Actions in this inspection or repetition, and illuminate me of thy visitation.
+                </div>
+            </div>
+
+            <div class="stage" data-name="INSPECT">
+                <h3>6 · Inspect the Note</h3>
+                <p>The rule for Grammar's first Note: "In the dayes when the Moon is in her prime, the first Note is to be looked into <strong>12 times</strong>, and the Oration thereof repeated <strong>24 times</strong> with Holy reverence; making a little space between, let the Oration be twice repeated at the inspection of every Note."</p>
+                <p>In practice: look at the figure, say the oration twice, pause, and repeat twelve times over the day. On days 15 and 17 the first and second Notes are inspected 20 times and the oration said 30 times.</p>
+                <div class="box practice">
+                    <div class="box-header">✎ Do</div>
+                    Open the <a href="#inspect">inspection view</a>. It shows a manuscript figure with a counter for your inspections and repetitions. Rest your eyes on the whole figure first, then let them follow the lines of writing as they wind around it.
+                </div>
+            </div>
+
+            <div class="stage" data-name="CLOSE">
+                <h3>7 · Close and Record</h3>
+                <p>Turner's text promises results "in one Moneth" to anyone who keeps the appointed times. Keeping a record is the only way to test that for yourself. After each session write down the day of the Moon, which Note you worked with, your counts, and anything you noticed. The text also mentions visions, so include dreams.</p>
+                <div class="box contemplate">
+                    <div class="box-header">◉ Contemplate</div>
+                    The book is called the <em>Notory</em> Art because "in certain brief Notes, it teacheth and comprehendeth the Knowledge of all Arts." What would it mean for a whole subject to be folded into one figure you can hold in your mind?
+                </div>
+            </div>
+
+            <div class="stage-nav">
+                <button class="btn" id="prevBtn">◄ PREV</button>
+                <button class="btn" id="nextBtn">NEXT ►</button>
+            </div>
+        </section>
+
+        <!-- INSPECT -->
+        <section id="inspect">
+            <h2>Inspection</h2>
+            <p>Choose a figure and a rule. Press <strong>LOOKED</strong> each time you take in the figure, and <strong>SAID</strong> each time you finish the oration. Counts are saved for today only.</p>
+            <div class="inspect">
+                <div>
+                    <div class="plate"><img id="plateImg" src="Screenshot 2026-01-13 165343.jpg" alt="Manuscript figure">
+                        <div class="plate-caption" id="plateCaption">Plate I</div>
+                    </div>
+                    <div class="thumbs" id="thumbs"></div>
+                    <p class="cite" style="margin-top:6px">Manuscript pages from the site's gallery. Turner's edition has no figures; the figures survive only in the Latin manuscripts.</p>
+                </div>
+                <div class="tally">
+                    <label for="ruleSel">Rule</label>
+                    <select id="ruleSel"></select>
+                    <div class="rule-text" id="ruleText"></div>
+                    <div class="counter">
+                        <div class="label">INSPECTIONS</div>
+                        <div><span class="num" id="lookNum">0</span> <span class="of" id="lookOf">/ 12</span></div>
+                        <div class="bar"><div id="lookBar"></div></div>
+                        <button class="btn alt" id="lookBtn">◉ LOOKED</button>
+                    </div>
+                    <div class="counter">
+                        <div class="label">REPETITIONS OF THE ORATION</div>
+                        <div><span class="num" id="sayNum">0</span> <span class="of" id="sayOf">/ 24</span></div>
+                        <div class="bar"><div id="sayBar"></div></div>
+                        <button class="btn alt" id="sayBtn">✦ SAID</button>
+                    </div>
+                    <div style="display:flex; gap:6px">
+                        <button class="btn" id="undoBtn" style="flex:1">UNDO</button>
+                        <button class="btn" id="resetTally" style="flex:1">RESET</button>
+                    </div>
+                    <div class="status" id="tallyStatus"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RECORD -->
+        <section id="record">
+            <h2>Record of the Work</h2>
+            <p>Entries are saved in this browser only. Use COPY ALL to move them into your <a href="grimoire.html">Book of Mirrors</a>.</p>
+            <label for="recNote">Art and Note</label>
+            <input class="rec-input" id="recNote" value="Grammar, first Note">
+            <label for="recNotice">What did you notice during the inspection?</label>
+            <textarea id="recNotice"></textarea>
+            <label for="recChange">Any change in memory, speech or understanding since the last session?</label>
+            <textarea id="recChange"></textarea>
+            <label for="recDream">Dreams or visions</label>
+            <textarea id="recDream"></textarea>
+            <div style="display:flex; gap:8px; flex-wrap:wrap">
+                <button class="btn" id="saveEntry">SAVE ENTRY</button>
+                <button class="btn alt" id="copyLog">COPY ALL</button>
+                <button class="btn" id="clearLog">CLEAR LOG</button>
+            </div>
+            <div class="status" id="recStatus"></div>
+            <div class="log" id="log"></div>
+        </section>
+
+        <!-- SOURCES -->
+        <section id="sources">
+            <h2>Sources and Further Reading</h2>
+            <ul class="sources">
+                <li>Robert Turner, trans., <em>Ars Notoria: The Notory Art of Solomon</em> (London, 1657). Transcription by Benjamin Rowe, included in this repository. All prayers and rules on this page are quoted from it.</li>
+                <li>Claire Fanger, ed., <em>Conjuring Spirits: Texts and Traditions of Medieval Ritual Magic</em> (Penn State UP, 1998). Includes Michael Camille, "Visual Art in Two Manuscripts of the Ars Notoria."</li>
+                <li>Julien Véronèse, <em>L'Ars notoria au Moyen Âge</em> (Florence: SISMEL, 2007). The critical study and edition.</li>
+                <li>Claire Fanger, <em>Rewriting Magic: An Exegesis of the Visionary Autobiography of a Fourteenth-Century French Monk</em> (Penn State UP, 2015). On John of Morigny.</li>
+                <li>Thomas Aquinas, <em>Summa Theologiae</em> II-II, q. 96, a. 1.</li>
+                <li>Jean Meeus, <em>Astronomical Algorithms</em>, 2nd ed. (Willmann-Bell, 1998). The source of the new-moon calculation used here.</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>ARS NOTORIA DIGITALIS • Practice of the Notory Art • Prayers from Turner's translation (1657, public domain)</footer>
+
+    <script src="lunar.js"></script>
+    <script>
+    (function () {
+        'use strict';
+        const $ = id => document.getElementById(id);
+        const SVGNS = 'http://www.w3.org/2000/svg';
+        function svgEl(tag, attrs, parent) {
+            const e = document.createElementNS(SVGNS, tag);
+            for (const k in attrs) e.setAttribute(k, attrs[k]);
+            if (parent) parent.appendChild(e);
+            return e;
+        }
+        function store(key, val) {
+            try {
+                if (val === undefined) return JSON.parse(localStorage.getItem(key) || 'null');
+                localStorage.setItem(key, JSON.stringify(val));
+                return true;
+            } catch (e) { return val === undefined ? null : false; }
+        }
+
+        // ===================== SHAPE OF THE ART =====================
+        const SIGNS = { gem: '♊ Gemini', vir: '♍ Virgo', tau: '♉ Taurus', lib: '♎ Libra', can: '♋ Cancer', fire: 'a fire sign (♈ ♌ ♐)' };
+        const NODES = [
+            { id: 'prayer', label: 'The Prayer in the beginning', x: 210, y: 30, w: 230,
+              info: '<p>"Alpha and Omega! Oh Almighty God…" said before any oration of the art. See stage 2 of <a href="#work">The Work</a>.</p>' },
+            { id: 'generals', label: 'GENERALS', count: 'Memory · Eloquence · Understanding · Perseverance', x: 210, y: 105, w: 380,
+              info: '<p>Faculties to build <strong>before</strong> working on any particular art: memory, eloquence, understanding and perseverance. The "general" orations include Hely Scemath, the Speculum of Wisdom (Assaylemath…), and Lameth, which is said at the beginning of every month, fasting.</p><p class="kv"><b>Rule:</b> "Say the general Notes 10 times a day, when you have occasion to use any common Arts, having the books of those Arts before you."</p>' },
+            { id: 'specials', label: 'SPECIALS', count: 'the Notes of each art', x: 210, y: 180, w: 230,
+              info: '<p>The Notes of the particular arts, worked "in the order in which they were customarily taught." Each Note comes with its own oration and its own number of inspections.</p>' },
+            { id: 'grammar', label: 'GRAMMAR', count: '3 Notes', x: 70, y: 260, w: 120, parent: 'specials',
+              notes: 3, sign: ['gem', 'vir'],
+              why: ['ordination of words and times', 'figures, simple, compound and various', 'declension and division of the parts'],
+              rule: 'Moon days 1–17: first Note 12× a day, its oration 24× (twice at each inspection). Days 15 and 17: first and second Notes 20×, orations 30×. Then all three Notes 12× a day, orations 20×. Fast on the first day.' },
+            { id: 'logic', label: 'LOGIC', count: '2 Notes', x: 210, y: 260, w: 120, parent: 'specials',
+              notes: 2, sign: ['gem', 'vir'],
+              why: ['eloquence in arguing', 'prudence to answer without ambiguity'],
+              rule: 'May be used every day except the forbidden days. Inspect 4× a day and say the orations 20×, "having the books of that Art before your Eyes."' },
+            { id: 'rhetoric', label: 'RHETORIC', count: '4 Notes', x: 350, y: 260, w: 120, parent: 'specials',
+              notes: 4, sign: ['gem', 'can'],
+              why: ['continual, flourishing adornment of speech', 'discerning judgements, just and unjust, true and false', 'discovering offices and causes', 'understanding and eloquence without prolixity'],
+              rule: 'Every day except days 11, 17 and 19 of the Moon. Keep the books of the art before you.' },
+            { id: 'arith', label: 'ARITHMETIC', count: '1½ Notes', x: 70, y: 335, w: 120, parent: 'specials',
+              notes: 1.5, sign: ['gem', 'can'],
+              rule: 'One Note and a "semi-note," each with its own oration. For the "four other Arts" the text says only that "the first dayes are to be observed," without saying more.' },
+            { id: 'geom', label: 'GEOMETRY', count: '1 Note', x: 210, y: 335, w: 120, parent: 'specials',
+              notes: 1, sign: ['gem', 'can'],
+              rule: 'One Note. As with the other "four Arts," the text says only that "the first dayes are to be observed."' },
+            { id: 'music', label: 'MUSIC & PHYSIC', count: '1 Note each', x: 350, y: 335, w: 120, parent: 'specials',
+              notes: 1, sign: ['tau', 'lib'],
+              rule: 'One Note each for Music and for Physic (medicine). Both are "to be published and rehearsed in their appointed dayes."' },
+            { id: 'philo', label: 'PHILOSOPHY', count: '7 species', x: 120, y: 420, w: 160, parent: 'specials',
+              notes: 7, sign: ['gem', 'can'],
+              rule: 'Moon days 7 and 17, 7× a day, each with its orations. "The Note is to be looked into, with fear, silence and trembling." Don\'t laugh, play or joke on those days.' },
+            { id: 'theo', label: 'THEOLOGY & ASTRONOMY', count: '7 Notes', x: 300, y: 420, w: 180, parent: 'specials',
+              notes: 7, sign: ['fire'],
+              rule: '"Great and dangerous; not great in the pronunciation, but have great efficacy." Work in a fiery sign. Don\'t laugh or play on those days: the text tells how Solomon looked at these Notes drunk and was punished.' }
+        ];
+
+        const shapeSvg = $('shapeSvg');
+        const nodeMap = {};
+        // The arts sit together in one group under SPECIALS
+        svgEl('rect', { x: 4, y: 226, width: 412, height: 230, fill: 'none', stroke: '#5555FF', 'stroke-dasharray': '4 4' }, shapeSvg);
+        svgEl('line', { class: 'link', x1: 210, y1: 198, x2: 210, y2: 226 }, shapeSvg);
+        const grpLabel = svgEl('text', { x: 12, y: 452, fill: '#555555', 'font-size': 9, 'font-family': 'Courier New' }, shapeSvg);
+        grpLabel.textContent = 'in the order they were taught';
+        svgEl('line', { class: 'link', x1: 210, y1: 48, x2: 210, y2: 87 }, shapeSvg);
+        svgEl('line', { class: 'link', x1: 210, y1: 123, x2: 210, y2: 162 }, shapeSvg);
+        NODES.forEach(n => {
+            const g = svgEl('g', { class: 'node', tabindex: 0, role: 'button' }, shapeSvg);
+            svgEl('rect', { x: n.x - n.w / 2, y: n.y - 18, width: n.w, height: 36, rx: 2 }, g);
+            const t = svgEl('text', { x: n.x, y: n.count ? n.y - 3 : n.y + 4 }, g);
+            t.textContent = n.label;
+            if (n.count) {
+                const c = svgEl('text', { x: n.x, y: n.y + 11, class: 'count' }, g);
+                c.textContent = n.count;
+            }
+            g.addEventListener('click', () => showNode(n.id));
+            g.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); showNode(n.id); } });
+            nodeMap[n.id] = g;
+        });
+
+        function showNode(id) {
+            const n = NODES.find(x => x.id === id);
+            Object.values(nodeMap).forEach(g => g.classList.remove('active'));
+            nodeMap[id].classList.add('active');
+            let html = '<h3>' + n.label + (n.count ? ' · ' + n.count : '') + '</h3>';
+            if (n.info) html += n.info;
+            if (n.why) html += '<p class="kv"><b>Why ' + n.why.length + ':</b> the angel told Solomon this art needs ' + n.why.length + ' things:</p><ol>' + n.why.map(w => '<li>' + w + '</li>').join('') + '</ol>';
+            if (n.rule) html += '<p class="kv"><b>Rule:</b> ' + n.rule + '</p>';
+            if (n.sign) html += '<p class="kv"><b>Best months:</b> when the lunation falls in ' + n.sign.map(s => SIGNS[s]).join(' or ') + '.</p>';
+            $('shapeInfo').innerHTML = html;
+        }
+
+        // ===================== MOON CALENDAR =====================
+        const CATS = [
+            { id: 'month', color: '#FFFF55', label: 'Lameth (start of month)', days: [1],
+              text: 'Beginning of the month: the oration <em>Lameth, Leynach, Semach, Belmay…</em> is said "most secretly," fasting, "before you have taken either Meat or Drink."' },
+            { id: 'spec', color: '#55FFFF', label: 'Speculum of Wisdom', days: [4, 8, 12, 16, 24, 28, 30],
+              text: 'The triumphal orations (<em>Assaylemath…</em>). Turner gives days 4, 8, 12, 16, 24, 28, and a "thirteenth" that is probably a misprint for the thirtieth. On days 4, 8 and 12 say it "very diligently four times."' },
+            { id: 'hely', color: '#55FF55', label: 'Hely Schemath group, 4× daily', days: [4, 8, 10, 12, 20, 24, 28, 30],
+              text: '"Hely Schemath, Alpha and Omega, Theos megale…" are said four times: "in the morning once, the third hour once, the ninth once, and once in the evening."' },
+            { id: 'gram', color: '#5555FF', label: 'Grammar Notes', days: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17],
+              text: 'Grammar: "the Moon is in her prime." First Note 12×, oration 24×.', special: { 15: 'Day 15: first and second Notes 20×, orations 30×.', 17: 'Day 17: first and second Notes 20×, orations 30×.' } },
+            { id: 'philo', color: '#FF55FF', label: 'Philosophy Notes', days: [7, 17],
+              text: 'Philosophy: its Notes are inspected 7× a day, "with fear, silence and trembling."' },
+            { id: 'theo', color: '#AA5500', label: 'Theology oration', days: [1, 3, 6, 9, 12, 17, 18, 26, 29],
+              text: 'The first oration of Theology is said as many times as the day\'s number (once on day 1, three times on day 3, and so on), in the morning, living chastely.' },
+            { id: 'nort', color: '#FF5555', label: 'Rhetoric forbidden', days: [11, 17, 19],
+              text: 'No Rhetoric: "The Rhetorical every day, except only three dayes of the Moneth, to wit, ☾ 11. 17. and 19."' }
+        ];
+
+        const moonSvg = $('moonSvg');
+        const CX = 170, CY = 170, R1 = 82, R2 = 132;
+        const segs = [];
+        let selectedDay = 1, viewLun = null;
+
+        for (let d = 1; d <= 30; d++) {
+            const a0 = (-90 + (d - 1) * 12) * Math.PI / 180;
+            const a1 = (-90 + d * 12) * Math.PI / 180;
+            const pt = (r, a) => (CX + r * Math.cos(a)).toFixed(2) + ' ' + (CY + r * Math.sin(a)).toFixed(2);
+            const g = svgEl('g', { class: 'seg', tabindex: 0, role: 'button', 'aria-label': 'Day ' + d }, moonSvg);
+            svgEl('path', { d: `M ${pt(R1, a0)} L ${pt(R2, a0)} A ${R2} ${R2} 0 0 1 ${pt(R2, a1)} L ${pt(R1, a1)} A ${R1} ${R1} 0 0 0 ${pt(R1, a0)} Z` }, g);
+            const am = (a0 + a1) / 2;
+            const t = svgEl('text', { x: CX + 98 * Math.cos(am), y: CY + 98 * Math.sin(am) }, g);
+            t.textContent = d;
+            // category dots
+            const hits = CATS.filter(c => c.days.includes(d));
+            hits.forEach((c, i) => {
+                const r = 114 + (i % 3) * 7, off = (Math.floor(i / 3) - 0.5) * 0.06 + (hits.length > 3 ? 0 : 0);
+                const aa = am + (hits.length > 3 ? off : 0) + ((i % 3) - 1) * 0.045;
+                svgEl('circle', { cx: CX + r * Math.cos(aa), cy: CY + r * Math.sin(aa), r: 2.6, fill: c.color }, g);
+            });
+            g.addEventListener('click', () => selectDay(d));
+            g.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectDay(d); } });
+            segs.push(g);
+        }
+        // central moon
+        svgEl('circle', { cx: CX, cy: CY, r: 60, fill: '#111', stroke: '#555' }, moonSvg);
+        const moonLit = svgEl('path', { fill: '#E8DCC4' }, moonSvg);
+        const moonLabel = svgEl('text', { x: CX, y: CY + 76, fill: '#FFFF55', 'font-size': 10, 'text-anchor': 'middle', 'font-family': 'Courier New' }, moonSvg);
+
+        function drawMoon(age) {
+            // Lit portion as seen from the northern hemisphere
+            const f = (age % Lunar.SYNODIC) / Lunar.SYNODIC;
+            const r = 56, k = Math.cos(2 * Math.PI * f);
+            const waxing = f < 0.5;
+            const top = `${CX} ${CY - r}`, bot = `${CX} ${CY + r}`;
+            const rx = Math.abs(k) * r;
+            const outerSweep = waxing ? 1 : 0;
+            const innerSweep = waxing ? (k > 0 ? 0 : 1) : (k > 0 ? 1 : 0);
+            moonLit.setAttribute('d', `M ${top} A ${r} ${r} 0 0 ${outerSweep} ${bot} A ${rx} ${r} 0 0 ${innerSweep} ${top} Z`);
+        }
+
+        CATS.forEach(c => {
+            const s = document.createElement('span');
+            s.style.setProperty('--c', c.color);
+            s.textContent = c.label;
+            $('legend').appendChild(s);
+        });
+
+        function sunSign(date) {
+            const jd = date.getTime() / 86400000 + 2440587.5;
+            const T = (jd - 2451545) / 36525;
+            const L0 = 280.46646 + 36000.76983 * T;
+            const M = (357.52911 + 35999.05029 * T) * Math.PI / 180;
+            const C = (1.914602 - 0.004817 * T) * Math.sin(M) + 0.019993 * Math.sin(2 * M) + 0.000289 * Math.sin(3 * M);
+            const lon = ((L0 + C) % 360 + 360) % 360;
+            return Math.floor(lon / 30);
+        }
+        const ZODIAC = ['♈ Aries', '♉ Taurus', '♊ Gemini', '♋ Cancer', '♌ Leo', '♍ Virgo', '♎ Libra', '♏ Scorpio', '♐ Sagittarius', '♑ Capricorn', '♒ Aquarius', '♓ Pisces'];
+        const FAVOURS = {
+            0: 'Theology & Astronomy', 4: 'Theology & Astronomy', 8: 'Theology & Astronomy',
+            2: 'Grammar, Logic, Rhetoric, Philosophy, Arithmetic, Geometry and Mathematics',
+            5: 'Grammar and Logic', 1: 'Music, Physic and Mathematics', 6: 'Music and Physic',
+            3: 'Rhetoric, Philosophy, Arithmetic and Geometry'
+        };
+
+        function showLunation(date) {
+            const isToday = !date;
+            date = date || new Date();
+            const lun = Lunar.lunation(date);
+            viewLun = lun;
+            const sign = sunSign(lun.newMoon);
+            const fav = FAVOURS[sign];
+            const fmt = d => d.toLocaleString(undefined, { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+            $('todayLine').innerHTML =
+                '<strong>' + (isToday ? 'Today' : date.toLocaleDateString()) + ': day ' + lun.day + ' of the Moon</strong> (' + Lunar.phaseName(lun.age) + ', ' + Math.round(lun.illumination * 100) + '% lit)<br>' +
+                'New moon: ' + fmt(lun.newMoon) + ' · next: ' + fmt(lun.nextNewMoon) + '<br>' +
+                'This lunation began in <strong>' + ZODIAC[sign] + '</strong>. ' +
+                (fav ? 'The text names this a good month for <em>' + fav + '</em>.' : 'The text names no art for this sign.');
+            segs.forEach((g, i) => {
+                g.classList.toggle('today', i + 1 === lun.day);
+                g.classList.toggle('beyond', i + 1 > Math.ceil(lun.length));
+            });
+            drawMoon(lun.age);
+            moonLabel.textContent = 'DAY ' + Lunar.toRoman(lun.day);
+            selectDay(lun.day);
+        }
+
+        function selectDay(d) {
+            selectedDay = d;
+            segs.forEach((g, i) => g.classList.toggle('selected', i + 1 === d));
+            const ul = $('dayRules');
+            ul.innerHTML = '';
+            $('dayTitle').textContent = 'Day ' + d + ' of the Moon' + (viewLun && d === viewLun.day ? ' (current)' : '');
+            const hits = CATS.filter(c => c.days.includes(d));
+            if (viewLun && d > Math.ceil(viewLun.length)) {
+                ul.innerHTML = '<li style="--c:#555">This lunation ends before day ' + d + '.</li>';
+                return;
+            }
+            if (!hits.length) {
+                ul.innerHTML = '<li style="--c:#555">No special assignment. Logic and Rhetoric Notes may be used, and the general Notes said, as usual.</li>';
+                return;
+            }
+            hits.forEach(c => {
+                const li = document.createElement('li');
+                li.style.setProperty('--c', c.color);
+                let txt = c.text;
+                if (c.id === 'theo') txt = 'The first oration of Theology is said <strong>' + d + '×</strong> today, in the morning, living chastely.';
+                if (c.special && c.special[d]) txt += ' <strong>' + c.special[d] + '</strong>';
+                li.innerHTML = '<strong style="color:' + c.color + '">' + c.label + '.</strong> ' + txt;
+                ul.appendChild(li);
+            });
+        }
+
+        const dateInput = $('moonDate');
+        const toISODate = d => new Date(d.getTime() - d.getTimezoneOffset() * 60000).toISOString().slice(0, 10);
+        dateInput.value = toISODate(new Date());
+        dateInput.addEventListener('change', () => {
+            if (!dateInput.value) return;
+            const [y, m, dd] = dateInput.value.split('-').map(Number);
+            showLunation(new Date(y, m - 1, dd, 12, 0, 0));
+        });
+        $('moonToday').addEventListener('click', () => { dateInput.value = toISODate(new Date()); showLunation(); });
+
+        // ===================== STAGES =====================
+        const stages = Array.from(document.querySelectorAll('.stage'));
+        const tabs = $('stageTabs');
+        const visited = new Set();
+        let current = 0;
+        stages.forEach((s, i) => {
+            const b = document.createElement('button');
+            b.className = 'stage-tab';
+            b.textContent = (i + 1) + '·' + s.dataset.name;
+            b.addEventListener('click', () => go(i));
+            tabs.appendChild(b);
+        });
+        function go(i) {
+            current = Math.max(0, Math.min(stages.length - 1, i));
+            visited.add(current);
+            stages.forEach((s, j) => s.classList.toggle('active', j === current));
+            Array.from(tabs.children).forEach((t, j) => {
+                t.classList.toggle('active', j === current);
+                t.classList.toggle('done', visited.has(j) && j !== current);
+            });
+            $('prevBtn').disabled = current === 0;
+            $('nextBtn').disabled = current === stages.length - 1;
+        }
+        $('prevBtn').addEventListener('click', () => go(current - 1));
+        $('nextBtn').addEventListener('click', () => go(current + 1));
+
+        // ===================== INSPECTION =====================
+        const PLATES = ['165343', '165415', '165424', '165435', '165444', '165453', '165502', '165510']
+            .map((s, i) => ({ src: 'Screenshot 2026-01-13 ' + s + '.jpg', name: 'Plate ' + Lunar.toRoman(i + 1) }));
+        PLATES.forEach((p, i) => {
+            const b = document.createElement('button');
+            b.textContent = p.name;
+            b.addEventListener('click', () => setPlate(i));
+            $('thumbs').appendChild(b);
+        });
+        function setPlate(i) {
+            $('plateImg').src = PLATES[i].src;
+            $('plateCaption').textContent = PLATES[i].name;
+            Array.from($('thumbs').children).forEach((b, j) => b.classList.toggle('active', i === j));
+        }
+        setPlate(0);
+
+        const RULES = [
+            { id: 'g1', label: 'Grammar, first Note (Moon days 1–17)', look: 12, say: 24, text: '"looked into 12 times, and the Oration thereof repeated 24 times … twice repeated at the inspection of every Note."' },
+            { id: 'g15', label: 'Grammar, first & second Notes (days 15, 17)', look: 20, say: 30, text: '"The first and second Notes are to be looked into 20 times, and the Oration to be repeated 30 times, on the 15 and 17 dayes."' },
+            { id: 'g3', label: 'Grammar, all three Notes (after)', look: 12, say: 20, text: '"All the three Notes are then everyday to be looked into 12 times, and the Orations are to be repeated 20 times."' },
+            { id: 'lg', label: 'Logic Notes (any allowed day)', look: 4, say: 20, text: '"four times to be looked into, and the Orations thereof in that day are 20 times to be repeated, making some respite, and having the books of that Art before your Eyes."' },
+            { id: 'ph', label: 'Philosophy Notes (days 7, 17)', look: 7, say: 7, text: '"inspected, 7 times a day, with their several Orations. The Note is to be looked into, with fear, silence and trembling."' },
+            { id: 'gen', label: 'General Notes', look: 10, say: 10, text: '"Say the general Notes 10 times a day."' }
+        ];
+        RULES.forEach(r => {
+            const o = document.createElement('option');
+            o.value = r.id; o.textContent = r.label;
+            $('ruleSel').appendChild(o);
+        });
+
+        const todayKey = 'notoryTally-' + toISODate(new Date());
+        let tally = store(todayKey) || { rule: 'g1', look: 0, say: 0, history: [] };
+        if (!Array.isArray(tally.history)) tally.history = [];
+        $('ruleSel').value = tally.rule;
+
+        function renderTally() {
+            const r = RULES.find(x => x.id === tally.rule) || RULES[0];
+            $('ruleText').textContent = r.text;
+            $('lookNum').textContent = tally.look;
+            $('sayNum').textContent = tally.say;
+            $('lookOf').textContent = '/ ' + r.look;
+            $('sayOf').textContent = '/ ' + r.say;
+            $('lookBar').style.width = Math.min(100, tally.look / r.look * 100) + '%';
+            $('sayBar').style.width = Math.min(100, tally.say / r.say * 100) + '%';
+            const done = tally.look >= r.look && tally.say >= r.say;
+            $('tallyStatus').textContent = done ? '✓ The day\'s count is complete.' : '';
+            store(todayKey, tally);
+        }
+        $('ruleSel').addEventListener('change', e => { tally.rule = e.target.value; renderTally(); });
+        $('lookBtn').addEventListener('click', () => { tally.look++; tally.history.push('look'); renderTally(); });
+        $('sayBtn').addEventListener('click', () => { tally.say++; tally.history.push('say'); renderTally(); });
+        $('undoBtn').addEventListener('click', () => {
+            const last = tally.history.pop();
+            if (last) tally[last] = Math.max(0, tally[last] - 1);
+            renderTally();
+        });
+        $('resetTally').addEventListener('click', () => { tally.look = 0; tally.say = 0; tally.history = []; renderTally(); });
+        renderTally();
+
+        // ===================== RECORD =====================
+        const LOG_KEY = 'notoryRecordLog';
+        let log = store(LOG_KEY) || [];
+        function flash(msg) {
+            $('recStatus').textContent = msg;
+            setTimeout(() => { if ($('recStatus').textContent === msg) $('recStatus').textContent = ''; }, 2500);
+        }
+        const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+        function renderLog() {
+            $('log').innerHTML = log.slice().reverse().map(e =>
+                '<div class="log-entry"><span class="when">' + esc(e.when) + ' · day ' + e.moonDay + ' of the Moon · ' + esc(e.note) + '</span>' +
+                (e.counts ? '<br>Counts: ' + e.counts.look + ' inspections, ' + e.counts.say + ' repetitions' : '') +
+                (e.notice ? '<br><strong>Noticed:</strong> ' + esc(e.notice) : '') +
+                (e.change ? '<br><strong>Change:</strong> ' + esc(e.change) : '') +
+                (e.dream ? '<br><strong>Dreams:</strong> ' + esc(e.dream) : '') + '</div>').join('');
+        }
+        $('saveEntry').addEventListener('click', () => {
+            const lun = Lunar.lunation(new Date());
+            log.push({
+                when: new Date().toLocaleString(), moonDay: lun.day, note: $('recNote').value,
+                counts: { look: tally.look, say: tally.say },
+                notice: $('recNotice').value, change: $('recChange').value, dream: $('recDream').value
+            });
+            if (store(LOG_KEY, log)) {
+                ['recNotice', 'recChange', 'recDream'].forEach(id => { $(id).value = ''; });
+                flash('✓ Entry saved in this browser.');
+            } else {
+                flash('Could not save here. Use COPY ALL instead.');
+            }
+            renderLog();
+        });
+        $('copyLog').addEventListener('click', () => {
+            const text = ['THE NOTORY ART: Record of the Work', ''].concat(log.map(e =>
+                [e.when + ' · day ' + e.moonDay + ' of the Moon · ' + e.note,
+                 'Counts: ' + (e.counts ? e.counts.look + ' inspections, ' + e.counts.say + ' repetitions' : '-'),
+                 'Noticed: ' + (e.notice || '-'), 'Change: ' + (e.change || '-'), 'Dreams: ' + (e.dream || '-'), ''].join('\n'))).join('\n');
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text).then(() => flash('✓ Copied to clipboard.'), () => flash('Copy failed.'));
+            } else { flash('Clipboard unavailable.'); }
+        });
+        $('clearLog').addEventListener('click', () => {
+            if (!log.length) return;
+            log = []; store(LOG_KEY, log); renderLog(); flash('Log cleared.');
+        });
+        renderLog();
+
+        go(0);
+        showLunation();
+        showNode('grammar');
+    })();
+    </script>
+    <script src="works-menu.js"></script>
+</body>
+</html>

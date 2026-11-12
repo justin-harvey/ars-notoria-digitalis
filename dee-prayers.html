@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Prayers of John Dee - A Practitioner's Office</title>
+    <style>
+        :root {
+            --black: #000000; --blue: #0000AA; --green: #00AA00; --cyan: #00AAAA;
+            --red: #AA0000; --purple: #AA00AA; --brown: #AA5500; --ltgray: #AAAAAA;
+            --dkgray: #555555; --ltblue: #5555FF; --ltgreen: #55FF55; --ltcyan: #55FFFF;
+            --ltred: #FF5555; --pink: #FF55FF; --yellow: #FFFF55; --white: #FFFFFF;
+            --parchment: #E8DCC4; --ink: #8B2500;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: var(--black); color: var(--ltgray); font-family: 'Courier New', monospace; line-height: 1.6; }
+        .titlebar {
+            background: var(--blue); color: var(--white); padding: 6px 12px; font-size: 14px;
+            display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 2px solid var(--ltblue); position: sticky; top: 0; z-index: 10;
+        }
+        .titlebar-title { font-weight: bold; letter-spacing: 1px; }
+        .titlebar-btn {
+            background: var(--ltgray); color: var(--black); border: 1px solid var(--white);
+            padding: 2px 10px; font-family: inherit; font-size: 11px; font-weight: bold; text-decoration: none;
+        }
+        .titlebar-btn:hover { background: var(--white); }
+        .menubar { background: var(--dkgray); display: flex; flex-wrap: wrap; border-bottom: 1px solid var(--ltgray); }
+        .menu-item { color: var(--white); padding: 4px 14px; font-size: 12px; text-decoration: none; }
+        .menu-item:hover { background: var(--ltblue); }
+        main { max-width: 1000px; margin: 0 auto; padding: 20px; }
+        header { text-align: center; margin-bottom: 30px; padding: 20px; border: 2px solid var(--ltcyan); background: rgba(85, 255, 255, 0.05); }
+        h1 { color: var(--ltcyan); font-size: 24px; margin-bottom: 10px; text-transform: uppercase; }
+        .subtitle { color: var(--yellow); font-size: 12px; font-style: italic; }
+        h2 { color: var(--ltblue); font-size: 18px; margin: 30px 0 15px; padding-bottom: 5px; border-bottom: 1px solid var(--dkgray); text-transform: uppercase; }
+        h3 { color: var(--ltgreen); font-size: 14px; margin: 20px 0 10px; }
+        p { margin-bottom: 15px; }
+        strong { color: var(--white); }
+        em { color: var(--ltcyan); font-style: normal; }
+        ul, ol { margin: 0 0 15px 22px; }
+        li { margin-bottom: 8px; }
+        a { color: var(--ltblue); text-decoration: none; }
+        a:hover { color: var(--ltcyan); text-decoration: underline; }
+        section { margin-bottom: 40px; scroll-margin-top: 70px; }
+        .box { border: 1px solid var(--dkgray); padding: 15px; margin: 15px 0; }
+        .box-header { font-weight: bold; margin-bottom: 8px; }
+        .note { background: rgba(255, 255, 85, 0.07); border-color: var(--brown); }
+        .note .box-header { color: var(--yellow); }
+        .practice { background: rgba(0, 170, 0, 0.08); border-color: var(--green); }
+        .practice .box-header { color: var(--ltgreen); }
+        .btn { background: var(--ltgray); color: var(--black); border: 1px solid var(--white); padding: 5px 14px; font-family: inherit; font-size: 12px; font-weight: bold; cursor: pointer; }
+        .btn:hover { background: var(--white); }
+        .btn:disabled { opacity: 0.3; cursor: default; }
+        .btn.alt { background: var(--blue); color: var(--white); border-color: var(--ltblue); }
+        .btn.alt:hover { background: var(--ltblue); }
+        .row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 10px 0; }
+        label { color: var(--ltcyan); font-size: 12px; }
+        input[type=text], select, textarea {
+            background: #000; color: var(--white); border: 1px solid var(--ltblue); font-family: inherit; font-size: 12px; padding: 4px 6px;
+        }
+        textarea { width: 100%; min-height: 80px; margin-bottom: 10px; display: block; }
+
+        /* Manuscript-style text */
+        .dee-text { font-family: Georgia, 'Times New Roman', serif; color: #2a1608; }
+        .page {
+            background: var(--parchment); color: #2a1608; padding: 22px 26px; border: 3px double var(--ink);
+            box-shadow: 0 0 0 4px #000, 0 0 0 6px var(--brown);
+        }
+        .page .rubric { color: var(--ink); font-weight: bold; font-family: 'Courier New', monospace; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; }
+        .page .la { font-family: Georgia, serif; font-size: 17px; line-height: 1.7; margin: 10px 0; }
+        .page .en { font-family: Georgia, serif; font-size: 15px; line-height: 1.6; color: #4a2a10; font-style: italic; }
+        .page .part-note { font-family: 'Courier New', monospace; font-size: 11px; color: #6b4a2a; border-top: 1px solid #c9b48e; padding-top: 8px; margin-top: 12px; }
+        .mode-la .en, .mode-en .la { display: none; }
+        .mode-en .en { font-style: normal; color: #2a1608; font-size: 17px; }
+        .progress { display: flex; gap: 4px; margin: 10px 0; }
+        .progress span { flex: 1; height: 6px; background: #222; border: 1px solid var(--dkgray); }
+        .progress span.on { background: var(--yellow); }
+        .head-line { font-family: Georgia, serif; font-size: 13px; color: var(--ltgray); border-left: 3px solid var(--brown); padding-left: 10px; margin: 10px 0; }
+
+        /* Short prayers & study bell */
+        .short-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; }
+        .short-card { background: var(--parchment); border: 2px solid var(--ink); padding: 14px; }
+        .short-card .la { font-family: Georgia, serif; font-size: 16px; color: #2a1608; }
+        .short-card .en { font-family: Georgia, serif; font-style: italic; color: #4a2a10; margin-top: 6px; }
+        .short-card .src { font-size: 10px; color: var(--ink); margin-top: 6px; }
+        .bell-panel { border: 2px solid var(--ltgreen); background: #000; padding: 15px; margin-top: 15px; }
+        .bell-now { min-height: 70px; margin-top: 10px; }
+        .bell-now .la { font-family: Georgia, serif; font-size: 18px; color: var(--yellow); }
+        .bell-now .en { font-family: Georgia, serif; font-style: italic; color: var(--ltgray); }
+
+        /* Psalms */
+        table { width: 100%; border-collapse: collapse; font-size: 12px; margin: 10px 0; }
+        th, td { border: 1px solid var(--dkgray); padding: 8px; text-align: left; vertical-align: top; }
+        th { background: var(--purple); color: var(--yellow); }
+        td .dee-text { color: var(--white); }
+
+        /* Closings */
+        .close-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 10px; }
+        .close-item { border: 1px solid var(--brown); padding: 12px; background: rgba(170, 85, 0, 0.08); }
+        .close-item .dee-text { color: var(--white); font-size: 15px; }
+        .close-kind { font-size: 10px; color: var(--yellow); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+        .close-en { font-family: Georgia, serif; font-style: italic; color: var(--ltgray); margin-top: 4px; font-size: 13px; }
+
+        /* Protestation */
+        .prot { background: var(--parchment); padding: 22px 26px; border: 3px double var(--ink); }
+        .prot-title { font-weight: bold; font-size: 15px; color: var(--ink) !important; }
+        .prot-para { margin-top: 16px; }
+        .prot-note { font-size: 11px; color: var(--ink); font-weight: bold; margin-bottom: 4px; }
+        .prot-para .dee-text { font-size: 15px; line-height: 1.7; margin: 0; }
+        abbr.gloss { text-decoration: underline dotted var(--ink); cursor: help; }
+        .gloss-tip { font-size: 11px; color: var(--ltgray); }
+
+        .log-entry { border: 1px solid var(--dkgray); padding: 8px 10px; margin-bottom: 6px; font-size: 12px; }
+        .log-entry .when { color: var(--yellow); }
+        .status { font-size: 11px; color: var(--ltgreen); min-height: 16px; }
+        .sources li { font-size: 12px; }
+        footer { text-align: center; font-size: 11px; color: var(--dkgray); border-top: 1px solid var(--dkgray); padding: 20px; margin-top: 40px; }
+        @media (max-width: 700px) { main { padding: 10px; } h1 { font-size: 18px; } .page, .prot { padding: 14px; } }
+    </style>
+</head>
+<body>
+    <div class="titlebar">
+        <span class="titlebar-title">ARS NOTORIA DIGITALIS :: The Prayers of John Dee</span>
+        <a class="titlebar-btn" href="index.html">← RETURN TO NOTES</a>
+    </div>
+    <nav class="menubar">
+        <a class="menu-item" href="#origins">ORIGINS</a>
+        <a class="menu-item" href="#office">PRAYER FOR WISDOM</a>
+        <a class="menu-item" href="#short">THREE SHORT PRAYERS</a>
+        <a class="menu-item" href="#psalms">PSALMS</a>
+        <a class="menu-item" href="#closings">CLOSINGS</a>
+        <a class="menu-item" href="#protestation">PROTESTATION</a>
+        <a class="menu-item" href="#day">A DAY</a>
+        <a class="menu-item" href="#record">RECORD</a>
+        <a class="menu-item" href="#sources">SOURCES</a>
+    </nav>
+
+    <main>
+        <header>
+            <h1>✠ The Prayers of John Dee ✠</h1>
+            <div class="subtitle">His own morning and evening prayer for wisdom, his short prayers, and his closings, from his manuscripts (1579–1583)</div>
+        </header>
+
+        <section id="origins">
+            <h2>Dee's Own Prayers</h2>
+            <p>Before any angel spoke through a scryer, John Dee prayed. At the front of the first book of his spiritual diaries (British Library, Sloane MS 3188) he copied out the prayer he used most, morning and evening, <strong>for wisdom</strong>. He added a note: from 1579 he prayed in roughly this way, in Latin or in English.</p>
+            <p>Beneath it he wrote a <strong>"Faithful Protestation to Almighty God"</strong> (<span class="dee-text" style="color:inherit">Ad Deum Omnipotentem Protestatio fidelis</span>, 1582). In his own English it explains why he prayed as he did. He had looked for the root truths of nature in books, languages and conversation, and failed. So he turned to God directly, and he insists on the difference between his "pure, sincere, devowte, &amp; faithfull prayer" and the practice of those who call on evil spirits.</p>
+            <p>This page gathers what is in <em>Dee's own voice</em>: these two texts, the three short prayers he says he used constantly, the Psalms he names, and the closing praises he wrote at the end of his sessions. It leaves out anything reported as spoken by angels or by his scryer.</p>
+            <div class="box note">
+                <div class="box-header">⚠ About the text</div>
+                <p style="margin-bottom:0">Dee's words are given in his own spelling and punctuation, from the transcription of Sloane MS 3188 in Joseph H. Peterson's edition, <em>John Dee's Five Books of Mystery</em> (2003). The English translations of the Latin are our own. Peterson's footnotes and translations are not reproduced. Hover over a dotted word in the Protestation for a gloss.</p>
+            </div>
+        </section>
+
+        <section id="office">
+            <h2>The Morning and Evening Prayer for Wisdom</h2>
+            <p class="head-line"><span class="dee-text" style="color:var(--ltgray)">Præter alias meas extemporaneas preces, et eiaculationes ad Deum vehementiores: Hæc una, maximè usitata fuit Oratio mea Matutina, Vespertinaque: pro Sapientia.</span><br><em>"Besides my other extempore prayers, and more fervent ejaculations to God: this one was the most used. My Morning and Evening Prayer: for Wisdom."</em></p>
+            <div class="row">
+                <label>Show:</label>
+                <button class="btn" data-mode="both">LATIN + ENGLISH</button>
+                <button class="btn" data-mode="la">LATIN</button>
+                <button class="btn" data-mode="en">ENGLISH</button>
+                <label for="pName" style="margin-left:12px">Your name in the last part:</label>
+                <input type="text" id="pName" placeholder="John Dee" maxlength="60">
+            </div>
+            <div class="progress" id="progress"></div>
+            <div class="page" id="prayerPage">
+                <div class="rubric" id="partRubric"></div>
+                <div class="la dee-text" id="partLa"></div>
+                <div class="en" id="partEn"></div>
+                <div class="part-note" id="partNote"></div>
+            </div>
+            <div class="row" style="justify-content:space-between">
+                <button class="btn" id="prevPart">◄ PREV</button>
+                <button class="btn alt" id="wholePrayer">SHOW WHOLE PRAYER</button>
+                <button class="btn" id="nextPart">NEXT ►</button>
+            </div>
+            <p class="head-line"><span class="dee-text" style="color:var(--ltgray)">Ab anno 1579. hoc ferè modo: Latinè, vel Anglicè; (ast circa annum 1569 alio et peculiari, particulari modo: interdum pro Raphaële, interdum pro Michaële) ad Deum præces fundere: mihi gratissimum fuit: Mirabilem in me faciat Deus Misericordiam suam.</span><br><em>"From the year 1579, to pour out prayers to God in roughly this manner, in Latin or in English (but around 1569 in another, particular way: sometimes for Raphael, sometimes for Michael), was most pleasing to me. May God work his wonderful mercy in me. Amen."</em> (Dee's note under the prayer)</p>
+        </section>
+
+        <section id="short">
+            <h2>The Three Short Prayers</h2>
+            <p>In the Protestation Dee says he "did fly unto thee by harty prayer, full oft, &amp; in sundry manners", and names three short prayers he cried out "sometymes." Two of them are the core of the Prayer for Wisdom. They are short enough to say under your breath at your desk.</p>
+            <div class="short-grid" id="shortGrid"></div>
+            <div class="bell-panel">
+                <h3 style="margin-top:0">Study Bell</h3>
+                <p style="font-size:12px">Set a study interval. At each bell, stop, say the short prayer shown, and go back to work. The three prayers rotate in turn.</p>
+                <div class="row">
+                    <label for="bellMin">Every</label>
+                    <select id="bellMin"><option>15</option><option selected>25</option><option>45</option><option>60</option></select>
+                    <label>minutes</label>
+                    <button class="btn alt" id="bellStart">▶ START</button>
+                    <span class="status" id="bellStatus"></span>
+                </div>
+                <div class="bell-now" id="bellNow"></div>
+            </div>
+        </section>
+
+        <section id="psalms">
+            <h2>The Psalms Dee Prayed</h2>
+            <p>Dee names the Psalms he prayed by their Latin first words. He used the Latin (Vulgate) numbering, which is one lower than most English Bibles for most Psalms. Both numbers are given.</p>
+            <table>
+                <tr><th>Dee's words</th><th>Psalm</th><th>When Dee used it</th></tr>
+                <tr><td><span class="dee-text">Deus misereatur nostri, et benedicat nobis</span><br><em>God be merciful unto us, and bless us</em></td><td>67 (Vulgate 66)</td><td>Prayed at the start of an early session.</td></tr>
+                <tr><td><span class="dee-text">Expectãs expectaui Dominum</span><br><em>I waited patiently for the Lord</em></td><td>40 (Vulgate 39)</td><td>The opening of a prayer he made himself, April 1583.</td></tr>
+                <tr><td><span class="dee-text">the 22 Psalm</span></td><td>22, or 23 if he counted by the Vulgate</td><td>Prayed in his oratory after a long confession, asking for "free forgiuenes."</td></tr>
+                <tr><td><span class="dee-text">Jubilate Deo quotquot in terra versamini</span><br><em>Be joyful in God, all ye that dwell on the earth</em></td><td>100 (Vulgate 99)</td><td>In thanks, once he felt his offences pardoned.</td></tr>
+                <tr><td><span class="dee-text">Castrametatur Angelus Domini, in Circuitu timentium eum</span><br><em>The angel of the Lord encampeth round about them that fear him</em></td><td>34:7 (Vulgate 33:8)</td><td>Dee "willed" his first scryer "to preach" this verse after rebuking him and the spirits he worked with.</td></tr>
+            </table>
+        </section>
+
+        <section id="closings">
+            <h2>Dee's Closings</h2>
+            <p>Dee ended his sessions in his own hand, in Latin or English. These praises can close any study, prayer or working.</p>
+            <div class="close-grid"><div class="close-item"><div class="close-kind">After receiving understanding</div><div class="dee-text">Blessed be the name of the Highest, who giueth light and understanding.</div></div><div class="close-item"><div class="close-kind">At the end of a day&#x27;s work</div><div class="dee-text">Prayse we the lord, and extoll his name. For, his hand hath wrought wundrous works, for his owne glorie. Amen.</div></div><div class="close-item"><div class="close-kind">At the close of a session</div><div class="dee-text">Prayses and Thankes be rendred to god, of us his sely ones, now and euer. Amen.</div></div><div class="close-item"><div class="close-kind">Before listening or reading closely</div><div class="dee-text">Then, o lord, make my hearing sharp and strong, to perceyue sufficiently as the case requireth.</div></div><div class="close-item"><div class="close-kind">After Psalm 115:1</div><div class="dee-text">Non nobis domine non nobis, sed nomini tuo damus gloriam.</div><div class="close-en">Not to us, O Lord, not to us, but to thy name we give the glory.</div></div><div class="close-item"><div class="close-kind">Closing</div><div class="dee-text">Deo nostro Viuo Vero et Omnipotenti sit omnis laus et graz actio nunc et semper. Amen.</div><div class="close-en">To our God, living, true and almighty, be all praise and thanksgiving, now and always. Amen.</div></div><div class="close-item"><div class="close-kind">Closing</div><div class="dee-text">Deo soli sit omnis laus honor et gloria per infinita sæculor sæcula. Amen.</div><div class="close-en">To God alone be all praise, honour and glory, through endless ages of ages. Amen.</div></div><div class="close-item"><div class="close-kind">Closing</div><div class="dee-text">Deo opt. Max°. omnis honor laus et gloria in sæcula sæculorum. Amen.</div><div class="close-en">To God, best and greatest, be all honour, praise and glory, for ever and ever. Amen.</div></div><div class="close-item"><div class="close-kind">Closing</div><div class="dee-text">Gloriam laudemque nostri Creatoris, omnes Creaturæ. indesinenter resonent: Amen.</div><div class="close-en">Let all creatures unceasingly resound the glory and praise of our Creator. Amen.</div></div><div class="close-item"><div class="close-kind">Closing</div><div class="dee-text">Gloria patri et filio et spiritui sancto. Sicut erat in principio, et nunc et semper: et in sæcula sæculorum.</div><div class="close-en">Glory be to the Father and to the Son and to the Holy Spirit; as it was in the beginning, is now and ever shall be, world without end.</div></div><div class="close-item"><div class="close-kind">Self-offering (after Luke 1:38)</div><div class="dee-text">Ecce seruus et misellus homuncio Dei nostri, fiat mihi iuxta beneplacitum voluntatis suæ:</div><div class="close-en">Behold the servant and poor little man of our God: be it done to me according to the good pleasure of his will.</div></div><div class="close-item"><div class="close-kind">Self-offering</div><div class="dee-text">Ecce seruus Domini, fiat Decretum eius in me (iuxta misericordiam eius) de me pronunciatum.</div><div class="close-en">Behold the servant of the Lord: may his decree pronounced concerning me be fulfilled in me (according to his mercy).</div></div></div>
+        </section>
+
+        <section id="protestation">
+            <h2>The Faithful Protestation (1582)</h2>
+            <p>Dee's own account of why he prayed for wisdom and how he came to seek angelic help, written <span class="dee-text" style="color:inherit">ad perpetuam rei memoriam</span> (for a perpetual memory of the matter). Read it as a preface to the practice: it sets out his reasons and his limits. A one-line summary in red heads each paragraph.</p>
+            <div class="prot"><p class="prot-title dee-text">Ad Deum Omnipotentem Protestatio fidelis: ad perpetuam rei memoriam Anno 1582.</p><div class="prot-para"><div class="prot-note">He has prayed since youth for wisdom about God&#x27;s truths, &quot;naturall and artificiall.&quot;</div><p class="dee-text">O God Almighty, thow knowest, &amp; art my director, and witnes herein, That I haue from my youth up, desyred &amp; prayed unto thee for pure &amp; sownd wisdome and understanding of some of thy truthes naturall and artificiall: such, as by which, thy wisdome, goodnes &amp; powre bestowed in the frame of the word might be browght, in some bowntifull measure under the <abbr class="gloss" title="here, the measure or capacity of his mind">Talent</abbr> of my Capacitie, to thy honor &amp; glory, &amp; the benefit of thy Servants, my brethern &amp; Sistern, in, &amp; by thy Christ our Saviour.</p></div><div class="prot-para"><div class="prot-note">Study, books, travel and conversation have not brought him to the &quot;radicall truthes.&quot;</div><p class="dee-text">And for as much as, many yeres, in many places, far &amp; nere, in many bokes, &amp; sundry languagis, I haue sowght, &amp; studyed; and with sundry men conferred, and with my owne reasonable discourse labored, whereby to fynde or get some <abbr class="gloss" title="inkling">ynckling</abbr>, <abbr class="gloss" title="glimpse">glyms</abbr>, or beame of such the forsaid <abbr class="gloss" title="fundamental, at the root">radicall</abbr> truthes: But, (to be brief) after all my forsaid endevor I could fynde no other way, to such true wisdome atteyning, but by thy extraordinary gift: and by no <abbr class="gloss" title="ordinary university teaching">vulgar Schole doctrine</abbr>, or humane Invention.</p></div><div class="prot-para"><div class="prot-note">Scripture shows God sending angels to teach the patriarchs and prophets, even about lost asses.</div><p class="dee-text">And, Seing, I haue red in thy bokes, &amp; records, how Enoch enioyed thy favor and conversation, with Moyses thow wast familier: And allso that to Abraham, Isaac, and Jacob, Josua, Gedeon, Esdras, Daniel, Tobias, and sundry other, thy good Angels were sent, by thy disposition, to instruct them, informe them, help them, yea in worldly and domesticall affaires, yea and sometimes to satisfy theyr desyres, dowtes &amp; questions of thy Secrets: And furdermore Considering, the <abbr class="gloss" title="the high priest&#x27;s oracle stones (the Urim and Thummim), as Dee understood them">Shew-stone</abbr>, which the high preists did use, by thy owne ordering: wherein they had lights and Judgments in theyr great dowtes: and considering allso that thow (O God) didst not refuse to instruct thy prophets, (then, called Seers) to give true answers to common people of things <abbr class="gloss" title="household, domestic">æconomicall</abbr>, as Samuel, for Saul, seeking for his fathers asses being gon astray: and of other things vulgar true predictions, whereby to wyn credyt unto thy waightier affayres: And thinking with my self, the lack of thy wisdome; to me, to be of more importance, then the Value of an Asse or two, could be to <abbr class="gloss" title="Kish, father of King Saul (1 Samuel 9)">Cis</abbr>, (Saul his father): And remembring what good cownsayle thy Apostle James giveth, saying, <abbr class="gloss" title="&quot;If any of you lack wisdom, let him ask of God&quot; (James 1:5)">Si quis autem vestrûm indiget sapientia, postulet a Deo</abbr>, &amp;c. And that Salomon the wise, did so, euen immediately by thy self, atteyne to his wonderfull wisdome.</p></div><div class="prot-para"><div class="prot-note">So he asks God directly, and refuses the &quot;filthy abvse&quot; of those who consult evil spirits.</div><p class="dee-text">Therfore, seeing I was sufficiently towght and confirmed, that this wisdome could not be come by at mans hand or by humane powre, but onely from thee (Ô God) mediately or immediately) And having allwayes a great regarde &amp; care to beware of the filthy abvse of such as willingly and <abbr class="gloss" title="knowingly">wetingly</abbr>, did invocate &amp; consult (in diuerse sorts) Spirituall creatures of the damned sort: angels of darknes, forgers &amp; patrons of lies &amp; untruthes: I did fly unto thee by harty prayer, full oft, &amp; in sundry manners: sometymes Crying unto thee, Mittas lucem tuam et veritatem tuam, que me ducant &amp;c, sometymes Recte sapere et intelligere doceto me, Nam sapientia tua totum est quod volo: &amp;c, sometymes, Da verbum tuum in ore meo, et sapientiam, tuam in corde meo fige &amp;c.</p></div><div class="prot-para"><div class="prot-note">He tried a scryer, &quot;a preacher,&quot; hoping God would in time send &quot;some apter man.&quot;</div><p class="dee-text">And having perceyued by some slight experiens with two diuerse persons, that thow hadst a speciall care to give me thy light, and truth, by thy holy and true ministers Angelic and Spirituall: and at length, hearing of one, (a master of Arte, a preacher of thy word admitted) accownted as a good Seer, and <abbr class="gloss" title="scryer, a seer in a crystal or mirror">skryer</abbr> of Spirituall apparitions, in <abbr class="gloss" title="a crystal stone">Christalline receptacle</abbr>, or in open ayre, by his practise procured: and trusting to frame him, by my ernest &amp; faithfull prayers unto thee (my God) to some my help in my forsayd Studies: tyll, thow (o hevenly father) woldest by thy unserchable proveydence, send me some apter man or means thereto.</p></div><div class="prot-para"><div class="prot-note">He finds the man&#x27;s private practice differs from his own pure prayer, and rebukes him.</div><p class="dee-text">Thereuppon trying him and using him, I fownd great diuersity betwene his private usuall manner, and intente of practise, and my pure, sincere, devowte, &amp; faithfull prayer unto thee onely. And therfore often &amp; fervently I exhorted him to the good; and reproved both him, and his ministers, with my no small daunger, but that thow (in manner unhard of) didst pitch thy holy tente to my defence, and cumfert, in conflict most terrible: as thow best knowest O God, and I willed him thereuppon to preach thy mercyes, &amp; the verity of the kingly prophet his testimony, <abbr class="gloss" title="&quot;The angel of the Lord encampeth round about them that fear him&quot; (Psalm 34:7)">Castrametatur Angelus Domini, in Circuitu timentium eum</abbr>. And out of Roger Bachon his boke written De mirabili potestate Artis et Natura, (where he writeth against the wycked Diuel callers) I noted unto him this sentence, <abbr class="gloss" title="Roger Bacon: it is &quot;far easier&quot; to obtain what is useful from God or from good spirits">Facilius (sine comparatione a Deo</abbr> impetrandum foret, vel a bonis spiritibus, quicquid homini utile reputare &amp;c which my cownsayle he promised me to follow, as thow art witnes, ô our true &amp; almighty God. And as thy good spirituall creatures neyther had delight in the man, neyther wold so playnely &amp; preistly give me theyr answers or informations by him, that he might be hable to perceyve the pith therof: So was he at length very unwilling to here him self rebuked for his nawghtynes, and to be barred from the Mysteries of thy truthes understanding; which were the onely things that I desyred, throwgh thy grace, o our most mercifull God.</p></div><div class="prot-para"><div class="prot-note">He sets down a record &quot;for a Memoriall.&quot;</div><p class="dee-text">Therfore, as well for a Memoriall answerable to the premisses, as for the better warrant of my Such exercises to be made accownt of, hereafter: (leaving all unto thy infinite mercies, and unsearchable providence,) I haue thowght it not impertinent, to note downe, even in this place one of the last Actions, which I had with the forsayd preacher: when I made ernest &amp; faythfull petition unto thee (o the true and Almighty God) for sending, unto my cumfort &amp; <abbr class="gloss" title="erudition, instruction">eridition</abbr>, (yf it were thy blessed will,) thy holy, &amp; mighty Angel <abbr class="gloss" title="the angel Anael">Annael</abbr>: of whome and of all the Hierarchies hevenly all prayer honor &amp; thanks, be rendred unto thy diuine maistie: now &amp; euer: &amp; worlde without ende. Amen. Amen. Amen.</p></div></div>
+            <p class="gloss-tip" style="margin-top:8px">Dotted words have glosses: hover, or tap on a phone. The preacher Dee describes is the scryer Barnabas Saul (1581–82), before Edward Kelley.</p>
+        </section>
+
+        <section id="day">
+            <h2>A Day in Dee's Manner</h2>
+            <p>Dee left no rule of life, but his own notes give its shape: a prayer "Matutina, Vespertinaque" (morning and evening), short prayers through the day, Psalms at need, praise at the close, and a written record.</p>
+            <div class="box practice">
+                <div class="box-header">✎ The practice</div>
+                <ol style="margin-bottom:0">
+                    <li><strong>On rising:</strong> say the <a href="#office">Prayer for Wisdom</a>, in Latin or English as Dee did. Name the study of the day before the "Petition for a teacher."</li>
+                    <li><strong>While studying:</strong> keep the <a href="#short">three short prayers</a> close. Use the study bell if it helps.</li>
+                    <li><strong>Before hard reading or listening:</strong> "Then, o lord, make my hearing sharp and strong, to perceyue sufficiently as the case requireth."</li>
+                    <li><strong>When you've done wrong, or feel stuck:</strong> one of Dee's Psalms.</li>
+                    <li><strong>In the evening:</strong> the Prayer for Wisdom again, then a <a href="#closings">closing</a>.</li>
+                    <li><strong>Write it down:</strong> Dee kept his record "for a Memoriall." Note what you studied, what came clear, and what didn't.</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="record">
+            <h2>Record: "For a Memoriall"</h2>
+            <p>Entries are saved in this browser only. COPY ALL moves them into your <a href="grimoire.html">Book of Mirrors</a>.</p>
+            <label for="rStudy">What I asked wisdom for today</label>
+            <textarea id="rStudy"></textarea>
+            <label for="rClear">What came clear</label>
+            <textarea id="rClear"></textarea>
+            <label for="rStill">What is still dark</label>
+            <textarea id="rStill"></textarea>
+            <div class="row">
+                <label><input type="checkbox" id="rMorning"> Morning prayer</label>
+                <label><input type="checkbox" id="rEvening"> Evening prayer</label>
+            </div>
+            <div class="row">
+                <button class="btn" id="saveEntry">SAVE ENTRY</button>
+                <button class="btn alt" id="copyLog">COPY ALL</button>
+                <button class="btn" id="clearLog">CLEAR LOG</button>
+                <span class="status" id="recStatus"></span>
+            </div>
+            <div id="log"></div>
+        </section>
+
+        <section id="sources">
+            <h2>Sources and Further Reading</h2>
+            <ul class="sources">
+                <li>John Dee, <em>Mysteriorum Liber Primus</em>, British Library Sloane MS 3188, opening leaves (the Prayer for Wisdom, Dee's note on it, and the Protestation of 1582). The Psalms and closings are from the same manuscript, 1582–83.</li>
+                <li>Joseph H. Peterson, ed., <em>John Dee's Five Books of Mystery</em> (Weiser, 2003). The transcription used here.</li>
+                <li>Deborah E. Harkness, <em>John Dee's Conversations with Angels</em> (Cambridge UP, 1999). On Dee's piety and natural philosophy.</li>
+                <li>Nicholas H. Clulee, <em>John Dee's Natural Philosophy</em> (Routledge, 1988).</li>
+                <li>Glyn Parry, <em>The Arch-Conjuror of England: John Dee</em> (Yale UP, 2011).</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>ARS NOTORIA DIGITALIS • The Prayers of John Dee • Dee's text from Sloane MS 3188; translations from the Latin are our own</footer>
+
+    <script>
+    (function () {
+        'use strict';
+        const $ = id => document.getElementById(id);
+        const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+        function store(key, val) {
+            try {
+                if (val === undefined) return JSON.parse(localStorage.getItem(key) || 'null');
+                localStorage.setItem(key, JSON.stringify(val)); return true;
+            } catch (e) { return val === undefined ? null : false; }
+        }
+
+        // ---------------- The Prayer for Wisdom ----------------
+        const PARTS = [{"label": "Invocation", "note": "Begin in the name of the Trinity.", "en": "In the name of God the Father, God the Son, God the Holy Spirit. Amen.", "la": "In nomine Dei Patris, Dei Filij, Dei Spiritus Sancti. Amen."}, {"label": "Call for help", "note": "Dee opens with the versicle that begins every hour of the church's daily office (Psalm 70:1): \"O God, make speed to save me.\"", "en": "Almighty, everlasting, true and living God, attend to my help: Lord of lords, King of kings, Jehovah of Hosts, make haste to help me:", "la": "Omnipotens, Sempiterne, vere, et viue Deus, in adiutorium meum intende: Domine Dominantium, Rex Regum, Jeouah Zebaoth, ad adiuuandum me festina:"}, {"label": "Glory", "note": "The Gloria Patri.", "en": "Glory be to God, the Father, the Son and the Holy Spirit: as it was in the beginning, is now, and ever shall be, world without end: Amen.", "la": "Gloria Deo, Patri, Filio, et spiritui Sancto: Sicut erat in principio, et nunc, et semper et in sæcula sæculorum: Amen."}, {"label": "Petition for wisdom", "note": "The heart of the prayer. Dee used these two lines on their own, all day long (see The Three Short Prayers).", "en": "Teach me to be rightly wise and to understand (O Creator of all things), for thy Wisdom is all that I desire: Put thy word in my mouth (O Creator of all things), and fix thy wisdom in my heart.", "la": "Recte sapere, et intelligere doceto me, (Ô rerum omnium Creator,) Nam Sapientia tua, totum est, quod volo: Da verbum tuum in ore meo, (Ô rerum omnium Creator,) et sapientiam tuam in corde meo fige."}, {"label": "Petition for a teacher", "note": "Notice the order: Dee asks first for a living teacher, a \"godly, wise and experienced philosopher.\"", "en": "O Lord Jesus Christ (who art the true wisdom of thy eternal and almighty Father), I most humbly pray thy Divine Majesty that thou wouldst deign to send me speedily the help of some godly, wise and experienced philosopher, for fully understanding and accomplishing those things which will be of greatest value for the increase of thy praise and glory:", "la": "O Domine Jesu Christe (qui sapientia vera es, æterni et Omnipotentis tui Patris) humilimè tuam oro Diuinam Maiestatem, expeditum mihi ut mittere digneris, alicuius pij, Sapientis expertique Philosophi auxilium, ad illa plenissimè intelligenda perficiendaque, quæ maximi valoris erunt ad tuam laudem et gloriam amplificandam:"}, {"label": "Petition for angels", "note": "Only if no such teacher lives does he ask for angels, and only for what concerns God's creatures, \"their natures, properties, and best uses.\"", "en": "And if no mortal now lives on earth who is fit for this task, or who has been appointed by thy eternal providence to render me this benefit: then I ask of thy Divine Majesty, most humbly, most ardently and most constantly, that thou wouldst deign to send me from the heavens thy good spiritual ministers and angels, namely Michael, Gabriel, Raphael and Uriel, and (by thy divine favour) any other of thy true and faithful angels, who may fully and perfectly inform and instruct me in the true and exact knowledge and understanding of thy secrets and mighty works (concerning all thy creatures, their natures, properties and best uses), and of things necessary for us mortals to know;", "la": "Et si Mortalis nullus iam in terris viuat, qui ad hoc munus aptus sit: vel qui ex æterna tua providentia, ad istud mihi præstandum beneficium assignatus fuerit: Tunc equidem humilimè, ardentissimè et constantissimè a tua Diuina Maiestate requiro, ut ad me de cælis mittere digneris bonos tuos Spirituales Ministros; Angelosque, videlicet Michaëlem, Gabrielem, Raphaëlem ac Urielem: et (ex Diuino tuo fauore) quoscunque, alios, veros, fidelesque tuos Angelos, qui me plene et perfecte informent et instruant, in cognitione, intelligentiaque vera et exacta, Arcanorum et Magnalium tuorum (Creaturas omnes tuas, illarumque naturas, proprietates, et optimos usus, concernentium) et nobis Mortalibus Scitu necessariorum;"}, {"label": "Purpose", "note": "What the wisdom is for: God's glory and the comfort of others.", "en": "to the praise, honour and glory of thy name; and to the solid comfort of myself and (through me) of very many others of thy faithful; and to the confusion and overthrow of thy enemies. Amen.", "la": "ad tui nominis laudem, honorem, et gloriam; et ad solidam meam, aliorumque (per me,) plurimorum tuorum fidelium consolationem: et ad Inimicorum tuorum confusionem, et subversionem. Amen."}, {"label": "Fiat", "note": "Three Hebrew names of God, each with \"let it be done.\"", "en": "Let it be done, Jehovah of Hosts: let it be done, Adonai; let it be done, Elohim.", "la": "Fiat Jeouah Zebaoth: Fiat Adonay, fiat Elohim."}, {"label": "Seal", "note": "Dee names himself. Put your own name here, or keep his.", "en": "O blessed and most highly blessed almighty Trinity, grant me ({NAME}) this petition, in such manner as shall most please thee. Amen.", "la": "O beata, et superbenedicta Omnipotens Trinitas, Concedas mihi (Joanni Dee) petitionem hanc, modo tali, qui tibi maximè placebit. Amen."}];
+        let part = 0, whole = false;
+        const prefs = store('deePrayerPrefs') || { mode: 'both', name: '' };
+        $('pName').value = prefs.name || '';
+
+        PARTS.forEach(() => $('progress').appendChild(document.createElement('span')));
+
+        function nameEn(s) {
+            const n = $('pName').value.trim() || 'John Dee';
+            return s.replace('{NAME}', esc(n));
+        }
+        function setMode(m) {
+            prefs.mode = m; store('deePrayerPrefs', prefs);
+            const pg = $('prayerPage');
+            pg.classList.toggle('mode-la', m === 'la');
+            pg.classList.toggle('mode-en', m === 'en');
+            document.querySelectorAll('[data-mode]').forEach(b => b.classList.toggle('alt', b.dataset.mode === m));
+        }
+        function render() {
+            if (whole) {
+                $('partRubric').textContent = 'The whole prayer';
+                $('partLa').innerHTML = PARTS.map(p => esc(p.la)).join(' ');
+                $('partEn').innerHTML = PARTS.map(p => nameEn(esc(p.en))).join(' ');
+                $('partNote').textContent = 'Say it through without stopping, as Dee would have.';
+            } else {
+                const p = PARTS[part];
+                $('partRubric').textContent = (part + 1) + ' / ' + PARTS.length + ' · ' + p.label;
+                $('partLa').innerHTML = esc(p.la);
+                $('partEn').innerHTML = nameEn(esc(p.en));
+                $('partNote').textContent = p.note;
+            }
+            Array.from($('progress').children).forEach((s, i) => s.classList.toggle('on', whole || i <= part));
+            $('prevPart').disabled = whole || part === 0;
+            $('nextPart').disabled = whole || part === PARTS.length - 1;
+            $('wholePrayer').textContent = whole ? 'STEP THROUGH' : 'SHOW WHOLE PRAYER';
+        }
+        $('prevPart').addEventListener('click', () => { part = Math.max(0, part - 1); render(); });
+        $('nextPart').addEventListener('click', () => { part = Math.min(PARTS.length - 1, part + 1); render(); });
+        $('wholePrayer').addEventListener('click', () => { whole = !whole; render(); });
+        $('pName').addEventListener('input', () => { prefs.name = $('pName').value; store('deePrayerPrefs', prefs); render(); });
+        document.querySelectorAll('[data-mode]').forEach(b => b.addEventListener('click', () => setMode(b.dataset.mode)));
+        setMode(prefs.mode || 'both');
+        render();
+
+        // ---------------- Short prayers & study bell ----------------
+        const SHORT = [{"la": "Mittas lucem tuam et veritatem tuam, que me ducant", "en": "Send thy light and thy truth, that they may lead me.", "src": "After Psalm 43:3"}, {"la": "Recte sapere et intelligere doceto me, Nam sapientia tua totum est quod volo", "en": "Teach me to be rightly wise and to understand, for thy wisdom is all that I desire.", "src": "From the Prayer for Wisdom"}, {"la": "Da verbum tuum in ore meo, et sapientiam, tuam in corde meo fige", "en": "Put thy word in my mouth, and fix thy wisdom in my heart.", "src": "From the Prayer for Wisdom"}];
+        $('shortGrid').innerHTML = SHORT.map(s =>
+            '<div class="short-card"><div class="la dee-text">' + esc(s.la) + '</div><div class="en">' + esc(s.en) + '</div><div class="src">' + esc(s.src) + '</div></div>').join('');
+
+        let audio = null;
+        function bell() {
+            try {
+                audio = audio || new (window.AudioContext || window.webkitAudioContext)();
+                [0, 0.35].forEach((d, i) => {
+                    const o = audio.createOscillator(), g = audio.createGain();
+                    o.frequency.value = i ? 392 : 523.25; o.type = 'sine';
+                    g.gain.setValueAtTime(0.0001, audio.currentTime + d);
+                    g.gain.exponentialRampToValueAtTime(0.25, audio.currentTime + d + 0.02);
+                    g.gain.exponentialRampToValueAtTime(0.0001, audio.currentTime + d + 2.2);
+                    o.connect(g); g.connect(audio.destination); o.start(audio.currentTime + d); o.stop(audio.currentTime + d + 2.3);
+                });
+            } catch (e) { /* no audio */ }
+        }
+        let bellTimer = null, tick = null, nextAt = 0, which = 0;
+        function showShort() {
+            const s = SHORT[which % SHORT.length];
+            $('bellNow').innerHTML = '<div class="la">' + esc(s.la) + '</div><div class="en">' + esc(s.en) + '</div>';
+            which++;
+        }
+        $('bellStart').addEventListener('click', () => {
+            if (bellTimer) {
+                clearInterval(bellTimer); clearInterval(tick); bellTimer = null;
+                $('bellStart').textContent = '▶ START'; $('bellStatus').textContent = 'Stopped.'; return;
+            }
+            const ms = parseInt($('bellMin').value, 10) * 60000;
+            bell(); showShort();
+            nextAt = Date.now() + ms;
+            bellTimer = setInterval(() => { bell(); showShort(); nextAt = Date.now() + ms; }, ms);
+            tick = setInterval(() => {
+                const left = Math.max(0, nextAt - Date.now());
+                $('bellStatus').textContent = 'Next bell in ' + Math.floor(left / 60000) + ':' + String(Math.floor(left / 1000) % 60).padStart(2, '0');
+            }, 500);
+            $('bellStart').textContent = '■ STOP';
+        });
+
+        // ---------------- Glosses: tap support ----------------
+        document.querySelectorAll('abbr.gloss').forEach(a => {
+            a.addEventListener('click', () => {
+                const open = a.dataset.open === '1';
+                if (open) { a.nextSibling && a.nextSibling.classList && a.nextSibling.classList.contains('gloss-pop') && a.nextSibling.remove(); a.dataset.open = '0'; return; }
+                const s = document.createElement('span');
+                s.className = 'gloss-pop';
+                s.style.cssText = 'font-family:Courier New,monospace;font-size:11px;color:#8B2500;background:#fff6e0;border:1px solid #8B2500;padding:0 4px;margin-left:4px';
+                s.textContent = '[' + a.title + ']';
+                a.after(s); a.dataset.open = '1';
+            });
+        });
+
+        // ---------------- Record ----------------
+        const LOG_KEY = 'deePrayerLog';
+        let log = store(LOG_KEY) || [];
+        function flash(m) { $('recStatus').textContent = m; setTimeout(() => { if ($('recStatus').textContent === m) $('recStatus').textContent = ''; }, 2500); }
+        function renderLog() {
+            $('log').innerHTML = log.slice().reverse().map(e =>
+                '<div class="log-entry"><span class="when">' + esc(e.when) + '</span> · ' + (e.morning ? '☼ morning ' : '') + (e.evening ? '☾ evening' : '') +
+                (e.study ? '<br><strong>Asked:</strong> ' + esc(e.study) : '') + (e.clear ? '<br><strong>Clear:</strong> ' + esc(e.clear) : '') +
+                (e.still ? '<br><strong>Still dark:</strong> ' + esc(e.still) : '') + '</div>').join('');
+        }
+        $('saveEntry').addEventListener('click', () => {
+            log.push({ when: new Date().toLocaleString(), study: $('rStudy').value, clear: $('rClear').value, still: $('rStill').value,
+                       morning: $('rMorning').checked, evening: $('rEvening').checked });
+            if (store(LOG_KEY, log)) {
+                ['rStudy', 'rClear', 'rStill'].forEach(id => { $(id).value = ''; });
+                $('rMorning').checked = $('rEvening').checked = false;
+                flash('✓ Saved in this browser.');
+            } else flash('Could not save here. Use COPY ALL instead.');
+            renderLog();
+        });
+        $('copyLog').addEventListener('click', () => {
+            const text = ['THE PRAYERS OF JOHN DEE: Record', ''].concat(log.map(e => [e.when + (e.morning ? ' · morning' : '') + (e.evening ? ' · evening' : ''),
+                'Asked: ' + (e.study || '-'), 'Clear: ' + (e.clear || '-'), 'Still dark: ' + (e.still || '-'), ''].join('\n'))).join('\n');
+            if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(() => flash('✓ Copied.'), () => flash('Copy failed.'));
+            else flash('Clipboard unavailable.');
+        });
+        $('clearLog').addEventListener('click', () => { if (!log.length) return; log = []; store(LOG_KEY, log); renderLog(); flash('Log cleared.'); });
+        renderLog();
+    })();
+    </script>
+    <script src="works-menu.js"></script>
+</body>
+</html>
