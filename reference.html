@@ -1,0 +1,1471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Occult Reference Library</title>
+    <style>
+        :root {
+            --black: #000000;
+            --blue: #0000AA;
+            --green: #00AA00;
+            --cyan: #00AAAA;
+            --red: #AA0000;
+            --purple: #AA00AA;
+            --brown: #AA5500;
+            --ltgray: #AAAAAA;
+            --dkgray: #555555;
+            --ltblue: #5555FF;
+            --ltgreen: #55FF55;
+            --ltcyan: #55FFFF;
+            --ltred: #FF5555;
+            --pink: #FF55FF;
+            --yellow: #FFFF55;
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--black);
+            color: var(--ltgray);
+            font-family: 'Courier New', monospace;
+            line-height: 1.6;
+        }
+
+        .titlebar {
+            background: var(--blue);
+            color: var(--white);
+            padding: 6px 12px;
+            font-size: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--ltblue);
+        }
+
+        .titlebar-title {
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .titlebar-btn {
+            background: var(--ltgray);
+            color: var(--black);
+            border: 1px solid var(--white);
+            padding: 2px 10px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 11px;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .titlebar-btn:hover {
+            background: var(--yellow);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .nav-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: var(--dkgray);
+            border: 2px solid var(--ltblue);
+        }
+
+        .nav-pill {
+            background: var(--blue);
+            color: var(--yellow);
+            padding: 8px 16px;
+            border: 2px solid var(--ltblue);
+            cursor: pointer;
+            font-size: 11px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .nav-pill:hover {
+            background: var(--ltblue);
+            color: var(--white);
+        }
+
+        .nav-pill.active {
+            background: var(--yellow);
+            color: var(--black);
+        }
+
+        .section {
+            display: none;
+            background: var(--dkgray);
+            border: 3px solid var(--ltcyan);
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        h1 {
+            color: var(--ltcyan);
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+            text-transform: uppercase;
+            border-bottom: 2px solid var(--cyan);
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            color: var(--ltblue);
+            font-size: 18px;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid var(--dkgray);
+            padding-bottom: 5px;
+        }
+
+        h3 {
+            color: var(--ltgreen);
+            font-size: 14px;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            margin-bottom: 15px;
+            color: var(--ltgray);
+            font-size: 12px;
+        }
+
+        ul, ol {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        li {
+            margin-bottom: 8px;
+            color: var(--ltgray);
+            font-size: 12px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 11px;
+        }
+
+        th, td {
+            border: 1px solid var(--dkgray);
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--purple);
+            color: var(--yellow);
+            font-weight: bold;
+        }
+
+        td {
+            color: var(--ltgray);
+        }
+
+        .info-box {
+            background-color: rgba(0, 170, 170, 0.1);
+            border: 1px solid var(--cyan);
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .info-header {
+            color: var(--ltcyan);
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .warning-box {
+            background-color: rgba(170, 0, 0, 0.1);
+            border: 2px solid var(--red);
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .warning-header {
+            color: var(--ltred);
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .planet-box {
+            background-color: rgba(170, 0, 170, 0.1);
+            border: 2px solid var(--purple);
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .color-swatch {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            border: 2px solid var(--white);
+            vertical-align: middle;
+            margin-right: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            .nav-pills {
+                padding: 10px;
+            }
+
+            .nav-pill {
+                font-size: 10px;
+                padding: 6px 12px;
+            }
+
+            .section {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 18px;
+            }
+
+            h2 {
+                font-size: 16px;
+            }
+
+            table {
+                font-size: 10px;
+            }
+
+            th, td {
+                padding: 6px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="titlebar">
+        <span class="titlebar-title">OCCULT REFERENCE LIBRARY :: Ars Notoria Digitalis</span>
+        <a href="grimoire.html" class="titlebar-btn">← RETURN TO GRIMOIRE</a>
+    </div>
+
+    <div class="container">
+        <div class="nav-pills">
+            <div class="nav-pill active" onclick="showSection('astrology')">Astrology</div>
+            <div class="nav-pill" onclick="showSection('color')">Color Magic</div>
+            <div class="nav-pill" onclick="showSection('deities')">Deities</div>
+            <div class="nav-pill" onclick="showSection('divination')">Divination</div>
+            <div class="nav-pill" onclick="showSection('energy')">Energy Work</div>
+            <div class="nav-pill" onclick="showSection('meditation')">Meditation</div>
+            <div class="nav-pill" onclick="showSection('plants')">Plants</div>
+            <div class="nav-pill" onclick="showSection('shadow')">Shadow Work</div>
+        </div>
+
+        <!-- ASTROLOGY SECTION -->
+        <div id="astrology" class="section active">
+            <h1>Astrology Reference</h1>
+
+            <h2>The Seven Classical Planets</h2>
+
+            <div class="planet-box">
+                <h3 style="color: var(--yellow);">☉ Sun (Sol)</h3>
+                <p><strong>Day:</strong> Sunday</p>
+                <p><strong>Color:</strong> Gold, Yellow</p>
+                <p><strong>Metal:</strong> Gold</p>
+                <p><strong>Keywords:</strong> Vitality, success, leadership, confidence, fame, health, authority</p>
+                <p><strong>Magic For:</strong> Success spells, healing, confidence, leadership, career advancement</p>
+                <p><strong>Planetary Hour:</strong> Best for solar workings, promotions, gaining recognition</p>
+            </div>
+
+            <div class="planet-box">
+                <h3 style="color: var(--ltgray);">☽ Moon (Luna)</h3>
+                <p><strong>Day:</strong> Monday</p>
+                <p><strong>Color:</strong> Silver, White</p>
+                <p><strong>Metal:</strong> Silver</p>
+                <p><strong>Keywords:</strong> Intuition, dreams, emotions, psychic ability, cycles, femininity</p>
+                <p><strong>Magic For:</strong> Divination, dream work, psychic development, emotional healing</p>
+                <p><strong>Planetary Hour:</strong> Scrying, intuition, working with the subconscious</p>
+            </div>
+
+            <div class="planet-box">
+                <h3 style="color: var(--ltred);">♂ Mars</h3>
+                <p><strong>Day:</strong> Tuesday</p>
+                <p><strong>Color:</strong> Red</p>
+                <p><strong>Metal:</strong> Iron</p>
+                <p><strong>Keywords:</strong> Courage, conflict, passion, strength, war, aggression, drive</p>
+                <p><strong>Magic For:</strong> Protection, courage, overcoming enemies, physical strength, passion</p>
+                <p><strong>Planetary Hour:</strong> Banishing, aggressive magic, competition, breaking curses</p>
+            </div>
+
+            <div class="planet-box">
+                <h3 style="color: var(--ltcyan);">☿ Mercury</h3>
+                <p><strong>Day:</strong> Wednesday</p>
+                <p><strong>Color:</strong> Orange, Purple</p>
+                <p><strong>Metal:</strong> Quicksilver</p>
+                <p><strong>Keywords:</strong> Communication, intellect, travel, commerce, trickery, speed</p>
+                <p><strong>Magic For:</strong> Communication, learning, writing, exams, contracts, business</p>
+                <p><strong>Planetary Hour:</strong> Mental clarity, writing spells, communication magic</p>
+            </div>
+
+            <div class="planet-box">
+                <h3 style="color: var(--ltblue);">♃ Jupiter</h3>
+                <p><strong>Day:</strong> Thursday</p>
+                <p><strong>Color:</strong> Blue, Purple</p>
+                <p><strong>Metal:</strong> Tin</p>
+                <p><strong>Keywords:</strong> Expansion, luck, abundance, wisdom, generosity, growth, prosperity</p>
+                <p><strong>Magic For:</strong> Money, legal matters, luck, expansion, spiritual growth</p>
+                <p><strong>Planetary Hour:</strong> Abundance work, court cases, higher learning, philosophy</p>
+            </div>
+
+            <div class="planet-box">
+                <h3 style="color: var(--ltgreen);">♀ Venus</h3>
+                <p><strong>Day:</strong> Friday</p>
+                <p><strong>Color:</strong> Green, Pink</p>
+                <p><strong>Metal:</strong> Copper</p>
+                <p><strong>Keywords:</strong> Love, beauty, pleasure, art, relationships, harmony, luxury</p>
+                <p><strong>Magic For:</strong> Love spells, beauty, friendships, art, social harmony</p>
+                <p><strong>Planetary Hour:</strong> Romance, artistic inspiration, social magic, self-love</p>
+            </div>
+
+            <div class="planet-box">
+                <h3 style="color: var(--dkgray);">♄ Saturn</h3>
+                <p><strong>Day:</strong> Saturday</p>
+                <p><strong>Color:</strong> Black, Dark Purple</p>
+                <p><strong>Metal:</strong> Lead</p>
+                <p><strong>Keywords:</strong> Structure, time, karma, discipline, endings, limitations, death</p>
+                <p><strong>Magic For:</strong> Banishing, binding, breaking bad habits, karmic work, ancestors</p>
+                <p><strong>Planetary Hour:</strong> Binding spells, banishing, discipline, shadow work</p>
+            </div>
+
+            <h2>Zodiac Signs & Their Energies</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Sign</th>
+                        <th>Element</th>
+                        <th>Quality</th>
+                        <th>Ruler</th>
+                        <th>Keywords</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>♈ Aries</td>
+                        <td>Fire</td>
+                        <td>Cardinal</td>
+                        <td>Mars</td>
+                        <td>Initiative, courage, leadership</td>
+                    </tr>
+                    <tr>
+                        <td>♉ Taurus</td>
+                        <td>Earth</td>
+                        <td>Fixed</td>
+                        <td>Venus</td>
+                        <td>Stability, sensuality, persistence</td>
+                    </tr>
+                    <tr>
+                        <td>♊ Gemini</td>
+                        <td>Air</td>
+                        <td>Mutable</td>
+                        <td>Mercury</td>
+                        <td>Communication, adaptability, curiosity</td>
+                    </tr>
+                    <tr>
+                        <td>♋ Cancer</td>
+                        <td>Water</td>
+                        <td>Cardinal</td>
+                        <td>Moon</td>
+                        <td>Emotion, nurturing, protection</td>
+                    </tr>
+                    <tr>
+                        <td>♌ Leo</td>
+                        <td>Fire</td>
+                        <td>Fixed</td>
+                        <td>Sun</td>
+                        <td>Creativity, pride, generosity</td>
+                    </tr>
+                    <tr>
+                        <td>♍ Virgo</td>
+                        <td>Earth</td>
+                        <td>Mutable</td>
+                        <td>Mercury</td>
+                        <td>Analysis, service, perfection</td>
+                    </tr>
+                    <tr>
+                        <td>♎ Libra</td>
+                        <td>Air</td>
+                        <td>Cardinal</td>
+                        <td>Venus</td>
+                        <td>Balance, justice, partnership</td>
+                    </tr>
+                    <tr>
+                        <td>♏ Scorpio</td>
+                        <td>Water</td>
+                        <td>Fixed</td>
+                        <td>Mars/Pluto</td>
+                        <td>Transformation, intensity, power</td>
+                    </tr>
+                    <tr>
+                        <td>♐ Sagittarius</td>
+                        <td>Fire</td>
+                        <td>Mutable</td>
+                        <td>Jupiter</td>
+                        <td>Expansion, philosophy, adventure</td>
+                    </tr>
+                    <tr>
+                        <td>♑ Capricorn</td>
+                        <td>Earth</td>
+                        <td>Cardinal</td>
+                        <td>Saturn</td>
+                        <td>Ambition, structure, authority</td>
+                    </tr>
+                    <tr>
+                        <td>♒ Aquarius</td>
+                        <td>Air</td>
+                        <td>Fixed</td>
+                        <td>Saturn/Uranus</td>
+                        <td>Innovation, rebellion, community</td>
+                    </tr>
+                    <tr>
+                        <td>♓ Pisces</td>
+                        <td>Water</td>
+                        <td>Mutable</td>
+                        <td>Jupiter/Neptune</td>
+                        <td>Compassion, mysticism, dissolution</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Planetary Hours</h2>
+            <p>Each day is divided into 24 planetary hours (12 day, 12 night). Each hour is ruled by a planet, starting with the day's ruling planet at sunrise.</p>
+            <div class="info-box">
+                <div class="info-header">How to Calculate:</div>
+                <ol>
+                    <li>Find local sunrise and sunset times</li>
+                    <li>Divide daylight into 12 equal parts = day hours</li>
+                    <li>Divide night into 12 equal parts = night hours</li>
+                    <li>First hour after sunrise = ruling planet of that day</li>
+                    <li>Follow Chaldean order: Saturn→Jupiter→Mars→Sun→Venus→Mercury→Moon (repeat)</li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- COLOR MAGIC SECTION -->
+        <div id="color" class="section">
+            <h1>Color Magic Reference</h1>
+
+            <h2>Color Correspondences</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Color</th>
+                        <th>Swatch</th>
+                        <th>Magical Uses</th>
+                        <th>Element</th>
+                        <th>Chakra</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong style="color: var(--ltred);">Red</strong></td>
+                        <td><span class="color-swatch" style="background: #FF0000;"></span></td>
+                        <td>Passion, courage, strength, vitality, lust, anger, protection</td>
+                        <td>Fire</td>
+                        <td>Root</td>
+                    </tr>
+                    <tr>
+                        <td><strong style="color: #FF8800;">Orange</strong></td>
+                        <td><span class="color-swatch" style="background: #FF8800;"></span></td>
+                        <td>Creativity, attraction, success, ambition, opportunity</td>
+                        <td>Fire</td>
+                        <td>Sacral</td>
+                    </tr>
+                    <tr>
+                        <td><strong style="color: var(--yellow);">Yellow</strong></td>
+                        <td><span class="color-swatch" style="background: #FFFF00;"></span></td>
+                        <td>Intellect, communication, divination, imagination, learning</td>
+                        <td>Air</td>
+                        <td>Solar Plexus</td>
+                    </tr>
+                    <tr>
+                        <td><strong style="color: var(--ltgreen);">Green</strong></td>
+                        <td><span class="color-swatch" style="background: #00FF00;"></span></td>
+                        <td>Money, prosperity, fertility, healing, growth, luck</td>
+                        <td>Earth</td>
+                        <td>Heart</td>
+                    </tr>
+                    <tr>
+                        <td><strong style="color: var(--ltblue);">Blue</strong></td>
+                        <td><span class="color-swatch" style="background: #0000FF;"></span></td>
+                        <td>Peace, truth, wisdom, protection, spiritual awareness, calm</td>
+                        <td>Water</td>
+                        <td>Throat</td>
+                    </tr>
+                    <tr>
+                        <td><strong style="color: var(--purple);">Purple</strong></td>
+                        <td><span class="color-swatch" style="background: #8800FF;"></span></td>
+                        <td>Psychic power, spirituality, hidden knowledge, meditation</td>
+                        <td>Spirit</td>
+                        <td>Third Eye</td>
+                    </tr>
+                    <tr>
+                        <td><strong style="color: var(--pink);">Pink</strong></td>
+                        <td><span class="color-swatch" style="background: #FF88FF;"></span></td>
+                        <td>Love, friendship, emotional healing, romance, harmony</td>
+                        <td>Water</td>
+                        <td>Heart</td>
+                    </tr>
+                    <tr>
+                        <td><strong style="color: var(--white);">White</strong></td>
+                        <td><span class="color-swatch" style="background: #FFFFFF;"></span></td>
+                        <td>Purity, cleansing, truth, protection, peace, ALL purposes</td>
+                        <td>Spirit</td>
+                        <td>Crown</td>
+                    </tr>
+                    <tr>
+                        <td><strong style="color: var(--ltgray);">Black</strong></td>
+                        <td><span class="color-swatch" style="background: #000000;"></span></td>
+                        <td>Banishing, binding, protection, absorbing negativity, endings</td>
+                        <td>Earth</td>
+                        <td>Root</td>
+                    </tr>
+                    <tr>
+                        <td><strong style="color: #996633;">Brown</strong></td>
+                        <td><span class="color-swatch" style="background: #996633;"></span></td>
+                        <td>Grounding, stability, home, animals, finding lost things</td>
+                        <td>Earth</td>
+                        <td>Root</td>
+                    </tr>
+                    <tr>
+                        <td><strong style="color: var(--ltgray);">Silver</strong></td>
+                        <td><span class="color-swatch" style="background: #C0C0C0;"></span></td>
+                        <td>Moon magic, intuition, dreams, reflection, feminine energy</td>
+                        <td>Water</td>
+                        <td>Third Eye</td>
+                    </tr>
+                    <tr>
+                        <td><strong style="color: #FFD700;">Gold</strong></td>
+                        <td><span class="color-swatch" style="background: #FFD700;"></span></td>
+                        <td>Sun magic, wealth, confidence, success, masculine energy</td>
+                        <td>Fire</td>
+                        <td>Solar Plexus</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>How to Use Color Magic</h2>
+            <ul>
+                <li><strong>Candle Magic:</strong> Burn candles of appropriate color for your intention</li>
+                <li><strong>Clothing:</strong> Wear colors that align with your magical goal</li>
+                <li><strong>Altar Cloths:</strong> Cover altar in color matching working</li>
+                <li><strong>Visualization:</strong> Imagine colored light surrounding you or target</li>
+                <li><strong>Sigils:</strong> Draw sigils in corresponding colored ink</li>
+                <li><strong>Crystals:</strong> Use stones of matching colors</li>
+            </ul>
+
+            <div class="info-box">
+                <div class="info-header">Tip:</div>
+                <p>White can substitute for ANY color if you don't have the specific one. It contains all colors and works for all intentions.</p>
+            </div>
+        </div>
+
+        <!-- DEITIES SECTION -->
+        <div id="deities" class="section">
+            <h1>Deities Reference</h1>
+
+            <h2>Egyptian Pantheon</h2>
+
+            <h3>Thoth (Djehuty)</h3>
+            <p><strong>Domain:</strong> Wisdom, writing, magic, science, moon</p>
+            <p><strong>Offerings:</strong> Papyrus, ink, written prayers, moon water</p>
+            <p><strong>Invoke For:</strong> Learning, exams, writing, magical knowledge, record keeping</p>
+
+            <h3>Isis (Aset)</h3>
+            <p><strong>Domain:</strong> Magic, motherhood, protection, healing, resurrection</p>
+            <p><strong>Offerings:</strong> Milk, honey, roses, water, wine</p>
+            <p><strong>Invoke For:</strong> Powerful magic, protection of children, healing, mysteries</p>
+
+            <h3>Anubis (Inpu)</h3>
+            <p><strong>Domain:</strong> Death, mummification, afterlife, protection of tombs</p>
+            <p><strong>Offerings:</strong> Black candles, myrrh, cypress, prayers for the dead</p>
+            <p><strong>Invoke For:</strong> Shadow work, communicating with dead, protection, transitions</p>
+
+            <h3>Ra</h3>
+            <p><strong>Domain:</strong> Sun, creation, kingship, vitality</p>
+            <p><strong>Offerings:</strong> Gold, frankincense, solar symbols, sunrise prayers</p>
+            <p><strong>Invoke For:</strong> Success, leadership, health, vitality, defeating darkness</p>
+
+            <h2>Greek/Roman Pantheon</h2>
+
+            <h3>Hermes (Mercury)</h3>
+            <p><strong>Domain:</strong> Communication, commerce, travel, trickery, magic, boundaries</p>
+            <p><strong>Offerings:</strong> Coins, dice, writing implements, honey cakes</p>
+            <p><strong>Invoke For:</strong> Communication, business, travel safety, quick wit, crossroads</p>
+
+            <h3>Hecate</h3>
+            <p><strong>Domain:</strong> Witchcraft, crossroads, ghosts, moon, night magic</p>
+            <p><strong>Offerings:</strong> Garlic, honey, eggs, keys, left at crossroads</p>
+            <p><strong>Invoke For:</strong> Witchcraft power, necromancy, protection, choices, divination</p>
+
+            <h3>Apollo</h3>
+            <p><strong>Domain:</strong> Sun, prophecy, healing, music, truth, plague</p>
+            <p><strong>Offerings:</strong> Bay laurel, wine, hymns, gold</p>
+            <p><strong>Invoke For:</strong> Divination, healing, artistic inspiration, truth-seeking</p>
+
+            <h3>Aphrodite (Venus)</h3>
+            <p><strong>Domain:</strong> Love, beauty, pleasure, sexuality</p>
+            <p><strong>Offerings:</strong> Roses, apples, shells, perfume, honey</p>
+            <p><strong>Invoke For:</strong> Love spells, beauty, confidence, pleasure, relationships</p>
+
+            <h2>Norse Pantheon</h2>
+
+            <h3>Odin</h3>
+            <p><strong>Domain:</strong> Wisdom, war, death, magic, poetry, runes</p>
+            <p><strong>Offerings:</strong> Mead, poetry, sacrifice of comfort, rune study</p>
+            <p><strong>Invoke For:</strong> Wisdom, rune magic, battle strategy, sacrifice for knowledge</p>
+
+            <h3>Freyja</h3>
+            <p><strong>Domain:</strong> Love, beauty, war, death, magic, fertility</p>
+            <p><strong>Offerings:</strong> Mead, honey, amber, cat imagery, gold</p>
+            <p><strong>Invoke For:</strong> Love magic, seidr (Norse magic), beauty, warrior strength</p>
+
+            <h3>Thor</h3>
+            <p><strong>Domain:</strong> Thunder, strength, protection, fertility, hallowing</p>
+            <p><strong>Offerings:</strong> Beer, bread, oak, hammer symbols</p>
+            <p><strong>Invoke For:</strong> Protection, strength, blessing spaces, defeating enemies</p>
+
+            <h2>Archangels (Judeo-Christian)</h2>
+
+            <h3>Michael</h3>
+            <p><strong>Domain:</strong> Protection, justice, courage, truth</p>
+            <p><strong>Direction:</strong> South</p>
+            <p><strong>Element:</strong> Fire</p>
+            <p><strong>Invoke For:</strong> Protection, banishing evil, courage, justice, spiritual warfare</p>
+
+            <h3>Raphael</h3>
+            <p><strong>Domain:</strong> Healing, travel, knowledge, communication</p>
+            <p><strong>Direction:</strong> East</p>
+            <p><strong>Element:</strong> Air</p>
+            <p><strong>Invoke For:</strong> Healing (physical/mental), safe travel, learning, guidance</p>
+
+            <h3>Gabriel</h3>
+            <p><strong>Domain:</strong> Messages, prophecy, resurrection, mercy</p>
+            <p><strong>Direction:</strong> West</p>
+            <p><strong>Element:</strong> Water</p>
+            <p><strong>Invoke For:</strong> Divination, prophecy, purity, creativity, dreams</p>
+
+            <h3>Uriel</h3>
+            <p><strong>Domain:</strong> Wisdom, earth, transformation, repentance</p>
+            <p><strong>Direction:</strong> North</p>
+            <p><strong>Element:</strong> Earth</p>
+            <p><strong>Invoke For:</strong> Grounding, practical wisdom, illumination, prophecy</p>
+
+            <div class="warning-box">
+                <div class="warning-header">Working with Deities:</div>
+                <ul>
+                    <li>Research before invoking - understand their mythology</li>
+                    <li>Show respect - these are powerful forces</li>
+                    <li>Keep promises and offerings</li>
+                    <li>Don't invoke multiple conflicting deities in same ritual</li>
+                    <li>Some deities demand more than others - be prepared</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- DIVINATION SECTION -->
+        <div id="divination" class="section">
+            <h1>Divination Reference</h1>
+
+            <h2>Tarot</h2>
+            <p>78 cards: 22 Major Arcana (spiritual lessons) + 56 Minor Arcana (daily life)</p>
+
+            <h3>Major Arcana Quick Reference</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Card</th>
+                        <th>Keywords</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>0</td><td>The Fool</td><td>New beginnings, innocence, spontaneity, leap of faith</td></tr>
+                    <tr><td>I</td><td>The Magician</td><td>Manifestation, power, skill, concentration, action</td></tr>
+                    <tr><td>II</td><td>High Priestess</td><td>Intuition, sacred knowledge, divine feminine, subconscious</td></tr>
+                    <tr><td>III</td><td>The Empress</td><td>Fertility, abundance, nature, motherhood, creativity</td></tr>
+                    <tr><td>IV</td><td>The Emperor</td><td>Authority, structure, control, fatherhood, leadership</td></tr>
+                    <tr><td>V</td><td>The Hierophant</td><td>Tradition, conformity, education, belief systems</td></tr>
+                    <tr><td>VI</td><td>The Lovers</td><td>Love, union, choices, values, relationships</td></tr>
+                    <tr><td>VII</td><td>The Chariot</td><td>Control, willpower, victory, determination, action</td></tr>
+                    <tr><td>VIII</td><td>Strength</td><td>Courage, inner strength, patience, compassion</td></tr>
+                    <tr><td>IX</td><td>The Hermit</td><td>Soul searching, introspection, inner guidance, withdrawal</td></tr>
+                    <tr><td>X</td><td>Wheel of Fortune</td><td>Fate, karma, life cycles, turning point, luck</td></tr>
+                    <tr><td>XI</td><td>Justice</td><td>Fairness, truth, law, cause and effect</td></tr>
+                    <tr><td>XII</td><td>The Hanged Man</td><td>Suspension, letting go, sacrifice, new perspective</td></tr>
+                    <tr><td>XIII</td><td>Death</td><td>Endings, transformation, transition, release</td></tr>
+                    <tr><td>XIV</td><td>Temperance</td><td>Balance, moderation, patience, purpose, alchemy</td></tr>
+                    <tr><td>XV</td><td>The Devil</td><td>Bondage, addiction, materialism, playfulness, shadow</td></tr>
+                    <tr><td>XVI</td><td>The Tower</td><td>Sudden change, upheaval, revelation, awakening</td></tr>
+                    <tr><td>XVII</td><td>The Star</td><td>Hope, faith, renewal, spirituality, healing</td></tr>
+                    <tr><td>XVIII</td><td>The Moon</td><td>Illusion, intuition, anxiety, subconscious, dreams</td></tr>
+                    <tr><td>XIX</td><td>The Sun</td><td>Success, vitality, confidence, joy, positivity</td></tr>
+                    <tr><td>XX</td><td>Judgement</td><td>Reflection, reckoning, awakening, rebirth</td></tr>
+                    <tr><td>XXI</td><td>The World</td><td>Completion, accomplishment, travel, fulfillment</td></tr>
+                </tbody>
+            </table>
+
+            <h3>Minor Arcana Suits</h3>
+            <ul>
+                <li><strong>Wands (Fire):</strong> Action, passion, creativity, ambition, energy</li>
+                <li><strong>Cups (Water):</strong> Emotions, relationships, intuition, love</li>
+                <li><strong>Swords (Air):</strong> Thoughts, conflict, truth, clarity, communication</li>
+                <li><strong>Pentacles (Earth):</strong> Material, money, career, health, practicality</li>
+            </ul>
+
+            <h2>Pendulum Dowsing</h2>
+            <p>Simple yes/no divination using suspended weight.</p>
+
+            <h3>How to Use:</h3>
+            <ol>
+                <li>Hold pendulum still, establish "yes" (usually clockwise circle)</li>
+                <li>Establish "no" (usually counter-clockwise or back-and-forth)</li>
+                <li>Ask clear yes/no questions</li>
+                <li>Observe movement for answer</li>
+            </ol>
+
+            <div class="info-box">
+                <div class="info-header">Best For:</div>
+                <p>Quick answers, finding lost objects, checking energy of items, confirming tarot readings, testing food/supplements</p>
+            </div>
+
+            <h2>Scrying</h2>
+            <p>Gazing into reflective surface to receive visions.</p>
+
+            <h3>Methods:</h3>
+            <ul>
+                <li><strong>Black Mirror:</strong> Obsidian or painted glass, traditional method</li>
+                <li><strong>Water Bowl:</strong> Dark bowl filled with water, simple and effective</li>
+                <li><strong>Crystal Ball:</strong> Clear quartz or glass sphere, classic</li>
+                <li><strong>Fire:</strong> Gazing into flames, pyromancy</li>
+                <li><strong>Smoke:</strong> Watching incense smoke patterns</li>
+            </ul>
+
+            <h3>Technique:</h3>
+            <ol>
+                <li>Dim lighting, candles preferred</li>
+                <li>Enter light trance (soft focus, relaxed)</li>
+                <li>Gaze into surface without straining</li>
+                <li>Don't force visions - let them come</li>
+                <li>Note symbols, images, impressions</li>
+                <li>Ground after session</li>
+            </ol>
+
+            <h2>Runes</h2>
+            <p>Elder Futhark runes (24 symbols) for divination and magic.</p>
+
+            <h3>Quick Meanings:</h3>
+            <ul>
+                <li><strong>ᚠ Fehu:</strong> Wealth, abundance, fulfillment</li>
+                <li><strong>ᚢ Uruz:</strong> Strength, vitality, primal power</li>
+                <li><strong>ᚦ Thurisaz:</strong> Protection, conflict, breakthrough</li>
+                <li><strong>ᚨ Ansuz:</strong> Communication, wisdom, divine messages</li>
+                <li><strong>ᚱ Raidho:</strong> Journey, travel, movement</li>
+                <li><strong>ᚲ Kenaz:</strong> Knowledge, creativity, illumination</li>
+                <li><strong>ᚷ Gebo:</strong> Gift, partnership, exchange</li>
+                <li><strong>ᚹ Wunjo:</strong> Joy, harmony, success</li>
+            </ul>
+
+            <h2>Other Methods</h2>
+            <ul>
+                <li><strong>Tea Leaves (Tasseomancy):</strong> Read patterns in tea leaves</li>
+                <li><strong>Bibliomancy:</strong> Random book opening for messages</li>
+                <li><strong>Numerology:</strong> Meaning in numbers and dates</li>
+                <li><strong>Astrology:</strong> Planetary positions and transits</li>
+                <li><strong>Dream Interpretation:</strong> Symbolic meaning in dreams</li>
+                <li><strong>Bone Casting:</strong> Throwing bones/charms and reading pattern</li>
+            </ul>
+        </div>
+
+        <!-- ENERGY WORK SECTION -->
+        <div id="energy" class="section">
+            <h1>Energy Work Reference</h1>
+
+            <h2>The Seven Main Chakras</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Chakra</th>
+                        <th>Location</th>
+                        <th>Color</th>
+                        <th>Keywords</th>
+                        <th>Mantra</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Root (Muladhara)</td>
+                        <td>Base of spine</td>
+                        <td>Red</td>
+                        <td>Survival, grounding, stability, security</td>
+                        <td>LAM</td>
+                    </tr>
+                    <tr>
+                        <td>Sacral (Svadhisthana)</td>
+                        <td>Below navel</td>
+                        <td>Orange</td>
+                        <td>Creativity, sexuality, pleasure, emotions</td>
+                        <td>VAM</td>
+                    </tr>
+                    <tr>
+                        <td>Solar Plexus (Manipura)</td>
+                        <td>Stomach</td>
+                        <td>Yellow</td>
+                        <td>Power, confidence, willpower, identity</td>
+                        <td>RAM</td>
+                    </tr>
+                    <tr>
+                        <td>Heart (Anahata)</td>
+                        <td>Center of chest</td>
+                        <td>Green/Pink</td>
+                        <td>Love, compassion, forgiveness, connection</td>
+                        <td>YAM</td>
+                    </tr>
+                    <tr>
+                        <td>Throat (Vishuddha)</td>
+                        <td>Throat</td>
+                        <td>Blue</td>
+                        <td>Communication, truth, expression, sound</td>
+                        <td>HAM</td>
+                    </tr>
+                    <tr>
+                        <td>Third Eye (Ajna)</td>
+                        <td>Forehead</td>
+                        <td>Indigo/Purple</td>
+                        <td>Intuition, vision, wisdom, psychic ability</td>
+                        <td>OM</td>
+                    </tr>
+                    <tr>
+                        <td>Crown (Sahasrara)</td>
+                        <td>Top of head</td>
+                        <td>Violet/White</td>
+                        <td>Connection to divine, consciousness, unity</td>
+                        <td>Silence/OM</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Grounding Techniques</h2>
+
+            <h3>Tree Visualization</h3>
+            <ol>
+                <li>Stand or sit with feet flat on ground</li>
+                <li>Imagine roots growing from feet deep into earth</li>
+                <li>Feel excess energy draining down roots</li>
+                <li>Draw up earth energy as needed</li>
+                <li>Branches extend from crown to sky</li>
+            </ol>
+
+            <h3>Stone Drop</h3>
+            <ol>
+                <li>Imagine yourself as a heavy stone</li>
+                <li>Feel yourself sinking into the earth</li>
+                <li>Become dense, heavy, solid</li>
+                <li>Let scattered energy collect and settle</li>
+            </ol>
+
+            <h3>Physical Grounding</h3>
+            <ul>
+                <li>Walk barefoot on earth</li>
+                <li>Eat heavy foods (bread, meat, root vegetables)</li>
+                <li>Hold grounding stones (hematite, black tourmaline)</li>
+                <li>Physical exercise</li>
+                <li>Cold water on wrists and face</li>
+            </ul>
+
+            <h2>Shielding</h2>
+
+            <h3>Basic Sphere Shield</h3>
+            <ol>
+                <li>Center and ground yourself</li>
+                <li>Visualize white light at your core</li>
+                <li>Expand it outward in all directions</li>
+                <li>Form a sphere 3-6 feet around you</li>
+                <li>Set intention: "This shield protects me from all harm"</li>
+                <li>Reinforce daily or as needed</li>
+            </ol>
+
+            <h3>Mirror Shield</h3>
+            <p>Visualize reflective surface facing outward - negative energy bounces back to sender</p>
+
+            <h3>Elemental Shields</h3>
+            <ul>
+                <li><strong>Fire:</strong> Burning barrier, destroys negativity (aggressive)</li>
+                <li><strong>Water:</strong> Flowing shield, washes away harm (gentle)</li>
+                <li><strong>Earth:</strong> Stone wall, solid protection (stable)</li>
+                <li><strong>Air:</strong> Deflecting wind, redirects energy (flexible)</li>
+            </ul>
+
+            <h2>Energy Cleansing</h2>
+
+            <h3>Personal Cleansing</h3>
+            <ul>
+                <li><strong>Salt Bath:</strong> Dissolve sea salt in bath, soak 20+ minutes</li>
+                <li><strong>Smoke Cleansing:</strong> Pass sage/incense smoke over body</li>
+                <li><strong>Visualization:</strong> Imagine white light washing through you</li>
+                <li><strong>Sound:</strong> Singing bowls, bells, chanting to break up stagnant energy</li>
+                <li><strong>Moon Bath:</strong> Sit in moonlight (especially full moon)</li>
+            </ul>
+
+            <h3>Space Cleansing</h3>
+            <ul>
+                <li><strong>LBRP:</strong> Lesser Banishing Ritual of the Pentagram</li>
+                <li><strong>Salt:</strong> Bowls of salt in corners, salt lines at doorways</li>
+                <li><strong>Bells:</strong> Ring bell in all corners</li>
+                <li><strong>Sweep:</strong> Physical sweeping while visualizing clearing</li>
+                <li><strong>Open Windows:</strong> Let fresh air circulate</li>
+            </ul>
+
+            <h2>Raising Energy</h2>
+            <ul>
+                <li><strong>Chanting:</strong> Repetitive sounds build energy</li>
+                <li><strong>Dancing:</strong> Movement generates power</li>
+                <li><strong>Drumming:</strong> Rhythm raises vibration</li>
+                <li><strong>Breath:</strong> Rapid breathing (carefully!)</li>
+                <li><strong>Emotion:</strong> Intense feeling = intense energy</li>
+                <li><strong>Gnosis:</strong> Trance states through various methods</li>
+            </ul>
+
+            <div class="warning-box">
+                <div class="warning-header">Energy Work Safety:</div>
+                <ul>
+                    <li>Always ground before and after energy work</li>
+                    <li>Don't deplete your own energy - draw from earth/universe</li>
+                    <li>Shield regularly, especially in crowds</li>
+                    <li>Cleanse after intense magical work or negative encounters</li>
+                    <li>If dizzy/nauseous, ground immediately and eat something</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- MEDITATION SECTION -->
+        <div id="meditation" class="section">
+            <h1>Meditation Reference</h1>
+
+            <h2>Basic Meditation Techniques</h2>
+
+            <h3>Breath Awareness</h3>
+            <p><strong>Best For:</strong> Beginners, calming mind, grounding</p>
+            <ol>
+                <li>Sit comfortably, spine straight</li>
+                <li>Close eyes or soft gaze downward</li>
+                <li>Focus attention on breath</li>
+                <li>Notice inhale and exhale naturally</li>
+                <li>When mind wanders, gently return to breath</li>
+                <li>Start with 5 minutes, build up</li>
+            </ol>
+
+            <h3>Body Scan</h3>
+            <p><strong>Best For:</strong> Relaxation, releasing tension, grounding</p>
+            <ol>
+                <li>Lie down or sit comfortably</li>
+                <li>Bring attention to top of head</li>
+                <li>Slowly move awareness down through body</li>
+                <li>Notice sensations in each area</li>
+                <li>Release tension as you go</li>
+                <li>Continue to toes, then reverse back up</li>
+            </ol>
+
+            <h3>Mantra Meditation</h3>
+            <p><strong>Best For:</strong> Focus, spiritual connection, energy raising</p>
+            <ol>
+                <li>Choose a mantra (OM, deity name, affirmation)</li>
+                <li>Repeat mentally or aloud</li>
+                <li>Synchronize with breath if desired</li>
+                <li>Let mantra fill your awareness</li>
+                <li>Continue 10-20 minutes</li>
+            </ol>
+
+            <h3>Visualization Meditation</h3>
+            <p><strong>Best For:</strong> Astral work, manifestation, psychic development</p>
+            <ol>
+                <li>Enter relaxed state through breath work</li>
+                <li>Visualize specific scene/object/symbol</li>
+                <li>Build detail - colors, sounds, smells</li>
+                <li>Interact with visualization</li>
+                <li>Note any spontaneous changes</li>
+                <li>Ground thoroughly after</li>
+            </ol>
+
+            <h2>Advanced Techniques</h2>
+
+            <h3>Middle Pillar Exercise (Golden Dawn)</h3>
+            <p>Circulates energy through body using Qabalistic spheres</p>
+            <ol>
+                <li>Stand, visualize white sphere above head (Kether)</li>
+                <li>Vibrate: "Eh-heh-yeh" - feel divine energy</li>
+                <li>Draw light down to throat (Daath) - purple sphere</li>
+                <li>Down to heart (Tiphareth) - golden sphere, vibrate "Yeh-ho-voh"</li>
+                <li>Down to groin (Yesod) - purple sphere</li>
+                <li>Down to feet (Malkuth) - earthy colors, vibrate "Ah-doh-nye"</li>
+                <li>Circulate energy up front of body, down back (fountain)</li>
+            </ol>
+
+            <h3>Void Meditation</h3>
+            <p><strong>Advanced:</strong> Silencing all thought</p>
+            <ol>
+                <li>Sit in meditation posture</li>
+                <li>Focus on emptiness, nothingness</li>
+                <li>Push away all thoughts as they arise</li>
+                <li>Maintain blank state</li>
+                <li>Even 30 seconds of pure void is progress</li>
+            </ol>
+
+            <h3>Pathworking</h3>
+            <p>Guided journey through symbolic landscapes</p>
+            <ol>
+                <li>Enter deep meditative state</li>
+                <li>Visualize starting point (temple, forest path, etc.)</li>
+                <li>Follow predetermined route or explore freely</li>
+                <li>Interact with symbols, beings encountered</li>
+                <li>Receive teachings or messages</li>
+                <li>Return same way you came</li>
+                <li>Journal immediately after</li>
+            </ol>
+
+            <h2>Meditation for Magical Purposes</h2>
+
+            <h3>Pre-Ritual Meditation</h3>
+            <p>15-20 minutes before ritual to enter proper headspace</p>
+            <ul>
+                <li>Calms mind</li>
+                <li>Raises awareness</li>
+                <li>Opens psychic senses</li>
+                <li>Centers will</li>
+            </ul>
+
+            <h3>Scrying Meditation</h3>
+            <p>Light trance for divination work</p>
+            <ul>
+                <li>Soft focus, relaxed awareness</li>
+                <li>Not deep trance</li>
+                <li>Receptive state</li>
+                <li>Allow visions to come</li>
+            </ul>
+
+            <h3>Gnosis States (Chaos Magic)</h3>
+            <p><strong>Inhibitory Gnosis:</strong> Deep stillness, void meditation, sensory deprivation</p>
+            <p><strong>Excitatory Gnosis:</strong> Hyperarousal through dance, sex, pain, exhaustion</p>
+            <p>Both lead to ego death and magical power</p>
+
+            <h2>Common Obstacles</h2>
+
+            <h3>"My mind won't stop thinking"</h3>
+            <p><strong>Solution:</strong> This is normal! Don't fight thoughts. Notice them, let them pass like clouds. The practice IS bringing attention back repeatedly.</p>
+
+            <h3>"I can't visualize clearly"</h3>
+            <p><strong>Solution:</strong> Not everyone is visual. Try feeling, hearing, or knowing instead. "Visualization" can be any sensory imagination.</p>
+
+            <h3>"I fall asleep"</h3>
+            <p><strong>Solution:</strong> Sit upright (don't lie down), meditate earlier in day, splash cold water on face first, or try walking meditation.</p>
+
+            <h3>"I can't sit still"</h3>
+            <p><strong>Solution:</strong> Try walking meditation, yoga, or shorter sessions. Build tolerance gradually.</p>
+
+            <div class="info-box">
+                <div class="info-header">Meditation Tips:</div>
+                <ul>
+                    <li>Consistency matters more than duration - 5 min daily beats 1 hour weekly</li>
+                    <li>Same time/place daily builds habit</li>
+                    <li>Morning meditation sets tone for day</li>
+                    <li>No "wrong" meditation - if you tried, you succeeded</li>
+                    <li>Keep journal of experiences and insights</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- PLANTS SECTION -->
+        <div id="plants" class="section">
+            <h1>Magical Plants Reference</h1>
+
+            <h2>Common Magical Herbs</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Herb</th>
+                        <th>Planet</th>
+                        <th>Element</th>
+                        <th>Magical Uses</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Sage</strong></td>
+                        <td>Jupiter</td>
+                        <td>Air</td>
+                        <td>Cleansing, wisdom, protection, longevity</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Rosemary</strong></td>
+                        <td>Sun</td>
+                        <td>Fire</td>
+                        <td>Protection, memory, love, cleansing, mental clarity</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Lavender</strong></td>
+                        <td>Mercury</td>
+                        <td>Air</td>
+                        <td>Peace, sleep, love, psychic awareness, happiness</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Mugwort</strong></td>
+                        <td>Moon</td>
+                        <td>Earth</td>
+                        <td>Psychic powers, dreams, astral projection, protection</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Bay Laurel</strong></td>
+                        <td>Sun</td>
+                        <td>Fire</td>
+                        <td>Prophecy, success, wishes, protection, psychic powers</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Basil</strong></td>
+                        <td>Mars</td>
+                        <td>Fire</td>
+                        <td>Money, love, protection, exorcism, flying</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Chamomile</strong></td>
+                        <td>Sun</td>
+                        <td>Water</td>
+                        <td>Money, sleep, love, purification, calm</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Cinnamon</strong></td>
+                        <td>Sun</td>
+                        <td>Fire</td>
+                        <td>Success, money, psychic powers, healing, love, fast action</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Frankincense</strong></td>
+                        <td>Sun</td>
+                        <td>Fire</td>
+                        <td>Spirituality, protection, exorcism, consecration</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Myrrh</strong></td>
+                        <td>Moon</td>
+                        <td>Water</td>
+                        <td>Protection, healing, spirituality, meditation</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Peppermint</strong></td>
+                        <td>Mercury</td>
+                        <td>Air</td>
+                        <td>Purification, sleep, love, healing, psychic powers</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Rose</strong></td>
+                        <td>Venus</td>
+                        <td>Water</td>
+                        <td>Love, psychic powers, healing, divination, luck</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Thyme</strong></td>
+                        <td>Venus</td>
+                        <td>Water</td>
+                        <td>Courage, psychic powers, healing, sleep, purification</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Yarrow</strong></td>
+                        <td>Venus</td>
+                        <td>Water</td>
+                        <td>Courage, love, psychic powers, exorcism</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Wormwood</strong></td>
+                        <td>Mars</td>
+                        <td>Fire</td>
+                        <td>Psychic powers, protection, love, calling spirits</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>How to Use Herbs</h2>
+
+            <h3>Incense</h3>
+            <p>Burn dried herbs on charcoal disc to release magical properties through smoke</p>
+
+            <h3>Sachets/Mojo Bags</h3>
+            <p>Place herbs in small cloth bag, carry or hide in home for continuous effect</p>
+
+            <h3>Teas & Infusions</h3>
+            <p>Steep herbs in hot water, drink for internal magic or use liquid in spells</p>
+
+            <h3>Bath Additives</h3>
+            <p>Add to ritual baths for cleansing, blessing, or other purposes</p>
+
+            <h3>Poppets</h3>
+            <p>Stuff dolls with appropriate herbs for sympathetic magic</p>
+
+            <h3>Jar Spells</h3>
+            <p>Layer herbs in jar with other ingredients, seal for long-term magic</p>
+
+            <h2>Sacred Trees</h2>
+
+            <h3>Oak</h3>
+            <p><strong>Planet:</strong> Sun/Jupiter | <strong>Use:</strong> Strength, protection, success, endurance, kingship</p>
+
+            <h3>Willow</h3>
+            <p><strong>Planet:</strong> Moon | <strong>Use:</strong> Moon magic, love, divination, healing, death work</p>
+
+            <h3>Ash</h3>
+            <p><strong>Planet:</strong> Sun | <strong>Use:</strong> Protection, sea rituals, healing, prosperity</p>
+
+            <h3>Rowan</h3>
+            <p><strong>Planet:</strong> Sun | <strong>Use:</strong> Protection from evil, psychic powers, success, healing</p>
+
+            <h3>Elder</h3>
+            <p><strong>Planet:</strong> Venus | <strong>Use:</strong> Exorcism, protection, healing, prosperity, sleep</p>
+
+            <div class="warning-box">
+                <div class="warning-header">Plant Safety:</div>
+                <ul>
+                    <li>Many magical herbs are TOXIC if ingested - research before consuming</li>
+                    <li>Pregnant/nursing should avoid many herbs</li>
+                    <li>Some herbs interact with medications</li>
+                    <li>Burning certain plants can be toxic - use ventilation</li>
+                    <li>Wildcrafting: take only what you need, never overharvest</li>
+                    <li>Give offerings when harvesting from nature</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- SHADOW WORK SECTION -->
+        <div id="shadow" class="section">
+            <h1>Shadow Work Reference</h1>
+
+            <h2>What is Shadow Work?</h2>
+            <p>Shadow work is the practice of exploring and integrating the parts of yourself you've repressed, denied, or hidden. The "shadow" (Carl Jung) contains rejected aspects of your personality - both "negative" traits you're ashamed of AND "positive" qualities you've suppressed.</p>
+
+            <div class="info-box">
+                <div class="info-header">Why Shadow Work Matters in Magic:</div>
+                <ul>
+                    <li>Unintegrated shadow leaks energy and sabotages spells</li>
+                    <li>Repressed desires manifest unconsciously (often badly)</li>
+                    <li>Facing shadow increases personal power</li>
+                    <li>Honest self-knowledge = effective magic</li>
+                    <li>Shadow contains hidden gifts and strengths</li>
+                </ul>
+            </div>
+
+            <h2>Shadow Work Techniques</h2>
+
+            <h3>Mirror Gazing</h3>
+            <p><strong>Intensity:</strong> High</p>
+            <ol>
+                <li>Sit before mirror in candlelit room</li>
+                <li>Gaze into your own eyes for 10-15 minutes</li>
+                <li>Don't look away even when uncomfortable</li>
+                <li>Face may appear to shift, change, age</li>
+                <li>Observe without judgment</li>
+                <li>Journal immediately after</li>
+            </ol>
+            <p><strong>Reveals:</strong> Hidden aspects, alternate selves, suppressed emotions</p>
+
+            <h3>Shadow Journaling Prompts</h3>
+            <ul>
+                <li>"What do I judge most harshly in others?" (This is often your shadow)</li>
+                <li>"What would I do if no one was watching?"</li>
+                <li>"What parts of myself do I hide from others?"</li>
+                <li>"What am I most ashamed of?"</li>
+                <li>"What do I secretly want but won't admit?"</li>
+                <li>"If I had no fear, I would..."</li>
+                <li>"The parts of me I've killed or buried are..."</li>
+                <li>"What would my 'dark side' say to me right now?"</li>
+            </ul>
+
+            <h3>Dialogue with Shadow Self</h3>
+            <ol>
+                <li>Enter meditative state</li>
+                <li>Visualize your shadow self appearing</li>
+                <li>Ask: "What do you want me to know?"</li>
+                <li>Allow it to speak (may be harsh or surprising)</li>
+                <li>Listen without defending</li>
+                <li>Ask: "What gift do you bring me?"</li>
+                <li>Thank shadow self</li>
+                <li>Journal conversation</li>
+            </ol>
+
+            <h3>Active Imagination</h3>
+            <ol>
+                <li>Recall a disturbing dream or fantasy</li>
+                <li>Re-enter it in meditative state</li>
+                <li>Engage with dream figures</li>
+                <li>Ask them what they represent</li>
+                <li>Don't force answers - let unconscious speak</li>
+                <li>Note any symbols or messages</li>
+            </ol>
+
+            <h2>Common Shadow Aspects</h2>
+
+            <h3>The Inner Critic</h3>
+            <p>Harsh voice that judges and attacks you. Often internalized parent/authority.</p>
+            <p><strong>Integration:</strong> Recognize it's trying to "protect" you from rejection. Thank it, but take back control.</p>
+
+            <h3>The Victim</h3>
+            <p>Part that feels powerless, wronged, helpless.</p>
+            <p><strong>Integration:</strong> Acknowledge real hurts, but reclaim agency. You are no longer helpless.</p>
+
+            <h3>The Saboteur</h3>
+            <p>Undermines your success out of fear of change/responsibility.</p>
+            <p><strong>Integration:</strong> Understand what it fears. Address those fears consciously.</p>
+
+            <h3>The Tyrant</h3>
+            <p>Desire for power, control, domination you've repressed.</p>
+            <p><strong>Integration:</strong> Channel into healthy leadership, boundaries, assertiveness.</p>
+
+            <h3>The Wild One</h3>
+            <p>Primal desires, sexuality, rage, chaos you've suppressed.</p>
+            <p><strong>Integration:</strong> Create safe containers for expression (ritual, art, controlled release).</p>
+
+            <h2>Saturn Work (Astrological Shadow)</h2>
+            <p>Saturn represents limitations, fears, karma, and lessons. Working with Saturn = shadow work.</p>
+
+            <h3>Saturn Day Practice (Saturday)</h3>
+            <ol>
+                <li>Identify a limitation or fear</li>
+                <li>Light black candle</li>
+                <li>Ask: "What is this teaching me?"</li>
+                <li>Accept the restriction as teacher</li>
+                <li>Work WITH limitation rather than against it</li>
+            </ol>
+
+            <h2>Shadow Integration Rituals</h2>
+
+            <h3>Dark Moon Shadow Release</h3>
+            <p><strong>Timing:</strong> Dark moon (3 days before new moon)</p>
+            <ol>
+                <li>Write down shadow aspects you've discovered</li>
+                <li>Sit in darkness (no light)</li>
+                <li>Read list aloud: "I acknowledge you. I accept you."</li>
+                <li>Burn paper safely</li>
+                <li>"I release shame. I integrate power."</li>
+                <li>Sit in darkness, feeling wholeness</li>
+            </ol>
+
+            <h3>Shadow Box Spell</h3>
+            <ol>
+                <li>Get black box</li>
+                <li>Write shadow aspects on paper strips</li>
+                <li>Add items representing them (mirror shard, black stone, etc.)</li>
+                <li>Place in box: "I contain you, but you don't control me"</li>
+                <li>Keep box on altar</li>
+                <li>Open periodically to "check in" with shadow</li>
+            </ol>
+
+            <h2>Signs You Need Shadow Work</h2>
+            <ul>
+                <li>Projecting onto others (seeing in them what you deny in yourself)</li>
+                <li>Repeated self-sabotage</li>
+                <li>Intense emotional reactions (rage, shame, disgust)</li>
+                <li>Recurring nightmares</li>
+                <li>Feeling "stuck" or blocked</li>
+                <li>Magic backfiring or failing</li>
+                <li>Avoiding certain topics/situations intensely</li>
+            </ul>
+
+            <h2>After Shadow Work</h2>
+
+            <h3>Integration Practices</h3>
+            <ul>
+                <li><strong>Art:</strong> Paint, draw, or sculpt shadow aspects</li>
+                <li><strong>Movement:</strong> Embody shadow through dance</li>
+                <li><strong>Voice:</strong> Sing or speak as your shadow</li>
+                <li><strong>Writing:</strong> Let shadow write you a letter</li>
+                <li><strong>Ritual:</strong> Create ceremony to honor integrated aspect</li>
+            </ul>
+
+            <h3>Grounding</h3>
+            <p>Shadow work is INTENSE. Always ground after:</p>
+            <ul>
+                <li>Eat heavy foods</li>
+                <li>Physical activity</li>
+                <li>Salt bath</li>
+                <li>Time in nature</li>
+                <li>Talk to trusted friend</li>
+            </ul>
+
+            <div class="warning-box">
+                <div class="warning-header">Shadow Work Warnings:</div>
+                <ul>
+                    <li>Can bring up trauma - work with therapist if needed</li>
+                    <li>Don't do alone if you have severe mental health issues</li>
+                    <li>Go slowly - integration takes time</li>
+                    <li>Not all dark thoughts = shadow (some are intrusive thoughts)</li>
+                    <li>Integration ≠ acting out harmful desires</li>
+                    <li>Some shadows are societal (racism, etc.) - don't integrate oppression</li>
+                    <li>Not a substitute for therapy or medical treatment</li>
+                </ul>
+            </div>
+
+            <div class="info-box">
+                <div class="info-header">The Goal:</div>
+                <p>Shadow work isn't about becoming "perfect" or eliminating the shadow. It's about making the unconscious conscious, so you have CHOICE. An integrated shadow becomes a source of power, creativity, and authenticity.</p>
+                <p style="color: var(--ltcyan); margin-top: 10px; font-style: italic;">"Until you make the unconscious conscious, it will direct your life and you will call it fate." - Carl Jung</p>
+            </div>
+        </div>
+    </div>
+
+    <div style="text-align: center; padding: 20px; border-top: 2px solid var(--dkgray); margin-top: 30px;">
+        <p style="color: var(--ltgray); font-size: 11px;">
+            Questions or issues? Contact:
+            <a href="mailto:highstdevelopment@gmail.com" style="color: var(--ltcyan); text-decoration: none;">highstdevelopment@gmail.com</a>
+        </p>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => section.classList.remove('active'));
+
+            // Remove active from all pills
+            const pills = document.querySelectorAll('.nav-pill');
+            pills.forEach(pill => pill.classList.remove('active'));
+
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+
+            // Activate clicked pill
+            event.target.classList.add('active');
+
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+# Robots.txt for Ars Notoria Digitalis
+# Block crawlers from hidden areas
+
+User-agent: *
+Disallow: /sanctum-9a4f2e8b.html
+
+# Additional privacy protection
+Disallow: /*.html$sanctum
+Disallow: /*-9a4f2e8b
+
+# Allow main content
+Allow: /index.html
+Allow: /grimoire.html
+Allow: /*.js
+Allow: /*.css
+Allow: /*.jpg
+Allow: /*.png
+Allow: /*.pdf

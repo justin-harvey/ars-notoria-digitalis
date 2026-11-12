@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Grimoire - Ars Notoria Digitalis</title>
+    <style>
+        @font-face {
+            font-family: 'TempleOS';
+            src: local('Courier New');
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --black: #000000;
+            --blue: #0000AA;
+            --green: #00AA00;
+            --cyan: #00AAAA;
+            --red: #AA0000;
+            --purple: #AA00AA;
+            --brown: #AA5500;
+            --ltgray: #AAAAAA;
+            --dkgray: #555555;
+            --ltblue: #5555FF;
+            --ltgreen: #55FF55;
+            --ltcyan: #55FFFF;
+            --ltred: #FF5555;
+            --ltpurple: #FF55FF;
+            --yellow: #FFFF55;
+            --white: #FFFFFF;
+            --ink: #8B2500;
+            --parchment: #E8DCC4;
+        }
+
+        body {
+            background: var(--black);
+            font-family: 'Courier New', monospace;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            color: var(--white);
+        }
+
+        .titlebar {
+            background: var(--blue);
+            color: var(--white);
+            padding: 6px 12px;
+            font-size: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--ltblue);
+        }
+
+        .titlebar-title {
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .titlebar-buttons {
+            display: flex;
+            gap: 6px;
+        }
+
+        .titlebar-btn {
+            background: var(--ltgray);
+            color: var(--black);
+            border: 1px solid var(--white);
+            padding: 2px 10px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        .titlebar-btn:hover {
+            background: var(--yellow);
+        }
+
+        .menubar {
+            background: var(--ltgray);
+            padding: 4px 12px;
+            display: flex;
+            gap: 20px;
+            border-bottom: 2px solid var(--dkgray);
+            font-size: 12px;
+        }
+
+        .menu-item {
+            color: var(--black);
+            cursor: pointer;
+            padding: 4px 10px;
+            font-weight: bold;
+        }
+
+        .menu-item:hover {
+            background: var(--blue);
+            color: var(--yellow);
+        }
+
+        .menu-item.active {
+            background: var(--white);
+            color: var(--red);
+        }
+
+        .main-container {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .left-column, .right-column {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .left-column {
+            background: var(--dkgray);
+            border-right: 3px solid var(--blue);
+        }
+
+        .right-column {
+            background: var(--black);
+        }
+
+        .section {
+            background: var(--black);
+            border: 2px solid var(--blue);
+            margin-bottom: 20px;
+            padding: 0;
+        }
+
+        .section.locked {
+            opacity: 0.5;
+            position: relative;
+        }
+
+        .section.locked::after {
+            content: "🔒 LOCKED - Investment Required";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--red);
+            color: var(--yellow);
+            padding: 10px 20px;
+            font-weight: bold;
+            border: 2px solid var(--yellow);
+            z-index: 10;
+        }
+
+        .section-header {
+            background: var(--purple);
+            color: var(--yellow);
+            padding: 8px 12px;
+            font-weight: bold;
+            font-size: 13px;
+            border-bottom: 2px solid var(--ltpurple);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .section-header.free {
+            background: var(--green);
+        }
+
+        .section-header.premium {
+            background: var(--red);
+        }
+
+        .section-content {
+            padding: 15px;
+            min-height: 100px;
+        }
+
+        .section.locked .section-content {
+            filter: blur(5px);
+            pointer-events: none;
+        }
+
+        .btn {
+            background: var(--blue);
+            color: var(--yellow);
+            border: 2px solid var(--ltblue);
+            padding: 6px 12px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 11px;
+            font-weight: bold;
+            margin: 5px;
+        }
+
+        .btn:hover {
+            background: var(--ltblue);
+            color: var(--white);
+        }
+
+        .btn-small {
+            padding: 3px 8px;
+            font-size: 10px;
+        }
+
+        .input {
+            background: var(--dkgray);
+            color: var(--ltgreen);
+            border: 2px solid var(--green);
+            padding: 6px;
+            font-family: inherit;
+            font-size: 11px;
+            width: 100%;
+            margin: 5px 0;
+        }
+
+        .entry {
+            background: var(--dkgray);
+            border: 1px solid var(--ltgray);
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        .entry-header {
+            color: var(--ltcyan);
+            font-weight: bold;
+            margin-bottom: 5px;
+            font-size: 11px;
+        }
+
+        .entry-content {
+            color: var(--white);
+            font-size: 11px;
+            line-height: 1.4;
+        }
+
+        .entry-meta {
+            color: var(--ltgray);
+            font-size: 10px;
+            font-style: italic;
+            margin-top: 5px;
+        }
+
+        .tag {
+            background: var(--blue);
+            color: var(--yellow);
+            padding: 2px 6px;
+            margin: 2px;
+            display: inline-block;
+            font-size: 9px;
+            border: 1px solid var(--ltblue);
+        }
+
+        .view-toggle {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 10px;
+        }
+
+        .view-btn {
+            padding: 4px 10px;
+            font-size: 10px;
+        }
+
+        .view-btn.active {
+            background: var(--yellow);
+            color: var(--black);
+        }
+
+        .moon-phase {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .moon-display {
+            font-size: 48px;
+            margin: 10px 0;
+        }
+
+        .servitor-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 10px;
+        }
+
+        .servitor-card {
+            background: var(--dkgray);
+            border: 2px solid var(--purple);
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .servitor-card:hover {
+            background: var(--purple);
+            color: var(--yellow);
+        }
+
+        .servitor-icon {
+            font-size: 32px;
+            margin-bottom: 5px;
+        }
+
+        .calendar {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 2px;
+            margin-top: 10px;
+        }
+
+        .calendar-day {
+            background: var(--dkgray);
+            padding: 8px;
+            text-align: center;
+            font-size: 10px;
+            border: 1px solid var(--ltgray);
+        }
+
+        .calendar-day.today {
+            background: var(--red);
+            color: var(--yellow);
+            font-weight: bold;
+        }
+
+        .calendar-day.has-entry {
+            background: var(--blue);
+            color: var(--white);
+        }
+
+        .unlock-modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--black);
+            border: 3px solid var(--yellow);
+            padding: 30px;
+            z-index: 1000;
+            min-width: 400px;
+        }
+
+        .unlock-modal.active {
+            display: block;
+        }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 999;
+        }
+
+        .modal-overlay.active {
+            display: block;
+        }
+
+        .unlock-title {
+            color: var(--yellow);
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .unlock-description {
+            color: var(--ltcyan);
+            font-size: 11px;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .unlock-price {
+            color: var(--ltgreen);
+            font-size: 14px;
+            font-weight: bold;
+            text-align: center;
+            margin: 15px 0;
+        }
+
+        .statusbar {
+            background: var(--dkgray);
+            color: var(--ltgray);
+            padding: 6px 12px;
+            font-size: 11px;
+            border-top: 2px solid var(--black);
+        }
+
+        @media (max-width: 1024px) {
+            .main-container {
+                flex-direction: column;
+            }
+
+            .left-column {
+                border-right: none;
+                border-bottom: 3px solid var(--blue);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="modal-overlay" id="modalOverlay" onclick="closeUnlockModal()"></div>
+    <div class="unlock-modal" id="unlockModal">
+        <div class="unlock-title" id="unlockTitle">UNLOCK PREMIUM FEATURE</div>
+        <div class="unlock-description" id="unlockDescription"></div>
+        <div class="unlock-price" id="unlockPrice"></div>
+        <div style="text-align: center; margin: 20px 0;">
+            <button class="btn" onclick="window.open('https://gumroad.com/your-product', '_blank')">Purchase on Gumroad</button>
+        </div>
+        <div style="border-top: 2px solid var(--yellow); margin: 20px 0; padding-top: 20px;">
+            <div style="color: var(--ltcyan); font-size: 11px; margin-bottom: 10px;">Already purchased? Enter your unlock code:</div>
+            <input type="text" class="input" id="unlockCodeInput" placeholder="Enter code from Gumroad...">
+            <div style="text-align: center; margin-top: 10px;">
+                <button class="btn" onclick="verifyUnlockCode()">Unlock</button>
+                <button class="btn" onclick="closeUnlockModal()">Cancel</button>
+            </div>
+            <div id="unlockError" style="color: var(--ltred); font-size: 10px; margin-top: 10px; text-align: center;"></div>
+            <div style="border-top: 1px solid var(--dkgray); margin-top: 20px; padding-top: 15px; text-align: center;">
+                <div style="color: var(--ltgray); font-size: 10px;">
+                    Need help? Email: <a href="mailto:highstdevelopment@gmail.com" style="color: var(--ltcyan); text-decoration: none;">highstdevelopment@gmail.com</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="titlebar">
+        <span class="titlebar-title">DIGITAL GRIMOIRE :: Ars Notoria Digitalis</span>
+        <div class="titlebar-buttons">
+            <button class="titlebar-btn" onclick="window.location.href='index.html'">← RETURN TO NOTES</button>
+            <button class="titlebar-btn" onclick="exportData()">EXPORT DATA</button>
+            <button class="titlebar-btn" onclick="importData()">IMPORT DATA</button>
+        </div>
+    </div>
+
+    <div class="menubar">
+        <span class="menu-item active" onclick="showView('daily')">DAILY TOOLS</span>
+        <span class="menu-item" onclick="showView('journals')">JOURNALS</span>
+        <a href="reference.html" class="menu-item" style="text-decoration: none;">REFERENCE</a>
+        <span class="menu-item" onclick="showView('unlock')">UNLOCK FEATURES</span>
+    </div>
+
+    <div class="main-container">
+        <!-- LEFT COLUMN: DAILY TOOLS -->
+        <div class="left-column" id="leftColumn">
+            <!-- Daily Divination Section (FREE) -->
+            <div class="section" id="section-divination">
+                <div class="section-header free">
+                    📖 DAILY DIVINATION
+                    <span style="font-size: 9px;">FREE</span>
+                </div>
+                <div class="section-content">
+                    <button class="btn btn-small" onclick="addDivination()">+ New Reading</button>
+                    <div class="view-toggle">
+                        <button class="view-btn active" onclick="setDivinationView('list')">LIST</button>
+                        <button class="view-btn" onclick="setDivinationView('calendar')">CALENDAR</button>
+                    </div>
+                    <div id="divinationContent"></div>
+                </div>
+            </div>
+
+            <!-- Moon Phase Widget (FREE) -->
+            <div class="section" id="section-moon">
+                <div class="section-header free">
+                    🌙 MOON PHASE TRACKER
+                    <span style="font-size: 9px;">FREE</span>
+                </div>
+                <div class="section-content">
+                    <div class="moon-phase">
+                        <div class="moon-display" id="moonPhase">🌕</div>
+                        <div id="moonPhaseName" style="color: var(--ltcyan); font-weight: bold;">Full Moon</div>
+                        <div id="moonDate" style="color: var(--ltgray); font-size: 10px; margin-top: 5px;"></div>
+                        <button class="btn btn-small" onclick="updateMoonPhase()">Update Manually</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Digital Servitor Homes (PREMIUM) -->
+            <div class="section locked" id="section-servitors" data-unlock-id="servitors">
+                <div class="section-header premium">
+                    👻 DIGITAL SERVITOR HOMES
+                    <span style="font-size: 9px;">PREMIUM - $5
+                        <a href="servitor-homes-guide.html" target="_blank"
+                           style="color: var(--yellow); text-decoration: none; margin-left: 8px;"
+                           title="Open Servitor Homes Guide">📖</a>
+                    </span>
+                </div>
+                <div class="section-content">
+                    <button class="btn btn-small" onclick="addServitor()">+ New Servitor</button>
+                    <div class="servitor-gallery" id="servitorGallery">
+                        <div class="servitor-card">
+                            <div class="servitor-icon">🔮</div>
+                            <div style="font-size: 9px;">Example</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Spell Journal (PREMIUM) -->
+            <div class="section locked" id="section-spell-journal" data-unlock-id="spell-journal">
+                <div class="section-header premium">
+                    🔥 SPELL JOURNAL
+                    <span style="font-size: 9px;">PREMIUM - $7
+                        <a href="spell-library-guide.html" target="_blank"
+                           style="color: var(--yellow); text-decoration: none; margin-left: 8px;"
+                           title="Open Spell Library Guide">📖</a>
+                    </span>
+                </div>
+                <div class="section-content">
+                    <button class="btn btn-small" onclick="addSpellEntry()">+ New Spell</button>
+                    <div class="view-toggle">
+                        <button class="view-btn active">LIST</button>
+                        <button class="view-btn">TIMELINE</button>
+                    </div>
+                    <div id="spellJournalContent"></div>
+                </div>
+            </div>
+
+            <!-- Calendar Widget (FREE) -->
+            <div class="section" id="section-calendar">
+                <div class="section-header free">
+                    📅 CALENDAR
+                    <span style="font-size: 9px;">FREE</span>
+                </div>
+                <div class="section-content">
+                    <div style="text-align: center; color: var(--yellow); font-weight: bold; margin-bottom: 10px;" id="calendarMonth"></div>
+                    <div class="calendar" id="calendar"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT COLUMN: JOURNALS & REFERENCE -->
+        <div class="right-column" id="rightColumn">
+            <!-- Book of Mirrors (PREMIUM) -->
+            <div class="section locked" id="section-mirrors" data-unlock-id="mirrors">
+                <div class="section-header premium">
+                    ✨ BOOK OF MIRRORS
+                    <span style="font-size: 9px;">PREMIUM - $7
+                        <a href="book-of-mirrors-guide.html" target="_blank"
+                           style="color: var(--yellow); text-decoration: none; margin-left: 8px;"
+                           title="Open Complete Guide">📖</a>
+                    </span>
+                </div>
+                <div class="section-content">
+                    <button class="btn btn-small" onclick="addMirrorEntry()">+ New Entry</button>
+                    <div class="view-toggle">
+                        <button class="view-btn active">LIST</button>
+                        <button class="view-btn">CALENDAR</button>
+                    </div>
+                    <div id="mirrorsContent"></div>
+                </div>
+            </div>
+
+            <!-- Sacred Library (PREMIUM) -->
+            <div class="section locked" id="section-reading" data-unlock-id="reading">
+                <div class="section-header premium">
+                    📖 SACRED LIBRARY
+                    <span style="font-size: 9px;">PREMIUM - $5</span>
+                </div>
+                <div class="section-content">
+                    <div style="color: var(--ltcyan); font-size: 10px; margin-bottom: 10px; font-style: italic;">
+                        A curated collection of occult texts and grimoires
+                    </div>
+                    <div id="readingContent"></div>
+                </div>
+            </div>
+
+            <!-- Brain Dump (FREE) -->
+            <div class="section" id="section-braindump">
+                <div class="section-header free">
+                    💭 BRAIN DUMP
+                    <span style="font-size: 9px;">FREE</span>
+                </div>
+                <div class="section-content">
+                    <button class="btn btn-small" onclick="addBrainDump()">+ Quick Note</button>
+                    <div id="brainDumpContent"></div>
+                </div>
+            </div>
+
+            <!-- Archive (FREE) -->
+            <div class="section" id="section-archive">
+                <div class="section-header free">
+                    📦 ARCHIVE
+                    <span style="font-size: 9px;">FREE</span>
+                </div>
+                <div class="section-content">
+                    <div id="archiveContent" style="color: var(--ltgray); font-size: 11px;">
+                        No archived entries yet. Move old entries here to keep your active sections organized.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="statusbar">
+        <span id="statusText">Digital Grimoire Loaded | Free: 5 sections | Premium: 7 sections locked</span>
+        <span style="margin-left: 20px;">
+            <a href="https://highstdev.gumroad.com/l/fpprsi" target="_blank" style="color: var(--yellow); text-decoration: none; font-weight: bold;">☕ Donate</a>
+        </span>
+        <span style="margin-left: 15px;">
+            Support: <a href="mailto:highstdevelopment@gmail.com" style="color: var(--ltcyan); text-decoration: none;">highstdevelopment@gmail.com</a>
+        </span>
+    </div>
+
+    <!-- Firebase Modular SDK (v10) -->
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js';
+        import { getFunctions, httpsCallable } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-functions.js';
+
+        // Firebase Configuration (from your existing chatroom setup)
+        const firebaseConfig = {
+            apiKey: "AIzaSyBTAZUXzowkuOHdRQg2rdT_gpNZJjKZlcg",
+            authDomain: "ars-notoria-chatroom.firebaseapp.com",
+            databaseURL: "https://ars-notoria-chatroom-default-rtdb.firebaseio.com",
+            projectId: "ars-notoria-chatroom",
+            storageBucket: "ars-notoria-chatroom.firebasestorage.app",
+            messagingSenderId: "533152057936",
+            appId: "1:533152057936:web:cff000dc8bc91b7a84df55"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const functions = getFunctions(app);
+        const verifyFunction = httpsCallable(functions, 'verifyGumroadKey');
+
+        // Product IDs mapping (replace with your actual Gumroad product IDs)
+        const PRODUCT_IDS = {
+            'servitors': 'IdVRaLQ_bUGpYc_cLLbuEQ==',
+            'mirrors': 'cxRcs6itWH3qNX5IJHWCXQ==',
+            'reading': 'yEWNis04RvE6MDxQ4uSpBA==',
+            'spell-journal': 't8hHPRckXq_dz8vFHSxDYw=='
+        };
+
+        // Gumroad product URLs
+        const GUMROAD_URLS = {
+            'servitors': 'https://highstdev.gumroad.com/l/vczqxj',
+            'mirrors': 'https://highstdev.gumroad.com/l/ffmfhe',
+            'reading': 'https://highstdev.gumroad.com/l/eikht',
+            'spell-journal': 'https://highstdev.gumroad.com/l/ubsjrv'
+        };
+
+        // Check for existing unlocks on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            Object.keys(PRODUCT_IDS).forEach(unlockId => {
+                const storedKey = localStorage.getItem(`unlock_${unlockId}`);
+                if (storedKey) {
+                    // Auto-unlock without verification (already verified before)
+                    unlockSection(unlockId);
+                }
+            });
+        });
+
+        // Global unlock function
+        window.verifyUnlockCode = async function() {
+            const codeInput = document.getElementById('unlockCodeInput');
+            const errorDiv = document.getElementById('unlockError');
+            const licenseKey = codeInput.value.trim();
+
+            if (!licenseKey) {
+                errorDiv.textContent = 'Please enter an unlock code';
+                return;
+            }
+
+            // ⚠️ TEMPORARY: Skeleton key for UX testing (REMOVE BEFORE PRODUCTION!)
+            if (licenseKey === 'SKELETON-2026') {
+                const modal = document.getElementById('unlockModal');
+                const currentUnlockId = modal.dataset.unlockId;
+                localStorage.setItem(`unlock_${currentUnlockId}`, licenseKey);
+                unlockSection(currentUnlockId);
+                closeUnlockModal();
+                alert('✨ [TEST MODE] Access granted with skeleton key ✨');
+                codeInput.value = '';
+                errorDiv.textContent = '';
+                return;
+            }
+            // ⚠️ END TEMPORARY CODE
+
+            // Get current unlock ID from modal data attribute
+            const modal = document.getElementById('unlockModal');
+            const currentUnlockId = modal.dataset.unlockId;
+            const productId = PRODUCT_IDS[currentUnlockId];
+
+            if (!productId || productId.includes('YOUR_')) {
+                errorDiv.textContent = 'Product not configured yet. Contact support.';
+                return;
+            }
+
+            errorDiv.textContent = 'Verifying...';
+            errorDiv.style.color = 'var(--yellow)';
+
+            try {
+                const result = await verifyFunction({
+                    productId: productId,
+                    licenseKey: licenseKey,
+                    incrementUses: true
+                });
+
+                if (result.data.valid) {
+                    // Valid key - unlock section
+                    localStorage.setItem(`unlock_${currentUnlockId}`, licenseKey);
+                    unlockSection(currentUnlockId);
+                    closeUnlockModal();
+
+                    // Success message
+                    alert('✨ Access granted, seeker. The veil is lifted. ✨');
+
+                    // Clear input
+                    codeInput.value = '';
+                    errorDiv.textContent = '';
+                } else {
+                    // Invalid key
+                    errorDiv.style.color = 'var(--ltred)';
+                    errorDiv.textContent = result.data.message || 'Invalid unlock code. Please check and try again.';
+                }
+            } catch (error) {
+                console.error('Verification error:', error);
+                errorDiv.style.color = 'var(--ltred)';
+                errorDiv.textContent = 'Connection error. Please try again.';
+            }
+        };
+
+        // Unlock section function
+        function unlockSection(unlockId) {
+            const section = document.querySelector(`[data-unlock-id="${unlockId}"]`);
+            if (section) {
+                section.classList.remove('locked');
+            }
+        }
+
+        // Open unlock modal (update existing function)
+        window.openUnlockModal = function(unlockId) {
+            const modal = document.getElementById('unlockModal');
+            const overlay = document.getElementById('modalOverlay');
+            const errorDiv = document.getElementById('unlockError');
+
+            // Clear previous errors
+            errorDiv.textContent = '';
+
+            // Store unlock ID in modal
+            modal.dataset.unlockId = unlockId;
+
+            // Update modal content based on unlock ID
+            const titles = {
+                'servitors': 'Digital Servitor Homes',
+                'mirrors': 'Book of Mirrors',
+                'reading': 'Sacred Library',
+                'spell-journal': 'Spell Journal'
+            };
+
+            const descriptions = {
+                'servitors': 'Create and manage thoughtform entities to assist in your magical work.',
+                'mirrors': 'Your personal magical journal for recording spiritual experiences and shadow work.',
+                'reading': 'Curated collection of occult texts and grimoires in PDF format.',
+                'spell-journal': '5 authentic occult spells plus ability to add your own custom spells.'
+            };
+
+            const prices = {
+                'servitors': '$5',
+                'mirrors': '$7',
+                'reading': '$5',
+                'spell-journal': '$7'
+            };
+
+            document.getElementById('unlockTitle').textContent = titles[unlockId] || 'Premium Feature';
+            document.getElementById('unlockDescription').textContent = descriptions[unlockId] || '';
+            document.getElementById('unlockPrice').textContent = `Price: ${prices[unlockId] || '$5'}`;
+
+            // Update Gumroad button
+            const gumroadBtn = modal.querySelector('button[onclick*="gumroad"]');
+            if (gumroadBtn) {
+                gumroadBtn.onclick = () => window.open(GUMROAD_URLS[unlockId] || 'https://gumroad.com', '_blank');
+            }
+
+            // Show modal
+            modal.classList.add('active');
+            overlay.classList.add('active');
+        };
+
+        // Close unlock modal
+        window.closeUnlockModal = function() {
+            document.getElementById('unlockModal').classList.remove('active');
+            document.getElementById('modalOverlay').classList.remove('active');
+            document.getElementById('unlockCodeInput').value = '';
+            document.getElementById('unlockError').textContent = '';
+        };
+
+        // Add click handlers to locked sections
+        document.querySelectorAll('.section.locked').forEach(section => {
+            section.addEventListener('click', function(e) {
+                // Don't trigger if clicking inside content
+                if (!e.target.closest('.section-content')) {
+                    const unlockId = this.dataset.unlockId;
+                    if (unlockId) {
+                        openUnlockModal(unlockId);
+                    }
+                }
+            });
+        });
+    </script>
+
+    <script src="grimoire.js"></script>
+</body>
+</html>

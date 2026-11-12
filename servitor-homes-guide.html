@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Servitor Homes - Complete Guide</title>
+    <style>
+        :root {
+            --black: #000000;
+            --blue: #0000AA;
+            --green: #00AA00;
+            --cyan: #00AAAA;
+            --red: #AA0000;
+            --purple: #AA00AA;
+            --brown: #AA5500;
+            --ltgray: #AAAAAA;
+            --dkgray: #555555;
+            --ltblue: #5555FF;
+            --ltgreen: #55FF55;
+            --ltcyan: #55FFFF;
+            --ltred: #FF5555;
+            --pink: #FF55FF;
+            --yellow: #FFFF55;
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--black);
+            color: var(--ltgray);
+            font-family: 'Courier New', monospace;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 2px solid var(--pink);
+            background-color: rgba(255, 85, 255, 0.05);
+        }
+
+        h1 {
+            color: var(--pink);
+            font-size: 24px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .subtitle {
+            color: var(--yellow);
+            font-size: 12px;
+            font-style: italic;
+        }
+
+        h2 {
+            color: var(--ltblue);
+            font-size: 18px;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid var(--dkgray);
+        }
+
+        h3 {
+            color: var(--ltgreen);
+            font-size: 14px;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            margin-bottom: 15px;
+            color: var(--ltgray);
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .servitor-card {
+            background-color: rgba(170, 0, 170, 0.1);
+            border: 2px solid var(--purple);
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .servitor-header {
+            color: var(--pink);
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .servitor-icon {
+            font-size: 32px;
+        }
+
+        .servitor-details {
+            color: var(--ltgray);
+            font-size: 11px;
+            line-height: 1.8;
+        }
+
+        .servitor-details strong {
+            color: var(--ltcyan);
+        }
+
+        ul, ol {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        li {
+            margin-bottom: 8px;
+            color: var(--ltgray);
+        }
+
+        .warning-box {
+            background-color: rgba(170, 0, 0, 0.1);
+            border: 2px solid var(--red);
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .warning-header {
+            color: var(--ltred);
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 12px;
+        }
+
+        .info-box {
+            background-color: rgba(85, 255, 85, 0.1);
+            border: 1px solid var(--green);
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .info-header {
+            color: var(--ltgreen);
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .example-box {
+            background-color: rgba(0, 170, 170, 0.1);
+            border: 1px solid var(--cyan);
+            padding: 15px;
+            margin: 15px 0;
+            font-size: 11px;
+        }
+
+        .example-header {
+            color: var(--ltcyan);
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .ritual-box {
+            background-color: rgba(170, 0, 170, 0.1);
+            border: 1px solid var(--purple);
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .ritual-header {
+            color: var(--pink);
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .unlock-box {
+            background-color: rgba(170, 170, 0, 0.1);
+            border: 2px solid var(--yellow);
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .unlock-code {
+            color: var(--yellow);
+            font-size: 18px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .quote-box {
+            text-align: center;
+            font-style: italic;
+            color: var(--ltcyan);
+            margin: 30px 0;
+            padding: 20px;
+            border-top: 1px solid var(--dkgray);
+            border-bottom: 1px solid var(--dkgray);
+        }
+
+        .step-by-step {
+            background-color: rgba(0, 0, 170, 0.1);
+            border-left: 3px solid var(--ltblue);
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        a {
+            color: var(--ltblue);
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: var(--ltcyan);
+            text-decoration: underline;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 10px 20px;
+            border: 1px solid var(--ltblue);
+            color: var(--ltblue);
+            text-align: center;
+        }
+
+        .back-link:hover {
+            background-color: rgba(85, 85, 255, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+                font-size: 12px;
+            }
+
+            h1 {
+                font-size: 18px;
+            }
+
+            h2 {
+                font-size: 16px;
+            }
+
+            h3 {
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>👻 Digital Servitor Homes 👻</h1>
+        <div class="subtitle">Creating & Maintaining Thoughtform Entities</div>
+    </header>
+
+    <div class="section">
+        <h2>What Are Servitors?</h2>
+        <p>A <strong>servitor</strong> is a thoughtform entity - a being created through focused will, imagination, and ritual to perform specific tasks. Also known as <strong>egregores</strong> (group-created) or <strong>tulpas</strong> (Tibetan Buddhist tradition), servitors are one of the most practical forms of operative magic.</p>
+
+        <div class="info-box">
+            <div class="info-header">Key Concept:</div>
+            <p>Unlike evoked spirits or invoked deities, servitors are <strong>intentionally created</strong> by the magician. They have no independent existence before you make them. You are the creator, the parent, the programmer.</p>
+        </div>
+
+        <h3>The Three Components of a Servitor</h3>
+        <ol>
+            <li><strong>Form</strong> - Visual appearance, name, sigil, or symbol</li>
+            <li><strong>Function</strong> - Specific task or purpose</li>
+            <li><strong>Fuel</strong> - Energy source (your attention, offerings, emotions)</li>
+        </ol>
+    </div>
+
+    <div class="section">
+        <h2>Why Digital Servitor Homes?</h2>
+        <p>In chaos magic and modern occultism, servitors can be "housed" in digital spaces. The <strong>Digital Servitor Homes</strong> feature provides:</p>
+
+        <ul>
+            <li><strong>Persistent Housing</strong> - A dedicated space for your servitors to "live"</li>
+            <li><strong>Regular Interaction</strong> - Visit and charge them daily</li>
+            <li><strong>Visual Anchors</strong> - Icons and names strengthen the thoughtform</li>
+            <li><strong>Record Keeping</strong> - Track when created, last fed, results observed</li>
+            <li><strong>Decommissioning</strong> - Safely dissolve servitors when done</li>
+        </ul>
+
+        <div class="info-box">
+            <div class="info-header">Digital Magic:</div>
+            <p>Your computer is a reality-creation machine. Code manifests intention into form. Digital servitors are natural extensions of chaos magic philosophy - belief is a tool, and the substrate doesn't matter as much as the focus.</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>How to Create a Servitor</h2>
+
+        <div class="step-by-step">
+            <h3 style="color: var(--ltblue); margin-top: 0;">Step 1: Define the Purpose</h3>
+            <p>What do you want the servitor to do? Be SPECIFIC.</p>
+            <p><strong>Good examples:</strong></p>
+            <ul>
+                <li>"Alert me to opportunities for financial gain"</li>
+                <li>"Protect my home while I sleep"</li>
+                <li>"Help me remember dreams upon waking"</li>
+                <li>"Draw creative inspiration when I'm stuck"</li>
+            </ul>
+            <p><strong>Bad examples:</strong></p>
+            <ul>
+                <li>"Make me rich" (too vague)</li>
+                <li>"Fix all my problems" (too broad)</li>
+                <li>"Make [person] love me" (violates free will)</li>
+            </ul>
+        </div>
+
+        <div class="step-by-step">
+            <h3 style="color: var(--ltblue); margin-top: 0;">Step 2: Choose Form & Name</h3>
+            <p>Give your servitor an identity:</p>
+            <ul>
+                <li><strong>Name</strong> - Short, memorable, unique (e.g., "Vigil", "Cascade", "Ember")</li>
+                <li><strong>Icon/Symbol</strong> - Pick an emoji or create a sigil</li>
+                <li><strong>Appearance</strong> - How do you visualize it? (color, shape, animal, geometric form)</li>
+                <li><strong>Personality</strong> - Optional but helpful (playful? serious? protective?)</li>
+            </ul>
+        </div>
+
+        <div class="step-by-step">
+            <h3 style="color: var(--ltblue); margin-top: 0;">Step 3: Create the Servitor Entry</h3>
+            <p>In the Digital Grimoire:</p>
+            <ol>
+                <li>Click <strong>"+ New Servitor"</strong></li>
+                <li>Enter name and purpose</li>
+                <li>Choose an icon (emoji)</li>
+                <li>Set creation date</li>
+                <li>Define feeding schedule (daily, weekly, as-needed)</li>
+            </ol>
+        </div>
+
+        <div class="step-by-step">
+            <h3 style="color: var(--ltblue); margin-top: 0;">Step 4: Perform Birth Ritual</h3>
+            <p>Bring the servitor to life through ritual:</p>
+
+            <div class="ritual-box">
+                <div class="ritual-header">Simple Servitor Creation Ritual:</div>
+                <ol style="margin-top: 10px;">
+                    <li>Cleanse space (LBRP or incense)</li>
+                    <li>Enter gnosis (trance state through meditation, breath work, or focused arousal)</li>
+                    <li>Visualize the servitor forming before you</li>
+                    <li>Speak aloud: <em>"I name you [NAME]. Your purpose is [PURPOSE]. You exist to serve this will and no other. Awaken now."</em></li>
+                    <li>Feel energy flowing from you into the thoughtform</li>
+                    <li>Visualize it solidifying, becoming "real"</li>
+                    <li>Command: <em>"Go forth and fulfill your purpose."</em></li>
+                    <li>Ground and close ritual</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="step-by-step">
+            <h3 style="color: var(--ltblue); margin-top: 0;">Step 5: Feed & Maintain</h3>
+            <p>Servitors need energy to function. Feed them through:</p>
+            <ul>
+                <li><strong>Attention</strong> - Visit their digital home, visualize them</li>
+                <li><strong>Offerings</strong> - Light candle, burn incense in their name</li>
+                <li><strong>Emotion</strong> - Direct gratitude, appreciation when they succeed</li>
+                <li><strong>Ritual</strong> - Weekly charging sessions</li>
+            </ul>
+            <p style="color: var(--yellow); margin-top: 10px;">⚠️ Neglected servitors may fade away or, in rare cases, act erratically.</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Example Servitors</h2>
+
+        <div class="servitor-card">
+            <div class="servitor-header">
+                <span class="servitor-icon">🔔</span>
+                <span>Vigil - The Alert Guardian</span>
+            </div>
+            <div class="servitor-details">
+                <p><strong>Purpose:</strong> Alerts you to opportunities and potential dangers you might miss</p>
+                <p><strong>Feeding:</strong> Daily acknowledgment when you wake: "Thank you, Vigil, for watching over me."</p>
+                <p><strong>Signs of Activity:</strong> Sudden urges to check something, gut feelings about people, waking at significant moments</p>
+                <p><strong>Icon:</strong> 🔔 (bell - alerting, awakening)</p>
+            </div>
+        </div>
+
+        <div class="servitor-card">
+            <div class="servitor-header">
+                <span class="servitor-icon">💰</span>
+                <span>Cascade - The Flow Opener</span>
+            </div>
+            <div class="servitor-details">
+                <p><strong>Purpose:</strong> Draws financial opportunities and removes blockages to abundance</p>
+                <p><strong>Feeding:</strong> Weekly offering of coins on altar, visualization of green energy flowing to it</p>
+                <p><strong>Signs of Activity:</strong> Unexpected money arriving, job opportunities, finding valuable items</p>
+                <p><strong>Icon:</strong> 💰 (money bag - prosperity, flow)</p>
+            </div>
+        </div>
+
+        <div class="servitor-card">
+            <div class="servitor-header">
+                <span class="servitor-icon">🛡️</span>
+                <span>Bastion - The Night Shield</span>
+            </div>
+            <div class="servitor-details">
+                <p><strong>Purpose:</strong> Protects your home and sleep from negative energies and entities</p>
+                <p><strong>Feeding:</strong> Nightly: "Bastion, guard this space. Allow only beneficial energies."</p>
+                <p><strong>Signs of Activity:</strong> Better sleep quality, reduced nightmares, sense of safety, pets calm at night</p>
+                <p><strong>Icon:</strong> 🛡️ (shield - protection, boundary)</p>
+            </div>
+        </div>
+
+        <div class="servitor-card">
+            <div class="servitor-header">
+                <span class="servitor-icon">💡</span>
+                <span>Muse - The Inspiration Weaver</span>
+            </div>
+            <div class="servitor-details">
+                <p><strong>Purpose:</strong> Brings creative ideas and solutions when you're stuck</p>
+                <p><strong>Feeding:</strong> Share your finished creative work with it: "This exists because of you, Muse."</p>
+                <p><strong>Signs of Activity:</strong> Sudden insights, creative breakthroughs, "aha!" moments, vivid imagery</p>
+                <p><strong>Icon:</strong> 💡 (lightbulb - ideas, illumination)</p>
+            </div>
+        </div>
+
+        <div class="servitor-card">
+            <div class="servitor-header">
+                <span class="servitor-icon">🌙</span>
+                <span>Oneiros - The Dream Keeper</span>
+            </div>
+            <div class="servitor-details">
+                <p><strong>Purpose:</strong> Helps you remember dreams and facilitates lucid dreaming</p>
+                <p><strong>Feeding:</strong> Record dreams in journal: "Oneiros showed me this vision."</p>
+                <p><strong>Signs of Activity:</strong> Increased dream recall, more vivid dreams, spontaneous lucidity</p>
+                <p><strong>Icon:</strong> 🌙 (moon - dreams, unconscious, night)</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Types of Servitors</h2>
+
+        <h3>By Function:</h3>
+        <ul>
+            <li><strong>Protection Servitors</strong> - Guard, shield, banish negative influences</li>
+            <li><strong>Abundance Servitors</strong> - Draw money, opportunities, resources</li>
+            <li><strong>Information Servitors</strong> - Alert you to important things, enhance intuition</li>
+            <li><strong>Creative Servitors</strong> - Inspire art, writing, problem-solving</li>
+            <li><strong>Healing Servitors</strong> - Support recovery, boost vitality</li>
+            <li><strong>Social Servitors</strong> - Enhance charisma, smooth interactions</li>
+        </ul>
+
+        <h3>By Lifespan:</h3>
+        <ul>
+            <li><strong>Temporary</strong> - Created for single task, dissolved after (1-30 days)</li>
+            <li><strong>Long-term</strong> - Ongoing purpose, maintained indefinitely (months-years)</li>
+            <li><strong>Self-sustaining</strong> - Advanced servitors that feed on ambient energy</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Feeding Your Servitors</h2>
+
+        <h3>Daily Feeding (Low Effort):</h3>
+        <div class="example-box">
+            <div class="example-header">Quick Daily Method:</div>
+            <ol>
+                <li>Open Digital Grimoire</li>
+                <li>Click on servitor's card</li>
+                <li>Visualize it for 10 seconds (see it clearly in your mind)</li>
+                <li>Say mentally or aloud: "[Name], I feed you with my attention. Fulfill your purpose."</li>
+                <li>Mark as "Fed" in grimoire</li>
+            </ol>
+        </div>
+
+        <h3>Weekly Charging (Medium Effort):</h3>
+        <div class="example-box">
+            <div class="example-header">Weekly Ritual Method:</div>
+            <ol>
+                <li>Light candle or incense</li>
+                <li>Enter light trance (deep breathing, relaxed focus)</li>
+                <li>Visualize the servitor before you</li>
+                <li>Feel energy building in your body</li>
+                <li>Direct energy toward the visualization</li>
+                <li>Speak: "[Name], receive this offering of power. Continue your work."</li>
+                <li>Visualize it glowing brighter</li>
+                <li>Thank it for its service</li>
+            </ol>
+        </div>
+
+        <h3>Offerings (Physical):</h3>
+        <ul>
+            <li>Coins (for abundance servitors)</li>
+            <li>Written thanks (for any servitor)</li>
+            <li>Incense smoke (general energy)</li>
+            <li>Water or alcohol (traditional spirit offering)</li>
+            <li>Art depicting them (strengthens form)</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Safety & Best Practices</h2>
+
+        <div class="warning-box">
+            <div class="warning-header">⚠️ Critical Safety Rules:</div>
+            <ol>
+                <li><strong>Specific Instructions Only</strong> - Never give vague commands like "do whatever it takes"</li>
+                <li><strong>Respect Free Will</strong> - Don't create servitors to control or manipulate others</li>
+                <li><strong>Set Boundaries</strong> - Define clearly what it CAN'T do</li>
+                <li><strong>Decommission Properly</strong> - Always dissolve servitors you no longer need</li>
+                <li><strong>Don't Overpopulate</strong> - Start with 1-3 servitors max</li>
+                <li><strong>Monitor Behavior</strong> - If strange things happen, investigate</li>
+            </ol>
+        </div>
+
+        <h3>When to Decommission a Servitor:</h3>
+        <ul>
+            <li>Task completed (temporary servitor)</li>
+            <li>No longer needed</li>
+            <li>Acting unpredictably or causing problems</li>
+            <li>Draining too much energy</li>
+            <li>You're leaving occult practice</li>
+        </ul>
+
+        <div class="ritual-box">
+            <div class="ritual-header">Decommissioning Ritual:</div>
+            <ol style="margin-top: 10px;">
+                <li>Open Digital Grimoire, view servitor</li>
+                <li>Perform LBRP or cleanse space</li>
+                <li>Visualize the servitor before you</li>
+                <li>Thank it for its service</li>
+                <li>Speak: <em>"[Name], your task is complete. I release you from service. Return to the void from which you came. You are dissolved."</em></li>
+                <li>Visualize it fading, becoming transparent, disappearing</li>
+                <li>Delete the servitor from grimoire</li>
+                <li>Ground and center</li>
+            </ol>
+            <p style="color: var(--yellow); margin-top: 10px;">Never just delete without ritual dissolution - this leaves energetic residue.</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Troubleshooting</h2>
+
+        <h3>Problem: Servitor isn't working</h3>
+        <p><strong>Solutions:</strong></p>
+        <ul>
+            <li>Feed it more regularly</li>
+            <li>Clarify its purpose (be more specific)</li>
+            <li>Strengthen visualization (spend more time seeing it clearly)</li>
+            <li>Check if purpose is realistic (magic works with probability, not impossibility)</li>
+        </ul>
+
+        <h3>Problem: Servitor is too active/draining</h3>
+        <p><strong>Solutions:</strong></p>
+        <ul>
+            <li>Set clearer boundaries ("Only act between 9 AM - 5 PM")</li>
+            <li>Feed it less often</li>
+            <li>Command it to reduce activity level</li>
+            <li>Consider decommissioning if it persists</li>
+        </ul>
+
+        <h3>Problem: Forgot to feed servitor for weeks</h3>
+        <p><strong>Solutions:</strong></p>
+        <ul>
+            <li>Don't panic - it likely just went dormant</li>
+            <li>Perform feeding ritual with extra energy</li>
+            <li>Restate its purpose clearly</li>
+            <li>If no response after 3 feedings, consider it dissolved naturally</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Advanced Techniques</h2>
+
+        <h3>Servitor Networks:</h3>
+        <p>Create servitors that work together. Example: "Alert" servitor finds opportunities → "Gate" servitor opens doors → "Flow" servitor brings abundance through.</p>
+
+        <h3>Timed Servitors:</h3>
+        <p>Program auto-dissolution: "You exist for 30 days, then dissolve automatically."</p>
+
+        <h3>Self-Sustaining Servitors:</h3>
+        <p>Advanced: Allow servitor to feed on ambient energy or emotional states (anger, joy, etc.). Requires careful programming.</p>
+
+        <h3>Group Servitors (Egregores):</h3>
+        <p>Multiple people feeding the same thoughtform = exponentially more powerful. Requires coordination.</p>
+    </div>
+
+    <div class="section">
+        <h2>Record Keeping</h2>
+        <p>Track these details for each servitor:</p>
+        <ul>
+            <li><strong>Creation Date</strong> - When brought to life</li>
+            <li><strong>Last Fed</strong> - Track feeding schedule</li>
+            <li><strong>Purpose Statement</strong> - Exact wording used</li>
+            <li><strong>Results Log</strong> - When did it work? What manifested?</li>
+            <li><strong>Behavioral Notes</strong> - Any unexpected activity</li>
+            <li><strong>Energy Level</strong> - Does it feel strong or weak?</li>
+            <li><strong>Modifications</strong> - Any changes to purpose or form</li>
+        </ul>
+    </div>
+
+    <div class="unlock-box">
+        <h2 style="color: var(--yellow); margin-bottom: 15px;">Get Digital Servitor Homes</h2>
+        <p><strong>Digital Servitor Homes</strong> is a premium feature ($5).</p>
+        <p style="margin-top: 15px;">Create and manage thoughtform entities in your digital grimoire.</p>
+        <div style="text-align: center; margin-top: 20px;">
+            <a href="grimoire.html" style="display: inline-block; background: var(--purple); color: var(--yellow); padding: 12px 24px; border: 2px solid var(--pink); text-decoration: none; font-weight: bold; font-size: 14px;">
+                UNLOCK THIS FEATURE →
+            </a>
+        </div>
+    </div>
+
+    <div class="quote-box">
+        <p style="color: var(--pink); font-size: 14px;">"You are the creator. They are your servants. Wield this power wisely." 👻✨</p>
+        <p style="margin-top: 15px; color: var(--ltcyan);">"Thought is the ancestor of action."</p>
+    </div>
+
+    <div style="text-align: center;">
+        <a href="javascript:window.close();" class="back-link">← Close This Guide</a>
+    </div>
+
+    <div style="text-align: center; padding: 20px; border-top: 2px solid var(--dkgray); margin-top: 30px;">
+        <p style="color: var(--ltgray); font-size: 11px;">
+            Questions or issues? Contact:
+            <a href="mailto:highstdevelopment@gmail.com" style="color: var(--ltcyan); text-decoration: none;">highstdevelopment@gmail.com</a>
+        </p>
+    </div>
+
+</body>
+</html>

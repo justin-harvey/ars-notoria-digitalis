@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book of Mirrors - Complete Guide</title>
+    <style>
+        :root {
+            --black: #000000;
+            --blue: #0000AA;
+            --green: #00AA00;
+            --cyan: #00AAAA;
+            --red: #AA0000;
+            --purple: #AA00AA;
+            --brown: #AA5500;
+            --ltgray: #AAAAAA;
+            --dkgray: #555555;
+            --ltblue: #5555FF;
+            --ltgreen: #55FF55;
+            --ltcyan: #55FFFF;
+            --ltred: #FF5555;
+            --pink: #FF55FF;
+            --yellow: #FFFF55;
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--black);
+            color: var(--ltgray);
+            font-family: 'Courier New', monospace;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 2px solid var(--ltcyan);
+            background-color: rgba(85, 255, 255, 0.05);
+        }
+
+        h1 {
+            color: var(--ltcyan);
+            font-size: 24px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .subtitle {
+            color: var(--yellow);
+            font-size: 12px;
+            font-style: italic;
+        }
+
+        h2 {
+            color: var(--ltblue);
+            font-size: 18px;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid var(--dkgray);
+        }
+
+        h3 {
+            color: var(--ltgreen);
+            font-size: 14px;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            margin-bottom: 15px;
+            color: var(--ltgray);
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .example-box {
+            background-color: rgba(0, 170, 0, 0.1);
+            border: 1px solid var(--green);
+            padding: 15px;
+            margin: 15px 0;
+            font-size: 11px;
+        }
+
+        .example-header {
+            color: var(--ltgreen);
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .example-content {
+            color: var(--ltgray);
+            white-space: pre-wrap;
+        }
+
+        ul, ol {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        li {
+            margin-bottom: 8px;
+            color: var(--ltgray);
+        }
+
+        .tag-category {
+            display: inline-block;
+            background-color: rgba(170, 0, 170, 0.2);
+            border: 1px solid var(--purple);
+            padding: 2px 8px;
+            margin: 3px;
+            font-size: 10px;
+            color: var(--pink);
+        }
+
+        .tips-box {
+            background-color: rgba(255, 255, 85, 0.1);
+            border: 1px solid var(--brown);
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .tips-header {
+            color: var(--yellow);
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .do-item {
+            color: var(--ltgreen);
+        }
+
+        .dont-item {
+            color: var(--ltred);
+        }
+
+        .security-box {
+            background-color: rgba(170, 0, 0, 0.1);
+            border: 1px solid var(--red);
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .unlock-box {
+            background-color: rgba(170, 170, 0, 0.1);
+            border: 2px solid var(--yellow);
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .unlock-code {
+            color: var(--yellow);
+            font-size: 18px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .quote-box {
+            text-align: center;
+            font-style: italic;
+            color: var(--ltcyan);
+            margin: 30px 0;
+            padding: 20px;
+            border-top: 1px solid var(--dkgray);
+            border-bottom: 1px solid var(--dkgray);
+        }
+
+        a {
+            color: var(--ltblue);
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: var(--ltcyan);
+            text-decoration: underline;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 10px 20px;
+            border: 1px solid var(--ltblue);
+            color: var(--ltblue);
+            text-align: center;
+        }
+
+        .back-link:hover {
+            background-color: rgba(85, 85, 255, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+                font-size: 12px;
+            }
+
+            h1 {
+                font-size: 18px;
+            }
+
+            h2 {
+                font-size: 16px;
+            }
+
+            h3 {
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🪞 Book of Mirrors 🪞</h1>
+        <div class="subtitle">Complete Guide to Your Personal Magical Journal</div>
+    </header>
+
+    <div class="section">
+        <h2>What Is the Book of Mirrors?</h2>
+        <p>The <strong>Book of Mirrors</strong> is your <strong>personal magical journal</strong> for recording spiritual experiences, insights, ritual results, and inner reflections. In occult tradition, a "mirror" reflects truth - both what you show to the world and what you hide from yourself.</p>
+
+        <h3>The Concept Behind the Name</h3>
+        <p><strong>"Book of Mirrors"</strong> represents:</p>
+        <ol>
+            <li><strong>Self-Reflection</strong> - Mirror work is a powerful psychological and magical practice</li>
+            <li><strong>Truth Revelation</strong> - Mirrors show reality without filter</li>
+            <li><strong>Shadow Work</strong> - Seeing and integrating your hidden self</li>
+            <li><strong>Magical Record</strong> - Documenting your spiritual journey</li>
+            <li><strong>Scrying Tool</strong> - Mirrors are used in divination to see beyond the veil</li>
+        </ol>
+        <p>This is your <strong>magical diary</strong>, but deeper than a normal journal - it's where you confront yourself honestly and track your spiritual evolution.</p>
+    </div>
+
+    <div class="section">
+        <h2>Current Features</h2>
+        <h3>What You Can Do Now:</h3>
+        <ol>
+            <li><strong>Create Journal Entries</strong> - Date-stamped automatically, free-form text, personal and private (stored locally)</li>
+            <li><strong>Tag System</strong> - Categorize entries with custom tags, multiple tags per entry, comma-separated</li>
+            <li><strong>Delete Entries</strong> - Remove old or unwanted entries with confirmation</li>
+            <li><strong>Chronological Display</strong> - Newest entries first, clean readable format, TempleOS aesthetic</li>
+        </ol>
+    </div>
+
+    <div class="section">
+        <h2>What to Record in Your Book of Mirrors</h2>
+
+        <h3>1. Ritual Results</h3>
+        <p>Document what happened during and after magical workings:</p>
+        <div class="example-box">
+            <div class="example-header">Example Entry:</div>
+            <div class="example-content">Performed LBRP at dawn. Felt immediate clearing of energy in room.
+Blue light visualizations were stronger than usual. Left shoulder
+tingled during Geburah invocation. Space felt "lighter" for 3 hours
+afterward. Will repeat tomorrow at same time.
+
+Tags: LBRP, protection, morning-practice, energy-work</div>
+        </div>
+
+        <h3>2. Dreams & Visions</h3>
+        <p>Record significant dreams, especially those with occult symbolism:</p>
+        <div class="example-box">
+            <div class="example-header">Example Entry:</div>
+            <div class="example-content">Dream: Walking through ancient library with spiraling staircases.
+A figure in blue robes handed me a book with geometric patterns.
+Couldn't read the text but felt I "understood" it. Woke feeling
+compelled to study sacred geometry. Possible message from Higher Self?
+
+Tags: dream, library, sacred-geometry, blue-figure, vision</div>
+        </div>
+
+        <h3>3. Divination Results</h3>
+        <p>Track tarot readings, pendulum work, scrying sessions:</p>
+        <div class="example-box">
+            <div class="example-header">Example Entry:</div>
+            <div class="example-content">3-card tarot spread on career question:
+Past: 8 of Pentacles (diligent work)
+Present: The Magician (manifesting power)
+Future: 10 of Cups (fulfillment)
+Interpretation: My focused effort is building toward manifestation.
+Success is coming through continued dedication. Confirmed by pendulum: YES.
+
+Tags: tarot, career, divination, manifestation</div>
+        </div>
+
+        <h3>4. Synchronicities</h3>
+        <p>Document meaningful coincidences and signs:</p>
+        <div class="example-box">
+            <div class="example-header">Example Entry:</div>
+            <div class="example-content">Asked universe for confirmation about pursuing Hermetic studies.
+Within 24 hours: Found copy of Kybalion at thrift store, saw 777
+three times, stranger mentioned "as above so below" in conversation.
+Universe is shouting YES. Beginning study tonight.
+
+Tags: synchronicity, signs, Hermeticism, confirmation</div>
+        </div>
+
+        <h3>5. Meditation & Trance States</h3>
+        <p>Record altered consciousness experiences:</p>
+        <div class="example-box">
+            <div class="example-header">Example Entry:</div>
+            <div class="example-content">20-minute meditation focusing on third eye. Around minute 15,
+entered deep trance. Saw purple geometric patterns morphing into
+spirals. Felt presence of "something" observing me - not threatening,
+curious. Asked identity, received word "Guide." Remained 5 more minutes,
+then grounded. Left hand tingling for an hour afterward.
+
+Tags: meditation, third-eye, trance, spirit-contact, guide</div>
+        </div>
+
+        <h3>6. Shadow Work</h3>
+        <p>Confront difficult truths about yourself:</p>
+        <div class="example-box">
+            <div class="example-header">Example Entry:</div>
+            <div class="example-content">Mirror gazing exercise (15 min). Held gaze with my reflection without
+looking away. Around minute 10, face began to shift - saw myself as
+child, as old person, as stranger. Confronted fear of aging. Realized
+I've been avoiding commitment because I fear time passing. Need to
+work with Saturn energy to accept time's flow.
+
+Tags: shadow-work, mirror-gazing, fear, Saturn, aging</div>
+        </div>
+
+        <h3>7. Astral Experiences</h3>
+        <p>Record out-of-body or astral projection attempts:</p>
+        <div class="example-box">
+            <div class="example-header">Example Entry:</div>
+            <div class="example-content">Astral projection attempt using rope technique. Felt vibrations after
+20 minutes. Managed to lift "astral arms" but couldn't fully separate.
+Heard buzzing sound, saw room from ceiling perspective for ~10 seconds
+before snapping back. Progress! Need to relax more during vibration phase.
+
+Tags: astral-projection, OBE, progress, vibrations</div>
+        </div>
+
+        <h3>8. Entity Contact</h3>
+        <p>Document spirit communication or deity work:</p>
+        <div class="example-box">
+            <div class="example-header">Example Entry:</div>
+            <div class="example-content">Invoked Mercury on Wednesday during planetary hour. Used yellow candle
+and offered rosemary. Asked for help with communication project.
+Felt quickening of thoughts, sudden creative ideas flowing. Saw mental
+image of caduceus. Received intuition: "Speed comes from clarity."
+Thank you Mercury. Project outline completed in one hour afterward.
+
+Tags: Mercury, invocation, deity-work, communication, Wednesday</div>
+        </div>
+
+        <h3>9. Energy Work</h3>
+        <p>Track chakra work, aura cleansing, energy healing:</p>
+        <div class="example-box">
+            <div class="example-header">Example Entry:</div>
+            <div class="example-content">Chakra balancing exercise. Root felt blocked (expected - financial stress).
+Spent extra time visualizing red light, chanting LAM. Throat chakra
+overly active (been talking too much, not listening). Third eye very
+active - purple flash during focus. Need to ground more, speak less,
+listen more.
+
+Tags: chakras, energy-work, balancing, throat, third-eye</div>
+        </div>
+
+        <h3>10. Personal Gnosis</h3>
+        <p>Sudden insights and spiritual revelations:</p>
+        <div class="example-box">
+            <div class="example-header">Example Entry:</div>
+            <div class="example-content">Sudden realization while reading Corpus Hermeticum: "The All is Mind"
+doesn't mean reality isn't real - it means consciousness is the
+FOUNDATION of reality. Matter is condensed thought. My thoughts
+literally create my experience. This changes everything about how
+I approach manifestation magic.
+
+Tags: gnosis, revelation, Hermeticism, mind, manifestation</div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Suggested Tag Categories</h2>
+        <p>Organize your entries with these tag types:</p>
+
+        <h3>Practice Type:</h3>
+        <div>
+            <span class="tag-category">ritual</span>
+            <span class="tag-category">meditation</span>
+            <span class="tag-category">divination</span>
+            <span class="tag-category">energy-work</span>
+            <span class="tag-category">astral</span>
+            <span class="tag-category">shadow-work</span>
+            <span class="tag-category">mirror-gazing</span>
+            <span class="tag-category">scrying</span>
+            <span class="tag-category">invocation</span>
+        </div>
+
+        <h3>Tradition:</h3>
+        <div>
+            <span class="tag-category">Hermetic</span>
+            <span class="tag-category">Solomonic</span>
+            <span class="tag-category">Golden-Dawn</span>
+            <span class="tag-category">Chaos-Magic</span>
+            <span class="tag-category">Kabbalah</span>
+            <span class="tag-category">Egyptian</span>
+            <span class="tag-category">Greek</span>
+            <span class="tag-category">Ceremonial</span>
+        </div>
+
+        <h3>Deities/Entities:</h3>
+        <div>
+            <span class="tag-category">Mercury</span>
+            <span class="tag-category">Thoth</span>
+            <span class="tag-category">Gabriel</span>
+            <span class="tag-category">Raphael</span>
+            <span class="tag-category">HGA</span>
+            <span class="tag-category">Saturn</span>
+            <span class="tag-category">Venus</span>
+            <span class="tag-category">Mars</span>
+            <span class="tag-category">Moon</span>
+            <span class="tag-category">Sun</span>
+        </div>
+
+        <h3>Moon Phase:</h3>
+        <div>
+            <span class="tag-category">new-moon</span>
+            <span class="tag-category">waxing</span>
+            <span class="tag-category">full-moon</span>
+            <span class="tag-category">waning</span>
+            <span class="tag-category">dark-moon</span>
+        </div>
+
+        <h3>Planetary Day:</h3>
+        <div>
+            <span class="tag-category">Sunday</span>
+            <span class="tag-category">Monday</span>
+            <span class="tag-category">Tuesday</span>
+            <span class="tag-category">Wednesday</span>
+            <span class="tag-category">Thursday</span>
+            <span class="tag-category">Friday</span>
+            <span class="tag-category">Saturday</span>
+        </div>
+
+        <h3>Results:</h3>
+        <div>
+            <span class="tag-category">success</span>
+            <span class="tag-category">partial</span>
+            <span class="tag-category">no-result</span>
+            <span class="tag-category">unexpected</span>
+            <span class="tag-category">breakthrough</span>
+            <span class="tag-category">progress</span>
+            <span class="tag-category">setback</span>
+            <span class="tag-category">synchronicity</span>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>How to Use the Book of Mirrors Effectively</h2>
+
+        <h3>Daily Practice:</h3>
+        <ol>
+            <li><strong>Morning Review</strong> - Read yesterday's entry, note patterns</li>
+            <li><strong>Evening Recording</strong> - Document the day's magical work</li>
+            <li><strong>Weekly Reflection</strong> - Review week's entries, identify themes</li>
+            <li><strong>Monthly Summary</strong> - Track lunar cycle influences</li>
+        </ol>
+
+        <h3>Tag Strategy:</h3>
+        <ul>
+            <li>Use 3-5 tags per entry</li>
+            <li>Be consistent with tag names (<code>new-moon</code> not <code>newmoon</code>)</li>
+            <li>Create a "master tag list" in a separate entry</li>
+            <li>Review tags monthly, consolidate similar ones</li>
+        </ul>
+
+        <h3>Writing Tips:</h3>
+        <div class="tips-box">
+            <div class="tips-header">DO:</div>
+            <ul>
+                <li class="do-item">Write immediately after experiences (while fresh)</li>
+                <li class="do-item">Be brutally honest (especially in shadow work)</li>
+                <li class="do-item">Include sensory details (sights, sounds, feelings)</li>
+                <li class="do-item">Note time, date, moon phase, planetary hour</li>
+                <li class="do-item">Record "failures" - they teach the most!</li>
+            </ul>
+        </div>
+
+        <div class="tips-box" style="background-color: rgba(170, 0, 0, 0.1); border-color: var(--red);">
+            <div class="tips-header" style="color: var(--ltred);">DON'T:</div>
+            <ul>
+                <li class="dont-item">Censor yourself (this is YOUR mirror)</li>
+                <li class="dont-item">Wait too long (memories fade)</li>
+                <li class="dont-item">Skip "boring" days (patterns emerge over time)</li>
+                <li class="dont-item">Edit for others (no one else will read this)</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Privacy & Security</h2>
+        <div class="security-box">
+            <p><strong>Your Book of Mirrors is stored in browser localStorage:</strong></p>
+            <ul>
+                <li style="color: var(--ltgreen);">Private - Only accessible on your device</li>
+                <li style="color: var(--ltgreen);">Not uploaded - Never sent to servers</li>
+                <li style="color: var(--ltgreen);">Persistent - Survives page refreshes</li>
+                <li style="color: var(--ltred);">Not backed up - Use Export feature!</li>
+            </ul>
+        </div>
+
+        <h3>Backup Your Entries:</h3>
+        <p>Currently, the grimoire has export functionality. To backup:</p>
+        <ol>
+            <li>Use browser DevTools (F12)</li>
+            <li>Console tab</li>
+            <li>Run: <code>console.log(localStorage.getItem('grimoire_data'))</code></li>
+            <li>Copy the output to a text file</li>
+            <li>Store securely (encrypted folder, password-protected)</li>
+        </ol>
+        <p><strong>Pro tip:</strong> Keep a physical backup in a locked notebook. Digital is convenient, physical is secure.</p>
+    </div>
+
+    <div class="section">
+        <h2>Philosophical Foundation</h2>
+
+        <h3>Why It's Called "Book of MIRRORS"</h3>
+        <p>In occult tradition, <strong>mirror work</strong> is profound:</p>
+        <ol>
+            <li><strong>Scrying Mirrors</strong> (Black mirrors, obsidian) - Used for divination</li>
+            <li><strong>Mirror Gazing</strong> - Confronting the self, seeing beyond ego</li>
+            <li><strong>Reflection</strong> - "As above, so below" - the outer mirrors the inner</li>
+            <li><strong>Truth</strong> - Mirrors don't lie, they show what IS</li>
+            <li><strong>Shadow Integration</strong> - Seeing the parts you hide</li>
+        </ol>
+        <p><strong>Your journal is a mirror</strong> - it reflects your true spiritual progress, stripped of ego and illusion.</p>
+
+        <h3>Traditional Mirror Work</h3>
+        <p>You can COMBINE mirror gazing with journaling:</p>
+        <div class="tips-box">
+            <div class="tips-header">Exercise:</div>
+            <ol>
+                <li>Light candle in dark room</li>
+                <li>Sit before mirror</li>
+                <li>Gaze into your own eyes for 10-15 minutes</li>
+                <li>Don't look away, even when face shifts</li>
+                <li>Immediately journal what you saw/felt</li>
+                <li>Tag: <code>mirror-gazing</code>, <code>shadow-work</code>, <code>self</code></li>
+            </ol>
+            <p style="color: var(--yellow); margin-top: 10px;">This is intense practice but extremely revealing.</p>
+        </div>
+    </div>
+
+    <div class="unlock-box">
+        <h2 style="color: var(--yellow); margin-bottom: 15px;">Get Book of Mirrors</h2>
+        <p><strong>Book of Mirrors</strong> is a premium feature ($7).</p>
+        <p style="margin-top: 15px;">Your personal magical journal for recording spiritual experiences and shadow work.</p>
+        <div style="text-align: center; margin-top: 20px;">
+            <a href="grimoire.html" style="display: inline-block; background: var(--purple); color: var(--yellow); padding: 12px 24px; border: 2px solid var(--ltcyan); text-decoration: none; font-weight: bold; font-size: 14px;">
+                UNLOCK THIS FEATURE →
+            </a>
+        </div>
+    </div>
+
+    <div class="quote-box">
+        <p>"The unexamined life is not worth living." - Socrates</p>
+        <p style="margin-top: 15px;">"Know thyself." - Delphic Oracle</p>
+        <p style="margin-top: 15px; color: var(--yellow);">Your Book of Mirrors is where you do both. 🪞✨</p>
+    </div>
+
+    <div style="text-align: center;">
+        <a href="javascript:window.close();" class="back-link">← Close This Guide</a>
+    </div>
+
+    <div style="text-align: center; padding: 20px; border-top: 2px solid var(--dkgray); margin-top: 30px;">
+        <p style="color: var(--ltgray); font-size: 11px;">
+            Questions or issues? Contact:
+            <a href="mailto:highstdevelopment@gmail.com" style="color: var(--ltcyan); text-decoration: none;">highstdevelopment@gmail.com</a>
+        </p>
+    </div>
+
+</body>
+</html>

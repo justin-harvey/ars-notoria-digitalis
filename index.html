@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ars Notoria Digitalis - The Notory Art of Solomon</title>
+    <style>
+        @font-face {
+            font-family: 'TempleOS';
+            src: local('Courier New');
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --black: #000000;
+            --blue: #0000AA;
+            --green: #00AA00;
+            --cyan: #00AAAA;
+            --red: #AA0000;
+            --purple: #AA00AA;
+            --brown: #AA5500;
+            --ltgray: #AAAAAA;
+            --dkgray: #555555;
+            --ltblue: #5555FF;
+            --ltgreen: #55FF55;
+            --ltcyan: #55FFFF;
+            --ltred: #FF5555;
+            --ltpurple: #FF55FF;
+            --yellow: #FFFF55;
+            --white: #FFFFFF;
+            --ink: #8B2500;
+            --ink-light: #A04030;
+            --parchment: #E8DCC4;
+            --parchment-dark: #D4C4A8;
+        }
+
+        body {
+            background: var(--black);
+            font-family: 'Courier New', monospace;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            color: var(--white);
+        }
+
+        .titlebar {
+            background: var(--blue);
+            color: var(--white);
+            padding: 6px 12px;
+            font-size: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--ltblue);
+        }
+
+        .titlebar-title {
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .titlebar-buttons {
+            display: flex;
+            gap: 6px;
+        }
+
+        .titlebar-btn {
+            background: var(--ltgray);
+            color: var(--black);
+            border: 1px solid var(--white);
+            padding: 2px 10px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        .titlebar-btn:hover {
+            background: var(--yellow);
+        }
+
+        .menubar {
+            background: var(--ltgray);
+            padding: 4px 12px;
+            display: flex;
+            gap: 20px;
+            border-bottom: 2px solid var(--dkgray);
+            font-size: 12px;
+        }
+
+        .menu-item {
+            color: var(--black);
+            cursor: pointer;
+            padding: 4px 10px;
+            font-weight: bold;
+            transition: all 0.1s;
+        }
+
+        .menu-item:hover {
+            background: var(--blue);
+            color: var(--yellow);
+        }
+
+        .menu-item.active {
+            background: var(--white);
+            color: var(--red);
+        }
+
+        .main-container {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .manuscript-area {
+            flex: 1;
+            background: var(--parchment);
+            background-image:
+                radial-gradient(ellipse at 20% 30%, rgba(139, 37, 0, 0.03) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 70%, rgba(139, 37, 0, 0.03) 0%, transparent 50%),
+                linear-gradient(180deg, var(--parchment) 0%, var(--parchment-dark) 100%);
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .manuscript-header {
+            text-align: center;
+            color: var(--ink);
+            margin-bottom: 20px;
+        }
+
+        .manuscript-header h1 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        .manuscript-header p {
+            font-size: 12px;
+            font-style: italic;
+            margin-bottom: 5px;
+        }
+
+        .sigil-canvas {
+            width: 100%;
+            max-width: 700px;
+            height: 700px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+        }
+
+        .sigil-canvas svg {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(2px 2px 3px rgba(139, 37, 0, 0.2));
+        }
+
+        .sigil-node {
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .sigil-node:hover {
+            filter: brightness(1.5) drop-shadow(0 0 10px var(--ink-light));
+        }
+
+        .sigil-node.active {
+            filter: brightness(1.3) drop-shadow(0 0 12px var(--red));
+        }
+
+        /* Ensure all SVG elements are clickable */
+        .sigil-node * {
+            pointer-events: all;
+            cursor: pointer;
+        }
+
+        .manuscript-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            width: 100%;
+            max-width: 900px;
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 2px solid var(--ink);
+        }
+
+        .gallery-item {
+            background: var(--white);
+            padding: 10px;
+            border: 2px solid var(--ink);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(139, 37, 0, 0.3);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .gallery-item-title {
+            text-align: center;
+            color: var(--ink);
+            font-size: 10px;
+            margin-top: 8px;
+            font-weight: bold;
+        }
+
+        .side-panel {
+            width: 380px;
+            background: var(--black);
+            display: flex;
+            flex-direction: column;
+            border-left: 3px solid var(--blue);
+        }
+
+        .panel-header {
+            background: var(--purple);
+            color: var(--yellow);
+            padding: 8px 12px;
+            font-weight: bold;
+            font-size: 13px;
+            border-bottom: 2px solid var(--ltpurple);
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        .note-selector {
+            background: var(--dkgray);
+            padding: 10px;
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            border-bottom: 2px solid var(--black);
+        }
+
+        .note-btn {
+            background: var(--ltgray);
+            color: var(--black);
+            border: 2px solid var(--white);
+            padding: 6px 12px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 11px;
+            font-weight: bold;
+            flex: 1;
+            min-width: 80px;
+        }
+
+        .note-btn:hover {
+            background: var(--ltblue);
+            color: var(--white);
+        }
+
+        .note-btn.active {
+            background: var(--red);
+            color: var(--yellow);
+            border-color: var(--yellow);
+        }
+
+        .panel-content {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        .panel-section {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--dkgray);
+        }
+
+        .panel-section:last-child {
+            border-bottom: none;
+        }
+
+        .panel-section-title {
+            color: var(--yellow);
+            font-weight: bold;
+            font-size: 11px;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+            border-bottom: 1px solid var(--yellow);
+            padding-bottom: 4px;
+        }
+
+        .sacred-text {
+            color: var(--ltcyan);
+            font-size: 14px;
+            font-weight: bold;
+            margin: 10px 0;
+            text-align: center;
+            letter-spacing: 2px;
+        }
+
+        .oration-text {
+            color: var(--white);
+            margin: 10px 0;
+        }
+
+        .instruction-text {
+            color: var(--ltgreen);
+            font-style: italic;
+        }
+
+        .latin-text {
+            color: var(--ltred);
+            font-style: italic;
+            text-align: center;
+            margin: 10px 0;
+            letter-spacing: 1px;
+        }
+
+        .warning-text {
+            color: var(--ltred);
+            background: var(--dkgray);
+            padding: 10px;
+            border: 2px solid var(--red);
+            margin: 10px 0;
+            font-weight: bold;
+        }
+
+        .statusbar {
+            background: var(--dkgray);
+            color: var(--ltgray);
+            padding: 6px 12px;
+            font-size: 11px;
+            display: flex;
+            justify-content: space-between;
+            border-top: 2px solid var(--black);
+        }
+
+        .status-item {
+            display: flex;
+            gap: 20px;
+        }
+
+        .intro-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--black);
+            z-index: 1000;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            flex-direction: column;
+            padding: 40px;
+            text-align: center;
+            overflow-y: auto;
+        }
+
+        .intro-screen.hidden {
+            display: none;
+        }
+
+        .intro-title {
+            color: var(--yellow);
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 30px;
+            letter-spacing: 3px;
+        }
+
+        .intro-text {
+            color: var(--ltcyan);
+            font-size: 14px;
+            max-width: 700px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .intro-warning {
+            color: var(--ltred);
+            font-size: 13px;
+            margin: 20px 0;
+            padding: 15px;
+            border: 2px solid var(--red);
+            max-width: 700px;
+        }
+
+        .intro-btn {
+            background: var(--blue);
+            color: var(--yellow);
+            border: 3px solid var(--ltblue);
+            padding: 12px 40px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 30px;
+            font-family: inherit;
+            letter-spacing: 2px;
+        }
+
+        .intro-btn:hover {
+            background: var(--ltblue);
+            color: var(--white);
+        }
+
+        @media (max-width: 1024px) {
+            .main-container {
+                flex-direction: column;
+            }
+
+            .side-panel {
+                width: 100%;
+                max-height: 400px;
+                border-left: none;
+                border-top: 3px solid var(--blue);
+            }
+
+            .menubar {
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="intro-screen" id="introScreen">
+        <div class="intro-title">ARS NOTORIA DIGITALIS</div>
+
+        <div class="intro-text">
+            The <i>Ars Notoria</i>, or "Notory Art of Solomon," stands as one of the oldest and most enigmatic texts
+            in the Western magical tradition. First appearing in the 13th century, this medieval grimoire claims
+            to grant practitioners perfect memory, eloquence, and mastery of the Seven Liberal Arts through
+            contemplation of sacred geometric figures and recitation of divine orations.
+        </div>
+
+        <div class="intro-text" style="border-left: 3px solid var(--yellow); padding-left: 15px; margin: 20px 0;">
+            <div style="color: var(--yellow); font-weight: bold; margin-bottom: 8px;">HISTORICAL SIGNIFICANCE</div>
+            Unlike grimoires focused on summoning spirits or commanding demons, the Ars Notoria pursues
+            knowledge itself as the ultimate magical goal. It was condemned by the Catholic Church yet remained
+            popular throughout the medieval and Renaissance periods among scholars, monks, and seekers of wisdom.
+            The text we present is based on Robert Turner's 1657 English translation from Latin manuscripts.
+        </div>
+
+        <div class="intro-text">
+            The grimoire instructs practitioners to meditate upon complex geometric "Notes" while speaking sacred
+            names in Hebrew, Greek, and Chaldean. Through this practice, one may obtain:
+            <br><br>
+            • Perfect Memory of all knowledge<br>
+            • Eloquence in Speech and Writing<br>
+            • Understanding of Grammar, Logic, Rhetoric, Arithmetic, Geometry, Music, and Astronomy<br>
+            • Divine Illumination and Spiritual Insight
+        </div>
+
+        <div class="intro-text" style="border-left: 3px solid var(--ltblue); padding-left: 15px; margin: 20px 0;">
+            <div style="color: var(--ltcyan); font-weight: bold; margin-bottom: 8px;">DIGITAL PRESERVATION</div>
+            This digital manifestation, inspired by the aesthetic of Terry A. Davis's TempleOS, brings the
+            Ars Notoria into the 21st century. We preserve these sacred mysteries through the medium of
+            the machine—transmitting medieval wisdom through modern technology. Each oration, each sacred name,
+            each geometric figure has been faithfully extracted from historical manuscripts to maintain
+            authenticity and power.
+        </div>
+
+        <div class="intro-warning">
+            ⚠ WARNING ⚠<br><br>
+            The Notes contained herein are to be approached with reverence and purity of heart.
+            The seventh Note of Astronomy is particularly dangerous and requires proper preparation—
+            twenty-four Angels attend, and one error may bring madness or death.
+            <br><br>
+            Observe the proper lunar days and hours. Fast when prescribed.
+            Speak the orations with devotion and precision. Face East during contemplation.
+            <br><br>
+            This is presented for historical, educational, and spiritual purposes.
+            Modern practitioners should approach these practices with respect for their medieval context.
+        </div>
+
+        <div class="intro-text" style="margin-top: 20px; font-size: 11px; color: var(--ltgray);">
+            The Ars Notoria was not meant to die in dusty archives. It was meant to transform minds,
+            to elevate consciousness, to connect the seeker with divine knowledge. Through this digital
+            grimoire, we ensure these sacred teachings remain accessible to future generations of students,
+            scholars, and practitioners of the Art.
+        </div>
+
+        <button class="intro-btn" onclick="enterTheArt()">ENTER THE ART</button>
+
+        <div style="margin-top: 20px; font-size: 10px; color: var(--dkgray);">
+            Based on Robert Turner's 1657 translation • Interactive SVG Sigils • Authentic Latin Orations<br>
+            TempleOS Aesthetic • Digital Grimoire System • Open Source Preservation
+        </div>
+    </div>
+
+    <div class="titlebar">
+        <span class="titlebar-title">ARS NOTORIA DIGITALIS :: The Notory Art of Solomon</span>
+        <div class="titlebar-buttons">
+            <button class="titlebar-btn" onclick="window.location.href='grimoire.html'">📖 GRIMOIRE</button>
+            <button class="titlebar-btn" onclick="showIntro()">ABOUT</button>
+            <button class="titlebar-btn" onclick="toggleGallery()">GALLERY</button>
+            <button class="titlebar-btn" onclick="resetView()">RESET</button>
+            <button class="titlebar-btn" onclick="togglePanel()">PANEL</button>
+        </div>
+    </div>
+
+    <div class="menubar">
+        <span class="menu-item active" data-art="grammar">GRAMMAR</span>
+        <span class="menu-item" data-art="logic">LOGIC</span>
+        <span class="menu-item" data-art="rhetoric">RHETORIC</span>
+        <span class="menu-item" data-art="arithmetic">ARITHMETIC</span>
+        <span class="menu-item" data-art="geometry">GEOMETRY</span>
+        <span class="menu-item" data-art="music">MUSIC</span>
+        <span class="menu-item" data-art="astronomy">ASTRONOMY</span>
+    </div>
+
+    <div class="main-container">
+        <div class="manuscript-area">
+            <div class="manuscript-header">
+                <h1 id="artTitle">NOTA PRIMA GRAMMATICAE</h1>
+                <p>The First Note of the Art of Grammar</p>
+                <p style="font-size: 10px; margin-top: 5px;">Click upon the circles and figures to reveal the sacred orations</p>
+            </div>
+
+            <div class="sigil-canvas" id="sigilCanvas">
+                <!-- SVG will be inserted here -->
+            </div>
+
+            <div class="manuscript-gallery" id="manuscriptGallery" style="display: none;">
+                <div class="gallery-item" onclick="viewManuscriptPage(1)">
+                    <img src="Screenshot 2026-01-13 165343.jpg" alt="Manuscript Page 1">
+                    <div class="gallery-item-title">Concentric Circles</div>
+                </div>
+                <div class="gallery-item" onclick="viewManuscriptPage(2)">
+                    <img src="Screenshot 2026-01-13 165415.jpg" alt="Manuscript Page 2">
+                    <div class="gallery-item-title">Ornamental Figure</div>
+                </div>
+                <div class="gallery-item" onclick="viewManuscriptPage(3)">
+                    <img src="Screenshot 2026-01-13 165424.jpg" alt="Manuscript Page 3">
+                    <div class="gallery-item-title">Complex Geometries</div>
+                </div>
+                <div class="gallery-item" onclick="viewManuscriptPage(4)">
+                    <img src="Screenshot 2026-01-13 165435.jpg" alt="Manuscript Page 4">
+                    <div class="gallery-item-title">Triangular Forms</div>
+                </div>
+                <div class="gallery-item" onclick="viewManuscriptPage(5)">
+                    <img src="Screenshot 2026-01-13 165444.jpg" alt="Manuscript Page 5">
+                    <div class="gallery-item-title">Column Notation</div>
+                </div>
+                <div class="gallery-item" onclick="viewManuscriptPage(6)">
+                    <img src="Screenshot 2026-01-13 165453.jpg" alt="Manuscript Page 6">
+                    <div class="gallery-item-title">Pillared Geometry</div>
+                </div>
+                <div class="gallery-item" onclick="viewManuscriptPage(7)">
+                    <img src="Screenshot 2026-01-13 165502.jpg" alt="Manuscript Page 7">
+                    <div class="gallery-item-title">Triple Circle Mystery</div>
+                </div>
+                <div class="gallery-item" onclick="viewManuscriptPage(8)">
+                    <img src="Screenshot 2026-01-13 165510.jpg" alt="Manuscript Page 8">
+                    <div class="gallery-item-title">Connected Orbs</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="side-panel" id="sidePanel">
+            <div class="panel-header" id="panelHeader">NOTA PRIMA GRAMMATICAE</div>
+
+            <div class="note-selector">
+                <button class="note-btn active" data-note="1">NOTE I</button>
+                <button class="note-btn" data-note="2">NOTE II</button>
+                <button class="note-btn" data-note="3">NOTE III</button>
+            </div>
+
+            <div class="panel-content" id="panelContent">
+                <div class="panel-section">
+                    <div class="panel-section-title">INSTRUCTIONS</div>
+                    <p class="oration-text">
+                        The Notes of the Grammatical Art are to be inspected in the days when the Moon is in her prime,
+                        from the first day to the fourteenth, and again from the fourteenth to the seventeenth.
+                    </p>
+                    <p class="instruction-text">
+                        Click upon any circle, cross, or figure within the sigil to reveal its sacred oration and purpose.
+                        The first Note is to be looked into 12 times, and its Oration repeated 24 times with holy reverence.
+                    </p>
+                </div>
+
+                <div class="panel-section">
+                    <div class="panel-section-title">LUNATION TIMES</div>
+                    <p class="oration-text">Luna Days: I-XIV and XIV-XVII</p>
+                    <p class="oration-text">Optimal Hours: Dawn and Twilight</p>
+                </div>
+
+                <div class="panel-section">
+                    <div class="panel-section-title">PREPARATION</div>
+                    <p class="instruction-text">
+                        Fast for three days before approaching the Note. Purify yourself with water and prayer.
+                        Face the East during contemplation. Speak the sacred names with absolute precision.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="statusbar">
+        <div class="status-item">
+            <span id="statusText">Ready - Select an Art from the menu</span>
+        </div>
+        <div class="status-item">
+            <span>Luna: <span id="lunaDay">IV</span></span>
+            <span>Hour: <span id="currentHour">III</span></span>
+            <span>Mode: Digital</span>
+            <a href="sanctum-9a4f2e8b.html" style="color: var(--dkgray); text-decoration: none; margin-left: 15px; font-size: 10px; opacity: 0.6;" rel="nofollow noindex">⚡</a>
+        </div>
+    </div>
+
+    <script src="sigils.js"></script>
+</body>
+</html>

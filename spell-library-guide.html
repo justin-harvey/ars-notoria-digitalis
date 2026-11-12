@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spell Library - Complete Guide</title>
+    <style>
+        :root {
+            --black: #000000;
+            --blue: #0000AA;
+            --green: #00AA00;
+            --cyan: #00AAAA;
+            --red: #AA0000;
+            --purple: #AA00AA;
+            --brown: #AA5500;
+            --ltgray: #AAAAAA;
+            --dkgray: #555555;
+            --ltblue: #5555FF;
+            --ltgreen: #55FF55;
+            --ltcyan: #55FFFF;
+            --ltred: #FF5555;
+            --pink: #FF55FF;
+            --yellow: #FFFF55;
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--black);
+            color: var(--ltgray);
+            font-family: 'Courier New', monospace;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 2px solid var(--ltred);
+            background-color: rgba(255, 85, 85, 0.05);
+        }
+
+        h1 {
+            color: var(--ltred);
+            font-size: 24px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .subtitle {
+            color: var(--yellow);
+            font-size: 12px;
+            font-style: italic;
+        }
+
+        h2 {
+            color: var(--ltblue);
+            font-size: 18px;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid var(--dkgray);
+        }
+
+        h3 {
+            color: var(--ltgreen);
+            font-size: 14px;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            margin-bottom: 15px;
+            color: var(--ltgray);
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .spell-card {
+            background-color: rgba(0, 0, 170, 0.1);
+            border: 2px solid var(--blue);
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .spell-header {
+            color: var(--ltcyan);
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .spell-tags {
+            margin-bottom: 15px;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 3px 8px;
+            margin: 3px;
+            font-size: 10px;
+            border: 1px solid;
+            font-weight: bold;
+        }
+
+        .tag-protection {
+            background-color: rgba(0, 0, 170, 0.2);
+            border-color: var(--blue);
+            color: var(--ltblue);
+        }
+
+        .tag-wisdom {
+            background-color: rgba(255, 255, 85, 0.2);
+            border-color: var(--yellow);
+            color: var(--yellow);
+        }
+
+        .tag-purification {
+            background-color: rgba(85, 255, 255, 0.2);
+            border-color: var(--ltcyan);
+            color: var(--ltcyan);
+        }
+
+        .tag-manifestation {
+            background-color: rgba(170, 0, 170, 0.2);
+            border-color: var(--purple);
+            color: var(--pink);
+        }
+
+        .tag-beginner {
+            border-color: var(--ltgreen);
+            color: var(--ltgreen);
+        }
+
+        .tag-intermediate {
+            border-color: var(--yellow);
+            color: var(--yellow);
+        }
+
+        .spell-purpose {
+            color: var(--white);
+            font-size: 12px;
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+
+        .spell-details {
+            color: var(--ltgray);
+            font-size: 11px;
+            line-height: 1.8;
+        }
+
+        .spell-details strong {
+            color: var(--ltgreen);
+        }
+
+        ul, ol {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        li {
+            margin-bottom: 8px;
+            color: var(--ltgray);
+        }
+
+        .category-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 11px;
+        }
+
+        .category-table th,
+        .category-table td {
+            border: 1px solid var(--dkgray);
+            padding: 10px;
+            text-align: left;
+        }
+
+        .category-table th {
+            background-color: var(--dkgray);
+            color: var(--yellow);
+            font-weight: bold;
+        }
+
+        .category-table td {
+            color: var(--ltgray);
+        }
+
+        .warning-box {
+            background-color: rgba(170, 0, 0, 0.1);
+            border: 2px solid var(--red);
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .warning-header {
+            color: var(--ltred);
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 12px;
+        }
+
+        .info-box {
+            background-color: rgba(85, 255, 85, 0.1);
+            border: 1px solid var(--green);
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .info-header {
+            color: var(--ltgreen);
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .moon-phase-box {
+            background-color: rgba(170, 0, 170, 0.1);
+            border: 1px solid var(--purple);
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .unlock-box {
+            background-color: rgba(170, 170, 0, 0.1);
+            border: 2px solid var(--yellow);
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .unlock-code {
+            color: var(--yellow);
+            font-size: 18px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .quote-box {
+            text-align: center;
+            font-style: italic;
+            color: var(--ltcyan);
+            margin: 30px 0;
+            padding: 20px;
+            border-top: 1px solid var(--dkgray);
+            border-bottom: 1px solid var(--dkgray);
+        }
+
+        a {
+            color: var(--ltblue);
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: var(--ltcyan);
+            text-decoration: underline;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 10px 20px;
+            border: 1px solid var(--ltblue);
+            color: var(--ltblue);
+            text-align: center;
+        }
+
+        .back-link:hover {
+            background-color: rgba(85, 85, 255, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+                font-size: 12px;
+            }
+
+            h1 {
+                font-size: 18px;
+            }
+
+            h2 {
+                font-size: 16px;
+            }
+
+            h3 {
+                font-size: 13px;
+            }
+
+            .category-table {
+                font-size: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🔥 Spell Library 🔥</h1>
+        <div class="subtitle">Starter Collection - 5 Authentic Occult Spells</div>
+    </header>
+
+    <div class="section">
+        <h2>How to Access</h2>
+        <ol>
+            <li>Open the <strong>Digital Grimoire</strong> (📖 button)</li>
+            <li>Unlock the <strong>Spell Journal</strong> feature ($7)</li>
+            <li>Scroll to the <strong>🔥 SPELL JOURNAL</strong> section</li>
+            <li>Click on any spell to expand and view full details</li>
+        </ol>
+    </div>
+
+    <div class="section">
+        <h2>The 5 Spells Included</h2>
+
+        <div class="spell-card" style="border-color: var(--blue);">
+            <div class="spell-header">
+                🛡️ 1. The Lesser Banishing Ritual of the Pentagram (LBRP)
+            </div>
+            <div class="spell-tags">
+                <span class="tag tag-protection">Protection</span>
+                <span class="tag tag-beginner">Beginner</span>
+                <span class="tag" style="border-color: var(--ltgray); color: var(--ltgray);">Hermetic/Golden Dawn</span>
+            </div>
+            <div class="spell-purpose">
+                Cleanse space of negative influences and establish sacred boundary
+            </div>
+            <div class="spell-details">
+                <p><strong>Why it's important:</strong> This is THE foundational ritual of Western ceremonial magic. Every practitioner should know this. Clears energy before any magical working.</p>
+                <p><strong>When to use:</strong></p>
+                <ul>
+                    <li>Before any ritual</li>
+                    <li>Daily practice for protection</li>
+                    <li>When space feels heavy or negative</li>
+                    <li>Before meditation</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="spell-card" style="border-color: var(--cyan);">
+            <div class="spell-header">
+                ⭕ 2. Solomonic Circle of Protection
+            </div>
+            <div class="spell-tags">
+                <span class="tag tag-protection">Protection</span>
+                <span class="tag tag-intermediate">Intermediate</span>
+                <span class="tag" style="border-color: var(--ltgray); color: var(--ltgray);">Solomonic/Medieval</span>
+            </div>
+            <div class="spell-purpose">
+                Create impenetrable barrier against hostile spirits
+            </div>
+            <div class="spell-details">
+                <p><strong>Why it's important:</strong> Traditional protection from the grimoires of Solomon. Essential for spirit work and evocation.</p>
+                <p><strong>When to use:</strong></p>
+                <ul>
+                    <li>Spirit evocation</li>
+                    <li>Ouija board sessions</li>
+                    <li>Scrying or divination</li>
+                    <li>When dealing with potentially hostile entities</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="spell-card" style="border-color: var(--yellow);">
+            <div class="spell-header">
+                🧠 3. Invocation for Clarity of Mind
+            </div>
+            <div class="spell-tags">
+                <span class="tag tag-wisdom">Wisdom</span>
+                <span class="tag tag-beginner">Beginner</span>
+                <span class="tag" style="border-color: var(--ltgray); color: var(--ltgray);">Hermetic</span>
+            </div>
+            <div class="spell-purpose">
+                Enhance mental clarity, memory, and intellectual understanding
+            </div>
+            <div class="spell-details">
+                <p><strong>Why it's important:</strong> Aligns with Mercury (planet of communication and intellect) and Thoth (god of wisdom). Practical magic for everyday use.</p>
+                <p><strong>When to use:</strong></p>
+                <ul>
+                    <li>Before exams or tests</li>
+                    <li>Important presentations</li>
+                    <li>Learning new skills</li>
+                    <li>Writer's block</li>
+                    <li>Wednesday (Mercury's day)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="spell-card" style="border-color: var(--ltcyan);">
+            <div class="spell-header">
+                🛁 4. Purification Bath of Hyssop
+            </div>
+            <div class="spell-tags">
+                <span class="tag tag-purification">Purification</span>
+                <span class="tag tag-beginner">Beginner</span>
+                <span class="tag" style="border-color: var(--ltgray); color: var(--ltgray);">Biblical/Traditional</span>
+            </div>
+            <div class="spell-purpose">
+                Remove spiritual impurities before ritual work
+            </div>
+            <div class="spell-details">
+                <p><strong>Why it's important:</strong> Referenced in Psalm 51 ("Purge me with hyssop, and I shall be clean"). Essential preparation for any serious magical work.</p>
+                <p><strong>When to use:</strong></p>
+                <ul>
+                    <li>Before major rituals</li>
+                    <li>After negative experiences</li>
+                    <li>When feeling spiritually "dirty"</li>
+                    <li>New Moon preparation</li>
+                    <li>Waning Moon cleansing</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="spell-card" style="border-color: var(--purple);">
+            <div class="spell-header">
+                ✨ 5. Sigil Charging Ritual
+            </div>
+            <div class="spell-tags">
+                <span class="tag tag-manifestation">Manifestation</span>
+                <span class="tag tag-intermediate">Intermediate</span>
+                <span class="tag" style="border-color: var(--ltgray); color: var(--ltgray);">Chaos Magic/Modern</span>
+            </div>
+            <div class="spell-purpose">
+                Empower a sigil to manifest desires
+            </div>
+            <div class="spell-details">
+                <p><strong>Why it's important:</strong> Austin Osman Spare's method. Practical, results-oriented magic. Works through the subconscious mind.</p>
+                <p><strong>When to use:</strong></p>
+                <ul>
+                    <li>Material goals (money, job, etc.)</li>
+                    <li>Manifesting specific outcomes</li>
+                    <li>New Moon (beginnings) or Full Moon (power)</li>
+                    <li>When you need tangible results</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Spell Categories & Color Coding</h2>
+        <p>Each spell is color-coded by category:</p>
+
+        <table class="category-table">
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Color</th>
+                    <th>Use For</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong style="color: var(--ltblue);">Protection</strong></td>
+                    <td>Blue</td>
+                    <td>Shielding, banishing, boundaries</td>
+                </tr>
+                <tr>
+                    <td><strong style="color: var(--yellow);">Wisdom</strong></td>
+                    <td>Yellow</td>
+                    <td>Learning, memory, clarity</td>
+                </tr>
+                <tr>
+                    <td><strong style="color: var(--ltcyan);">Purification</strong></td>
+                    <td>Light Cyan</td>
+                    <td>Cleansing, preparation</td>
+                </tr>
+                <tr>
+                    <td><strong style="color: var(--pink);">Manifestation</strong></td>
+                    <td>Purple</td>
+                    <td>Creating reality, sigils</td>
+                </tr>
+                <tr>
+                    <td><strong style="color: var(--ltgreen);">Healing</strong></td>
+                    <td>Light Green</td>
+                    <td>Health, recovery</td>
+                </tr>
+                <tr>
+                    <td><strong style="color: var(--ltpurple);">Divination</strong></td>
+                    <td>Light Purple</td>
+                    <td>Seeing, scrying, prophecy</td>
+                </tr>
+                <tr>
+                    <td><strong style="color: var(--ltred);">Banishing</strong></td>
+                    <td>Red</td>
+                    <td>Removing, destroying</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>How Spells Are Displayed</h2>
+        <p>Each spell entry shows:</p>
+        <ul>
+            <li><strong>Header Bar</strong> - Name, category color, delete button</li>
+            <li><strong>Tags</strong> - Category, Tradition, Difficulty level</li>
+            <li><strong>Quick Summary</strong> - Purpose at a glance</li>
+            <li><strong>Expandable Details:</strong>
+                <ul>
+                    <li>🌙 Moon Phase recommendations</li>
+                    <li>🔮 Required tools/ingredients</li>
+                    <li>📜 Full incantation text</li>
+                    <li>📋 Step-by-step instructions</li>
+                    <li>⚠️ Important notes and warnings</li>
+                </ul>
+            </li>
+        </ul>
+        <div class="info-box">
+            <div class="info-header">💡 Tip:</div>
+            <p>Click the spell header or "View Full Spell" button to expand and see all details!</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Spell Difficulty Levels</h2>
+        <ul>
+            <li><strong style="color: var(--ltgreen);">Beginner</strong> - Simple, safe, requires minimal tools. Good for daily practice.</li>
+            <li><strong style="color: var(--yellow);">Intermediate</strong> - Requires more preparation, specific timing, or ritual setup.</li>
+            <li><strong style="color: var(--ltred);">Advanced</strong> - Complex operations requiring experience and deep knowledge.</li>
+        </ul>
+        <p style="color: var(--ltcyan); font-style: italic;">Start with beginner spells and work your way up!</p>
+    </div>
+
+    <div class="section">
+        <h2>Moon Phase Guide</h2>
+        <div class="moon-phase-box">
+            <p>Spells are most effective when performed during the appropriate lunar phase:</p>
+            <ul style="margin-top: 10px;">
+                <li><strong style="color: var(--white);">New Moon</strong> - New beginnings, fresh starts, manifestation</li>
+                <li><strong style="color: var(--ltgray);">Waxing Moon</strong> - Growth, building power, attracting</li>
+                <li><strong style="color: var(--yellow);">Full Moon</strong> - Maximum power, completion, charging</li>
+                <li><strong style="color: var(--dkgray);">Waning Moon</strong> - Banishing, releasing, cleansing</li>
+                <li><strong style="color: var(--black); text-shadow: 1px 1px var(--ltgray);">Dark Moon</strong> - Deep shadow work, divination, necromancy</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Safety & Ethics</h2>
+        <div class="warning-box">
+            <div class="warning-header">⚠️ Important Reminders:</div>
+            <ol>
+                <li><strong>Always ground and center</strong> before and after magical work</li>
+                <li><strong>Cleanse your space</strong> (use LBRP or salt water)</li>
+                <li><strong>Respect free will</strong> - never manipulate others</li>
+                <li><strong>Protection first</strong> - especially for spirit work</li>
+                <li><strong>Keep records</strong> - document results in the grimoire</li>
+                <li><strong>Start small</strong> - master basics before attempting advanced work</li>
+            </ol>
+        </div>
+
+        <div class="warning-box" style="border-color: var(--ltred);">
+            <div class="warning-header">🛑 Warning Signs to Stop:</div>
+            <ul>
+                <li>Extreme fatigue</li>
+                <li>Persistent negative experiences</li>
+                <li>Physical illness after ritual</li>
+                <li>Unwanted manifestations</li>
+                <li>Loss of control</li>
+            </ul>
+            <p style="margin-top: 10px; color: var(--yellow);">If you experience any of these, perform banishing and take a break from practice.</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Adding Your Own Spells</h2>
+        <p>You can add custom spells using the <strong>"+ New Spell"</strong> button. Include:</p>
+        <ul>
+            <li>Name and category</li>
+            <li>Tools required</li>
+            <li>Incantation or words of power</li>
+            <li>Step-by-step procedure</li>
+            <li>Date performed</li>
+            <li>Results observed</li>
+        </ul>
+        <p style="color: var(--ltcyan); font-style: italic;">Build your own grimoire over time!</p>
+    </div>
+
+    <div class="section">
+        <h2>Recommended Reading</h2>
+        <p>To deepen your practice, study the books in the <strong>Sacred Library</strong>:</p>
+        <ul>
+            <li><strong>Three Books of Occult Philosophy</strong> (Agrippa) - Comprehensive magical theory</li>
+            <li><strong>The Kybalion</strong> - Hermetic principles underlying all magic</li>
+            <li><strong>The Goetia</strong> - Spirit evocation (advanced)</li>
+            <li><strong>The Book of Abramelin</strong> - The Abramelin operation (very advanced)</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Best Practices</h2>
+
+        <h3>Daily Practice</h3>
+        <ol>
+            <li><strong>Morning:</strong> LBRP to clear space</li>
+            <li><strong>Study:</strong> Read grimoires, take notes</li>
+            <li><strong>Practice:</strong> Work with one spell per week</li>
+            <li><strong>Evening:</strong> LBRP to close day</li>
+        </ol>
+
+        <h3>Record Keeping</h3>
+        <ul>
+            <li>Date and time of working</li>
+            <li>Moon phase and planetary hour</li>
+            <li>Tools used</li>
+            <li>Exact words spoken</li>
+            <li>Results observed (even if "nothing")</li>
+            <li>Feelings and insights</li>
+        </ul>
+    </div>
+
+    <div class="unlock-box">
+        <h2 style="color: var(--yellow); margin-bottom: 15px;">Get Spell Journal</h2>
+        <p>The <strong>Spell Journal</strong> is a premium feature ($7).</p>
+        <p style="margin-top: 15px;">Access all 5 authentic occult spells plus the ability to add your own custom spells.</p>
+        <div style="text-align: center; margin-top: 20px;">
+            <a href="grimoire.html" style="display: inline-block; background: var(--purple); color: var(--yellow); padding: 12px 24px; border: 2px solid var(--ltred); text-decoration: none; font-weight: bold; font-size: 14px;">
+                UNLOCK THIS FEATURE →
+            </a>
+        </div>
+    </div>
+
+    <div class="quote-box">
+        <p style="color: var(--ltred); font-size: 14px;">May your practice be fruitful and your will be done. 🔥✨</p>
+        <p style="margin-top: 15px; color: var(--ltcyan);">"As above, so below. As within, so without."</p>
+    </div>
+
+    <div style="text-align: center;">
+        <a href="javascript:window.close();" class="back-link">← Close This Guide</a>
+    </div>
+
+    <div style="text-align: center; padding: 20px; border-top: 2px solid var(--dkgray); margin-top: 30px;">
+        <p style="color: var(--ltgray); font-size: 11px;">
+            Questions or issues? Contact:
+            <a href="mailto:highstdevelopment@gmail.com" style="color: var(--ltcyan); text-decoration: none;">highstdevelopment@gmail.com</a>
+        </p>
+    </div>
+
+</body>
+</html>
