@@ -323,6 +323,8 @@
         .sh-prompt { color: var(--white); font-size: 15px; margin: 8px 0 10px; }
         .sh-answer { min-height: 120px; }
         @media (max-width: 768px) {
+            /* Wide reference tables scroll inside their own box on phones */
+            .section table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; max-width: 100%; }
             .gs-wrap, .draw-wrap { grid-template-columns: 1fr; }
             .gs-wrap svg { max-width: 260px; margin: 0 auto; }
         }
@@ -1742,5 +1744,6 @@
 
     <script src="lunar.js"></script>
     <script src="reference-tools.js"></script>
+    <script src="works-menu.js"></script>
 </body>
 </html>
