@@ -50,6 +50,18 @@ Access via the "✦ PRACTICE" button in the main interface (`ars-notoria-practic
 
 `lunar.js` is shared by this page and the main status bar, which now shows the astronomical day of the Moon instead of an estimate from the calendar date.
 
+### Reference Library Tools
+
+The reference databases (`reference.html`) now include interactive tools (`reference-tools.js`) and a **History & Sources** note in every section:
+
+- **Astrology** - Live planetary hours, using true sunrise and sunset for your location (from your device or entered by hand, stored only in the browser), with a "sky now" summary and a short working by the hours
+- **Meditation** - Animated breath pacer (Calm, Box, Even, 4-7-8) and a guided body scan with a highlighted figure
+- **Energy Work** - Animated nine-step ground-and-shield visualization, and a clickable chakra figure with a timed walk through the centers
+- **Divination** - Daily draw from the Major Arcana or Elder Futhark, with a log. The rune list is now complete (all 24).
+- **Plants** - Safety box (toxic herbs, pregnancy, pets, smoke)
+- **Shadow Work** - Journaling prompts presented one at a time, and a corrected Jung quotation
+- Sections can be linked directly (for example `reference.html#meditation`)
+
 ### Digital Grimoire System
 
 Access via the "📖 GRIMOIRE" button in the main interface. The grimoire includes:
@@ -84,6 +96,7 @@ Ars Notoria Digitalis/
 ├── monas-hieroglyphica.html            # Guided Monas Hieroglyphica exercise
 ├── ars-notoria-practice.html           # Guided practice of the Notory Art
 ├── lunar.js                            # True new-moon / day-of-the-Moon calculation
+├── reference-tools.js                  # Interactive tools for the reference library
 ├── README.md                           # This file
 ├── Ars Notoria - PDF.pdf              # Source grimoire (not deployed)
 ├── Screenshot 2026-01-13 165343.jpg   # Manuscript page 1
