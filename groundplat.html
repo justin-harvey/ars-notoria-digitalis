@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Groundplat - John Dee's Map of the Mathematical Arts (1570)</title>
+    <style>
+        :root {
+            --black: #000000; --blue: #0000AA; --green: #00AA00; --cyan: #00AAAA;
+            --red: #AA0000; --purple: #AA00AA; --brown: #AA5500; --ltgray: #AAAAAA;
+            --dkgray: #555555; --ltblue: #5555FF; --ltgreen: #55FF55; --ltcyan: #55FFFF;
+            --ltred: #FF5555; --pink: #FF55FF; --yellow: #FFFF55; --white: #FFFFFF;
+            --parchment: #E8DCC4; --parchment-dk: #D4C4A8; --ink: #8B2500; --ink-dk: #2a1608;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: var(--black); color: var(--ltgray); font-family: 'Courier New', monospace; line-height: 1.6; }
+        .titlebar {
+            background: var(--blue); color: var(--white); padding: 6px 12px; font-size: 14px;
+            display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 2px solid var(--ltblue); position: sticky; top: 0; z-index: 20;
+        }
+        .titlebar-title { font-weight: bold; letter-spacing: 1px; }
+        .titlebar-btn { background: var(--ltgray); color: var(--black); border: 1px solid var(--white); padding: 2px 10px; font-size: 11px; font-weight: bold; text-decoration: none; }
+        .titlebar-btn:hover { background: var(--white); }
+        .menubar { background: var(--dkgray); display: flex; flex-wrap: wrap; border-bottom: 1px solid var(--ltgray); }
+        .menu-item { color: var(--white); padding: 4px 14px; font-size: 12px; text-decoration: none; }
+        .menu-item:hover { background: var(--ltblue); }
+        main { max-width: 1250px; margin: 0 auto; padding: 20px; }
+        header { text-align: center; margin-bottom: 30px; padding: 20px; border: 2px solid var(--ltcyan); background: rgba(85, 255, 255, 0.05); }
+        h1 { color: var(--ltcyan); font-size: 24px; margin-bottom: 10px; text-transform: uppercase; }
+        .subtitle { color: var(--yellow); font-size: 12px; font-style: italic; }
+        h2 { color: var(--ltblue); font-size: 18px; margin: 30px 0 15px; padding-bottom: 5px; border-bottom: 1px solid var(--dkgray); text-transform: uppercase; }
+        h3 { color: var(--ltgreen); font-size: 14px; margin: 18px 0 8px; }
+        p { margin-bottom: 14px; }
+        strong { color: var(--white); }
+        em { color: var(--ltcyan); font-style: normal; }
+        a { color: var(--ltblue); text-decoration: none; }
+        a:hover { color: var(--ltcyan); text-decoration: underline; }
+        section { margin-bottom: 40px; scroll-margin-top: 70px; }
+        .box { border: 1px solid var(--dkgray); padding: 15px; margin: 15px 0; }
+        .box-header { font-weight: bold; margin-bottom: 8px; }
+        .note { background: rgba(255, 255, 85, 0.07); border-color: var(--brown); }
+        .note .box-header { color: var(--yellow); }
+        .btn { background: var(--ltgray); color: var(--black); border: 1px solid var(--white); padding: 5px 12px; font-family: inherit; font-size: 12px; font-weight: bold; cursor: pointer; }
+        .btn:hover { background: var(--white); }
+        .btn.alt { background: var(--blue); color: var(--white); border-color: var(--ltblue); }
+        .btn.alt:hover { background: var(--ltblue); }
+        .row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 8px 0; }
+        label { color: var(--ltcyan); font-size: 12px; }
+        input[type=number], select { background: #000; color: var(--white); border: 1px solid var(--ltblue); font-family: inherit; font-size: 12px; padding: 4px 6px; width: 100px; }
+        select { width: auto; }
+        .quote { font-family: Georgia, serif; color: var(--white); border-left: 3px solid var(--brown); padding: 4px 12px; margin: 10px 0; }
+
+        /* ---------- The Groundplat ---------- */
+        .gp-wrap { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 18px; align-items: start; }
+        .gp-sheet {
+            background: var(--parchment); color: var(--ink-dk); padding: 18px 14px; border: 3px double var(--ink);
+            box-shadow: 0 0 0 4px #000, 0 0 0 6px var(--brown); max-height: 80vh; overflow: auto;
+        }
+        .gp-sheet .imprint { font-family: Georgia, serif; text-align: center; font-size: 13px; color: var(--ink); margin-bottom: 12px; }
+        .gp-tools { display: flex; gap: 6px; justify-content: center; margin-bottom: 10px; }
+        .gp-tools button { background: var(--parchment-dk); border: 1px solid var(--ink); color: var(--ink); font-family: inherit; font-size: 10px; padding: 2px 8px; cursor: pointer; }
+        ul.gp { list-style: none; margin: 0; padding: 0; }
+        ul.gp ul.gp {
+            margin-left: 14px; padding-left: 12px; position: relative;
+            border-left: 2px solid var(--ink); border-radius: 10px 0 0 10px;
+        }
+        ul.gp li { position: relative; margin: 2px 0; }
+        ul.gp ul.gp > li::before { content: ''; position: absolute; left: -12px; top: 12px; width: 10px; border-top: 1px solid var(--ink); }
+        .gp-node {
+            background: none; border: 1px solid transparent; color: var(--ink-dk); font-family: Georgia, serif;
+            font-size: 14px; padding: 1px 6px; cursor: pointer; text-align: left; border-radius: 2px;
+        }
+        .gp-node:hover { border-color: var(--ink); background: rgba(139, 37, 0, 0.06); }
+        .gp-node.sel { background: var(--ink); color: var(--parchment); }
+        .gp-node.has-text::after { content: ' ¶'; color: var(--brown); font-size: 11px; }
+        .gp-node.sel.has-text::after { color: var(--yellow); }
+        .gp-node .done { color: #1b6b1b; font-family: 'Courier New', monospace; font-size: 11px; }
+        .gp-node.branch { font-weight: bold; }
+        .twisty { font-family: 'Courier New', monospace; color: var(--ink); cursor: pointer; display: inline-block; width: 14px; font-size: 11px; background: none; border: none; }
+        li.closed > ul.gp { display: none; }
+
+        .reader { border: 2px solid var(--ltblue); background: #05051a; padding: 16px; max-height: 80vh; overflow: auto; position: sticky; top: 70px; }
+        .reader h3 { color: var(--yellow); font-size: 18px; margin-top: 0; font-family: Georgia, serif; }
+        .crumbs { font-size: 10px; color: var(--dkgray); margin-bottom: 6px; }
+        .label { font-size: 10px; color: var(--yellow); letter-spacing: 1px; text-transform: uppercase; margin: 14px 0 4px; }
+        .def { font-family: Georgia, serif; font-size: 15px; color: var(--ink-dk); background: var(--parchment); padding: 10px 12px; border-left: 4px solid var(--ink); }
+        .def b, .text b { font-weight: bold; }
+        .def em, .text em { color: inherit; font-style: italic; }
+        .gloss { font-size: 13px; color: var(--white); }
+        .text { font-family: Georgia, serif; font-size: 14px; line-height: 1.7; color: var(--ink-dk); background: var(--parchment); padding: 14px 16px; }
+        .seg { margin: 0; }
+        .seg.brk { margin-top: 12px; }
+        .seg:first-child { margin-top: 0; }
+        .mnote { float: right; clear: right; max-width: 38%; margin: 0 0 4px 10px; font-family: 'Courier New', monospace; font-size: 10px; line-height: 1.3;
+                 color: var(--ink); border-left: 2px solid var(--brown); padding-left: 5px; font-style: italic; }
+        .text sup { font-size: 9px; }
+        .clamp { max-height: 340px; overflow: hidden; position: relative; }
+        .clamp::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 60px; background: linear-gradient(transparent, var(--parchment)); }
+        .reader .row { margin-top: 10px; }
+        .try { border: 1px solid var(--ltgreen); padding: 10px; margin-top: 12px; background: rgba(0, 170, 0, 0.08); font-size: 13px; }
+        .try .label { color: var(--ltgreen); margin-top: 0; }
+
+        /* ---------- Practice ---------- */
+        .tools { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; }
+        .tool { border: 2px solid var(--ltgreen); background: #000; padding: 15px; scroll-margin-top: 70px; }
+        .tool h3 { margin-top: 0; }
+        .tool .out { color: var(--yellow); font-size: 14px; margin-top: 8px; min-height: 22px; }
+        .mono svg { width: 100%; height: auto; background: var(--parchment); border: 1px solid var(--ink); }
+        .ratio-btns { display: flex; flex-wrap: wrap; gap: 4px; margin: 8px 0; }
+        .ratio-btns button { background: #111; color: var(--ltcyan); border: 1px solid var(--cyan); font-family: inherit; font-size: 11px; padding: 3px 8px; cursor: pointer; }
+        .ratio-btns button.on { background: var(--cyan); color: #000; }
+        .path { columns: 2 260px; font-size: 12px; }
+        .path label { display: block; color: var(--ltgray); break-inside: avoid; padding: 2px 0; cursor: pointer; }
+        .path label:hover { color: var(--white); }
+        .bar { height: 10px; background: #222; border: 1px solid var(--dkgray); margin: 6px 0 12px; }
+        .bar div { height: 100%; background: var(--ltgreen); width: 0; transition: width 0.3s; }
+        .sources li { font-size: 12px; margin-bottom: 6px; }
+        footer { text-align: center; font-size: 11px; color: var(--dkgray); border-top: 1px solid var(--dkgray); padding: 20px; margin-top: 40px; }
+        @media (max-width: 900px) {
+            .gp-wrap { grid-template-columns: 1fr; }
+            .reader { position: static; max-height: none; }
+            .gp-sheet { max-height: 60vh; }
+            main { padding: 10px; }
+            h1 { font-size: 18px; }
+            .mnote { float: none; max-width: none; margin: 4px 0; display: block; }
+        }
+    </style>
+</head>
+<body>
+    <div class="titlebar">
+        <span class="titlebar-title">ARS NOTORIA DIGITALIS :: The Groundplat</span>
+        <a class="titlebar-btn" href="index.html">← RETURN TO NOTES</a>
+    </div>
+    <nav class="menubar">
+        <a class="menu-item" href="#origins">ORIGINS</a>
+        <a class="menu-item" href="#groundplat">THE GROUNDPLAT</a>
+        <a class="menu-item" href="#practice">PRACTICE</a>
+        <a class="menu-item" href="#path">STUDY PATH</a>
+        <a class="menu-item" href="#legacy">LEGACY</a>
+        <a class="menu-item" href="#sources">SOURCES</a>
+    </nav>
+
+    <main>
+        <header>
+            <h1>⊕ The Groundplat ⊕</h1>
+            <div class="subtitle">John Dee's map of all the mathematical arts, from his Preface to the first English Euclid (London, 1570)</div>
+        </header>
+
+        <section id="origins">
+            <h2>Dee's Map of Knowledge</h2>
+            <p>In 1570 the printer John Day published Henry Billingsley's translation of Euclid's <em>Elements</em>, the first in English. Dee wrote its long Preface "at my poore House At Mortlake." It is his most influential English work, written for "vnlatined people," craftsmen and practitioners rather than university scholars. Its argument is that mathematics is the key to almost every useful art, and to understanding God's creation.</p>
+            <p>At the end Dee gives the <strong>Groundplat</strong>, the "ground plan" of the whole discourse, printed as a fold-out tree. It starts from the two pure sciences, Arithmetic (number) and Geometry (magnitude). From them it branches into practical measuring and then into nineteen arts with names of their own, from Perspective and Astronomy to mining, clockmaking, navigation and the making of marvels. It ends with <strong>Archemastrie</strong>, the master art of experiment.</p>
+            <p>Behind it lies Dee's division of everything that exists into three kinds:</p>
+            <div class="quote">"All thinges which are, &amp; haue beyng, are found vnder a triple diuersitie generall. For, either, they are demed Supernaturall, Naturall, or, of a third being."</div>
+            <p>Mathematical things are that third kind, standing between the divine and the natural. That is why the Groundplat says mathematics can be applied in two directions: <em>Ascending</em> to divine things, and <em>Descending</em> to natural ones.</p>
+            <div class="box note">
+                <div class="box-header">About the text</div>
+                <p style="margin-bottom:0">Every definition and passage on this page is Dee's own, in his 1570 spelling and type. It comes from the Project Gutenberg transcription (eBook #22062) and was checked against it, 425 passages in all. Dee's marginal notes appear beside the text in red. The short "In plain terms" lines and the practice exercises are ours. The ¶ mark means Dee discusses that art at length in the Preface.</p>
+            </div>
+        </section>
+
+        <section id="groundplat">
+            <h2>The Groundplat</h2>
+            <p>Click any branch to read Dee's definition, a plain-language summary, and his full discussion of that art. Use ▸ to fold branches open and shut.</p>
+            <div class="gp-wrap">
+                <div class="gp-sheet">
+                    <div class="imprint"><i>J. DEE</i><br>"Here haue you (according to my promisse) the Groundplat of my MATHEMATICALL Præface: annexed to <i>Euclide</i> (now first) published in our Englishe tounge. An. 1570. Febr. 3."</div>
+                    <div class="gp-tools"><button id="expandAll">OPEN ALL</button><button id="collapseAll">FOLD ALL</button></div>
+                    <ul class="gp" id="gpTree"></ul>
+                </div>
+                <div class="reader" id="reader"></div>
+            </div>
+        </section>
+
+        <section id="practice">
+            <h2>Practice: Dee's Arts by Hand</h2>
+            <p>Dee wrote for people who would <em>use</em> these arts. Each tool below turns one branch of the Groundplat into a short exercise you can do today.</p>
+            <div class="tools">
+                <div class="tool mono" id="tool-musike">
+                    <h3>Musike · The Monochord</h3>
+                    <p style="font-size:12px">The old way of teaching harmony: one string, a movable bridge. Shorten the string by a simple ratio and you get a consonance. Play the whole string, then the stopped part, then both together.</p>
+                    <svg id="monoSvg" viewBox="0 0 400 90" aria-label="Monochord"></svg>
+                    <div class="ratio-btns" id="ratioBtns"></div>
+                    <div class="row"><button class="btn alt" id="playSeq">▶ ONE THEN THE OTHER</button><button class="btn" id="playTog">▶ TOGETHER</button></div>
+                    <div class="out" id="monoOut"></div>
+                </div>
+                <div class="tool" id="tool-hypsometrie">
+                    <h3>Hypsometrie · Height by Shadow</h3>
+                    <p style="font-size:12px">"How high … any thing is." On a sunny day, measure your own height and your shadow, then the shadow of a tree or tower. The two shadows keep the same proportion as the two heights.</p>
+                    <div class="row"><label>Your height <input type="number" id="hyH" value="1.75" step="0.01"></label><label>Your shadow <input type="number" id="hyS" value="2.10" step="0.01"></label></div>
+                    <div class="row"><label>Its shadow <input type="number" id="hyO" value="18" step="0.1"></label><span style="font-size:11px">(any one unit)</span></div>
+                    <div class="out" id="hyOut"></div>
+                </div>
+                <div class="tool" id="tool-apomecometrie">
+                    <h3>Apomecometrie · Distance by Thumb</h3>
+                    <p style="font-size:12px">"How farre, from the Measurer, any thing is." Hold your thumb up at arm's length. Close one eye, then the other: the thumb seems to jump sideways. Estimate how wide that jump is at the far object, for example two car-lengths. Your arm is about ten times as long as the distance between your eyes, so the object is about ten times the jump away.</p>
+                    <div class="row"><label>Apparent jump <input type="number" id="apJ" value="9" step="0.1"></label><label>Arm ÷ eye spacing <input type="number" id="apR" value="10" step="0.1"></label></div>
+                    <div class="out" id="apOut"></div>
+                </div>
+                <div class="tool" id="tool-horometrie">
+                    <h3>Horometrie · True Noon</h3>
+                    <p style="font-size:12px">"the precise, vsuall denomination of time … for any place assigned." Clock time is not Sun time. Find when the Sun is due south (north in the southern hemisphere) where you are today. At that moment a stick's shadow is at its shortest, so you can mark a noon line on the ground.</p>
+                    <div class="row"><label>Latitude <input type="number" id="hoLat" step="0.0001"></label><label>Longitude <input type="number" id="hoLon" step="0.0001"></label><button class="btn" id="hoLoc">📍</button></div>
+                    <div class="out" id="hoOut"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="path">
+            <h2>Study Path</h2>
+            <p>Dee's arts in the order he treats them in the Preface. Tick each one off once you've read his discussion and tried it. Progress is saved in this browser.</p>
+            <div class="bar"><div id="pathBar"></div></div>
+            <div class="path" id="pathList"></div>
+        </section>
+
+        <section id="legacy">
+            <h2>Legacy: Archemastrie and the Rosicrucians</h2>
+            <p>The Preface ends with Archemastrie, an art that "teacheth to bring to actuall experience sensible, all worthy conclusions." Dee hints at more: the chief science of the Archemaster "is an other (as it were) OPTICAL Science," whose name he promises to give "when I shall haue some, (more iust) occasion."</p>
+            <p>The historian Frances Yates argued that this practical, mechanical and optical "mathematical magic" was one source of the Rosicrucian programme of reformed learning announced in 1614–16. On this view, the Preface and the <a href="monas-hieroglyphica.html">Monas Hieroglyphica</a> were the two works of Dee's that carried his thought to Germany. Others, including Nicholas Clulee, have shown how much of the Preface is conventional Renaissance mathematics and caution against reading too much into it. Either way, it is Dee in his own words: confident that number and measure lead from the workshop to the divine.</p>
+            <p>The Preface is also where Dee answers those who called him a conjurer for making mechanical marvels. His defence is in the Thaumaturgike section:</p>
+            <div class="quote">"ought any honest Student, and Modest Christian Philosopher, be counted, &amp; called a Coniurer?"</div>
+            <p><button class="btn" id="goThaum">READ THE DEFENCE IN THAUMATURGIKE ►</button></p>
+        </section>
+
+        <section id="sources">
+            <h2>Sources and Further Reading</h2>
+            <ul class="sources">
+                <li>John Dee, "Mathematicall Præface," in <em>The Elements of Geometrie of the most auncient Philosopher Euclide of Megara</em>, trans. H. Billingsley (London: John Daye, 1570). Text from Project Gutenberg eBook #22062, transcribed by Louise Hope, David Starner, Suzanne Lybarger and the Online Distributed Proofreading Team (public domain).</li>
+                <li>Frances A. Yates, <em>Theatre of the World</em> (1969) and <em>The Rosicrucian Enlightenment</em> (1972).</li>
+                <li>Nicholas H. Clulee, <em>John Dee's Natural Philosophy: Between Science and Religion</em> (1988).</li>
+                <li>Stephen Johnston, "Like Father, Like Son? John Dee, Thomas Digges and the Identity of the Mathematician," in <em>John Dee: Interdisciplinary Studies</em>, ed. S. Clucas (2006).</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>ARS NOTORIA DIGITALIS • The Groundplat • Dee's text (1570) via Project Gutenberg #22062, public domain</footer>
+
+    <script src="groundplat-data.js"></script>
+    <script>
+    (function () {
+        'use strict';
+        const $ = id => document.getElementById(id);
+        const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+        function store(key, val) {
+            try {
+                if (val === undefined) return JSON.parse(localStorage.getItem(key) || 'null');
+                localStorage.setItem(key, JSON.stringify(val)); return true;
+            } catch (e) { return val === undefined ? null : false; }
+        }
+
+        // Practice links and exercises (our own) for particular arts
+        const TRY = {
+            mecometrie: 'Pace out a known distance (say 20 m) and count your steps. You now have a measuring rod you always carry.',
+            embadometrie: 'Measure a room and find its floor area. Then work out how many boards or tiles would cover it.',
+            stereometrie: 'Find the volume of a mug by measuring it as a cylinder, then check by filling it from a measuring jug.',
+            apomecometrie: { tool: 'tool-apomecometrie', text: 'Use the thumb-jump method on a distant building.' },
+            hypsometrie: { tool: 'tool-hypsometrie', text: 'Measure a tree\'s height from its shadow.' },
+            perspectiue: 'Lay a small mirror flat and look at a lamp in it. Move until you see it: your eye and the lamp make equal angles with the mirror, the law Dee calls Reflected radiation.',
+            astronomie: { href: 'ars-notoria-practice.html#moon', text: 'Watch the Moon at the same hour for a week and sketch its shape and position. The Moon Calendar gives the day of the lunation.' },
+            musike: { tool: 'tool-musike', text: 'Hear the consonances on the monochord.' },
+            astrologie: { href: 'reference.html#astrology-tools', text: 'Dee\'s "naturall beames of light, and secrete Influence": compare the day and night planetary hours where you live.' },
+            statike: 'Balance a ruler on a pencil. Put two coins at 5 cm from the pivot on one side: where must one coin go on the other side? (Archimedes\' law of the lever.)',
+            trochilike: 'Count the teeth on a bicycle\'s front and back gears. Their ratio tells you how many times the wheel turns for each turn of the pedals.',
+            helicosophie: 'Wind a string around a pencil at an even slope and look at the helix. Then press it flat into a spiral.',
+            menadrie: 'Lift a heavy book with a long lever (a ruler over a pencil). Note how far your hand moves compared with the book.',
+            horometrie: { tool: 'tool-horometrie', text: 'Find true noon where you are and mark a noon line.' },
+            zographie: 'Tape clear film to a window and, with one eye closed and your head still, trace the street outside: Dürer\'s "window" of perspective.',
+            nauigation: 'Find north without a compass: mark the tip of a stick\'s shadow, wait 15 minutes, mark it again. The line from the first mark to the second runs roughly west to east.',
+            archemastrie: 'Pick one conclusion from another art on this chart and design a complete experiment that tests it, then do it and write down the result.'
+        };
+
+        // ---------------- Build the tree ----------------
+        const byId = {}, parentOf = {};
+        (function index(n, p) { byId[n.id] = n; if (p) parentOf[n.id] = p.id; n.kids.forEach(k => index(k, n)); })(GROUNDPLAT_TREE, null);
+        const done = new Set(store('groundplatDone') || []);
+
+        function nodeHtml(n, depth) {
+            const has = n.kids.length > 0;
+            const text = n.sec ? ' has-text' : '';
+            const twisty = has ? '<button class="twisty" data-tw="' + n.id + '" aria-label="Open or close">▾</button>' : '<span class="twisty"></span>';
+            const tick = done.has(n.id) ? ' <span class="done">✓</span>' : '';
+            let h = '<li data-li="' + n.id + '"' + (depth >= 3 && has ? ' class="closed"' : '') + '>' + twisty +
+                '<button class="gp-node' + (has ? ' branch' : '') + text + '" data-id="' + n.id + '">' + esc(n.label) + tick + '</button>';
+            if (has) h += '<ul class="gp">' + n.kids.map(k => nodeHtml(k, depth + 1)).join('') + '</ul>';
+            return h + '</li>';
+        }
+        function renderTree() {
+            $('gpTree').innerHTML = nodeHtml(GROUNDPLAT_TREE, 0);
+            document.querySelectorAll('li.closed > .twisty').forEach(t => t.textContent = '▸');
+        }
+        renderTree();
+
+        $('gpTree').addEventListener('click', e => {
+            const tw = e.target.closest('[data-tw]');
+            if (tw) {
+                const li = tw.parentElement;
+                li.classList.toggle('closed');
+                tw.textContent = li.classList.contains('closed') ? '▸' : '▾';
+                return;
+            }
+            const b = e.target.closest('.gp-node');
+            if (b) select(b.dataset.id, true);
+        });
+        $('expandAll').addEventListener('click', () => document.querySelectorAll('#gpTree li').forEach(li => { li.classList.remove('closed'); const t = li.querySelector(':scope > .twisty'); if (t && t.tagName === 'BUTTON') t.textContent = '▾'; }));
+        $('collapseAll').addEventListener('click', () => document.querySelectorAll('#gpTree li').forEach(li => { if (li.querySelector(':scope > ul')) { li.classList.add('closed'); li.querySelector(':scope > .twisty').textContent = '▸'; } }));
+
+        function crumbs(id) {
+            const out = [];
+            let cur = id;
+            while (cur) { out.unshift(byId[cur].label); cur = parentOf[cur]; }
+            return out.join(' › ');
+        }
+        function sectionHtml(key) {
+            const segs = GROUNDPLAT_SECTIONS[key] || [];
+            return segs.map((s, i) => '<p class="seg' + (s.b && i ? ' brk' : '') + '">' +
+                s.n.map(n => '<span class="mnote">' + n + '</span>').join('') + s.h + '</p>').join('');
+        }
+
+        let current = null;
+        function select(id, fromClick) {
+            const n = byId[id];
+            if (!n) return;
+            current = id;
+            document.querySelectorAll('.gp-node').forEach(b => b.classList.toggle('sel', b.dataset.id === id));
+            // make sure it is visible in the tree
+            let p = parentOf[id];
+            while (p) { const li = document.querySelector('[data-li="' + p + '"]'); if (li && li.classList.contains('closed')) { li.classList.remove('closed'); li.querySelector(':scope > .twisty').textContent = '▾'; } p = parentOf[p]; }
+            let h = '<div class="crumbs">' + esc(crumbs(id)) + '</div><h3>' + esc(n.label) + '</h3>';
+            if (n.gp) h += '<div class="label">In the Groundplat</div><div class="def">' + n.gp.html + '</div>';
+            if (n.gloss) h += '<div class="label">In plain terms</div><div class="gloss">' + esc(n.gloss) + '</div>';
+            const t = TRY[id];
+            if (t) {
+                const text = typeof t === 'string' ? t : t.text;
+                const link = typeof t === 'string' ? '' : t.tool ? ' <a href="#' + t.tool + '">Open the tool ↓</a>' : ' <a href="' + t.href + '">Open ↗</a>';
+                h += '<div class="try"><div class="label">Try it</div>' + esc(text) + link + '</div>';
+            }
+            if (n.sec) {
+                const shared = n.sec === 'vulgar' && id !== 'geom_vulgar' ? ' (Dee treats all the kinds of measuring together)' : '';
+                h += '<div class="label">Dee\'s discussion in the Preface' + shared + '</div><div class="text clamp" id="secText">' + sectionHtml(n.sec) + '</div>' +
+                     '<div class="row"><button class="btn" id="moreBtn">READ IN FULL ▾</button></div>';
+            }
+            if (!n.kids.length || n.sec) {
+                h += '<div class="row"><label><input type="checkbox" id="doneBox"' + (done.has(id) ? ' checked' : '') + '> I have read and practised this</label></div>';
+            }
+            $('reader').innerHTML = h;
+            $('reader').scrollTop = 0;
+            const more = $('moreBtn');
+            if (more) more.addEventListener('click', () => {
+                const open = $('secText').classList.toggle('clamp');
+                more.textContent = open ? 'READ IN FULL ▾' : 'SHOW LESS ▴';
+            });
+            const box = $('doneBox');
+            if (box) box.addEventListener('change', () => { box.checked ? done.add(id) : done.delete(id); saveDone(); });
+            if (fromClick && history.replaceState) history.replaceState(null, '', '#gp-' + id);
+        }
+
+        function saveDone() {
+            store('groundplatDone', Array.from(done));
+            renderTree();
+            if (current) document.querySelectorAll('.gp-node').forEach(b => b.classList.toggle('sel', b.dataset.id === current));
+            renderPath();
+        }
+
+        // ---------------- Study path (Dee's order in the Preface) ----------------
+        const PATH = ['root', 'arith', 'geom', 'geom_vulgar', 'geodesie', 'geographie', 'chorographie', 'hydrographie', 'stratarithmetrie',
+            'perspectiue', 'astronomie', 'musike', 'cosmographie', 'astrologie', 'statike', 'anthropographie', 'trochilike', 'helicosophie',
+            'pneumatithmie', 'menadrie', 'hypogeiodie', 'hydragogie', 'horometrie', 'zographie', 'architecture', 'nauigation', 'thaumaturgike', 'archemastrie'];
+        function renderPath() {
+            $('pathList').innerHTML = PATH.map((id, i) =>
+                '<label><input type="checkbox" data-path="' + id + '"' + (done.has(id) ? ' checked' : '') + '> ' + (i + 1) + '. ' +
+                '<a href="#groundplat" data-open="' + id + '">' + esc(byId[id].label) + '</a></label>').join('');
+            const n = PATH.filter(id => done.has(id)).length;
+            $('pathBar').style.width = (n / PATH.length * 100) + '%';
+        }
+        $('pathList').addEventListener('change', e => {
+            const id = e.target.dataset.path; if (!id) return;
+            e.target.checked ? done.add(id) : done.delete(id); saveDone();
+        });
+        $('pathList').addEventListener('click', e => {
+            const a = e.target.closest('[data-open]'); if (!a) return;
+            select(a.dataset.open, true);
+        });
+        renderPath();
+        $('goThaum').addEventListener('click', () => {
+            select('thaumaturgike', true);
+            $('groundplat').scrollIntoView();
+            const more = $('moreBtn'); if (more) more.click();
+        });
+
+        // initial selection (deep link #gp-<id>)
+        const m = (location.hash || '').match(/^#gp-(\w+)/);
+        select(m && byId[m[1]] ? m[1] : 'root', false);
+        if (m) setTimeout(() => $('groundplat').scrollIntoView(), 0);
+
+        // ---------------- Monochord ----------------
+        const RATIOS = [
+            ['Unison', 1, 1], ['Diapason (octave)', 2, 1], ['Diapente (fifth)', 3, 2], ['Diatessaron (fourth)', 4, 3],
+            ['Tone', 9, 8], ['Diapason & diapente', 3, 1], ['Disdiapason', 4, 1]
+        ];
+        let ratio = RATIOS[1];
+        const svg = $('monoSvg');
+        function drawMono() {
+            const x0 = 20, x1 = 380, stop = x1 - (x1 - x0) * ratio[2] / ratio[1];
+            svg.innerHTML =
+                '<rect x="10" y="50" width="380" height="22" fill="#a0784a" stroke="#8B2500"/>' +
+                '<line x1="' + x0 + '" y1="40" x2="' + x1 + '" y2="40" stroke="#2a1608" stroke-width="2"/>' +
+                '<line x1="' + stop + '" y1="40" x2="' + x1 + '" y2="40" stroke="#8B2500" stroke-width="3.5"/>' +
+                '<polygon points="' + (stop - 6) + ',50 ' + (stop + 6) + ',50 ' + stop + ',38" fill="#2a1608"/>' +
+                '<rect x="' + (x0 - 6) + '" y="34" width="6" height="16" fill="#2a1608"/><rect x="' + x1 + '" y="34" width="6" height="16" fill="#2a1608"/>' +
+                '<text x="200" y="86" text-anchor="middle" font-family="Courier New" font-size="11" fill="#2a1608">stopped part = ' + ratio[2] + '/' + ratio[1] + ' of the string</text>';
+            $('monoOut').textContent = ratio[0] + ': ' + ratio[1] + ' : ' + ratio[2];
+            document.querySelectorAll('#ratioBtns button').forEach((b, i) => b.classList.toggle('on', RATIOS[i] === ratio));
+        }
+        RATIOS.forEach(r => {
+            const b = document.createElement('button');
+            b.textContent = r[0] + ' ' + r[1] + ':' + r[2];
+            b.addEventListener('click', () => { ratio = r; drawMono(); });
+            $('ratioBtns').appendChild(b);
+        });
+        drawMono();
+        let ac = null;
+        function tone(freq, start, dur) {
+            ac = ac || new (window.AudioContext || window.webkitAudioContext)();
+            const o = ac.createOscillator(), g = ac.createGain();
+            o.type = 'triangle'; o.frequency.value = freq;
+            const t0 = ac.currentTime + start;
+            g.gain.setValueAtTime(0.0001, t0);
+            g.gain.exponentialRampToValueAtTime(0.18, t0 + 0.02);
+            g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+            o.connect(g); g.connect(ac.destination); o.start(t0); o.stop(t0 + dur + 0.05);
+        }
+        const BASE = 196;
+        $('playSeq').addEventListener('click', () => { try { tone(BASE, 0, 1.4); tone(BASE * ratio[1] / ratio[2], 1.5, 1.4); } catch (e) {} });
+        $('playTog').addEventListener('click', () => { try { tone(BASE, 0, 2.2); tone(BASE * ratio[1] / ratio[2], 0, 2.2); } catch (e) {} });
+
+        // ---------------- Hypsometrie ----------------
+        function hypso() {
+            const h = parseFloat($('hyH').value), s = parseFloat($('hyS').value), o = parseFloat($('hyO').value);
+            $('hyOut').textContent = (h > 0 && s > 0 && o > 0) ? 'Height ≈ ' + (o * h / s).toFixed(2) + ' (same unit as the shadows)' : 'Enter three positive numbers.';
+        }
+        ['hyH', 'hyS', 'hyO'].forEach(id => $(id).addEventListener('input', hypso)); hypso();
+
+        // ---------------- Apomecometrie ----------------
+        function apo() {
+            const j = parseFloat($('apJ').value), r = parseFloat($('apR').value);
+            $('apOut').textContent = (j > 0 && r > 0) ? 'Distance ≈ ' + (j * r).toFixed(1) + ' (in the unit of your jump)' : 'Enter positive numbers.';
+        }
+        ['apJ', 'apR'].forEach(id => $(id).addEventListener('input', apo)); apo();
+
+        // ---------------- Horometrie: local apparent noon (NOAA equations) ----------------
+        const RAD = Math.PI / 180;
+        function eqTimeAndDecl(date) {
+            const jd = date.getTime() / 86400000 + 2440587.5, T = (jd - 2451545) / 36525;
+            const L0 = (280.46646 + T * (36000.76983 + 0.0003032 * T)) % 360;
+            const M = 357.52911 + T * (35999.05029 - 0.0001537 * T);
+            const e = 0.016708634 - T * (0.000042037 + 0.0000001267 * T);
+            const eps = 23 + (26 + (21.448 - T * 46.815) / 60) / 60 + 0.00256 * Math.cos((125.04 - 1934.136 * T) * RAD);
+            const y = Math.tan(eps / 2 * RAD) ** 2;
+            const E = 4 / RAD * (y * Math.sin(2 * L0 * RAD) - 2 * e * Math.sin(M * RAD) + 4 * e * y * Math.sin(M * RAD) * Math.cos(2 * L0 * RAD)
+                - 0.5 * y * y * Math.sin(4 * L0 * RAD) - 1.25 * e * e * Math.sin(2 * M * RAD));
+            const C = Math.sin(M * RAD) * (1.914602 - T * 0.004817) + Math.sin(2 * M * RAD) * 0.019993;
+            const lam = L0 + C - 0.00569 - 0.00478 * Math.sin((125.04 - 1934.136 * T) * RAD);
+            const decl = Math.asin(Math.sin(eps * RAD) * Math.sin(lam * RAD)) / RAD;
+            return { E: E, decl: decl };
+        }
+        const loc = store('refPlanetaryLocation') || { lat: 51.4682, lon: -0.2703 };
+        $('hoLat').value = loc.lat; $('hoLon').value = loc.lon;
+        function horo() {
+            const lat = parseFloat($('hoLat').value), lon = parseFloat($('hoLon').value);
+            if (isNaN(lat) || isNaN(lon)) { $('hoOut').textContent = 'Enter latitude and longitude.'; return; }
+            const now = new Date();
+            const noonGuess = new Date(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate(), 12) - lon / 360 * 86400000);
+            const { E, decl } = eqTimeAndDecl(noonGuess);
+            const mins = 720 - 4 * lon - E;
+            const noon = new Date(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()) + mins * 60000);
+            const alt = 90 - Math.abs(lat - decl);
+            const fmt = d => d.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+            $('hoOut').innerHTML = 'True noon today: <strong>' + fmt(noon) + '</strong> <span style="font-size:11px;color:#AAAAAA">(your device\'s time zone)</span><br>' +
+                '<span style="font-size:12px;color:#AAAAAA">Sun\'s height then: ' + alt.toFixed(1) + '°. Equation of time: the Sun is ' +
+                Math.abs(E).toFixed(1) + ' min ' + (E >= 0 ? 'ahead of' : 'behind') + ' the mean clock today.</span>';
+        }
+        ['hoLat', 'hoLon'].forEach(id => $(id).addEventListener('input', horo));
+        $('hoLoc').addEventListener('click', () => {
+            if (!navigator.geolocation) return;
+            navigator.geolocation.getCurrentPosition(p => { $('hoLat').value = p.coords.latitude.toFixed(4); $('hoLon').value = p.coords.longitude.toFixed(4); horo(); });
+        });
+        horo();
+    })();
+    </script>
+</body>
+</html>

@@ -38,6 +38,17 @@ Access via the "☿ MONAS" button in the main interface (`monas-hieroglyphica.ht
 
 Note: Dee left no ritual instructions for the Monas. The exercise is a modern reconstruction that follows the order of his theorems, and the page says so.
 
+### The Groundplat
+
+Access via the "⊕ GROUNDPLAT" button (`groundplat.html`, data in `groundplat-data.js`). An interactive version of the fold-out "Groundplat" from Dee's *Mathematicall Præface* to the first English Euclid (1570):
+
+- **The tree** - All 55 branches, from the two principal sciences through vulgar arithmetic and geometry to the nineteen named arts, ending in Archemastrie. Each branch shows Dee's definition, a plain-language summary, and his full discussion from the Preface, with his marginal notes.
+- **Practice** - A monochord that plays Dee's consonances (Musike), height by shadow (Hypsometrie), distance by thumb (Apomecometrie), and true local noon with the equation of time (Horometrie), plus hands-on exercises for most of the arts
+- **Study path** - The arts in Dee's order, with progress saved locally
+- **Legacy** - Archemastrie, Dee's hinted "OPTICAL Science", Yates's Rosicrucian thesis and its critics, and Dee's defence against being called a "Coniurer"
+
+All text is Dee's 1570 spelling from the Project Gutenberg transcription (#22062, public domain), checked against it: 425 passages.
+
 ### The Prayers of John Dee
 
 Access via the "✠ DEE'S PRAYERS" button (`dee-prayers.html`). A daily office built only from Dee's own words in Sloane MS 3188, with nothing spoken by angels or scryers:
@@ -110,6 +121,8 @@ Ars Notoria Digitalis/
 ├── monas-hieroglyphica.html            # Guided Monas Hieroglyphica exercise
 ├── ars-notoria-practice.html           # Guided practice of the Notory Art
 ├── dee-prayers.html                    # John Dee's own prayers as a daily office
+├── groundplat.html                     # Interactive Groundplat of the Mathematical Preface
+├── groundplat-data.js                  # Groundplat tree and Preface text (generated)
 ├── lunar.js                            # True new-moon / day-of-the-Moon calculation
 ├── reference-tools.js                  # Interactive tools for the reference library
 ├── README.md                           # This file
